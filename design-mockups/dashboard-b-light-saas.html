@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>方案 B · 现代浅色 SaaS 风 | 高企标的挖掘驾驶舱</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --surface: #ffffff;
+    --surface-2: #fafbfc;
+    --border: #e5e7eb;
+    --border-strong: #d4d7dd;
+    --text-0: #0f172a;
+    --text-1: #475569;
+    --text-2: #94a3b8;
+    --text-3: #cbd5e1;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-soft: #eff6ff;
+    --success: #10b981;
+    --success-soft: #ecfdf5;
+    --warn: #f59e0b;
+    --warn-soft: #fffbeb;
+    --danger: #ef4444;
+    --purple: #8b5cf6;
+    --teal: #14b8a6;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 2px 0 rgba(15,23,42,0.04);
+    --shadow: 0 1px 3px 0 rgba(15,23,42,0.05), 0 1px 2px 0 rgba(15,23,42,0.04);
+    --shadow-lg: 0 4px 12px -2px rgba(15,23,42,0.06), 0 2px 6px -1px rgba(15,23,42,0.04);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--text-0);
+    font-family: "Inter", "PingFang SC", "Microsoft YaHei", -apple-system, system-ui, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .num-font { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+  /* ═══ App shell ═══ */
+  .app { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    flex-shrink: 0;
+  }
+  .sidebar-logo {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+    display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 14px;
+    box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+  }
+  .logo-text { font-weight: 600; font-size: 15px; color: var(--text-0); }
+  .logo-sub { font-size: 11px; color: var(--text-2); }
+
+  .nav-section { padding: 12px 10px; }
+  .nav-section-label { font-size: 11px; color: var(--text-2); text-transform: uppercase; letter-spacing: 0.5px; padding: 8px 10px; font-weight: 600; }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--text-1);
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 2px;
+  }
+  .nav-item:hover { background: var(--surface-2); color: var(--text-0); }
+  .nav-item.active {
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .nav-item .nav-icon { width: 16px; height: 16px; display: grid; place-items: center; opacity: 0.9; }
+  .nav-item .nav-badge {
+    margin-left: auto;
+    font-size: 11px;
+    background: var(--bg);
+    color: var(--text-1);
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+  .nav-item.active .nav-badge { background: #fff; color: var(--primary); }
+  .sidebar-footer {
+    margin-top: auto;
+    padding: 14px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--text-2);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg,#a78bfa,#7c3aed); display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 600; }
+
+  /* Main */
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+  /* Topbar */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .crumb { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .crumb-root { color: var(--text-2); }
+  .crumb-sep { color: var(--text-3); }
+  .crumb-cur { font-weight: 600; color: var(--text-0); }
+  .region-select {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    color: var(--text-1);
+    margin-left: 12px;
+    cursor: pointer;
+  }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .role-toggle {
+    display: flex;
+    background: var(--bg);
+    padding: 3px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  .role-toggle button {
+    border: none; background: transparent; padding: 5px 14px;
+    border-radius: 5px; cursor: pointer; color: var(--text-1);
+    font-size: 12px;
+  }
+  .role-toggle button.on { background: var(--surface); color: var(--text-0); font-weight: 500; box-shadow: var(--shadow-sm); }
+  .search {
+    width: 240px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    background: var(--surface-2);
+    color: var(--text-1);
+  }
+
+  /* Content */
+  .content { padding: 24px 28px 32px; }
+  .page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; }
+  .page-title { font-size: 20px; font-weight: 600; color: var(--text-0); letter-spacing: -0.2px; }
+  .page-sub { font-size: 13px; color: var(--text-2); margin-top: 4px; }
+  .page-actions { display: flex; gap: 8px; }
+  .btn {
+    padding: 7px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text-1);
+    cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn:hover { background: var(--surface-2); }
+  .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+  .btn-primary:hover { background: var(--primary-hover); }
+
+  /* KPI row */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card .kpi-icon {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: grid; place-items: center;
+    font-size: 15px;
+  }
+  .kpi-label { font-size: 12px; color: var(--text-2); font-weight: 500; }
+  .kpi-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--text-0);
+    margin-top: 6px;
+    display: flex; align-items: baseline; gap: 6px;
+    letter-spacing: -0.5px;
+  }
+  .kpi-value .unit { font-size: 13px; font-weight: 500; color: var(--text-2); }
+  .kpi-delta {
+    margin-top: 10px;
+    font-size: 12px;
+    display: flex; align-items: center; gap: 4px;
+    color: var(--text-2);
+  }
+  .kpi-delta .trend { font-weight: 600; }
+  .kpi-delta .trend.up { color: var(--success); }
+  .kpi-delta .trend.warn { color: var(--warn); }
+  .kpi-card[data-color="primary"] .kpi-icon { background: var(--primary-soft); color: var(--primary); }
+  .kpi-card[data-color="success"] .kpi-icon { background: var(--success-soft); color: var(--success); }
+  .kpi-card[data-color="purple"] .kpi-icon { background: #f5f3ff; color: var(--purple); }
+  .kpi-card[data-color="warn"] .kpi-icon { background: var(--warn-soft); color: var(--warn); }
+
+  /* Main grid */
+  .grid-2x { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-3x { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 16px 20px 12px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-title { font-size: 15px; font-weight: 600; color: var(--text-0); }
+  .card-sub { font-size: 12px; color: var(--text-2); margin-top: 2px; }
+  .card-action { font-size: 12px; color: var(--primary); cursor: pointer; }
+  .card-body { padding: 16px 20px 20px; }
+
+  /* Street distribution list (instead of map) */
+  .street-list { display: flex; flex-direction: column; gap: 10px; }
+  .street-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 50px;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+  }
+  .street-row .street-name { color: var(--text-0); font-weight: 500; }
+  .street-row .street-name .pin { color: var(--text-3); margin-right: 4px; font-size: 11px; }
+  .street-bar-track {
+    height: 8px;
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .street-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), #60a5fa);
+  }
+  .street-row .street-count { text-align: right; color: var(--text-1); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .street-row.top .street-name { color: var(--primary); font-weight: 600; }
+  .street-row.top .street-bar-fill { background: linear-gradient(90deg, #1d4ed8, var(--primary)); }
+
+  /* Tier funnel (custom bars) */
+  .tier-funnel { display: flex; flex-direction: column; gap: 12px; }
+  .tier-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier-item .tier-bar {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--primary-soft);
+    z-index: 0;
+  }
+  .tier-item[data-t="A"] .tier-bar { background: #dcfce7; }
+  .tier-item[data-t="B"] .tier-bar { background: #dbeafe; }
+  .tier-item[data-t="C"] .tier-bar { background: #fef3c7; }
+  .tier-item[data-t="D"] .tier-bar { background: #f3f4f6; }
+  .tier-item .tier-content { position: relative; display: flex; align-items: center; justify-content: space-between; }
+  .tier-label { display: flex; align-items: center; gap: 10px; }
+  .tier-badge {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 13px;
+    color: #fff;
+  }
+  .tier-item[data-t="A"] .tier-badge { background: var(--success); }
+  .tier-item[data-t="B"] .tier-badge { background: var(--primary); }
+  .tier-item[data-t="C"] .tier-badge { background: var(--warn); }
+  .tier-item[data-t="D"] .tier-badge { background: #94a3b8; }
+  .tier-name { font-size: 13px; color: var(--text-0); font-weight: 500; }
+  .tier-desc { font-size: 11px; color: var(--text-2); }
+  .tier-count {
+    font-size: 20px; font-weight: 700; color: var(--text-0);
+    font-variant-numeric: tabular-nums;
+  }
+  .tier-count .pct { font-size: 12px; color: var(--text-2); font-weight: 500; margin-left: 4px; }
+
+  /* Charts */
+  .chart { height: 260px; }
+  .chart-sm { height: 220px; }
+
+  /* Top10 table */
+  .top10 { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .top10 thead th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-2);
+    font-size: 12px;
+    padding: 10px 14px;
+    background: var(--surface-2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .top10 tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-1);
+    vertical-align: middle;
+  }
+  .top10 tbody tr:hover td { background: var(--surface-2); }
+  .top10 .rank {
+    display: inline-block;
+    min-width: 22px; text-align: center;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--text-2);
+  }
+  .top10 .rank-top { color: var(--primary); }
+  .top10 .company {
+    color: var(--text-0);
+    font-weight: 500;
+  }
+  .top10 .score-cell { display: flex; align-items: center; gap: 8px; }
+  .score-num { font-size: 15px; font-weight: 700; color: var(--text-0); font-variant-numeric: tabular-nums; }
+  .score-mini {
+    width: 60px; height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .score-mini-fill { height: 100%; background: var(--primary); border-radius: 3px; }
+  .tier-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+  }
+  .tier-pill.A { background: var(--success-soft); color: var(--success); }
+  .tier-pill.B { background: var(--primary-soft); color: var(--primary); }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--bg);
+    color: var(--text-1);
+    font-size: 11px;
+    border-radius: 4px;
+  }
+  .btn-link {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .btn-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- ═══ Sidebar ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">TM</div>
+      <div>
+        <div class="logo-text">标的挖掘</div>
+        <div class="logo-sub">高企申报 · v0.1</div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">工作台</div>
+      <div class="nav-item active">
+        <span class="nav-icon">◼</span> 驾驶舱
+        <span class="nav-badge">今日</span>
+      </div>
+      <div class="nav-item"><span class="nav-icon">▤</span> 标的池 <span class="nav-badge">246</span></div>
+      <div class="nav-item"><span class="nav-icon">✓</span> 任务管理 <span class="nav-badge">12</span></div>
+      <div class="nav-item"><span class="nav-icon">◐</span> 算法模型</div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">分析</div>
+      <div class="nav-item"><span class="nav-icon">◇</span> 认定进度</div>
+      <div class="nav-item"><span class="nav-icon">◈</span> 区域对比</div>
+      <div class="nav-item"><span class="nav-icon">≡</span> 导出记录</div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="avatar">李</div>
+      <div>
+        <div style="color: var(--text-0); font-weight: 500;">李明</div>
+        <div>科创局 · 高新处</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ Main ═══ -->
+  <main class="main">
+    <header class="topbar">
+      <div class="crumb">
+        <span class="crumb-root">工作台</span>
+        <span class="crumb-sep">/</span>
+        <span class="crumb-cur">驾驶舱</span>
+        <span class="region-select">◉ 武汉市 · 东西湖区 ▾</span>
+      </div>
+      <div class="topbar-right">
+        <input class="search" placeholder="🔍 搜索企业名称 / 社会信用代码" />
+        <div class="role-toggle">
+          <button class="on">领导视角</button>
+          <button>科员视角</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="page-header">
+        <div>
+          <div class="page-title">2026 年高企申报 · 全景概览</div>
+          <div class="page-sub">东西湖区 · 更新于 14:28 · 数据来源：工商 · 专利 · 招聘 · 税务</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn">导出报告</button>
+          <button class="btn-primary btn">+ 新建筛选条件</button>
+        </div>
+      </div>
+
+      <!-- KPI -->
+      <section class="kpi-row">
+        <div class="kpi-card" data-color="primary">
+          <div class="kpi-icon">◉</div>
+          <div class="kpi-label">本年度申报目标</div>
+          <div class="kpi-value num-font">120<span class="unit">家</span></div>
+          <div class="kpi-delta"><span class="trend up">↑ 20%</span> 较 2025 年 +20 家</div>
+        </div>
+        <div class="kpi-card" data-color="success">
+          <div class="kpi-icon">✓</div>
+          <div class="kpi-label">本年度已认定</div>
+          <div class="kpi-value num-font">58<span class="unit">家 · 48.3%</span></div>
+          <div class="kpi-delta"><span class="trend up">↑ 6</span> 本月新增认定</div>
+        </div>
+        <div class="kpi-card" data-color="purple">
+          <div class="kpi-icon">◈</div>
+          <div class="kpi-label">系统识别潜在标的</div>
+          <div class="kpi-value num-font">246<span class="unit">家</span></div>
+          <div class="kpi-delta"><span class="trend up">↑ 34</span> 本月新识别</div>
+        </div>
+        <div class="kpi-card" data-color="warn">
+          <div class="kpi-icon">◆</div>
+          <div class="kpi-label">预计年度完成率</div>
+          <div class="kpi-value num-font">138<span class="unit">% · 超额 23 家</span></div>
+          <div class="kpi-delta"><span class="trend warn">▲</span> 依赖 B 类转化 36 家</div>
+        </div>
+      </section>
+
+      <!-- Street distribution + Tier funnel -->
+      <section class="grid-2x">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">街道 / 园区分布</div>
+              <div class="card-sub">按潜在标的数量排序 · 共 10 个辖区</div>
+            </div>
+            <div class="card-action">查看全部 ▸</div>
+          </div>
+          <div class="card-body">
+            <div class="street-list">
+              <div class="street-row top"><div class="street-name"><span class="pin">◉</span>国家网安基地</div><div class="street-bar-track"><div class="street-bar-fill" style="width:100%"></div></div><div class="street-count">52</div></div>
+              <div class="street-row top"><div class="street-name"><span class="pin">◉</span>临空港经开区</div><div class="street-bar-track"><div class="street-bar-fill" style="width:92%"></div></div><div class="street-count">48</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>吴家山街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:73%"></div></div><div class="street-count">38</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>将军路街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:54%"></div></div><div class="street-count">28</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>径河街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:42%"></div></div><div class="street-count">22</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>金银湖街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:35%"></div></div><div class="street-count">18</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>慈惠街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:27%"></div></div><div class="street-count">14</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>走马岭街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:23%"></div></div><div class="street-count">12</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>新沟镇街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:15%"></div></div><div class="street-count">8</div></div>
+              <div class="street-row"><div class="street-name"><span class="pin">◉</span>东山街道</div><div class="street-bar-track"><div class="street-bar-fill" style="width:12%"></div></div><div class="street-count">6</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">置信度分档</div>
+              <div class="card-sub">A / B / C / D 四档</div>
+            </div>
+            <div class="card-action">调整规则 ▸</div>
+          </div>
+          <div class="card-body">
+            <div class="tier-funnel">
+              <div class="tier-item" data-t="A">
+                <div class="tier-bar" style="width:50%"></div>
+                <div class="tier-content">
+                  <div class="tier-label">
+                    <div class="tier-badge">A</div>
+                    <div>
+                      <div class="tier-name">可立即申报</div>
+                      <div class="tier-desc">≥ 80 分 · 基本具备条件</div>
+                    </div>
+                  </div>
+                  <div class="tier-count">42<span class="pct">17.1%</span></div>
+                </div>
+              </div>
+              <div class="tier-item" data-t="B">
+                <div class="tier-bar" style="width:91%"></div>
+                <div class="tier-content">
+                  <div class="tier-label">
+                    <div class="tier-badge">B</div>
+                    <div>
+                      <div class="tier-name">缺 1-2 项硬指标</div>
+                      <div class="tier-desc">60-79 分 · 定向培育</div>
+                    </div>
+                  </div>
+                  <div class="tier-count">76<span class="pct">30.9%</span></div>
+                </div>
+              </div>
+              <div class="tier-item" data-t="C">
+                <div class="tier-bar" style="width:100%"></div>
+                <div class="tier-content">
+                  <div class="tier-label">
+                    <div class="tier-badge">C</div>
+                    <div>
+                      <div class="tier-name">中远期培育</div>
+                      <div class="tier-desc">40-59 分 · 持续观察</div>
+                    </div>
+                  </div>
+                  <div class="tier-count">82<span class="pct">33.3%</span></div>
+                </div>
+              </div>
+              <div class="tier-item" data-t="D">
+                <div class="tier-bar" style="width:55%"></div>
+                <div class="tier-content">
+                  <div class="tier-label">
+                    <div class="tier-badge">D</div>
+                    <div>
+                      <div class="tier-name">暂不推荐</div>
+                      <div class="tier-desc">&lt; 40 分 · 条件不足</div>
+                    </div>
+                  </div>
+                  <div class="tier-count">46<span class="pct">18.7%</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Charts row -->
+      <section class="grid-2x">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">八大领域分布</div>
+              <div class="card-sub">国家重点支持高新技术领域</div>
+            </div>
+          </div>
+          <div class="card-body"><div id="donutChart" class="chart"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">成立年限分布</div>
+              <div class="card-sub">高企认定偏好 3-8 年期企业</div>
+            </div>
+          </div>
+          <div class="card-body"><div id="yearChart" class="chart"></div></div>
+        </div>
+      </section>
+
+      <!-- Top 10 -->
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">高置信标的 · Top 10</div>
+            <div class="card-sub">按综合评分降序排列 · 点击查看详情与打分依据</div>
+          </div>
+          <div class="page-actions">
+            <button class="btn">批量派发</button>
+            <button class="btn">导出 CSV</button>
+          </div>
+        </div>
+        <table class="top10">
+          <thead>
+            <tr>
+              <th style="width:40px;">#</th>
+              <th>企业名称</th>
+              <th style="width:180px;">综合评分</th>
+              <th>分档</th>
+              <th>领域</th>
+              <th>所在街道/园区</th>
+              <th>专利</th>
+              <th>参保</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="rank rank-top">01</span></td><td class="company">武汉磐石网络安全科技有限公司</td><td><div class="score-cell"><span class="score-num">94</span><div class="score-mini"><div class="score-mini-fill" style="width:94%"></div></div></div></td><td><span class="tier-pill A">A 类</span></td><td><span class="tag">电子信息</span></td><td>国家网安基地</td><td class="num-font">23</td><td class="num-font">186</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank rank-top">02</span></td><td class="company">武汉鼎盛智能装备股份有限公司</td><td><div class="score-cell"><span class="score-num">91</span><div class="score-mini"><div class="score-mini-fill" style="width:91%"></div></div></div></td><td><span class="tier-pill A">A 类</span></td><td><span class="tag">先进制造</span></td><td>临空港经开区</td><td class="num-font">19</td><td class="num-font">212</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank rank-top">03</span></td><td class="company">武汉云麦数据科技有限公司</td><td><div class="score-cell"><span class="score-num">89</span><div class="score-mini"><div class="score-mini-fill" style="width:89%"></div></div></div></td><td><span class="tier-pill A">A 类</span></td><td><span class="tag">电子信息</span></td><td>吴家山街道</td><td class="num-font">15</td><td class="num-font">98</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">04</span></td><td class="company">武汉楚天生物技术有限公司</td><td><div class="score-cell"><span class="score-num">87</span><div class="score-mini"><div class="score-mini-fill" style="width:87%"></div></div></div></td><td><span class="tier-pill A">A 类</span></td><td><span class="tag">生物医药</span></td><td>金银湖街道</td><td class="num-font">12</td><td class="num-font">76</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">05</span></td><td class="company">武汉星纬量子通信有限公司</td><td><div class="score-cell"><span class="score-num">85</span><div class="score-mini"><div class="score-mini-fill" style="width:85%"></div></div></div></td><td><span class="tier-pill A">A 类</span></td><td><span class="tag">电子信息</span></td><td>国家网安基地</td><td class="num-font">11</td><td class="num-font">64</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">06</span></td><td class="company">武汉启航物联网有限公司</td><td><div class="score-cell"><span class="score-num">78</span><div class="score-mini"><div class="score-mini-fill" style="width:78%"></div></div></div></td><td><span class="tier-pill B">B 类</span></td><td><span class="tag">电子信息</span></td><td>将军路街道</td><td class="num-font">8</td><td class="num-font">52</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">07</span></td><td class="company">武汉食研坊食品装备有限公司</td><td><div class="score-cell"><span class="score-num">75</span><div class="score-mini"><div class="score-mini-fill" style="width:75%"></div></div></div></td><td><span class="tier-pill B">B 类</span></td><td><span class="tag">先进制造</span></td><td>径河街道</td><td class="num-font">7</td><td class="num-font">88</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">08</span></td><td class="company">武汉青鸟新能源科技有限公司</td><td><div class="score-cell"><span class="score-num">72</span><div class="score-mini"><div class="score-mini-fill" style="width:72%"></div></div></div></td><td><span class="tier-pill B">B 类</span></td><td><span class="tag">新能源</span></td><td>走马岭街道</td><td class="num-font">6</td><td class="num-font">42</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">09</span></td><td class="company">武汉锦绣新材料有限公司</td><td><div class="score-cell"><span class="score-num">69</span><div class="score-mini"><div class="score-mini-fill" style="width:69%"></div></div></div></td><td><span class="tier-pill B">B 类</span></td><td><span class="tag">新材料</span></td><td>慈惠街道</td><td class="num-font">5</td><td class="num-font">38</td><td><button class="btn-link">详情 ↗</button></td></tr>
+            <tr><td><span class="rank">10</span></td><td class="company">武汉远航航空配件有限公司</td><td><div class="score-cell"><span class="score-num">66</span><div class="score-mini"><div class="score-mini-fill" style="width:66%"></div></div></div></td><td><span class="tier-pill B">B 类</span></td><td><span class="tag">先进制造</span></td><td>临空港经开区</td><td class="num-font">5</td><td class="num-font">54</td><td><button class="btn-link">详情 ↗</button></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  // Donut chart
+  echarts.init(document.getElementById('donutChart')).setOption({
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 家 ({d}%)' },
+    legend: {
+      orient: 'vertical',
+      right: 10, top: 'middle',
+      icon: 'circle', itemWidth: 8, itemHeight: 8, itemGap: 10,
+      textStyle: { color: '#475569', fontSize: 12 }
+    },
+    series: [{
+      type: 'pie',
+      radius: ['55%', '80%'],
+      center: ['32%', '50%'],
+      avoidLabelOverlap: false,
+      itemStyle: { borderColor: '#ffffff', borderWidth: 3, borderRadius: 4 },
+      label: { show: true, position: 'center', formatter: '{total|246}\n{sub|总数}', rich: {
+        total: { fontSize: 28, color: '#0f172a', fontWeight: 700 },
+        sub: { fontSize: 12, color: '#94a3b8', padding: [6, 0, 0, 0] }
+      }},
+      emphasis: { label: { show: true } },
+      labelLine: { show: false },
+      data: [
+        { value: 78, name: '电子信息', itemStyle: { color: '#2563eb' } },
+        { value: 52, name: '先进制造', itemStyle: { color: '#7c3aed' } },
+        { value: 38, name: '新材料', itemStyle: { color: '#0891b2' } },
+        { value: 32, name: '生物医药', itemStyle: { color: '#10b981' } },
+        { value: 18, name: '新能源与节能', itemStyle: { color: '#f59e0b' } },
+        { value: 14, name: '资源与环境', itemStyle: { color: '#f97316' } },
+        { value: 14, name: '高技术服务', itemStyle: { color: '#ec4899' } }
+      ]
+    }]
+  });
+
+  // Year bar
+  echarts.init(document.getElementById('yearChart')).setOption({
+    grid: { left: 40, right: 20, top: 20, bottom: 30 },
+    tooltip: { trigger: 'axis' },
+    xAxis: {
+      type: 'category',
+      data: ['1-3 年', '3-5 年', '5-8 年', '8-15 年', '15 年+'],
+      axisLine: { lineStyle: { color: '#e5e7eb' } },
+      axisTick: { show: false },
+      axisLabel: { color: '#64748b', fontSize: 12 }
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { lineStyle: { color: '#f1f5f9' } },
+      axisLabel: { color: '#94a3b8', fontSize: 11 }
+    },
+    series: [{
+      type: 'bar',
+      data: [58, 62, 84, 32, 10],
+      barWidth: 36,
+      itemStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: '#60a5fa' },
+          { offset: 1, color: '#2563eb' }
+        ]),
+        borderRadius: [6, 6, 0, 0]
+      },
+      label: { show: true, position: 'top', color: '#0f172a', fontSize: 12, fontWeight: 600 }
+    }]
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,8876 @@
+[
+  {
+    "id": "c0001",
+    "name": "武汉深蓝股份有限公司",
+    "creditCode": "91420100000000001X",
+    "street": "国家网安基地",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2017-03-25",
+    "registeredCapital": 4377,
+    "employees": 180,
+    "rdEmployees": 53,
+    "patents": {
+      "invention": 6,
+      "utility": 23,
+      "design": 5
+    },
+    "software": 18,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王磊",
+      "phone": "13800002261",
+      "email": "王@武汉.com"
+    }
+  },
+  {
+    "id": "c0002",
+    "name": "湖北创博科技有限公司",
+    "creditCode": "91420100000000002X",
+    "street": "国家网安基地",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-06-16",
+    "registeredCapital": 601,
+    "employees": 172,
+    "rdEmployees": 48,
+    "patents": {
+      "invention": 20,
+      "utility": 22,
+      "design": 1
+    },
+    "software": 18,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙静",
+      "phone": "18200008607",
+      "email": "孙@湖北.com"
+    }
+  },
+  {
+    "id": "c0003",
+    "name": "江城深蓝科技有限公司",
+    "creditCode": "91420100000000003X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2016-02-02",
+    "registeredCapital": 3172,
+    "employees": 90,
+    "rdEmployees": 31,
+    "patents": {
+      "invention": 12,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡霞",
+      "phone": "15000002941",
+      "email": "胡@江城.com"
+    }
+  },
+  {
+    "id": "c0004",
+    "name": "武汉数盾科技股份有限公司",
+    "creditCode": "91420100000000004X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2014-03-10",
+    "registeredCapital": 963,
+    "employees": 91,
+    "rdEmployees": 34,
+    "patents": {
+      "invention": 18,
+      "utility": 18,
+      "design": 2
+    },
+    "software": 10,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗秀英",
+      "phone": "18200004896",
+      "email": "罗@武汉.com"
+    }
+  },
+  {
+    "id": "c0005",
+    "name": "江城数服科技有限公司",
+    "creditCode": "91420100000000005X",
+    "street": "国家网安基地",
+    "industry": "科技中介",
+    "techField": "高技术服务",
+    "establishedAt": "2015-01-27",
+    "registeredCapital": 4177,
+    "employees": 227,
+    "rdEmployees": 73,
+    "patents": {
+      "invention": 16,
+      "utility": 16,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈艳",
+      "phone": "18200004614",
+      "email": "陈@江城.com"
+    }
+  },
+  {
+    "id": "c0006",
+    "name": "武汉量子科技有限公司",
+    "creditCode": "91420100000000006X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2015-10-23",
+    "registeredCapital": 1259,
+    "employees": 295,
+    "rdEmployees": 72,
+    "patents": {
+      "invention": 11,
+      "utility": 8,
+      "design": 1
+    },
+    "software": 18,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周娟",
+      "phone": "13900005409",
+      "email": "周@武汉.com"
+    }
+  },
+  {
+    "id": "c0007",
+    "name": "湖北科创科技股份有限公司",
+    "creditCode": "91420100000000007X",
+    "street": "国家网安基地",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2017-08-31",
+    "registeredCapital": 3653,
+    "employees": 121,
+    "rdEmployees": 34,
+    "patents": {
+      "invention": 5,
+      "utility": 19,
+      "design": 2
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨磊",
+      "phone": "15800003086",
+      "email": "杨@湖北.com"
+    }
+  },
+  {
+    "id": "c0008",
+    "name": "江城芯片股份有限公司",
+    "creditCode": "91420100000000008X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2014-06-09",
+    "registeredCapital": 4910,
+    "employees": 181,
+    "rdEmployees": 59,
+    "patents": {
+      "invention": 19,
+      "utility": 8,
+      "design": 2
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高勇",
+      "phone": "18200003779",
+      "email": "高@江城.com"
+    }
+  },
+  {
+    "id": "c0009",
+    "name": "东湖磐石科技股份有限公司",
+    "creditCode": "91420100000000009X",
+    "street": "国家网安基地",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2018-10-18",
+    "registeredCapital": 1646,
+    "employees": 220,
+    "rdEmployees": 72,
+    "patents": {
+      "invention": 5,
+      "utility": 18,
+      "design": 2
+    },
+    "software": 15,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林霞",
+      "phone": "15100001308",
+      "email": "林@东湖.com"
+    }
+  },
+  {
+    "id": "c0010",
+    "name": "荆楚集成有限公司",
+    "creditCode": "91420100000000010X",
+    "street": "国家网安基地",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2020-10-04",
+    "registeredCapital": 3863,
+    "employees": 208,
+    "rdEmployees": 32,
+    "patents": {
+      "invention": 14,
+      "utility": 22,
+      "design": 1
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗霞",
+      "phone": "18600005032",
+      "email": "罗@荆楚.com"
+    }
+  },
+  {
+    "id": "c0011",
+    "name": "东湖深蓝科技有限公司",
+    "creditCode": "91420100000000011X",
+    "street": "国家网安基地",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2019-02-19",
+    "registeredCapital": 4887,
+    "employees": 195,
+    "rdEmployees": 61,
+    "patents": {
+      "invention": 7,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 9,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙芳",
+      "phone": "15800004252",
+      "email": "孙@东湖.com"
+    }
+  },
+  {
+    "id": "c0012",
+    "name": "楚天集成技术开发有限公司",
+    "creditCode": "91420100000000012X",
+    "street": "国家网安基地",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2019-12-04",
+    "registeredCapital": 2486,
+    "employees": 84,
+    "rdEmployees": 28,
+    "patents": {
+      "invention": 14,
+      "utility": 12,
+      "design": 1
+    },
+    "software": 8,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马娟",
+      "phone": "15800008445",
+      "email": "马@楚天.com"
+    }
+  },
+  {
+    "id": "c0013",
+    "name": "东湖脉冲科技股份有限公司",
+    "creditCode": "91420100000000013X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2015-01-30",
+    "registeredCapital": 1228,
+    "employees": 251,
+    "rdEmployees": 74,
+    "patents": {
+      "invention": 15,
+      "utility": 12,
+      "design": 5
+    },
+    "software": 20,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐涛",
+      "phone": "15100007278",
+      "email": "徐@东湖.com"
+    }
+  },
+  {
+    "id": "c0014",
+    "name": "汉水云麦技术开发有限公司",
+    "creditCode": "91420100000000014X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2014-08-25",
+    "registeredCapital": 1152,
+    "employees": 197,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 15,
+      "utility": 18,
+      "design": 1
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄霞",
+      "phone": "18200009709",
+      "email": "黄@汉水.com"
+    }
+  },
+  {
+    "id": "c0015",
+    "name": "武汉孵化有限公司",
+    "creditCode": "91420100000000015X",
+    "street": "国家网安基地",
+    "industry": "云服务",
+    "techField": "高技术服务",
+    "establishedAt": "2014-12-28",
+    "registeredCapital": 3929,
+    "employees": 198,
+    "rdEmployees": 67,
+    "patents": {
+      "invention": 6,
+      "utility": 20,
+      "design": 5
+    },
+    "software": 14,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何超",
+      "phone": "15100008051",
+      "email": "何@武汉.com"
+    }
+  },
+  {
+    "id": "c0016",
+    "name": "汉水深蓝股份有限公司",
+    "creditCode": "91420100000000016X",
+    "street": "国家网安基地",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2015-09-02",
+    "registeredCapital": 4912,
+    "employees": 82,
+    "rdEmployees": 20,
+    "patents": {
+      "invention": 17,
+      "utility": 20,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周娜",
+      "phone": "15100002111",
+      "email": "周@汉水.com"
+    }
+  },
+  {
+    "id": "c0017",
+    "name": "荆楚数盾技术股份有限公司",
+    "creditCode": "91420100000000017X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": "电子信息",
+    "establishedAt": "2015-03-30",
+    "registeredCapital": 1327,
+    "employees": 72,
+    "rdEmployees": 16,
+    "patents": {
+      "invention": 9,
+      "utility": 12,
+      "design": 5
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄娟",
+      "phone": "15000009290",
+      "email": "黄@荆楚.com"
+    }
+  },
+  {
+    "id": "c0018",
+    "name": "汉水云帆有限公司",
+    "creditCode": "91420100000000018X",
+    "street": "国家网安基地",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2015-04-09",
+    "registeredCapital": 3634,
+    "employees": 122,
+    "rdEmployees": 20,
+    "patents": {
+      "invention": 16,
+      "utility": 9,
+      "design": 4
+    },
+    "software": 9,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何伟",
+      "phone": "18200002618",
+      "email": "何@汉水.com"
+    }
+  },
+  {
+    "id": "c0019",
+    "name": "荆楚启航科技股份有限公司",
+    "creditCode": "91420100000000019X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2017-01-21",
+    "registeredCapital": 4971,
+    "employees": 182,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 13,
+      "utility": 20,
+      "design": 1
+    },
+    "software": 5,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林磊",
+      "phone": "15000008904",
+      "email": "林@荆楚.com"
+    }
+  },
+  {
+    "id": "c0020",
+    "name": "楚天芯片科技开发有限公司",
+    "creditCode": "91420100000000020X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": "电子信息",
+    "establishedAt": "2022-04-22",
+    "registeredCapital": 3689,
+    "employees": 81,
+    "rdEmployees": 29,
+    "patents": {
+      "invention": 10,
+      "utility": 11,
+      "design": 4
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱霞",
+      "phone": "15800007928",
+      "email": "朱@楚天.com"
+    }
+  },
+  {
+    "id": "c0021",
+    "name": "荆楚远航技术有限公司",
+    "creditCode": "91420100000000021X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-10-05",
+    "registeredCapital": 2491,
+    "employees": 145,
+    "rdEmployees": 51,
+    "patents": {
+      "invention": 8,
+      "utility": 8,
+      "design": 1
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐静",
+      "phone": "15000005896",
+      "email": "徐@荆楚.com"
+    }
+  },
+  {
+    "id": "c0022",
+    "name": "楚天热泵技术有限公司",
+    "creditCode": "91420100000000022X",
+    "street": "临空港经开区",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2017-12-13",
+    "registeredCapital": 4213,
+    "employees": 299,
+    "rdEmployees": 65,
+    "patents": {
+      "invention": 9,
+      "utility": 25,
+      "design": 3
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈军",
+      "phone": "15000009046",
+      "email": "陈@楚天.com"
+    }
+  },
+  {
+    "id": "c0023",
+    "name": "楚天镀膜科技股份有限公司",
+    "creditCode": "91420100000000023X",
+    "street": "临空港经开区",
+    "industry": "纳米材料",
+    "techField": "新材料",
+    "establishedAt": "2021-06-04",
+    "registeredCapital": 4144,
+    "employees": 220,
+    "rdEmployees": 55,
+    "patents": {
+      "invention": 16,
+      "utility": 22,
+      "design": 5
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵娜",
+      "phone": "15000008987",
+      "email": "赵@楚天.com"
+    }
+  },
+  {
+    "id": "c0024",
+    "name": "东湖风电科技有限公司",
+    "creditCode": "91420100000000024X",
+    "street": "临空港经开区",
+    "industry": "光伏发电",
+    "techField": "新能源与节能",
+    "establishedAt": "2016-08-20",
+    "registeredCapital": 1042,
+    "employees": 215,
+    "rdEmployees": 34,
+    "patents": {
+      "invention": 16,
+      "utility": 11,
+      "design": 4
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张芳",
+      "phone": "15100007562",
+      "email": "张@东湖.com"
+    }
+  },
+  {
+    "id": "c0025",
+    "name": "江城低碳科技开发有限公司",
+    "creditCode": "91420100000000025X",
+    "street": "临空港经开区",
+    "industry": "储能技术",
+    "techField": "新能源与节能",
+    "establishedAt": "2015-12-06",
+    "registeredCapital": 1837,
+    "employees": 270,
+    "rdEmployees": 84,
+    "patents": {
+      "invention": 19,
+      "utility": 13,
+      "design": 2
+    },
+    "software": 9,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林敏",
+      "phone": "15000001621",
+      "email": "林@江城.com"
+    }
+  },
+  {
+    "id": "c0026",
+    "name": "湖北宏图技术股份有限公司",
+    "creditCode": "91420100000000026X",
+    "street": "临空港经开区",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-04-19",
+    "registeredCapital": 4983,
+    "employees": 276,
+    "rdEmployees": 64,
+    "patents": {
+      "invention": 7,
+      "utility": 15,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄超",
+      "phone": "15800001923",
+      "email": "黄@湖北.com"
+    }
+  },
+  {
+    "id": "c0027",
+    "name": "荆楚远航技术开发有限公司",
+    "creditCode": "91420100000000027X",
+    "street": "临空港经开区",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2021-06-28",
+    "registeredCapital": 817,
+    "employees": 164,
+    "rdEmployees": 47,
+    "patents": {
+      "invention": 8,
+      "utility": 8,
+      "design": 2
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱磊",
+      "phone": "15100004076",
+      "email": "朱@荆楚.com"
+    }
+  },
+  {
+    "id": "c0028",
+    "name": "湖北食研坊科技开发有限公司",
+    "creditCode": "91420100000000028X",
+    "street": "临空港经开区",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2016-10-25",
+    "registeredCapital": 2567,
+    "employees": 212,
+    "rdEmployees": 42,
+    "patents": {
+      "invention": 9,
+      "utility": 18,
+      "design": 1
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何涛",
+      "phone": "15800006261",
+      "email": "何@湖北.com"
+    }
+  },
+  {
+    "id": "c0029",
+    "name": "湖北节电科技有限公司",
+    "creditCode": "91420100000000029X",
+    "street": "临空港经开区",
+    "industry": "节能环保",
+    "techField": "新能源与节能",
+    "establishedAt": "2016-01-02",
+    "registeredCapital": 3875,
+    "employees": 255,
+    "rdEmployees": 60,
+    "patents": {
+      "invention": 14,
+      "utility": 18,
+      "design": 2
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何超",
+      "phone": "15100007287",
+      "email": "何@湖北.com"
+    }
+  },
+  {
+    "id": "c0030",
+    "name": "江城精工技术开发有限公司",
+    "creditCode": "91420100000000030X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-05-09",
+    "registeredCapital": 3312,
+    "employees": 183,
+    "rdEmployees": 45,
+    "patents": {
+      "invention": 10,
+      "utility": 17,
+      "design": 5
+    },
+    "software": 10,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵强",
+      "phone": "15100002306",
+      "email": "赵@江城.com"
+    }
+  },
+  {
+    "id": "c0031",
+    "name": "东湖鑫宇技术有限公司",
+    "creditCode": "91420100000000031X",
+    "street": "临空港经开区",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-10-29",
+    "registeredCapital": 3123,
+    "employees": 189,
+    "rdEmployees": 71,
+    "patents": {
+      "invention": 11,
+      "utility": 18,
+      "design": 3
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何艳",
+      "phone": "13800006808",
+      "email": "何@东湖.com"
+    }
+  },
+  {
+    "id": "c0032",
+    "name": "荆楚远航科技有限公司",
+    "creditCode": "91420100000000032X",
+    "street": "临空港经开区",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-11-11",
+    "registeredCapital": 2529,
+    "employees": 234,
+    "rdEmployees": 43,
+    "patents": {
+      "invention": 8,
+      "utility": 24,
+      "design": 2
+    },
+    "software": 7,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈明",
+      "phone": "18600002148",
+      "email": "陈@荆楚.com"
+    }
+  },
+  {
+    "id": "c0033",
+    "name": "荆楚汇聚科技开发有限公司",
+    "creditCode": "91420100000000033X",
+    "street": "临空港经开区",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-01-05",
+    "registeredCapital": 2531,
+    "employees": 190,
+    "rdEmployees": 40,
+    "patents": {
+      "invention": 14,
+      "utility": 23,
+      "design": 5
+    },
+    "software": 11,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何洋",
+      "phone": "18200001592",
+      "email": "何@荆楚.com"
+    }
+  },
+  {
+    "id": "c0034",
+    "name": "荆楚晶华科技有限公司",
+    "creditCode": "91420100000000034X",
+    "street": "临空港经开区",
+    "industry": "纳米材料",
+    "techField": "新材料",
+    "establishedAt": "2015-07-05",
+    "registeredCapital": 1979,
+    "employees": 282,
+    "rdEmployees": 103,
+    "patents": {
+      "invention": 12,
+      "utility": 17,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴明",
+      "phone": "18200007639",
+      "email": "吴@荆楚.com"
+    }
+  },
+  {
+    "id": "c0035",
+    "name": "汉水数控有限公司",
+    "creditCode": "91420100000000035X",
+    "street": "临空港经开区",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-06-06",
+    "registeredCapital": 1043,
+    "employees": 188,
+    "rdEmployees": 43,
+    "patents": {
+      "invention": 7,
+      "utility": 12,
+      "design": 4
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘霞",
+      "phone": "13900005124",
+      "email": "刘@汉水.com"
+    }
+  },
+  {
+    "id": "c0036",
+    "name": "汉水硅材技术股份有限公司",
+    "creditCode": "91420100000000036X",
+    "street": "临空港经开区",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2017-08-24",
+    "registeredCapital": 2405,
+    "employees": 142,
+    "rdEmployees": 52,
+    "patents": {
+      "invention": 16,
+      "utility": 14,
+      "design": 4
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "18600006664",
+      "email": "周@汉水.com"
+    }
+  },
+  {
+    "id": "c0037",
+    "name": "武汉精工有限公司",
+    "creditCode": "91420100000000037X",
+    "street": "临空港经开区",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-01-17",
+    "registeredCapital": 2777,
+    "employees": 105,
+    "rdEmployees": 23,
+    "patents": {
+      "invention": 10,
+      "utility": 9,
+      "design": 3
+    },
+    "software": 10,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨秀英",
+      "phone": "15800009349",
+      "email": "杨@武汉.com"
+    }
+  },
+  {
+    "id": "c0038",
+    "name": "荆楚合金技术开发有限公司",
+    "creditCode": "91420100000000038X",
+    "street": "临空港经开区",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2018-06-02",
+    "registeredCapital": 1242,
+    "employees": 152,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 10,
+      "utility": 17,
+      "design": 2
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗艳",
+      "phone": "18200003875",
+      "email": "罗@荆楚.com"
+    }
+  },
+  {
+    "id": "c0039",
+    "name": "湖北智造科技有限公司",
+    "creditCode": "91420100000000039X",
+    "street": "吴家山街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-06-22",
+    "registeredCapital": 3061,
+    "employees": 229,
+    "rdEmployees": 43,
+    "patents": {
+      "invention": 13,
+      "utility": 24,
+      "design": 4
+    },
+    "software": 20,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵敏",
+      "phone": "15000007904",
+      "email": "赵@湖北.com"
+    }
+  },
+  {
+    "id": "c0040",
+    "name": "东湖镀膜科技开发有限公司",
+    "creditCode": "91420100000000040X",
+    "street": "吴家山街道",
+    "industry": "复合材料",
+    "techField": "新材料",
+    "establishedAt": "2019-06-29",
+    "registeredCapital": 828,
+    "employees": 233,
+    "rdEmployees": 46,
+    "patents": {
+      "invention": 18,
+      "utility": 13,
+      "design": 3
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭伟",
+      "phone": "13800004377",
+      "email": "郭@东湖.com"
+    }
+  },
+  {
+    "id": "c0041",
+    "name": "汉水导热科技有限公司",
+    "creditCode": "91420100000000041X",
+    "street": "吴家山街道",
+    "industry": "功能材料",
+    "techField": "新材料",
+    "establishedAt": "2017-07-28",
+    "registeredCapital": 2903,
+    "employees": 282,
+    "rdEmployees": 73,
+    "patents": {
+      "invention": 18,
+      "utility": 20,
+      "design": 1
+    },
+    "software": 19,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林伟",
+      "phone": "15000004030",
+      "email": "林@汉水.com"
+    }
+  },
+  {
+    "id": "c0042",
+    "name": "江城纤维技术开发有限公司",
+    "creditCode": "91420100000000042X",
+    "street": "吴家山街道",
+    "industry": "功能材料",
+    "techField": "新材料",
+    "establishedAt": "2022-10-29",
+    "registeredCapital": 3856,
+    "employees": 233,
+    "rdEmployees": 67,
+    "patents": {
+      "invention": 18,
+      "utility": 13,
+      "design": 4
+    },
+    "software": 5,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡伟",
+      "phone": "18200004775",
+      "email": "胡@江城.com"
+    }
+  },
+  {
+    "id": "c0043",
+    "name": "武汉赋能股份有限公司",
+    "creditCode": "91420100000000043X",
+    "street": "吴家山街道",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2016-09-20",
+    "registeredCapital": 3946,
+    "employees": 262,
+    "rdEmployees": 82,
+    "patents": {
+      "invention": 19,
+      "utility": 10,
+      "design": 2
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张娜",
+      "phone": "13900008070",
+      "email": "张@武汉.com"
+    }
+  },
+  {
+    "id": "c0044",
+    "name": "湖北脉冲技术有限公司",
+    "creditCode": "91420100000000044X",
+    "street": "吴家山街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2014-03-08",
+    "registeredCapital": 2293,
+    "employees": 289,
+    "rdEmployees": 100,
+    "patents": {
+      "invention": 10,
+      "utility": 15,
+      "design": 1
+    },
+    "software": 20,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何霞",
+      "phone": "15000003612",
+      "email": "何@湖北.com"
+    }
+  },
+  {
+    "id": "c0045",
+    "name": "江城星纬科技有限公司",
+    "creditCode": "91420100000000045X",
+    "street": "吴家山街道",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2015-04-28",
+    "registeredCapital": 3609,
+    "employees": 200,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 15,
+      "utility": 13,
+      "design": 3
+    },
+    "software": 7,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐勇",
+      "phone": "18200001489",
+      "email": "徐@江城.com"
+    }
+  },
+  {
+    "id": "c0046",
+    "name": "江城联盟股份有限公司",
+    "creditCode": "91420100000000046X",
+    "street": "吴家山街道",
+    "industry": "科技中介",
+    "techField": "高技术服务",
+    "establishedAt": "2020-12-01",
+    "registeredCapital": 2151,
+    "employees": 62,
+    "rdEmployees": 18,
+    "patents": {
+      "invention": 12,
+      "utility": 10,
+      "design": 5
+    },
+    "software": 6,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗敏",
+      "phone": "13800009975",
+      "email": "罗@江城.com"
+    }
+  },
+  {
+    "id": "c0047",
+    "name": "湖北深蓝技术有限公司",
+    "creditCode": "91420100000000047X",
+    "street": "吴家山街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2022-01-31",
+    "registeredCapital": 4433,
+    "employees": 214,
+    "rdEmployees": 74,
+    "patents": {
+      "invention": 20,
+      "utility": 10,
+      "design": 5
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张芳",
+      "phone": "13900001658",
+      "email": "张@湖北.com"
+    }
+  },
+  {
+    "id": "c0048",
+    "name": "东湖联盟科技有限公司",
+    "creditCode": "91420100000000048X",
+    "street": "吴家山街道",
+    "industry": "科技中介",
+    "techField": "高技术服务",
+    "establishedAt": "2015-11-04",
+    "registeredCapital": 3034,
+    "employees": 110,
+    "rdEmployees": 22,
+    "patents": {
+      "invention": 16,
+      "utility": 12,
+      "design": 1
+    },
+    "software": 11,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡丽",
+      "phone": "15100007599",
+      "email": "胡@东湖.com"
+    }
+  },
+  {
+    "id": "c0049",
+    "name": "汉水数据技术有限公司",
+    "creditCode": "91420100000000049X",
+    "street": "将军路街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2018-08-17",
+    "registeredCapital": 3189,
+    "employees": 177,
+    "rdEmployees": 35,
+    "patents": {
+      "invention": 18,
+      "utility": 18,
+      "design": 3
+    },
+    "software": 11,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高超",
+      "phone": "15000003022",
+      "email": "高@汉水.com"
+    }
+  },
+  {
+    "id": "c0050",
+    "name": "荆楚赛博科技有限公司",
+    "creditCode": "91420100000000050X",
+    "street": "将军路街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2018-09-02",
+    "registeredCapital": 2960,
+    "employees": 142,
+    "rdEmployees": 43,
+    "patents": {
+      "invention": 16,
+      "utility": 8,
+      "design": 3
+    },
+    "software": 17,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张明",
+      "phone": "15000009645",
+      "email": "张@荆楚.com"
+    }
+  },
+  {
+    "id": "c0051",
+    "name": "武汉星纬技术股份有限公司",
+    "creditCode": "91420100000000051X",
+    "street": "将军路街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2015-02-07",
+    "registeredCapital": 2117,
+    "employees": 200,
+    "rdEmployees": 49,
+    "patents": {
+      "invention": 20,
+      "utility": 23,
+      "design": 5
+    },
+    "software": 6,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐磊",
+      "phone": "15100005647",
+      "email": "徐@武汉.com"
+    }
+  },
+  {
+    "id": "c0052",
+    "name": "荆楚药研科技有限公司",
+    "creditCode": "91420100000000052X",
+    "street": "将军路街道",
+    "industry": "生物技术",
+    "techField": "生物与新医药",
+    "establishedAt": "2019-02-16",
+    "registeredCapital": 3675,
+    "employees": 169,
+    "rdEmployees": 42,
+    "patents": {
+      "invention": 13,
+      "utility": 18,
+      "design": 2
+    },
+    "software": 14,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王秀兰",
+      "phone": "13800008092",
+      "email": "王@荆楚.com"
+    }
+  },
+  {
+    "id": "c0053",
+    "name": "武汉益生技术开发有限公司",
+    "creditCode": "91420100000000053X",
+    "street": "将军路街道",
+    "industry": "医疗服务",
+    "techField": "生物与新医药",
+    "establishedAt": "2020-03-30",
+    "registeredCapital": 2233,
+    "employees": 160,
+    "rdEmployees": 45,
+    "patents": {
+      "invention": 14,
+      "utility": 10,
+      "design": 3
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周静",
+      "phone": "15100006136",
+      "email": "周@武汉.com"
+    }
+  },
+  {
+    "id": "c0054",
+    "name": "东湖细胞技术开发有限公司",
+    "creditCode": "91420100000000054X",
+    "street": "将军路街道",
+    "industry": "生物技术",
+    "techField": "生物与新医药",
+    "establishedAt": "2020-05-18",
+    "registeredCapital": 3250,
+    "employees": 210,
+    "rdEmployees": 34,
+    "patents": {
+      "invention": 8,
+      "utility": 18,
+      "design": 3
+    },
+    "software": 11,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张杰",
+      "phone": "13900003813",
+      "email": "张@东湖.com"
+    }
+  },
+  {
+    "id": "c0055",
+    "name": "湖北鼎盛科技有限公司",
+    "creditCode": "91420100000000055X",
+    "street": "径河街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-04-15",
+    "registeredCapital": 4563,
+    "employees": 203,
+    "rdEmployees": 32,
+    "patents": {
+      "invention": 14,
+      "utility": 24,
+      "design": 5
+    },
+    "software": 5,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨超",
+      "phone": "13900001528",
+      "email": "杨@湖北.com"
+    }
+  },
+  {
+    "id": "c0056",
+    "name": "楚天绿氢有限公司",
+    "creditCode": "91420100000000056X",
+    "street": "径河街道",
+    "industry": "节能环保",
+    "techField": "新能源与节能",
+    "establishedAt": "2020-08-16",
+    "registeredCapital": 4819,
+    "employees": 147,
+    "rdEmployees": 43,
+    "patents": {
+      "invention": 11,
+      "utility": 14,
+      "design": 2
+    },
+    "software": 16,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨伟",
+      "phone": "18200006674",
+      "email": "杨@楚天.com"
+    }
+  },
+  {
+    "id": "c0057",
+    "name": "汉水食研坊有限公司",
+    "creditCode": "91420100000000057X",
+    "street": "径河街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-03-08",
+    "registeredCapital": 1883,
+    "employees": 115,
+    "rdEmployees": 43,
+    "patents": {
+      "invention": 12,
+      "utility": 16,
+      "design": 1
+    },
+    "software": 9,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗霞",
+      "phone": "15800006695",
+      "email": "罗@汉水.com"
+    }
+  },
+  {
+    "id": "c0058",
+    "name": "湖北氮化科技股份有限公司",
+    "creditCode": "91420100000000058X",
+    "street": "径河街道",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2014-04-03",
+    "registeredCapital": 1479,
+    "employees": 240,
+    "rdEmployees": 86,
+    "patents": {
+      "invention": 20,
+      "utility": 12,
+      "design": 3
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高军",
+      "phone": "13800006684",
+      "email": "高@湖北.com"
+    }
+  },
+  {
+    "id": "c0059",
+    "name": "楚天蛋白有限公司",
+    "creditCode": "91420100000000059X",
+    "street": "金银湖街道",
+    "industry": "医疗服务",
+    "techField": "生物与新医药",
+    "establishedAt": "2016-08-03",
+    "registeredCapital": 4215,
+    "employees": 274,
+    "rdEmployees": 109,
+    "patents": {
+      "invention": 18,
+      "utility": 22,
+      "design": 1
+    },
+    "software": 13,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵勇",
+      "phone": "15000003915",
+      "email": "赵@楚天.com"
+    }
+  },
+  {
+    "id": "c0060",
+    "name": "楚天咨询技术有限公司",
+    "creditCode": "91420100000000060X",
+    "street": "金银湖街道",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2019-05-12",
+    "registeredCapital": 1426,
+    "employees": 128,
+    "rdEmployees": 21,
+    "patents": {
+      "invention": 16,
+      "utility": 17,
+      "design": 2
+    },
+    "software": 12,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱娜",
+      "phone": "15100008177",
+      "email": "朱@楚天.com"
+    }
+  },
+  {
+    "id": "c0061",
+    "name": "汉水铸造技术有限公司",
+    "creditCode": "91420100000000061X",
+    "street": "国家网安基地",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-06-04",
+    "registeredCapital": 2057,
+    "employees": 131,
+    "rdEmployees": 34,
+    "patents": {
+      "invention": 3,
+      "utility": 14,
+      "design": 3
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡秀英",
+      "phone": "15100002914",
+      "email": "胡277@example.com"
+    }
+  },
+  {
+    "id": "c0062",
+    "name": "武汉智算科技有限公司",
+    "creditCode": "91420100000000062X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2017-08-14",
+    "registeredCapital": 2199,
+    "employees": 118,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 8,
+      "utility": 16,
+      "design": 4
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙娜",
+      "phone": "18600006739",
+      "email": "孙157@example.com"
+    }
+  },
+  {
+    "id": "c0063",
+    "name": "荆楚磐石科技有限公司",
+    "creditCode": "91420100000000063X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": null,
+    "establishedAt": "2019-05-23",
+    "registeredCapital": 2326,
+    "employees": 148,
+    "rdEmployees": 35,
+    "patents": {
+      "invention": 7,
+      "utility": 12,
+      "design": 3
+    },
+    "software": 9,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何秀英",
+      "phone": "15000009005",
+      "email": "何473@example.com"
+    }
+  },
+  {
+    "id": "c0064",
+    "name": "江城数服科技股份有限公司",
+    "creditCode": "91420100000000064X",
+    "street": "国家网安基地",
+    "industry": "研究开发",
+    "techField": null,
+    "establishedAt": "2018-04-10",
+    "registeredCapital": 1406,
+    "employees": 138,
+    "rdEmployees": 34,
+    "patents": {
+      "invention": 9,
+      "utility": 16,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈强",
+      "phone": "15800003393",
+      "email": "陈493@example.com"
+    }
+  },
+  {
+    "id": "c0065",
+    "name": "东湖芯片科技有限公司",
+    "creditCode": "91420100000000065X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2020-12-06",
+    "registeredCapital": 2410,
+    "employees": 163,
+    "rdEmployees": 44,
+    "patents": {
+      "invention": 11,
+      "utility": 17,
+      "design": 2
+    },
+    "software": 13,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李洋",
+      "phone": "15800001425",
+      "email": "李934@example.com"
+    }
+  },
+  {
+    "id": "c0066",
+    "name": "东湖铭科科技有限公司",
+    "creditCode": "91420100000000066X",
+    "street": "国家网安基地",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2021-09-17",
+    "registeredCapital": 1176,
+    "employees": 53,
+    "rdEmployees": 13,
+    "patents": {
+      "invention": 9,
+      "utility": 16,
+      "design": 4
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵娜",
+      "phone": "15000002681",
+      "email": "赵822@example.com"
+    }
+  },
+  {
+    "id": "c0067",
+    "name": "武汉食研坊科技有限公司",
+    "creditCode": "91420100000000067X",
+    "street": "国家网安基地",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-11-17",
+    "registeredCapital": 646,
+    "employees": 113,
+    "rdEmployees": 24,
+    "patents": {
+      "invention": 9,
+      "utility": 9,
+      "design": 4
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐超",
+      "phone": "18200005565",
+      "email": "徐748@example.com"
+    }
+  },
+  {
+    "id": "c0068",
+    "name": "江城深蓝智能科技有限公司",
+    "creditCode": "91420100000000068X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2020-07-08",
+    "registeredCapital": 2436,
+    "employees": 63,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 8,
+      "utility": 11,
+      "design": 1
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周勇",
+      "phone": "15100003021",
+      "email": "周318@example.com"
+    }
+  },
+  {
+    "id": "c0069",
+    "name": "东湖融合科技股份有限公司",
+    "creditCode": "91420100000000069X",
+    "street": "国家网安基地",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2023-06-19",
+    "registeredCapital": 2951,
+    "employees": 143,
+    "rdEmployees": 30,
+    "patents": {
+      "invention": 5,
+      "utility": 17,
+      "design": 3
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘娜",
+      "phone": "13900005387",
+      "email": "刘967@example.com"
+    }
+  },
+  {
+    "id": "c0070",
+    "name": "楚天脉冲有限公司",
+    "creditCode": "91420100000000070X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": null,
+    "establishedAt": "2019-04-09",
+    "registeredCapital": 250,
+    "employees": 73,
+    "rdEmployees": 11,
+    "patents": {
+      "invention": 1,
+      "utility": 3,
+      "design": 2
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林秀兰",
+      "phone": "15000005034",
+      "email": "林173@example.com"
+    }
+  },
+  {
+    "id": "c0071",
+    "name": "江城星纬创新科技有限公司",
+    "creditCode": "91420100000000071X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2023-04-18",
+    "registeredCapital": 310,
+    "employees": 54,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 3,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡敏",
+      "phone": "13800002406",
+      "email": "胡216@example.com"
+    }
+  },
+  {
+    "id": "c0072",
+    "name": "楚天增效技术开发有限公司",
+    "creditCode": "91420100000000072X",
+    "street": "国家网安基地",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2019-12-13",
+    "registeredCapital": 561,
+    "employees": 97,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 4,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周娜",
+      "phone": "15800009013",
+      "email": "周888@example.com"
+    }
+  },
+  {
+    "id": "c0073",
+    "name": "江城智隼科技有限公司",
+    "creditCode": "91420100000000073X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": "电子信息",
+    "establishedAt": "2023-05-04",
+    "registeredCapital": 499,
+    "employees": 81,
+    "rdEmployees": 15,
+    "patents": {
+      "invention": 2,
+      "utility": 10,
+      "design": 0
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨军",
+      "phone": "15100002864",
+      "email": "杨527@example.com"
+    }
+  },
+  {
+    "id": "c0074",
+    "name": "武汉芯片科技股份有限公司",
+    "creditCode": "91420100000000074X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2021-04-12",
+    "registeredCapital": 640,
+    "employees": 93,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 4,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗秀英",
+      "phone": "15100005733",
+      "email": "罗553@example.com"
+    }
+  },
+  {
+    "id": "c0075",
+    "name": "武汉数据科技有限公司",
+    "creditCode": "91420100000000075X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2017-08-25",
+    "registeredCapital": 956,
+    "employees": 91,
+    "rdEmployees": 13,
+    "patents": {
+      "invention": 1,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱洋",
+      "phone": "15000008747",
+      "email": "朱496@example.com"
+    }
+  },
+  {
+    "id": "c0076",
+    "name": "荆楚集成科技有限公司",
+    "creditCode": "91420100000000076X",
+    "street": "国家网安基地",
+    "industry": "科技中介",
+    "techField": "高技术服务",
+    "establishedAt": "2022-03-11",
+    "registeredCapital": 784,
+    "employees": 74,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 1,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡磊",
+      "phone": "15000005285",
+      "email": "胡703@example.com"
+    }
+  },
+  {
+    "id": "c0077",
+    "name": "江城食研坊有限公司",
+    "creditCode": "91420100000000077X",
+    "street": "国家网安基地",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-10-11",
+    "registeredCapital": 282,
+    "employees": 30,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 4,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘磊",
+      "phone": "15000003568",
+      "email": "刘889@example.com"
+    }
+  },
+  {
+    "id": "c0078",
+    "name": "江城锋码科技股份有限公司",
+    "creditCode": "91420100000000078X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": null,
+    "establishedAt": "2021-01-17",
+    "registeredCapital": 739,
+    "employees": 60,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 0,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄娜",
+      "phone": "15800003772",
+      "email": "黄224@example.com"
+    }
+  },
+  {
+    "id": "c0079",
+    "name": "武汉智造科技有限公司",
+    "creditCode": "91420100000000079X",
+    "street": "国家网安基地",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-07-27",
+    "registeredCapital": 655,
+    "employees": 93,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 4,
+      "utility": 7,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙娟",
+      "phone": "18200009682",
+      "email": "孙673@example.com"
+    }
+  },
+  {
+    "id": "c0080",
+    "name": "荆楚精工股份有限公司",
+    "creditCode": "91420100000000080X",
+    "street": "国家网安基地",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-01-05",
+    "registeredCapital": 674,
+    "employees": 89,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 4,
+      "utility": 6,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗军",
+      "phone": "15000007517",
+      "email": "罗781@example.com"
+    }
+  },
+  {
+    "id": "c0081",
+    "name": "荆楚网络科技有限公司",
+    "creditCode": "91420100000000081X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2022-10-26",
+    "registeredCapital": 387,
+    "employees": 49,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 3,
+      "utility": 8,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡强",
+      "phone": "15100007530",
+      "email": "胡108@example.com"
+    }
+  },
+  {
+    "id": "c0082",
+    "name": "湖北晨光技术开发有限公司",
+    "creditCode": "91420100000000082X",
+    "street": "国家网安基地",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2021-06-26",
+    "registeredCapital": 993,
+    "employees": 89,
+    "rdEmployees": 12,
+    "patents": {
+      "invention": 4,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王伟",
+      "phone": "15800001003",
+      "email": "王688@example.com"
+    }
+  },
+  {
+    "id": "c0083",
+    "name": "荆楚智隼科技股份有限公司",
+    "creditCode": "91420100000000083X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2019-04-10",
+    "registeredCapital": 309,
+    "employees": 58,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘霞",
+      "phone": "13800008257",
+      "email": "刘274@example.com"
+    }
+  },
+  {
+    "id": "c0084",
+    "name": "汉水磐石有限公司",
+    "creditCode": "91420100000000084X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2021-02-06",
+    "registeredCapital": 372,
+    "employees": 87,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 3
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙芳",
+      "phone": "15100007306",
+      "email": "孙295@example.com"
+    }
+  },
+  {
+    "id": "c0085",
+    "name": "武汉赛博科技股份有限公司",
+    "creditCode": "91420100000000085X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": "电子信息",
+    "establishedAt": "2019-12-10",
+    "registeredCapital": 603,
+    "employees": 76,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 1,
+      "utility": 10,
+      "design": 2
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄强",
+      "phone": "18200001896",
+      "email": "黄864@example.com"
+    }
+  },
+  {
+    "id": "c0086",
+    "name": "楚天网络科技有限公司",
+    "creditCode": "91420100000000086X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": null,
+    "establishedAt": "2017-09-14",
+    "registeredCapital": 112,
+    "employees": 26,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙洋",
+      "phone": "13900009690",
+      "email": "孙380@example.com"
+    }
+  },
+  {
+    "id": "c0087",
+    "name": "湖北咨询有限公司",
+    "creditCode": "91420100000000087X",
+    "street": "国家网安基地",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2023-11-23",
+    "registeredCapital": 157,
+    "employees": 24,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗娟",
+      "phone": "18200001930",
+      "email": "罗514@example.com"
+    }
+  },
+  {
+    "id": "c0088",
+    "name": "武汉平台科技有限公司",
+    "creditCode": "91420100000000088X",
+    "street": "国家网安基地",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2024-01-20",
+    "registeredCapital": 481,
+    "employees": 59,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭秀兰",
+      "phone": "15800007429",
+      "email": "郭301@example.com"
+    }
+  },
+  {
+    "id": "c0089",
+    "name": "湖北赛博技术有限公司",
+    "creditCode": "91420100000000089X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2023-02-11",
+    "registeredCapital": 192,
+    "employees": 49,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭艳",
+      "phone": "15100005605",
+      "email": "郭956@example.com"
+    }
+  },
+  {
+    "id": "c0090",
+    "name": "江城量子科技股份有限公司",
+    "creditCode": "91420100000000090X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2024-01-28",
+    "registeredCapital": 313,
+    "employees": 33,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴娜",
+      "phone": "13800008803",
+      "email": "吴316@example.com"
+    }
+  },
+  {
+    "id": "c0091",
+    "name": "武汉芯片有限公司",
+    "creditCode": "91420100000000091X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2020-10-18",
+    "registeredCapital": 415,
+    "employees": 45,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐艳",
+      "phone": "18600001685",
+      "email": "徐602@example.com"
+    }
+  },
+  {
+    "id": "c0092",
+    "name": "江城启航科技有限公司",
+    "creditCode": "91420100000000092X",
+    "street": "国家网安基地",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2018-01-17",
+    "registeredCapital": 445,
+    "employees": 37,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 1,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱强",
+      "phone": "15800007445",
+      "email": "朱689@example.com"
+    }
+  },
+  {
+    "id": "c0093",
+    "name": "楚天精密有限公司",
+    "creditCode": "91420100000000093X",
+    "street": "国家网安基地",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-06-24",
+    "registeredCapital": 441,
+    "employees": 23,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴霞",
+      "phone": "13800002655",
+      "email": "吴174@example.com"
+    }
+  },
+  {
+    "id": "c0094",
+    "name": "武汉星纬技术有限公司",
+    "creditCode": "91420100000000094X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": "电子信息",
+    "establishedAt": "2018-05-03",
+    "registeredCapital": 113,
+    "employees": 24,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨磊",
+      "phone": "15800009587",
+      "email": "杨376@example.com"
+    }
+  },
+  {
+    "id": "c0095",
+    "name": "汉水烽火技术开发有限公司",
+    "creditCode": "91420100000000095X",
+    "street": "国家网安基地",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2019-03-23",
+    "registeredCapital": 371,
+    "employees": 60,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄超",
+      "phone": "15100008659",
+      "email": "黄456@example.com"
+    }
+  },
+  {
+    "id": "c0096",
+    "name": "东湖光子科技股份有限公司",
+    "creditCode": "91420100000000096X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2018-10-06",
+    "registeredCapital": 156,
+    "employees": 59,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "刘伟",
+      "phone": "15000002105",
+      "email": "刘729@example.com"
+    }
+  },
+  {
+    "id": "c0097",
+    "name": "荆楚晨光科技开发有限公司",
+    "creditCode": "91420100000000097X",
+    "street": "国家网安基地",
+    "industry": "数控设备",
+    "techField": null,
+    "establishedAt": "2016-01-13",
+    "registeredCapital": 128,
+    "employees": 46,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈娟",
+      "phone": "18600003809",
+      "email": "陈901@example.com"
+    }
+  },
+  {
+    "id": "c0098",
+    "name": "湖北云链科技有限公司",
+    "creditCode": "91420100000000098X",
+    "street": "国家网安基地",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2023-07-03",
+    "registeredCapital": 222,
+    "employees": 47,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴军",
+      "phone": "13800005341",
+      "email": "吴300@example.com"
+    }
+  },
+  {
+    "id": "c0099",
+    "name": "汉水赋能技术有限公司",
+    "creditCode": "91420100000000099X",
+    "street": "国家网安基地",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2024-07-31",
+    "registeredCapital": 389,
+    "employees": 21,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王娜",
+      "phone": "18600004937",
+      "email": "王696@example.com"
+    }
+  },
+  {
+    "id": "c0100",
+    "name": "江城创博科技有限公司",
+    "creditCode": "91420100000000100X",
+    "street": "国家网安基地",
+    "industry": "航空配件",
+    "techField": null,
+    "establishedAt": "2019-09-11",
+    "registeredCapital": 461,
+    "employees": 39,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 2,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马秀兰",
+      "phone": "15100001427",
+      "email": "马330@example.com"
+    }
+  },
+  {
+    "id": "c0101",
+    "name": "东湖汇聚股份有限公司",
+    "creditCode": "91420100000000101X",
+    "street": "国家网安基地",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-06-20",
+    "registeredCapital": 313,
+    "employees": 25,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘军",
+      "phone": "13900006534",
+      "email": "刘156@example.com"
+    }
+  },
+  {
+    "id": "c0102",
+    "name": "东湖精工股份有限公司",
+    "creditCode": "91420100000000102X",
+    "street": "国家网安基地",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-01-13",
+    "registeredCapital": 405,
+    "employees": 57,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马涛",
+      "phone": "18600008874",
+      "email": "马830@example.com"
+    }
+  },
+  {
+    "id": "c0103",
+    "name": "湖北星纬科技有限公司",
+    "creditCode": "91420100000000103X",
+    "street": "国家网安基地",
+    "industry": "网络安全",
+    "techField": null,
+    "establishedAt": "2020-06-03",
+    "registeredCapital": 136,
+    "employees": 20,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈明",
+      "phone": "18200007418",
+      "email": "陈561@example.com"
+    }
+  },
+  {
+    "id": "c0104",
+    "name": "湖北平台科技有限公司",
+    "creditCode": "91420100000000104X",
+    "street": "国家网安基地",
+    "industry": "云服务",
+    "techField": "高技术服务",
+    "establishedAt": "2019-05-13",
+    "registeredCapital": 165,
+    "employees": 9,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙娜",
+      "phone": "15800001892",
+      "email": "孙975@example.com"
+    }
+  },
+  {
+    "id": "c0105",
+    "name": "江城精工技术有限公司",
+    "creditCode": "91420100000000105X",
+    "street": "国家网安基地",
+    "industry": "数控设备",
+    "techField": null,
+    "establishedAt": "2021-04-11",
+    "registeredCapital": 62,
+    "employees": 8,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨丽",
+      "phone": "18200007742",
+      "email": "杨104@example.com"
+    }
+  },
+  {
+    "id": "c0106",
+    "name": "荆楚运营科技有限公司",
+    "creditCode": "91420100000000106X",
+    "street": "国家网安基地",
+    "industry": "检验检测",
+    "techField": null,
+    "establishedAt": "2021-05-05",
+    "registeredCapital": 140,
+    "employees": 22,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡秀兰",
+      "phone": "15800002421",
+      "email": "胡759@example.com"
+    }
+  },
+  {
+    "id": "c0107",
+    "name": "江城联盟技术股份有限公司",
+    "creditCode": "91420100000000107X",
+    "street": "国家网安基地",
+    "industry": "智慧供应链",
+    "techField": null,
+    "establishedAt": "2016-01-31",
+    "registeredCapital": 138,
+    "employees": 21,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘军",
+      "phone": "15100003380",
+      "email": "刘476@example.com"
+    }
+  },
+  {
+    "id": "c0108",
+    "name": "汉水磐石科技股份有限公司",
+    "creditCode": "91420100000000108X",
+    "street": "国家网安基地",
+    "industry": "集成电路",
+    "techField": null,
+    "establishedAt": "2016-11-08",
+    "registeredCapital": 189,
+    "employees": 6,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗强",
+      "phone": "15100004447",
+      "email": "罗520@example.com"
+    }
+  },
+  {
+    "id": "c0109",
+    "name": "湖北平台技术股份有限公司",
+    "creditCode": "91420100000000109X",
+    "street": "国家网安基地",
+    "industry": "研究开发",
+    "techField": null,
+    "establishedAt": "2020-06-03",
+    "registeredCapital": 143,
+    "employees": 22,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张超",
+      "phone": "15000003466",
+      "email": "张582@example.com"
+    }
+  },
+  {
+    "id": "c0110",
+    "name": "荆楚星纬科技有限公司",
+    "creditCode": "91420100000000110X",
+    "street": "国家网安基地",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2015-07-27",
+    "registeredCapital": 90,
+    "employees": 19,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": true
+    },
+    "contact": {
+      "name": "王艳",
+      "phone": "15800007070",
+      "email": "王723@example.com"
+    }
+  },
+  {
+    "id": "c0111",
+    "name": "武汉星纬智能技术有限公司",
+    "creditCode": "91420100000000111X",
+    "street": "国家网安基地",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2019-03-17",
+    "registeredCapital": 98,
+    "employees": 9,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨霞",
+      "phone": "15800004750",
+      "email": "杨491@example.com"
+    }
+  },
+  {
+    "id": "c0112",
+    "name": "武汉芯片技术股份有限公司",
+    "creditCode": "91420100000000112X",
+    "street": "国家网安基地",
+    "industry": "信息技术服务",
+    "techField": null,
+    "establishedAt": "2018-09-01",
+    "registeredCapital": 58,
+    "employees": 5,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李超",
+      "phone": "13900002177",
+      "email": "李668@example.com"
+    }
+  },
+  {
+    "id": "c0113",
+    "name": "荆楚华兴科技有限公司",
+    "creditCode": "91420100000000113X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-09-18",
+    "registeredCapital": 2697,
+    "employees": 73,
+    "rdEmployees": 20,
+    "patents": {
+      "invention": 12,
+      "utility": 17,
+      "design": 4
+    },
+    "software": 15,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴强",
+      "phone": "15000007904",
+      "email": "吴521@example.com"
+    }
+  },
+  {
+    "id": "c0114",
+    "name": "荆楚创博科技开发有限公司",
+    "creditCode": "91420100000000114X",
+    "street": "临空港经开区",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-03-21",
+    "registeredCapital": 2304,
+    "employees": 186,
+    "rdEmployees": 53,
+    "patents": {
+      "invention": 5,
+      "utility": 18,
+      "design": 4
+    },
+    "software": 12,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱丽",
+      "phone": "13900009411",
+      "email": "朱425@example.com"
+    }
+  },
+  {
+    "id": "c0115",
+    "name": "江城汇聚技术有限公司",
+    "creditCode": "91420100000000115X",
+    "street": "临空港经开区",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-01-10",
+    "registeredCapital": 1216,
+    "employees": 199,
+    "rdEmployees": 30,
+    "patents": {
+      "invention": 5,
+      "utility": 15,
+      "design": 1
+    },
+    "software": 15,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘涛",
+      "phone": "15100001984",
+      "email": "刘729@example.com"
+    }
+  },
+  {
+    "id": "c0116",
+    "name": "楚天恒力科技开发有限公司",
+    "creditCode": "91420100000000116X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": null,
+    "establishedAt": "2021-05-13",
+    "registeredCapital": 2133,
+    "employees": 140,
+    "rdEmployees": 40,
+    "patents": {
+      "invention": 12,
+      "utility": 16,
+      "design": 3
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈勇",
+      "phone": "18200006628",
+      "email": "陈644@example.com"
+    }
+  },
+  {
+    "id": "c0117",
+    "name": "汉水鑫宇科技有限公司",
+    "creditCode": "91420100000000117X",
+    "street": "临空港经开区",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-05-13",
+    "registeredCapital": 1622,
+    "employees": 167,
+    "rdEmployees": 55,
+    "patents": {
+      "invention": 5,
+      "utility": 14,
+      "design": 4
+    },
+    "software": 9,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭芳",
+      "phone": "13800003662",
+      "email": "郭419@example.com"
+    }
+  },
+  {
+    "id": "c0118",
+    "name": "荆楚青鸟技术有限公司",
+    "creditCode": "91420100000000118X",
+    "street": "临空港经开区",
+    "industry": "光伏发电",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-05-07",
+    "registeredCapital": 618,
+    "employees": 172,
+    "rdEmployees": 32,
+    "patents": {
+      "invention": 5,
+      "utility": 13,
+      "design": 4
+    },
+    "software": 13,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱娟",
+      "phone": "15800002499",
+      "email": "朱158@example.com"
+    }
+  },
+  {
+    "id": "c0119",
+    "name": "武汉磁性科技有限公司",
+    "creditCode": "91420100000000119X",
+    "street": "临空港经开区",
+    "industry": "纳米材料",
+    "techField": "新材料",
+    "establishedAt": "2021-05-10",
+    "registeredCapital": 2390,
+    "employees": 178,
+    "rdEmployees": 29,
+    "patents": {
+      "invention": 3,
+      "utility": 17,
+      "design": 2
+    },
+    "software": 9,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴霞",
+      "phone": "18200007717",
+      "email": "吴616@example.com"
+    }
+  },
+  {
+    "id": "c0120",
+    "name": "江城铭科科技开发有限公司",
+    "creditCode": "91420100000000120X",
+    "street": "临空港经开区",
+    "industry": "工业自动化",
+    "techField": null,
+    "establishedAt": "2019-12-09",
+    "registeredCapital": 1866,
+    "employees": 149,
+    "rdEmployees": 42,
+    "patents": {
+      "invention": 4,
+      "utility": 9,
+      "design": 4
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱磊",
+      "phone": "15800006740",
+      "email": "朱484@example.com"
+    }
+  },
+  {
+    "id": "c0121",
+    "name": "武汉储能技术股份有限公司",
+    "creditCode": "91420100000000121X",
+    "street": "临空港经开区",
+    "industry": "风电",
+    "techField": "新能源与节能",
+    "establishedAt": "2021-10-30",
+    "registeredCapital": 381,
+    "employees": 69,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 3,
+      "utility": 7,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张涛",
+      "phone": "15000005850",
+      "email": "张291@example.com"
+    }
+  },
+  {
+    "id": "c0122",
+    "name": "汉水精工技术开发有限公司",
+    "creditCode": "91420100000000122X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-06-29",
+    "registeredCapital": 664,
+    "employees": 40,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 8,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡秀兰",
+      "phone": "18600008457",
+      "email": "胡628@example.com"
+    }
+  },
+  {
+    "id": "c0123",
+    "name": "楚天铸造科技有限公司",
+    "creditCode": "91420100000000123X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": null,
+    "establishedAt": "2019-01-14",
+    "registeredCapital": 888,
+    "employees": 64,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 4,
+      "utility": 2,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘明",
+      "phone": "15800007168",
+      "email": "刘281@example.com"
+    }
+  },
+  {
+    "id": "c0124",
+    "name": "东湖太阳技术股份有限公司",
+    "creditCode": "91420100000000124X",
+    "street": "临空港经开区",
+    "industry": "风电",
+    "techField": "新能源与节能",
+    "establishedAt": "2022-08-28",
+    "registeredCapital": 360,
+    "employees": 63,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高超",
+      "phone": "15800005080",
+      "email": "高259@example.com"
+    }
+  },
+  {
+    "id": "c0125",
+    "name": "江城磁性技术股份有限公司",
+    "creditCode": "91420100000000125X",
+    "street": "临空港经开区",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2023-06-02",
+    "registeredCapital": 218,
+    "employees": 82,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 3,
+      "utility": 10,
+      "design": 2
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18600009304",
+      "email": "胡662@example.com"
+    }
+  },
+  {
+    "id": "c0126",
+    "name": "东湖功能技术股份有限公司",
+    "creditCode": "91420100000000126X",
+    "street": "临空港经开区",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2021-07-03",
+    "registeredCapital": 742,
+    "employees": 59,
+    "rdEmployees": 7,
+    "patents": {
+      "invention": 0,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴强",
+      "phone": "13900003118",
+      "email": "吴634@example.com"
+    }
+  },
+  {
+    "id": "c0127",
+    "name": "江城鑫宇科技有限公司",
+    "creditCode": "91420100000000127X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-09-10",
+    "registeredCapital": 420,
+    "employees": 99,
+    "rdEmployees": 17,
+    "patents": {
+      "invention": 3,
+      "utility": 3,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈娜",
+      "phone": "15000003692",
+      "email": "陈324@example.com"
+    }
+  },
+  {
+    "id": "c0128",
+    "name": "楚天纤维科技有限公司",
+    "creditCode": "91420100000000128X",
+    "street": "临空港经开区",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2017-12-01",
+    "registeredCapital": 333,
+    "employees": 48,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林磊",
+      "phone": "18200009801",
+      "email": "林554@example.com"
+    }
+  },
+  {
+    "id": "c0129",
+    "name": "武汉碳中科技有限公司",
+    "creditCode": "91420100000000129X",
+    "street": "临空港经开区",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-02-02",
+    "registeredCapital": 609,
+    "employees": 71,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 3,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴军",
+      "phone": "15800009508",
+      "email": "吴674@example.com"
+    }
+  },
+  {
+    "id": "c0130",
+    "name": "武汉热泵科技开发有限公司",
+    "creditCode": "91420100000000130X",
+    "street": "临空港经开区",
+    "industry": "节能环保",
+    "techField": null,
+    "establishedAt": "2018-11-15",
+    "registeredCapital": 293,
+    "employees": 33,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 0,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴伟",
+      "phone": "18600002144",
+      "email": "吴400@example.com"
+    }
+  },
+  {
+    "id": "c0131",
+    "name": "武汉汇聚股份有限公司",
+    "creditCode": "91420100000000131X",
+    "street": "临空港经开区",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2017-11-05",
+    "registeredCapital": 640,
+    "employees": 56,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 3,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "18200006848",
+      "email": "张114@example.com"
+    }
+  },
+  {
+    "id": "c0132",
+    "name": "东湖博联科技有限公司",
+    "creditCode": "91420100000000132X",
+    "street": "临空港经开区",
+    "industry": "食品机械",
+    "techField": null,
+    "establishedAt": "2024-02-14",
+    "registeredCapital": 311,
+    "employees": 34,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 0,
+      "utility": 8,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱娟",
+      "phone": "13800003508",
+      "email": "朱450@example.com"
+    }
+  },
+  {
+    "id": "c0133",
+    "name": "荆楚航宇科技有限公司",
+    "creditCode": "91420100000000133X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-01-28",
+    "registeredCapital": 512,
+    "employees": 71,
+    "rdEmployees": 7,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱磊",
+      "phone": "15800008673",
+      "email": "朱230@example.com"
+    }
+  },
+  {
+    "id": "c0134",
+    "name": "荆楚智造科技开发有限公司",
+    "creditCode": "91420100000000134X",
+    "street": "临空港经开区",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-03-18",
+    "registeredCapital": 615,
+    "employees": 54,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 3,
+      "utility": 2,
+      "design": 3
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈艳",
+      "phone": "15000009794",
+      "email": "陈513@example.com"
+    }
+  },
+  {
+    "id": "c0135",
+    "name": "荆楚恒力科技有限公司",
+    "creditCode": "91420100000000135X",
+    "street": "临空港经开区",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-09-07",
+    "registeredCapital": 569,
+    "employees": 64,
+    "rdEmployees": 11,
+    "patents": {
+      "invention": 1,
+      "utility": 6,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭杰",
+      "phone": "18600002117",
+      "email": "郭695@example.com"
+    }
+  },
+  {
+    "id": "c0136",
+    "name": "楚天铭科科技有限公司",
+    "creditCode": "91420100000000136X",
+    "street": "临空港经开区",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-03-22",
+    "registeredCapital": 307,
+    "employees": 53,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张涛",
+      "phone": "15100006727",
+      "email": "张550@example.com"
+    }
+  },
+  {
+    "id": "c0137",
+    "name": "武汉宏图技术开发有限公司",
+    "creditCode": "91420100000000137X",
+    "street": "临空港经开区",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2021-03-07",
+    "registeredCapital": 123,
+    "employees": 38,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭杰",
+      "phone": "15000002206",
+      "email": "郭993@example.com"
+    }
+  },
+  {
+    "id": "c0138",
+    "name": "东湖低碳科技股份有限公司",
+    "creditCode": "91420100000000138X",
+    "street": "临空港经开区",
+    "industry": "风电",
+    "techField": "新能源与节能",
+    "establishedAt": "2020-12-03",
+    "registeredCapital": 425,
+    "employees": 57,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 2,
+      "utility": 3,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何秀英",
+      "phone": "15000007854",
+      "email": "何125@example.com"
+    }
+  },
+  {
+    "id": "c0139",
+    "name": "汉水远航技术开发有限公司",
+    "creditCode": "91420100000000139X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-09-19",
+    "registeredCapital": 278,
+    "employees": 52,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄娜",
+      "phone": "13900002252",
+      "email": "黄816@example.com"
+    }
+  },
+  {
+    "id": "c0140",
+    "name": "武汉铸造技术有限公司",
+    "creditCode": "91420100000000140X",
+    "street": "临空港经开区",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2021-09-12",
+    "registeredCapital": 107,
+    "employees": 26,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何涛",
+      "phone": "15100002612",
+      "email": "何311@example.com"
+    }
+  },
+  {
+    "id": "c0141",
+    "name": "湖北镀膜技术有限公司",
+    "creditCode": "91420100000000141X",
+    "street": "临空港经开区",
+    "industry": "光电材料",
+    "techField": null,
+    "establishedAt": "2018-06-23",
+    "registeredCapital": 177,
+    "employees": 32,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周静",
+      "phone": "13900007258",
+      "email": "周225@example.com"
+    }
+  },
+  {
+    "id": "c0142",
+    "name": "武汉合金技术股份有限公司",
+    "creditCode": "91420100000000142X",
+    "street": "临空港经开区",
+    "industry": "高分子材料",
+    "techField": "新材料",
+    "establishedAt": "2022-07-11",
+    "registeredCapital": 153,
+    "employees": 50,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘娟",
+      "phone": "18600005506",
+      "email": "刘174@example.com"
+    }
+  },
+  {
+    "id": "c0143",
+    "name": "东湖食研坊科技开发有限公司",
+    "creditCode": "91420100000000143X",
+    "street": "临空港经开区",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-05-13",
+    "registeredCapital": 287,
+    "employees": 34,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄霞",
+      "phone": "15000007087",
+      "email": "黄170@example.com"
+    }
+  },
+  {
+    "id": "c0144",
+    "name": "汉水硅材科技有限公司",
+    "creditCode": "91420100000000144X",
+    "street": "临空港经开区",
+    "industry": "复合材料",
+    "techField": "新材料",
+    "establishedAt": "2024-05-17",
+    "registeredCapital": 154,
+    "employees": 22,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 1,
+      "utility": 0,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马明",
+      "phone": "13800008878",
+      "email": "马898@example.com"
+    }
+  },
+  {
+    "id": "c0145",
+    "name": "楚天远航科技有限公司",
+    "creditCode": "91420100000000145X",
+    "street": "临空港经开区",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-08-27",
+    "registeredCapital": 343,
+    "employees": 35,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张强",
+      "phone": "13900004110",
+      "email": "张441@example.com"
+    }
+  },
+  {
+    "id": "c0146",
+    "name": "江城碳中科技有限公司",
+    "creditCode": "91420100000000146X",
+    "street": "临空港经开区",
+    "industry": "储能技术",
+    "techField": "新能源与节能",
+    "establishedAt": "2019-08-24",
+    "registeredCapital": 414,
+    "employees": 45,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈敏",
+      "phone": "15100001223",
+      "email": "陈662@example.com"
+    }
+  },
+  {
+    "id": "c0147",
+    "name": "武汉恒力股份有限公司",
+    "creditCode": "91420100000000147X",
+    "street": "临空港经开区",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-05-26",
+    "registeredCapital": 298,
+    "employees": 15,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 0,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙伟",
+      "phone": "13800002949",
+      "email": "孙567@example.com"
+    }
+  },
+  {
+    "id": "c0148",
+    "name": "楚天绿能科技有限公司",
+    "creditCode": "91420100000000148X",
+    "street": "临空港经开区",
+    "industry": "储能技术",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-09-20",
+    "registeredCapital": 136,
+    "employees": 16,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘超",
+      "phone": "13800009346",
+      "email": "刘602@example.com"
+    }
+  },
+  {
+    "id": "c0149",
+    "name": "汉水恒力有限公司",
+    "creditCode": "91420100000000149X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-11-09",
+    "registeredCapital": 357,
+    "employees": 58,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙娜",
+      "phone": "15000003974",
+      "email": "孙272@example.com"
+    }
+  },
+  {
+    "id": "c0150",
+    "name": "楚天稀土科技有限公司",
+    "creditCode": "91420100000000150X",
+    "street": "临空港经开区",
+    "industry": "功能材料",
+    "techField": null,
+    "establishedAt": "2022-10-24",
+    "registeredCapital": 477,
+    "employees": 19,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙磊",
+      "phone": "15000002209",
+      "email": "孙317@example.com"
+    }
+  },
+  {
+    "id": "c0151",
+    "name": "汉水光伏股份有限公司",
+    "creditCode": "91420100000000151X",
+    "street": "临空港经开区",
+    "industry": "氢能",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-11-28",
+    "registeredCapital": 286,
+    "employees": 57,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐秀英",
+      "phone": "13800004887",
+      "email": "徐227@example.com"
+    }
+  },
+  {
+    "id": "c0152",
+    "name": "武汉结构科技股份有限公司",
+    "creditCode": "91420100000000152X",
+    "street": "临空港经开区",
+    "industry": "高分子材料",
+    "techField": "新材料",
+    "establishedAt": "2024-05-01",
+    "registeredCapital": 42,
+    "employees": 28,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴静",
+      "phone": "13900004262",
+      "email": "吴698@example.com"
+    }
+  },
+  {
+    "id": "c0153",
+    "name": "东湖余热科技有限公司",
+    "creditCode": "91420100000000153X",
+    "street": "临空港经开区",
+    "industry": "节能环保",
+    "techField": null,
+    "establishedAt": "2020-06-22",
+    "registeredCapital": 47,
+    "employees": 9,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何军",
+      "phone": "15800002233",
+      "email": "何358@example.com"
+    }
+  },
+  {
+    "id": "c0154",
+    "name": "东湖光学科技有限公司",
+    "creditCode": "91420100000000154X",
+    "street": "临空港经开区",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2019-08-09",
+    "registeredCapital": 158,
+    "employees": 18,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王秀兰",
+      "phone": "13900004918",
+      "email": "王948@example.com"
+    }
+  },
+  {
+    "id": "c0155",
+    "name": "武汉光学科技股份有限公司",
+    "creditCode": "91420100000000155X",
+    "street": "临空港经开区",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2024-11-04",
+    "registeredCapital": 39,
+    "employees": 10,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何敏",
+      "phone": "15000008484",
+      "email": "何557@example.com"
+    }
+  },
+  {
+    "id": "c0156",
+    "name": "江城热泵有限公司",
+    "creditCode": "91420100000000156X",
+    "street": "临空港经开区",
+    "industry": "光伏发电",
+    "techField": null,
+    "establishedAt": "2018-09-04",
+    "registeredCapital": 199,
+    "employees": 6,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "朱敏",
+      "phone": "18600003080",
+      "email": "朱133@example.com"
+    }
+  },
+  {
+    "id": "c0157",
+    "name": "湖北低碳技术股份有限公司",
+    "creditCode": "91420100000000157X",
+    "street": "临空港经开区",
+    "industry": "节能环保",
+    "techField": "新能源与节能",
+    "establishedAt": "2022-11-16",
+    "registeredCapital": 179,
+    "employees": 10,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王娟",
+      "phone": "18200006641",
+      "email": "王239@example.com"
+    }
+  },
+  {
+    "id": "c0158",
+    "name": "楚天宏图科技股份有限公司",
+    "creditCode": "91420100000000158X",
+    "street": "临空港经开区",
+    "industry": "航空配件",
+    "techField": null,
+    "establishedAt": "2020-01-10",
+    "registeredCapital": 109,
+    "employees": 19,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙洋",
+      "phone": "13900003409",
+      "email": "孙651@example.com"
+    }
+  },
+  {
+    "id": "c0159",
+    "name": "荆楚碳中股份有限公司",
+    "creditCode": "91420100000000159X",
+    "street": "临空港经开区",
+    "industry": "氢能",
+    "techField": null,
+    "establishedAt": "2019-11-23",
+    "registeredCapital": 200,
+    "employees": 9,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马杰",
+      "phone": "13800003527",
+      "email": "马126@example.com"
+    }
+  },
+  {
+    "id": "c0160",
+    "name": "江城食研坊精密有限公司",
+    "creditCode": "91420100000000160X",
+    "street": "临空港经开区",
+    "industry": "机器人",
+    "techField": null,
+    "establishedAt": "2022-02-22",
+    "registeredCapital": 109,
+    "employees": 11,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李艳",
+      "phone": "18600005297",
+      "email": "李875@example.com"
+    }
+  },
+  {
+    "id": "c0161",
+    "name": "荆楚锋码科技有限公司",
+    "creditCode": "91420100000000161X",
+    "street": "吴家山街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2021-12-19",
+    "registeredCapital": 1853,
+    "employees": 189,
+    "rdEmployees": 53,
+    "patents": {
+      "invention": 12,
+      "utility": 16,
+      "design": 1
+    },
+    "software": 12,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴娟",
+      "phone": "15100009665",
+      "email": "吴772@example.com"
+    }
+  },
+  {
+    "id": "c0162",
+    "name": "汉水集成科技有限公司",
+    "creditCode": "91420100000000162X",
+    "street": "吴家山街道",
+    "industry": "云服务",
+    "techField": "高技术服务",
+    "establishedAt": "2020-12-03",
+    "registeredCapital": 2096,
+    "employees": 50,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 9,
+      "utility": 9,
+      "design": 4
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙明",
+      "phone": "15000009396",
+      "email": "孙587@example.com"
+    }
+  },
+  {
+    "id": "c0163",
+    "name": "湖北孵化科技开发有限公司",
+    "creditCode": "91420100000000163X",
+    "street": "吴家山街道",
+    "industry": "智慧供应链",
+    "techField": "高技术服务",
+    "establishedAt": "2023-03-07",
+    "registeredCapital": 2997,
+    "employees": 68,
+    "rdEmployees": 21,
+    "patents": {
+      "invention": 6,
+      "utility": 6,
+      "design": 4
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐霞",
+      "phone": "15100004870",
+      "email": "徐884@example.com"
+    }
+  },
+  {
+    "id": "c0164",
+    "name": "武汉食研坊技术有限公司",
+    "creditCode": "91420100000000164X",
+    "street": "吴家山街道",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-02-14",
+    "registeredCapital": 2142,
+    "employees": 181,
+    "rdEmployees": 50,
+    "patents": {
+      "invention": 4,
+      "utility": 9,
+      "design": 4
+    },
+    "software": 9,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马杰",
+      "phone": "18200002464",
+      "email": "马618@example.com"
+    }
+  },
+  {
+    "id": "c0165",
+    "name": "武汉联盟股份有限公司",
+    "creditCode": "91420100000000165X",
+    "street": "吴家山街道",
+    "industry": "检验检测",
+    "techField": "高技术服务",
+    "establishedAt": "2020-06-15",
+    "registeredCapital": 1009,
+    "employees": 184,
+    "rdEmployees": 53,
+    "patents": {
+      "invention": 8,
+      "utility": 17,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马洋",
+      "phone": "15100009182",
+      "email": "马516@example.com"
+    }
+  },
+  {
+    "id": "c0166",
+    "name": "武汉精密科技有限公司",
+    "creditCode": "91420100000000166X",
+    "street": "吴家山街道",
+    "industry": "食品机械",
+    "techField": null,
+    "establishedAt": "2020-05-20",
+    "registeredCapital": 2435,
+    "employees": 104,
+    "rdEmployees": 28,
+    "patents": {
+      "invention": 4,
+      "utility": 15,
+      "design": 4
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭娜",
+      "phone": "13800007168",
+      "email": "郭220@example.com"
+    }
+  },
+  {
+    "id": "c0167",
+    "name": "楚天芯片科技股份有限公司",
+    "creditCode": "91420100000000167X",
+    "street": "吴家山街道",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2017-08-10",
+    "registeredCapital": 638,
+    "employees": 46,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 4,
+      "utility": 7,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐静",
+      "phone": "15000004906",
+      "email": "徐308@example.com"
+    }
+  },
+  {
+    "id": "c0168",
+    "name": "湖北咨询技术开发有限公司",
+    "creditCode": "91420100000000168X",
+    "street": "吴家山街道",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2020-06-21",
+    "registeredCapital": 299,
+    "employees": 37,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 3,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡洋",
+      "phone": "18200006139",
+      "email": "胡572@example.com"
+    }
+  },
+  {
+    "id": "c0169",
+    "name": "江城光子技术开发有限公司",
+    "creditCode": "91420100000000169X",
+    "street": "吴家山街道",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2023-12-25",
+    "registeredCapital": 368,
+    "employees": 75,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 3,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗丽",
+      "phone": "18200002361",
+      "email": "罗498@example.com"
+    }
+  },
+  {
+    "id": "c0170",
+    "name": "武汉博联科技股份有限公司",
+    "creditCode": "91420100000000170X",
+    "street": "吴家山街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-02-02",
+    "registeredCapital": 313,
+    "employees": 87,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 4,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨明",
+      "phone": "13900006390",
+      "email": "杨506@example.com"
+    }
+  },
+  {
+    "id": "c0171",
+    "name": "荆楚铭科科技开发有限公司",
+    "creditCode": "91420100000000171X",
+    "street": "吴家山街道",
+    "industry": "食品机械",
+    "techField": null,
+    "establishedAt": "2020-01-20",
+    "registeredCapital": 971,
+    "employees": 36,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "15100006454",
+      "email": "朱766@example.com"
+    }
+  },
+  {
+    "id": "c0172",
+    "name": "荆楚铸造有限公司",
+    "creditCode": "91420100000000172X",
+    "street": "吴家山街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2017-03-31",
+    "registeredCapital": 338,
+    "employees": 62,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 4,
+      "utility": 10,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王超",
+      "phone": "18200007915",
+      "email": "王566@example.com"
+    }
+  },
+  {
+    "id": "c0173",
+    "name": "武汉赋能技术开发有限公司",
+    "creditCode": "91420100000000173X",
+    "street": "吴家山街道",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2018-02-06",
+    "registeredCapital": 914,
+    "employees": 60,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 4,
+      "utility": 6,
+      "design": 1
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈秀兰",
+      "phone": "18200007717",
+      "email": "陈264@example.com"
+    }
+  },
+  {
+    "id": "c0174",
+    "name": "江城镀膜技术有限公司",
+    "creditCode": "91420100000000174X",
+    "street": "吴家山街道",
+    "industry": "复合材料",
+    "techField": "新材料",
+    "establishedAt": "2018-08-10",
+    "registeredCapital": 907,
+    "employees": 88,
+    "rdEmployees": 17,
+    "patents": {
+      "invention": 2,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨娜",
+      "phone": "13800004565",
+      "email": "杨295@example.com"
+    }
+  },
+  {
+    "id": "c0175",
+    "name": "江城网络科技开发有限公司",
+    "creditCode": "91420100000000175X",
+    "street": "吴家山街道",
+    "industry": "信息技术服务",
+    "techField": null,
+    "establishedAt": "2023-08-16",
+    "registeredCapital": 459,
+    "employees": 31,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何伟",
+      "phone": "15800003578",
+      "email": "何998@example.com"
+    }
+  },
+  {
+    "id": "c0176",
+    "name": "武汉联盟技术股份有限公司",
+    "creditCode": "91420100000000176X",
+    "street": "吴家山街道",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2021-07-16",
+    "registeredCapital": 289,
+    "employees": 44,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 0,
+      "utility": 7,
+      "design": 3
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周军",
+      "phone": "15800001557",
+      "email": "周943@example.com"
+    }
+  },
+  {
+    "id": "c0177",
+    "name": "楚天深蓝科技开发有限公司",
+    "creditCode": "91420100000000177X",
+    "street": "吴家山街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2023-03-23",
+    "registeredCapital": 877,
+    "employees": 86,
+    "rdEmployees": 12,
+    "patents": {
+      "invention": 0,
+      "utility": 9,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何秀英",
+      "phone": "13900003512",
+      "email": "何107@example.com"
+    }
+  },
+  {
+    "id": "c0178",
+    "name": "汉水磁性科技股份有限公司",
+    "creditCode": "91420100000000178X",
+    "street": "吴家山街道",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2021-02-10",
+    "registeredCapital": 785,
+    "employees": 44,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 3,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高静",
+      "phone": "18600005812",
+      "email": "高873@example.com"
+    }
+  },
+  {
+    "id": "c0179",
+    "name": "汉水启航科技有限公司",
+    "creditCode": "91420100000000179X",
+    "street": "吴家山街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2024-05-18",
+    "registeredCapital": 341,
+    "employees": 43,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 0,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高静",
+      "phone": "15000007001",
+      "email": "高312@example.com"
+    }
+  },
+  {
+    "id": "c0180",
+    "name": "荆楚晨光科技股份有限公司",
+    "creditCode": "91420100000000180X",
+    "street": "吴家山街道",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-08-25",
+    "registeredCapital": 496,
+    "employees": 35,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱静",
+      "phone": "13900004074",
+      "email": "朱486@example.com"
+    }
+  },
+  {
+    "id": "c0181",
+    "name": "楚天鑫宇科技有限公司",
+    "creditCode": "91420100000000181X",
+    "street": "吴家山街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-04-30",
+    "registeredCapital": 289,
+    "employees": 35,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何静",
+      "phone": "13900003419",
+      "email": "何110@example.com"
+    }
+  },
+  {
+    "id": "c0182",
+    "name": "武汉磐石科技股份有限公司",
+    "creditCode": "91420100000000182X",
+    "street": "吴家山街道",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2016-12-28",
+    "registeredCapital": 172,
+    "employees": 32,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高娜",
+      "phone": "15800004738",
+      "email": "高656@example.com"
+    }
+  },
+  {
+    "id": "c0183",
+    "name": "东湖数盾科技开发有限公司",
+    "creditCode": "91420100000000183X",
+    "street": "吴家山街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2024-07-12",
+    "registeredCapital": 161,
+    "employees": 31,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐明",
+      "phone": "15100009511",
+      "email": "徐983@example.com"
+    }
+  },
+  {
+    "id": "c0184",
+    "name": "武汉启航技术股份有限公司",
+    "creditCode": "91420100000000184X",
+    "street": "吴家山街道",
+    "industry": "网络安全",
+    "techField": "电子信息",
+    "establishedAt": "2020-12-23",
+    "registeredCapital": 269,
+    "employees": 16,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱娟",
+      "phone": "18200007106",
+      "email": "朱274@example.com"
+    }
+  },
+  {
+    "id": "c0185",
+    "name": "荆楚硅材科技股份有限公司",
+    "creditCode": "91420100000000185X",
+    "street": "吴家山街道",
+    "industry": "复合材料",
+    "techField": "新材料",
+    "establishedAt": "2019-03-06",
+    "registeredCapital": 381,
+    "employees": 25,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "孙涛",
+      "phone": "15100009515",
+      "email": "孙491@example.com"
+    }
+  },
+  {
+    "id": "c0186",
+    "name": "荆楚纳米股份有限公司",
+    "creditCode": "91420100000000186X",
+    "street": "吴家山街道",
+    "industry": "功能材料",
+    "techField": "新材料",
+    "establishedAt": "2022-05-30",
+    "registeredCapital": 136,
+    "employees": 31,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马磊",
+      "phone": "18600006018",
+      "email": "马540@example.com"
+    }
+  },
+  {
+    "id": "c0187",
+    "name": "东湖优化技术股份有限公司",
+    "creditCode": "91420100000000187X",
+    "street": "吴家山街道",
+    "industry": "研究开发",
+    "techField": "高技术服务",
+    "establishedAt": "2024-03-12",
+    "registeredCapital": 251,
+    "employees": 30,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李杰",
+      "phone": "13800001212",
+      "email": "李431@example.com"
+    }
+  },
+  {
+    "id": "c0188",
+    "name": "荆楚鑫宇技术股份有限公司",
+    "creditCode": "91420100000000188X",
+    "street": "吴家山街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2021-12-10",
+    "registeredCapital": 494,
+    "employees": 38,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 1,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭涛",
+      "phone": "13800008441",
+      "email": "郭915@example.com"
+    }
+  },
+  {
+    "id": "c0189",
+    "name": "汉水平台科技有限公司",
+    "creditCode": "91420100000000189X",
+    "street": "吴家山街道",
+    "industry": "云服务",
+    "techField": null,
+    "establishedAt": "2019-10-03",
+    "registeredCapital": 113,
+    "employees": 31,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 1,
+      "utility": 3,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄超",
+      "phone": "18200006368",
+      "email": "黄252@example.com"
+    }
+  },
+  {
+    "id": "c0190",
+    "name": "东湖精工科技有限公司",
+    "creditCode": "91420100000000190X",
+    "street": "吴家山街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-07-03",
+    "registeredCapital": 121,
+    "employees": 16,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 0,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨明",
+      "phone": "13800009315",
+      "email": "杨631@example.com"
+    }
+  },
+  {
+    "id": "c0191",
+    "name": "武汉精工科技开发有限公司",
+    "creditCode": "91420100000000191X",
+    "street": "吴家山街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-07-05",
+    "registeredCapital": 351,
+    "employees": 32,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 1
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李军",
+      "phone": "13800004157",
+      "email": "李945@example.com"
+    }
+  },
+  {
+    "id": "c0192",
+    "name": "荆楚氮化科技股份有限公司",
+    "creditCode": "91420100000000192X",
+    "street": "吴家山街道",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2015-11-06",
+    "registeredCapital": 106,
+    "employees": 11,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘娟",
+      "phone": "18200009113",
+      "email": "刘277@example.com"
+    }
+  },
+  {
+    "id": "c0193",
+    "name": "汉水博联科技有限公司",
+    "creditCode": "91420100000000193X",
+    "street": "吴家山街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-10-31",
+    "registeredCapital": 110,
+    "employees": 11,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何秀英",
+      "phone": "13800004569",
+      "email": "何867@example.com"
+    }
+  },
+  {
+    "id": "c0194",
+    "name": "武汉磐石科技有限公司",
+    "creditCode": "91420100000000194X",
+    "street": "吴家山街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2025-04-13",
+    "registeredCapital": 179,
+    "employees": 12,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马军",
+      "phone": "18600003360",
+      "email": "马428@example.com"
+    }
+  },
+  {
+    "id": "c0195",
+    "name": "江城汇聚有限公司",
+    "creditCode": "91420100000000195X",
+    "street": "吴家山街道",
+    "industry": "航空配件",
+    "techField": null,
+    "establishedAt": "2021-06-30",
+    "registeredCapital": 157,
+    "employees": 7,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马秀英",
+      "phone": "15800002298",
+      "email": "马292@example.com"
+    }
+  },
+  {
+    "id": "c0196",
+    "name": "江城信安科技开发有限公司",
+    "creditCode": "91420100000000196X",
+    "street": "吴家山街道",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2017-05-25",
+    "registeredCapital": 92,
+    "employees": 26,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗敏",
+      "phone": "15000005356",
+      "email": "罗454@example.com"
+    }
+  },
+  {
+    "id": "c0197",
+    "name": "湖北脉冲科技有限公司",
+    "creditCode": "91420100000000197X",
+    "street": "吴家山街道",
+    "industry": "网络安全",
+    "techField": null,
+    "establishedAt": "2024-05-12",
+    "registeredCapital": 45,
+    "employees": 25,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "徐敏",
+      "phone": "15800006219",
+      "email": "徐751@example.com"
+    }
+  },
+  {
+    "id": "c0198",
+    "name": "湖北航宇技术股份有限公司",
+    "creditCode": "91420100000000198X",
+    "street": "吴家山街道",
+    "industry": "工业自动化",
+    "techField": null,
+    "establishedAt": "2021-01-07",
+    "registeredCapital": 129,
+    "employees": 6,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴秀英",
+      "phone": "18200004752",
+      "email": "吴408@example.com"
+    }
+  },
+  {
+    "id": "c0199",
+    "name": "楚天仁济股份有限公司",
+    "creditCode": "91420100000000199X",
+    "street": "将军路街道",
+    "industry": "生物技术",
+    "techField": "生物与新医药",
+    "establishedAt": "2020-12-06",
+    "registeredCapital": 1964,
+    "employees": 115,
+    "rdEmployees": 29,
+    "patents": {
+      "invention": 10,
+      "utility": 10,
+      "design": 4
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴娜",
+      "phone": "15800009675",
+      "email": "吴418@example.com"
+    }
+  },
+  {
+    "id": "c0200",
+    "name": "江城精工精密技术开发有限公司",
+    "creditCode": "91420100000000200X",
+    "street": "将军路街道",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-02-25",
+    "registeredCapital": 718,
+    "employees": 150,
+    "rdEmployees": 36,
+    "patents": {
+      "invention": 7,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张磊",
+      "phone": "13900009075",
+      "email": "张494@example.com"
+    }
+  },
+  {
+    "id": "c0201",
+    "name": "汉水星纬有限公司",
+    "creditCode": "91420100000000201X",
+    "street": "将军路街道",
+    "industry": "通信设备",
+    "techField": null,
+    "establishedAt": "2018-11-20",
+    "registeredCapital": 1531,
+    "employees": 161,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 3,
+      "utility": 8,
+      "design": 4
+    },
+    "software": 10,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周洋",
+      "phone": "13900001607",
+      "email": "周474@example.com"
+    }
+  },
+  {
+    "id": "c0202",
+    "name": "武汉网安科技股份有限公司",
+    "creditCode": "91420100000000202X",
+    "street": "将军路街道",
+    "industry": "网络安全",
+    "techField": null,
+    "establishedAt": "2018-04-04",
+    "registeredCapital": 1595,
+    "employees": 53,
+    "rdEmployees": 17,
+    "patents": {
+      "invention": 7,
+      "utility": 6,
+      "design": 2
+    },
+    "software": 13,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周明",
+      "phone": "15000007345",
+      "email": "周927@example.com"
+    }
+  },
+  {
+    "id": "c0203",
+    "name": "楚天量子技术有限公司",
+    "creditCode": "91420100000000203X",
+    "street": "将军路街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2021-02-28",
+    "registeredCapital": 1194,
+    "employees": 121,
+    "rdEmployees": 21,
+    "patents": {
+      "invention": 11,
+      "utility": 14,
+      "design": 4
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨勇",
+      "phone": "15000008477",
+      "email": "杨211@example.com"
+    }
+  },
+  {
+    "id": "c0204",
+    "name": "楚天食研坊科技有限公司",
+    "creditCode": "91420100000000204X",
+    "street": "将军路街道",
+    "industry": "工业自动化",
+    "techField": null,
+    "establishedAt": "2023-06-30",
+    "registeredCapital": 266,
+    "employees": 65,
+    "rdEmployees": 7,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵娟",
+      "phone": "13900006492",
+      "email": "赵274@example.com"
+    }
+  },
+  {
+    "id": "c0205",
+    "name": "东湖信安有限公司",
+    "creditCode": "91420100000000205X",
+    "street": "将军路街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2018-02-24",
+    "registeredCapital": 693,
+    "employees": 89,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈强",
+      "phone": "18600004057",
+      "email": "陈916@example.com"
+    }
+  },
+  {
+    "id": "c0206",
+    "name": "武汉深蓝有限公司",
+    "creditCode": "91420100000000206X",
+    "street": "将军路街道",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2017-07-15",
+    "registeredCapital": 303,
+    "employees": 67,
+    "rdEmployees": 11,
+    "patents": {
+      "invention": 4,
+      "utility": 4,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "13900005057",
+      "email": "杨192@example.com"
+    }
+  },
+  {
+    "id": "c0207",
+    "name": "荆楚制剂科技有限公司",
+    "creditCode": "91420100000000207X",
+    "street": "将军路街道",
+    "industry": "医疗服务",
+    "techField": "生物与新医药",
+    "establishedAt": "2021-10-22",
+    "registeredCapital": 263,
+    "employees": 58,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 3,
+      "utility": 10,
+      "design": 0
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐杰",
+      "phone": "13900005513",
+      "email": "徐356@example.com"
+    }
+  },
+  {
+    "id": "c0208",
+    "name": "湖北细胞技术有限公司",
+    "creditCode": "91420100000000208X",
+    "street": "将军路街道",
+    "industry": "基因检测",
+    "techField": "生物与新医药",
+    "establishedAt": "2020-04-24",
+    "registeredCapital": 455,
+    "employees": 83,
+    "rdEmployees": 13,
+    "patents": {
+      "invention": 0,
+      "utility": 6,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "李涛",
+      "phone": "15000006649",
+      "email": "李132@example.com"
+    }
+  },
+  {
+    "id": "c0209",
+    "name": "武汉精密股份有限公司",
+    "creditCode": "91420100000000209X",
+    "street": "将军路街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-10-30",
+    "registeredCapital": 641,
+    "employees": 52,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 2,
+      "utility": 7,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李涛",
+      "phone": "13800002045",
+      "email": "李370@example.com"
+    }
+  },
+  {
+    "id": "c0210",
+    "name": "汉水制剂科技有限公司",
+    "creditCode": "91420100000000210X",
+    "street": "将军路街道",
+    "industry": "基因检测",
+    "techField": "生物与新医药",
+    "establishedAt": "2022-12-01",
+    "registeredCapital": 475,
+    "employees": 72,
+    "rdEmployees": 11,
+    "patents": {
+      "invention": 3,
+      "utility": 7,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘娟",
+      "phone": "18200009827",
+      "email": "刘287@example.com"
+    }
+  },
+  {
+    "id": "c0211",
+    "name": "汉水数盾科技开发有限公司",
+    "creditCode": "91420100000000211X",
+    "street": "将军路街道",
+    "industry": "信息技术服务",
+    "techField": "电子信息",
+    "establishedAt": "2018-10-12",
+    "registeredCapital": 845,
+    "employees": 35,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 4,
+      "utility": 8,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗强",
+      "phone": "13800009643",
+      "email": "罗989@example.com"
+    }
+  },
+  {
+    "id": "c0212",
+    "name": "湖北基因科技有限公司",
+    "creditCode": "91420100000000212X",
+    "street": "将军路街道",
+    "industry": "医药研发",
+    "techField": "生物与新医药",
+    "establishedAt": "2017-05-27",
+    "registeredCapital": 928,
+    "employees": 53,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 4,
+      "utility": 10,
+      "design": 3
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周娜",
+      "phone": "18600002832",
+      "email": "周850@example.com"
+    }
+  },
+  {
+    "id": "c0213",
+    "name": "武汉盛达科技有限公司",
+    "creditCode": "91420100000000213X",
+    "street": "将军路街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2016-05-03",
+    "registeredCapital": 457,
+    "employees": 18,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴娜",
+      "phone": "15100003168",
+      "email": "吴281@example.com"
+    }
+  },
+  {
+    "id": "c0214",
+    "name": "武汉网络股份有限公司",
+    "creditCode": "91420100000000214X",
+    "street": "将军路街道",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2016-12-25",
+    "registeredCapital": 383,
+    "employees": 60,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 2,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王洋",
+      "phone": "13800001643",
+      "email": "王765@example.com"
+    }
+  },
+  {
+    "id": "c0215",
+    "name": "武汉深蓝创新股份有限公司",
+    "creditCode": "91420100000000215X",
+    "street": "将军路街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2019-02-19",
+    "registeredCapital": 387,
+    "employees": 15,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 1,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱伟",
+      "phone": "18200009593",
+      "email": "朱536@example.com"
+    }
+  },
+  {
+    "id": "c0216",
+    "name": "荆楚脉冲技术有限公司",
+    "creditCode": "91420100000000216X",
+    "street": "将军路街道",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2018-07-21",
+    "registeredCapital": 334,
+    "employees": 44,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱艳",
+      "phone": "15000008649",
+      "email": "朱955@example.com"
+    }
+  },
+  {
+    "id": "c0217",
+    "name": "武汉创博有限公司",
+    "creditCode": "91420100000000217X",
+    "street": "将军路街道",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2017-10-25",
+    "registeredCapital": 463,
+    "employees": 15,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 3,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭秀英",
+      "phone": "18200008846",
+      "email": "郭877@example.com"
+    }
+  },
+  {
+    "id": "c0218",
+    "name": "楚天远航股份有限公司",
+    "creditCode": "91420100000000218X",
+    "street": "将军路街道",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-04-30",
+    "registeredCapital": 265,
+    "employees": 20,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林芳",
+      "phone": "18600004962",
+      "email": "林572@example.com"
+    }
+  },
+  {
+    "id": "c0219",
+    "name": "汉水航宇科技有限公司",
+    "creditCode": "91420100000000219X",
+    "street": "将军路街道",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-12-29",
+    "registeredCapital": 314,
+    "employees": 41,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何洋",
+      "phone": "13900009943",
+      "email": "何633@example.com"
+    }
+  },
+  {
+    "id": "c0220",
+    "name": "武汉启航科技有限公司",
+    "creditCode": "91420100000000220X",
+    "street": "将军路街道",
+    "industry": "网络安全",
+    "techField": null,
+    "establishedAt": "2023-12-27",
+    "registeredCapital": 130,
+    "employees": 37,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭艳",
+      "phone": "15000008888",
+      "email": "郭218@example.com"
+    }
+  },
+  {
+    "id": "c0221",
+    "name": "荆楚锋码创新科技有限公司",
+    "creditCode": "91420100000000221X",
+    "street": "将军路街道",
+    "industry": "集成电路",
+    "techField": "电子信息",
+    "establishedAt": "2019-09-18",
+    "registeredCapital": 316,
+    "employees": 45,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 0,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗秀英",
+      "phone": "15000006929",
+      "email": "罗282@example.com"
+    }
+  },
+  {
+    "id": "c0222",
+    "name": "武汉博翔科技股份有限公司",
+    "creditCode": "91420100000000222X",
+    "street": "将军路街道",
+    "industry": "体外诊断",
+    "techField": null,
+    "establishedAt": "2023-01-28",
+    "registeredCapital": 176,
+    "employees": 6,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高秀兰",
+      "phone": "13800006144",
+      "email": "高961@example.com"
+    }
+  },
+  {
+    "id": "c0223",
+    "name": "江城楚天技术股份有限公司",
+    "creditCode": "91420100000000223X",
+    "street": "将军路街道",
+    "industry": "生物技术",
+    "techField": null,
+    "establishedAt": "2023-07-30",
+    "registeredCapital": 55,
+    "employees": 7,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何敏",
+      "phone": "18600004950",
+      "email": "何846@example.com"
+    }
+  },
+  {
+    "id": "c0224",
+    "name": "武汉赛博技术股份有限公司",
+    "creditCode": "91420100000000224X",
+    "street": "将军路街道",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2016-03-30",
+    "registeredCapital": 136,
+    "employees": 19,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴军",
+      "phone": "13900003993",
+      "email": "吴717@example.com"
+    }
+  },
+  {
+    "id": "c0225",
+    "name": "湖北盛达科技开发有限公司",
+    "creditCode": "91420100000000225X",
+    "street": "将军路街道",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-09-07",
+    "registeredCapital": 171,
+    "employees": 12,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "13800001109",
+      "email": "周581@example.com"
+    }
+  },
+  {
+    "id": "c0226",
+    "name": "湖北汇聚科技股份有限公司",
+    "creditCode": "91420100000000226X",
+    "street": "将军路街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2025-03-12",
+    "registeredCapital": 115,
+    "employees": 22,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭娟",
+      "phone": "15000004413",
+      "email": "郭512@example.com"
+    }
+  },
+  {
+    "id": "c0227",
+    "name": "江城新能技术有限公司",
+    "creditCode": "91420100000000227X",
+    "street": "径河街道",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-11-25",
+    "registeredCapital": 1534,
+    "employees": 55,
+    "rdEmployees": 15,
+    "patents": {
+      "invention": 5,
+      "utility": 10,
+      "design": 3
+    },
+    "software": 13,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄芳",
+      "phone": "13800009997",
+      "email": "黄834@example.com"
+    }
+  },
+  {
+    "id": "c0228",
+    "name": "汉水精密技术股份有限公司",
+    "creditCode": "91420100000000228X",
+    "street": "径河街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-09-16",
+    "registeredCapital": 2000,
+    "employees": 171,
+    "rdEmployees": 58,
+    "patents": {
+      "invention": 3,
+      "utility": 10,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨洋",
+      "phone": "15100003624",
+      "email": "杨580@example.com"
+    }
+  },
+  {
+    "id": "c0229",
+    "name": "荆楚华兴技术股份有限公司",
+    "creditCode": "91420100000000229X",
+    "street": "径河街道",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-01-29",
+    "registeredCapital": 2033,
+    "employees": 66,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 8,
+      "utility": 16,
+      "design": 1
+    },
+    "software": 10,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周秀兰",
+      "phone": "13800009197",
+      "email": "周443@example.com"
+    }
+  },
+  {
+    "id": "c0230",
+    "name": "荆楚绿能股份有限公司",
+    "creditCode": "91420100000000230X",
+    "street": "径河街道",
+    "industry": "储能技术",
+    "techField": "新能源与节能",
+    "establishedAt": "2023-01-12",
+    "registeredCapital": 1346,
+    "employees": 104,
+    "rdEmployees": 26,
+    "patents": {
+      "invention": 12,
+      "utility": 13,
+      "design": 4
+    },
+    "software": 11,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何芳",
+      "phone": "18200007734",
+      "email": "何718@example.com"
+    }
+  },
+  {
+    "id": "c0231",
+    "name": "江城航宇股份有限公司",
+    "creditCode": "91420100000000231X",
+    "street": "径河街道",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2017-06-26",
+    "registeredCapital": 559,
+    "employees": 30,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 3,
+      "utility": 3,
+      "design": 2
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡勇",
+      "phone": "15100007787",
+      "email": "胡244@example.com"
+    }
+  },
+  {
+    "id": "c0232",
+    "name": "东湖充电科技有限公司",
+    "creditCode": "91420100000000232X",
+    "street": "径河街道",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2023-10-29",
+    "registeredCapital": 294,
+    "employees": 36,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 2,
+      "utility": 6,
+      "design": 3
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭勇",
+      "phone": "15000002231",
+      "email": "郭404@example.com"
+    }
+  },
+  {
+    "id": "c0233",
+    "name": "湖北创博科技开发有限公司",
+    "creditCode": "91420100000000233X",
+    "street": "径河街道",
+    "industry": "智能装备",
+    "techField": null,
+    "establishedAt": "2018-04-10",
+    "registeredCapital": 404,
+    "employees": 41,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "18200001347",
+      "email": "刘681@example.com"
+    }
+  },
+  {
+    "id": "c0234",
+    "name": "楚天铸造股份有限公司",
+    "creditCode": "91420100000000234X",
+    "street": "径河街道",
+    "industry": "智能装备",
+    "techField": null,
+    "establishedAt": "2019-12-02",
+    "registeredCapital": 770,
+    "employees": 91,
+    "rdEmployees": 16,
+    "patents": {
+      "invention": 3,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴丽",
+      "phone": "15800001229",
+      "email": "吴766@example.com"
+    }
+  },
+  {
+    "id": "c0235",
+    "name": "汉水汇聚技术股份有限公司",
+    "creditCode": "91420100000000235X",
+    "street": "径河街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-03-03",
+    "registeredCapital": 694,
+    "employees": 33,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 0,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡娟",
+      "phone": "18200006861",
+      "email": "胡789@example.com"
+    }
+  },
+  {
+    "id": "c0236",
+    "name": "汉水食研坊技术开发有限公司",
+    "creditCode": "91420100000000236X",
+    "street": "径河街道",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-02-18",
+    "registeredCapital": 556,
+    "employees": 96,
+    "rdEmployees": 15,
+    "patents": {
+      "invention": 2,
+      "utility": 9,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马伟",
+      "phone": "15100003290",
+      "email": "马835@example.com"
+    }
+  },
+  {
+    "id": "c0237",
+    "name": "江城热泵技术开发有限公司",
+    "creditCode": "91420100000000237X",
+    "street": "径河街道",
+    "industry": "风电",
+    "techField": "新能源与节能",
+    "establishedAt": "2022-01-06",
+    "registeredCapital": 562,
+    "employees": 88,
+    "rdEmployees": 12,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗芳",
+      "phone": "15100001200",
+      "email": "罗624@example.com"
+    }
+  },
+  {
+    "id": "c0238",
+    "name": "楚天青鸟科技股份有限公司",
+    "creditCode": "91420100000000238X",
+    "street": "径河街道",
+    "industry": "节能环保",
+    "techField": "新能源与节能",
+    "establishedAt": "2016-01-19",
+    "registeredCapital": 314,
+    "employees": 53,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭丽",
+      "phone": "15100007155",
+      "email": "郭973@example.com"
+    }
+  },
+  {
+    "id": "c0239",
+    "name": "汉水光学有限公司",
+    "creditCode": "91420100000000239X",
+    "street": "径河街道",
+    "industry": "功能材料",
+    "techField": "新材料",
+    "establishedAt": "2023-02-08",
+    "registeredCapital": 284,
+    "employees": 34,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "13800006675",
+      "email": "杨323@example.com"
+    }
+  },
+  {
+    "id": "c0240",
+    "name": "江城变频科技股份有限公司",
+    "creditCode": "91420100000000240X",
+    "street": "径河街道",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-11-28",
+    "registeredCapital": 277,
+    "employees": 21,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 0,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗芳",
+      "phone": "13800003135",
+      "email": "罗436@example.com"
+    }
+  },
+  {
+    "id": "c0241",
+    "name": "东湖环保技术有限公司",
+    "creditCode": "91420100000000241X",
+    "street": "径河街道",
+    "industry": "氢能",
+    "techField": "新能源与节能",
+    "establishedAt": "2015-09-24",
+    "registeredCapital": 102,
+    "employees": 39,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何伟",
+      "phone": "13900006210",
+      "email": "何440@example.com"
+    }
+  },
+  {
+    "id": "c0242",
+    "name": "江城硅材科技股份有限公司",
+    "creditCode": "91420100000000242X",
+    "street": "径河街道",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2022-04-03",
+    "registeredCapital": 497,
+    "employees": 26,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李秀兰",
+      "phone": "15000002816",
+      "email": "李797@example.com"
+    }
+  },
+  {
+    "id": "c0243",
+    "name": "荆楚汇聚科技股份有限公司",
+    "creditCode": "91420100000000243X",
+    "street": "径河街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-12-23",
+    "registeredCapital": 222,
+    "employees": 33,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "罗明",
+      "phone": "15100002715",
+      "email": "罗431@example.com"
+    }
+  },
+  {
+    "id": "c0244",
+    "name": "武汉数控科技开发有限公司",
+    "creditCode": "91420100000000244X",
+    "street": "径河街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2024-04-12",
+    "registeredCapital": 274,
+    "employees": 34,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭丽",
+      "phone": "13900009414",
+      "email": "郭617@example.com"
+    }
+  },
+  {
+    "id": "c0245",
+    "name": "东湖精密科技有限公司",
+    "creditCode": "91420100000000245X",
+    "street": "径河街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-08-01",
+    "registeredCapital": 67,
+    "employees": 23,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘娜",
+      "phone": "13800003810",
+      "email": "刘895@example.com"
+    }
+  },
+  {
+    "id": "c0246",
+    "name": "荆楚高分子科技股份有限公司",
+    "creditCode": "91420100000000246X",
+    "street": "径河街道",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2018-09-14",
+    "registeredCapital": 62,
+    "employees": 6,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨娟",
+      "phone": "18200008276",
+      "email": "杨577@example.com"
+    }
+  },
+  {
+    "id": "c0247",
+    "name": "武汉晨光技术股份有限公司",
+    "creditCode": "91420100000000247X",
+    "street": "径河街道",
+    "industry": "工业自动化",
+    "techField": null,
+    "establishedAt": "2024-01-11",
+    "registeredCapital": 58,
+    "employees": 24,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": true
+    },
+    "contact": {
+      "name": "刘明",
+      "phone": "18200005213",
+      "email": "刘179@example.com"
+    }
+  },
+  {
+    "id": "c0248",
+    "name": "江城精密科技有限公司",
+    "creditCode": "91420100000000248X",
+    "street": "径河街道",
+    "industry": "机器人",
+    "techField": null,
+    "establishedAt": "2021-06-16",
+    "registeredCapital": 185,
+    "employees": 30,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐杰",
+      "phone": "18200007400",
+      "email": "徐293@example.com"
+    }
+  },
+  {
+    "id": "c0249",
+    "name": "武汉网络科技有限公司",
+    "creditCode": "91420100000000249X",
+    "street": "金银湖街道",
+    "industry": "人工智能",
+    "techField": "电子信息",
+    "establishedAt": "2018-02-17",
+    "registeredCapital": 1181,
+    "employees": 147,
+    "rdEmployees": 47,
+    "patents": {
+      "invention": 11,
+      "utility": 17,
+      "design": 2
+    },
+    "software": 12,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴静",
+      "phone": "13800002424",
+      "email": "吴620@example.com"
+    }
+  },
+  {
+    "id": "c0250",
+    "name": "荆楚智链有限公司",
+    "creditCode": "91420100000000250X",
+    "street": "金银湖街道",
+    "industry": "检验检测",
+    "techField": null,
+    "establishedAt": "2020-02-20",
+    "registeredCapital": 2595,
+    "employees": 187,
+    "rdEmployees": 40,
+    "patents": {
+      "invention": 10,
+      "utility": 10,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高伟",
+      "phone": "13900006126",
+      "email": "高801@example.com"
+    }
+  },
+  {
+    "id": "c0251",
+    "name": "湖北烽火科技有限公司",
+    "creditCode": "91420100000000251X",
+    "street": "金银湖街道",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2022-08-18",
+    "registeredCapital": 1522,
+    "employees": 67,
+    "rdEmployees": 21,
+    "patents": {
+      "invention": 4,
+      "utility": 15,
+      "design": 2
+    },
+    "software": 12,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡娟",
+      "phone": "18600003890",
+      "email": "胡768@example.com"
+    }
+  },
+  {
+    "id": "c0252",
+    "name": "湖北生命技术股份有限公司",
+    "creditCode": "91420100000000252X",
+    "street": "金银湖街道",
+    "industry": "医疗器械",
+    "techField": "生物与新医药",
+    "establishedAt": "2021-06-01",
+    "registeredCapital": 668,
+    "employees": 93,
+    "rdEmployees": 13,
+    "patents": {
+      "invention": 1,
+      "utility": 7,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林秀英",
+      "phone": "15800004325",
+      "email": "林940@example.com"
+    }
+  },
+  {
+    "id": "c0253",
+    "name": "武汉细胞科技有限公司",
+    "creditCode": "91420100000000253X",
+    "street": "金银湖街道",
+    "industry": "医疗器械",
+    "techField": "生物与新医药",
+    "establishedAt": "2022-11-06",
+    "registeredCapital": 299,
+    "employees": 82,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 3,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王艳",
+      "phone": "18600006536",
+      "email": "王259@example.com"
+    }
+  },
+  {
+    "id": "c0254",
+    "name": "江城孵化技术开发有限公司",
+    "creditCode": "91420100000000254X",
+    "street": "金银湖街道",
+    "industry": "智慧供应链",
+    "techField": "高技术服务",
+    "establishedAt": "2022-10-15",
+    "registeredCapital": 647,
+    "employees": 89,
+    "rdEmployees": 16,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林洋",
+      "phone": "18600003232",
+      "email": "林730@example.com"
+    }
+  },
+  {
+    "id": "c0255",
+    "name": "江城智慧科技有限公司",
+    "creditCode": "91420100000000255X",
+    "street": "金银湖街道",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2022-03-29",
+    "registeredCapital": 236,
+    "employees": 77,
+    "rdEmployees": 15,
+    "patents": {
+      "invention": 4,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨勇",
+      "phone": "13800006790",
+      "email": "杨205@example.com"
+    }
+  },
+  {
+    "id": "c0256",
+    "name": "东湖数字技术股份有限公司",
+    "creditCode": "91420100000000256X",
+    "street": "金银湖街道",
+    "industry": "数字化服务",
+    "techField": "高技术服务",
+    "establishedAt": "2020-04-25",
+    "registeredCapital": 847,
+    "employees": 43,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 3,
+      "utility": 8,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙洋",
+      "phone": "15800002804",
+      "email": "孙457@example.com"
+    }
+  },
+  {
+    "id": "c0257",
+    "name": "武汉药研科技有限公司",
+    "creditCode": "91420100000000257X",
+    "street": "金银湖街道",
+    "industry": "医药研发",
+    "techField": "生物与新医药",
+    "establishedAt": "2019-01-18",
+    "registeredCapital": 710,
+    "employees": 65,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐勇",
+      "phone": "18600002337",
+      "email": "徐319@example.com"
+    }
+  },
+  {
+    "id": "c0258",
+    "name": "武汉弘康技术股份有限公司",
+    "creditCode": "91420100000000258X",
+    "street": "金银湖街道",
+    "industry": "生物技术",
+    "techField": "生物与新医药",
+    "establishedAt": "2016-02-21",
+    "registeredCapital": 182,
+    "employees": 16,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 3,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林秀英",
+      "phone": "18600003871",
+      "email": "林568@example.com"
+    }
+  },
+  {
+    "id": "c0259",
+    "name": "武汉医药技术开发有限公司",
+    "creditCode": "91420100000000259X",
+    "street": "金银湖街道",
+    "industry": "基因检测",
+    "techField": "生物与新医药",
+    "establishedAt": "2016-03-17",
+    "registeredCapital": 222,
+    "employees": 28,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭洋",
+      "phone": "15100009588",
+      "email": "郭525@example.com"
+    }
+  },
+  {
+    "id": "c0260",
+    "name": "荆楚智隼技术股份有限公司",
+    "creditCode": "91420100000000260X",
+    "street": "金银湖街道",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2020-02-10",
+    "registeredCapital": 121,
+    "employees": 47,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张静",
+      "phone": "18600009704",
+      "email": "张878@example.com"
+    }
+  },
+  {
+    "id": "c0261",
+    "name": "湖北星纬高端科技有限公司",
+    "creditCode": "91420100000000261X",
+    "street": "金银湖街道",
+    "industry": "通信设备",
+    "techField": "电子信息",
+    "establishedAt": "2023-05-18",
+    "registeredCapital": 252,
+    "employees": 20,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙娜",
+      "phone": "13900001697",
+      "email": "孙854@example.com"
+    }
+  },
+  {
+    "id": "c0262",
+    "name": "楚天康生科技有限公司",
+    "creditCode": "91420100000000262X",
+    "street": "金银湖街道",
+    "industry": "医疗器械",
+    "techField": null,
+    "establishedAt": "2015-10-18",
+    "registeredCapital": 444,
+    "employees": 47,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 1
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高涛",
+      "phone": "15800007461",
+      "email": "高575@example.com"
+    }
+  },
+  {
+    "id": "c0263",
+    "name": "江城优化科技有限公司",
+    "creditCode": "91420100000000263X",
+    "street": "金银湖街道",
+    "industry": "云服务",
+    "techField": null,
+    "establishedAt": "2018-08-26",
+    "registeredCapital": 466,
+    "employees": 19,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭艳",
+      "phone": "15100001075",
+      "email": "郭933@example.com"
+    }
+  },
+  {
+    "id": "c0264",
+    "name": "武汉生命科技有限公司",
+    "creditCode": "91420100000000264X",
+    "street": "金银湖街道",
+    "industry": "医疗器械",
+    "techField": null,
+    "establishedAt": "2018-09-06",
+    "registeredCapital": 70,
+    "employees": 24,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗秀英",
+      "phone": "18200006465",
+      "email": "罗995@example.com"
+    }
+  },
+  {
+    "id": "c0265",
+    "name": "荆楚免疫科技有限公司",
+    "creditCode": "91420100000000265X",
+    "street": "金银湖街道",
+    "industry": "体外诊断",
+    "techField": null,
+    "establishedAt": "2020-05-23",
+    "registeredCapital": 43,
+    "employees": 19,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": true
+    },
+    "contact": {
+      "name": "吴超",
+      "phone": "15100002837",
+      "email": "吴241@example.com"
+    }
+  },
+  {
+    "id": "c0266",
+    "name": "武汉赛博科技有限公司",
+    "creditCode": "91420100000000266X",
+    "street": "金银湖街道",
+    "industry": "网络安全",
+    "techField": null,
+    "establishedAt": "2024-11-13",
+    "registeredCapital": 63,
+    "employees": 28,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱静",
+      "phone": "18600001182",
+      "email": "朱292@example.com"
+    }
+  },
+  {
+    "id": "c0267",
+    "name": "江城热泵科技开发有限公司",
+    "creditCode": "91420100000000267X",
+    "street": "慈惠街道",
+    "industry": "氢能",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-09-30",
+    "registeredCapital": 527,
+    "employees": 131,
+    "rdEmployees": 23,
+    "patents": {
+      "invention": 9,
+      "utility": 11,
+      "design": 4
+    },
+    "software": 9,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马秀兰",
+      "phone": "18600005801",
+      "email": "马544@example.com"
+    }
+  },
+  {
+    "id": "c0268",
+    "name": "武汉食研坊智能科技有限公司",
+    "creditCode": "91420100000000268X",
+    "street": "慈惠街道",
+    "industry": "航空配件",
+    "techField": null,
+    "establishedAt": "2019-03-03",
+    "registeredCapital": 1421,
+    "employees": 103,
+    "rdEmployees": 19,
+    "patents": {
+      "invention": 3,
+      "utility": 18,
+      "design": 4
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李勇",
+      "phone": "18200008823",
+      "email": "李867@example.com"
+    }
+  },
+  {
+    "id": "c0269",
+    "name": "汉水充电技术股份有限公司",
+    "creditCode": "91420100000000269X",
+    "street": "慈惠街道",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-01-15",
+    "registeredCapital": 761,
+    "employees": 84,
+    "rdEmployees": 12,
+    "patents": {
+      "invention": 1,
+      "utility": 3,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴敏",
+      "phone": "15800007397",
+      "email": "吴869@example.com"
+    }
+  },
+  {
+    "id": "c0270",
+    "name": "汉水稀土有限公司",
+    "creditCode": "91420100000000270X",
+    "street": "慈惠街道",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2019-04-07",
+    "registeredCapital": 476,
+    "employees": 40,
+    "rdEmployees": 7,
+    "patents": {
+      "invention": 2,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱静",
+      "phone": "13900002928",
+      "email": "朱884@example.com"
+    }
+  },
+  {
+    "id": "c0271",
+    "name": "湖北磁性有限公司",
+    "creditCode": "91420100000000271X",
+    "street": "慈惠街道",
+    "industry": "光电材料",
+    "techField": "新材料",
+    "establishedAt": "2023-11-19",
+    "registeredCapital": 470,
+    "employees": 34,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张芳",
+      "phone": "13900002297",
+      "email": "张266@example.com"
+    }
+  },
+  {
+    "id": "c0272",
+    "name": "楚天高分子股份有限公司",
+    "creditCode": "91420100000000272X",
+    "street": "慈惠街道",
+    "industry": "功能材料",
+    "techField": "新材料",
+    "establishedAt": "2019-02-27",
+    "registeredCapital": 530,
+    "employees": 44,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 0,
+      "utility": 6,
+      "design": 2
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴强",
+      "phone": "13900004543",
+      "email": "吴100@example.com"
+    }
+  },
+  {
+    "id": "c0273",
+    "name": "汉水鑫宇技术开发有限公司",
+    "creditCode": "91420100000000273X",
+    "street": "慈惠街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-10-12",
+    "registeredCapital": 497,
+    "employees": 36,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨艳",
+      "phone": "15800006947",
+      "email": "杨269@example.com"
+    }
+  },
+  {
+    "id": "c0274",
+    "name": "汉水创博科技开发有限公司",
+    "creditCode": "91420100000000274X",
+    "street": "慈惠街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-08-29",
+    "registeredCapital": 340,
+    "employees": 29,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙勇",
+      "phone": "15800009117",
+      "email": "孙626@example.com"
+    }
+  },
+  {
+    "id": "c0275",
+    "name": "江城智造科技开发有限公司",
+    "creditCode": "91420100000000275X",
+    "street": "慈惠街道",
+    "industry": "食品机械",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-11-10",
+    "registeredCapital": 221,
+    "employees": 39,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 1
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐超",
+      "phone": "13900003171",
+      "email": "徐222@example.com"
+    }
+  },
+  {
+    "id": "c0276",
+    "name": "楚天鼎盛科技股份有限公司",
+    "creditCode": "91420100000000276X",
+    "street": "慈惠街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-05-30",
+    "registeredCapital": 456,
+    "employees": 45,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴敏",
+      "phone": "15000006768",
+      "email": "吴544@example.com"
+    }
+  },
+  {
+    "id": "c0277",
+    "name": "武汉恒力技术有限公司",
+    "creditCode": "91420100000000277X",
+    "street": "慈惠街道",
+    "industry": "工业自动化",
+    "techField": null,
+    "establishedAt": "2024-02-20",
+    "registeredCapital": 228,
+    "employees": 34,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王涛",
+      "phone": "13900008458",
+      "email": "王316@example.com"
+    }
+  },
+  {
+    "id": "c0278",
+    "name": "楚天盛达技术股份有限公司",
+    "creditCode": "91420100000000278X",
+    "street": "慈惠街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-01-15",
+    "registeredCapital": 74,
+    "employees": 18,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张勇",
+      "phone": "18200001789",
+      "email": "张263@example.com"
+    }
+  },
+  {
+    "id": "c0279",
+    "name": "湖北汇聚科技开发有限公司",
+    "creditCode": "91420100000000279X",
+    "street": "慈惠街道",
+    "industry": "智能装备",
+    "techField": null,
+    "establishedAt": "2016-10-19",
+    "registeredCapital": 62,
+    "employees": 30,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙敏",
+      "phone": "13900004501",
+      "email": "孙788@example.com"
+    }
+  },
+  {
+    "id": "c0280",
+    "name": "湖北纳米科技开发有限公司",
+    "creditCode": "91420100000000280X",
+    "street": "慈惠街道",
+    "industry": "复合材料",
+    "techField": null,
+    "establishedAt": "2015-04-28",
+    "registeredCapital": 41,
+    "employees": 17,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱超",
+      "phone": "18200003361",
+      "email": "朱388@example.com"
+    }
+  },
+  {
+    "id": "c0281",
+    "name": "东湖机电科技有限公司",
+    "creditCode": "91420100000000281X",
+    "street": "走马岭街道",
+    "industry": "数控设备",
+    "techField": null,
+    "establishedAt": "2023-02-11",
+    "registeredCapital": 1814,
+    "employees": 148,
+    "rdEmployees": 37,
+    "patents": {
+      "invention": 8,
+      "utility": 13,
+      "design": 3
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "罗磊",
+      "phone": "15800005865",
+      "email": "罗464@example.com"
+    }
+  },
+  {
+    "id": "c0282",
+    "name": "荆楚创博科技有限公司",
+    "creditCode": "91420100000000282X",
+    "street": "走马岭街道",
+    "industry": "航空配件",
+    "techField": null,
+    "establishedAt": "2023-03-25",
+    "registeredCapital": 1550,
+    "employees": 98,
+    "rdEmployees": 31,
+    "patents": {
+      "invention": 7,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 12,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄霞",
+      "phone": "15000007190",
+      "email": "黄114@example.com"
+    }
+  },
+  {
+    "id": "c0283",
+    "name": "江城鑫宇股份有限公司",
+    "creditCode": "91420100000000283X",
+    "street": "走马岭街道",
+    "industry": "机器人",
+    "techField": null,
+    "establishedAt": "2018-11-21",
+    "registeredCapital": 949,
+    "employees": 85,
+    "rdEmployees": 16,
+    "patents": {
+      "invention": 3,
+      "utility": 8,
+      "design": 2
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "徐超",
+      "phone": "18200007990",
+      "email": "徐572@example.com"
+    }
+  },
+  {
+    "id": "c0284",
+    "name": "汉水电网科技开发有限公司",
+    "creditCode": "91420100000000284X",
+    "street": "走马岭街道",
+    "industry": "风电",
+    "techField": "新能源与节能",
+    "establishedAt": "2022-10-17",
+    "registeredCapital": 747,
+    "employees": 60,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 4,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马勇",
+      "phone": "18200007214",
+      "email": "马783@example.com"
+    }
+  },
+  {
+    "id": "c0285",
+    "name": "湖北恒力科技有限公司",
+    "creditCode": "91420100000000285X",
+    "street": "走马岭街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-08-10",
+    "registeredCapital": 590,
+    "employees": 64,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 2,
+      "utility": 9,
+      "design": 3
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭杰",
+      "phone": "13800003447",
+      "email": "郭371@example.com"
+    }
+  },
+  {
+    "id": "c0286",
+    "name": "东湖精工科技股份有限公司",
+    "creditCode": "91420100000000286X",
+    "street": "走马岭街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2017-07-05",
+    "registeredCapital": 594,
+    "employees": 59,
+    "rdEmployees": 9,
+    "patents": {
+      "invention": 3,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马洋",
+      "phone": "15100007467",
+      "email": "马595@example.com"
+    }
+  },
+  {
+    "id": "c0287",
+    "name": "武汉创博高端有限公司",
+    "creditCode": "91420100000000287X",
+    "street": "走马岭街道",
+    "industry": "航空配件",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-04-19",
+    "registeredCapital": 495,
+    "employees": 49,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘敏",
+      "phone": "18600008566",
+      "email": "刘791@example.com"
+    }
+  },
+  {
+    "id": "c0288",
+    "name": "武汉光伏有限公司",
+    "creditCode": "91420100000000288X",
+    "street": "走马岭街道",
+    "industry": "节能环保",
+    "techField": "新能源与节能",
+    "establishedAt": "2024-07-29",
+    "registeredCapital": 250,
+    "employees": 25,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "马秀英",
+      "phone": "15000002640",
+      "email": "马891@example.com"
+    }
+  },
+  {
+    "id": "c0289",
+    "name": "汉水机电科技股份有限公司",
+    "creditCode": "91420100000000289X",
+    "street": "走马岭街道",
+    "industry": "数控设备",
+    "techField": null,
+    "establishedAt": "2020-08-20",
+    "registeredCapital": 153,
+    "employees": 55,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周秀英",
+      "phone": "15000009419",
+      "email": "周877@example.com"
+    }
+  },
+  {
+    "id": "c0290",
+    "name": "东湖热泵有限公司",
+    "creditCode": "91420100000000290X",
+    "street": "走马岭街道",
+    "industry": "储能技术",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-10-05",
+    "registeredCapital": 437,
+    "employees": 35,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵静",
+      "phone": "15100004979",
+      "email": "赵519@example.com"
+    }
+  },
+  {
+    "id": "c0291",
+    "name": "荆楚太阳科技股份有限公司",
+    "creditCode": "91420100000000291X",
+    "street": "走马岭街道",
+    "industry": "风电",
+    "techField": "新能源与节能",
+    "establishedAt": "2020-11-06",
+    "registeredCapital": 51,
+    "employees": 26,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄丽",
+      "phone": "15000007251",
+      "email": "黄267@example.com"
+    }
+  },
+  {
+    "id": "c0292",
+    "name": "江城清洁科技有限公司",
+    "creditCode": "91420100000000292X",
+    "street": "走马岭街道",
+    "industry": "新能源汽车配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2024-02-07",
+    "registeredCapital": 141,
+    "employees": 29,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 1,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵伟",
+      "phone": "15000006116",
+      "email": "赵867@example.com"
+    }
+  },
+  {
+    "id": "c0293",
+    "name": "荆楚新材技术开发有限公司",
+    "creditCode": "91420100000000293X",
+    "street": "新沟镇街道",
+    "industry": "纳米材料",
+    "techField": "新材料",
+    "establishedAt": "2020-08-11",
+    "registeredCapital": 1006,
+    "employees": 156,
+    "rdEmployees": 38,
+    "patents": {
+      "invention": 7,
+      "utility": 6,
+      "design": 4
+    },
+    "software": 14,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "高秀兰",
+      "phone": "15100006606",
+      "email": "高990@example.com"
+    }
+  },
+  {
+    "id": "c0294",
+    "name": "东湖精工创新股份有限公司",
+    "creditCode": "91420100000000294X",
+    "street": "新沟镇街道",
+    "industry": "航空配件",
+    "techField": null,
+    "establishedAt": "2019-08-26",
+    "registeredCapital": 606,
+    "employees": 42,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王娜",
+      "phone": "13900009604",
+      "email": "王523@example.com"
+    }
+  },
+  {
+    "id": "c0295",
+    "name": "江城盛达科技开发有限公司",
+    "creditCode": "91420100000000295X",
+    "street": "新沟镇街道",
+    "industry": "智能装备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-05-11",
+    "registeredCapital": 820,
+    "employees": 77,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 1,
+      "utility": 9,
+      "design": 0
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵艳",
+      "phone": "15800004256",
+      "email": "赵353@example.com"
+    }
+  },
+  {
+    "id": "c0296",
+    "name": "湖北汇聚技术股份有限公司",
+    "creditCode": "91420100000000296X",
+    "street": "新沟镇街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2023-02-17",
+    "registeredCapital": 207,
+    "employees": 57,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 1,
+      "utility": 1,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄杰",
+      "phone": "18600007775",
+      "email": "黄224@example.com"
+    }
+  },
+  {
+    "id": "c0297",
+    "name": "武汉恒力科技开发有限公司",
+    "creditCode": "91420100000000297X",
+    "street": "新沟镇街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2016-11-01",
+    "registeredCapital": 156,
+    "employees": 52,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李秀英",
+      "phone": "15800005988",
+      "email": "李307@example.com"
+    }
+  },
+  {
+    "id": "c0298",
+    "name": "东湖功能技术开发有限公司",
+    "creditCode": "91420100000000298X",
+    "street": "新沟镇街道",
+    "industry": "新型建材",
+    "techField": "新材料",
+    "establishedAt": "2018-12-16",
+    "registeredCapital": 408,
+    "employees": 30,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林娜",
+      "phone": "13800002147",
+      "email": "林919@example.com"
+    }
+  },
+  {
+    "id": "c0299",
+    "name": "东湖铭科高端科技有限公司",
+    "creditCode": "91420100000000299X",
+    "street": "新沟镇街道",
+    "industry": "机器人",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-09-15",
+    "registeredCapital": 168,
+    "employees": 6,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王勇",
+      "phone": "18200008875",
+      "email": "王749@example.com"
+    }
+  },
+  {
+    "id": "c0300",
+    "name": "楚天机电科技有限公司",
+    "creditCode": "91420100000000300X",
+    "street": "新沟镇街道",
+    "industry": "数控设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2020-05-08",
+    "registeredCapital": 66,
+    "employees": 7,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": true,
+      "penalty": true
+    },
+    "contact": {
+      "name": "刘艳",
+      "phone": "15000008740",
+      "email": "刘999@example.com"
+    }
+  },
+  {
+    "id": "c0301",
+    "name": "江城土壤科技股份有限公司",
+    "creditCode": "91420100000000301X",
+    "street": "东山街道",
+    "industry": "固废处理",
+    "techField": "资源与环境",
+    "establishedAt": "2021-03-23",
+    "registeredCapital": 2113,
+    "employees": 118,
+    "rdEmployees": 22,
+    "patents": {
+      "invention": 6,
+      "utility": 7,
+      "design": 1
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈强",
+      "phone": "15100004303",
+      "email": "陈528@example.com"
+    }
+  },
+  {
+    "id": "c0302",
+    "name": "武汉湿地科技有限公司",
+    "creditCode": "91420100000000302X",
+    "street": "东山街道",
+    "industry": "环境监测",
+    "techField": null,
+    "establishedAt": "2021-01-16",
+    "registeredCapital": 480,
+    "employees": 66,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 1,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "何磊",
+      "phone": "18200009011",
+      "email": "何940@example.com"
+    }
+  },
+  {
+    "id": "c0303",
+    "name": "楚天华兴科技有限公司",
+    "creditCode": "91420100000000303X",
+    "street": "东山街道",
+    "industry": "工业自动化",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2018-05-31",
+    "registeredCapital": 245,
+    "employees": 84,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 3,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄敏",
+      "phone": "13900005936",
+      "email": "黄454@example.com"
+    }
+  },
+  {
+    "id": "c0304",
+    "name": "湖北净水技术开发有限公司",
+    "creditCode": "91420100000000304X",
+    "street": "东山街道",
+    "industry": "碳减排",
+    "techField": "资源与环境",
+    "establishedAt": "2017-05-23",
+    "registeredCapital": 466,
+    "employees": 33,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 2,
+      "utility": 0,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李明",
+      "phone": "13800002060",
+      "email": "李177@example.com"
+    }
+  },
+  {
+    "id": "c0305",
+    "name": "武汉循环科技有限公司",
+    "creditCode": "91420100000000305X",
+    "street": "东山街道",
+    "industry": "大气治理",
+    "techField": "资源与环境",
+    "establishedAt": "2024-10-10",
+    "registeredCapital": 458,
+    "employees": 26,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林军",
+      "phone": "13900007874",
+      "email": "林153@example.com"
+    }
+  },
+  {
+    "id": "c0306",
+    "name": "东湖远航科技有限公司",
+    "creditCode": "91420100000000306X",
+    "street": "东山街道",
+    "industry": "数控设备",
+    "techField": null,
+    "establishedAt": "2017-07-03",
+    "registeredCapital": 85,
+    "employees": 22,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 2,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张芳",
+      "phone": "18200002369",
+      "email": "张391@example.com"
+    }
+  }
+]

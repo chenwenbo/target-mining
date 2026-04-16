@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>方案 C · 新中式政务风 | 高企标的挖掘驾驶舱</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --paper: #f6f1e4;
+    --paper-2: #faf6ea;
+    --ink: #1c1a17;
+    --ink-1: #3d3832;
+    --ink-2: #6b645a;
+    --ink-3: #9b9388;
+    --hair: #c9beab;
+    --hair-soft: #e2d9c5;
+    --cinnabar: #a8322c;
+    --cinnabar-soft: #d46a5f;
+    --cinnabar-seal: #b83a32;
+    --indigo: #2f4858;
+    --indigo-soft: #4b6374;
+    --gold: #b68d40;
+    --jade: #5a7a5a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "PingFang SC", "Microsoft YaHei", "SimSun", serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(168,50,44,0.02) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(47,72,88,0.03) 0%, transparent 40%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><circle cx='30' cy='30' r='0.6' fill='%23c9beab' opacity='0.35'/></svg>");
+    background-size: auto, auto, 60px 60px;
+    min-height: 100vh;
+    padding: 28px 48px 40px;
+  }
+  .serif-hei {
+    font-family: "SimHei", "STHeiti", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  .serif-song {
+    font-family: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "STSong", "SimSun", "FangSong", serif;
+    font-weight: 600;
+  }
+  .num-font {
+    font-family: "PingFang SC", "STSong", serif;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ═══ Header ═══ */
+  .app-header {
+    text-align: center;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .app-header::after {
+    content: "";
+    position: absolute;
+    bottom: -6px; left: 0; right: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+  .header-meta-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+  .header-left-meta { display: flex; align-items: center; gap: 14px; }
+  .seal {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px;
+    background: var(--cinnabar-seal);
+    color: #fff8ea;
+    border-radius: 4px;
+    font-family: "SimSun", "STSong", serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.1;
+    padding: 4px;
+    text-align: center;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 0 rgba(0,0,0,0.08);
+    transform: rotate(-2deg);
+  }
+  .header-left-meta .org-text { color: var(--ink-1); font-size: 13px; }
+  .header-left-meta .org-text .t1 { font-size: 15px; color: var(--ink); }
+  .header-right-meta { text-align: right; font-size: 12px; color: var(--ink-2); }
+  .header-right-meta .date { font-size: 13px; color: var(--ink-1); }
+
+  .page-banner .t-en {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .page-banner h1 {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    color: var(--ink);
+    margin: 0 0 8px;
+    padding-left: 10px;
+  }
+  .page-banner .subtitle {
+    font-size: 13px;
+    color: var(--ink-2);
+    letter-spacing: 2px;
+  }
+  .page-banner .subtitle .divider { color: var(--cinnabar); margin: 0 10px; }
+
+  /* Section titles */
+  .sec-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin: 32px 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--hair);
+    position: relative;
+  }
+  .sec-head .title {
+    font-size: 17px;
+    color: var(--ink);
+    position: relative;
+    padding-left: 14px;
+    letter-spacing: 1px;
+  }
+  .sec-head .title::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    width: 4px; height: 16px;
+    background: var(--cinnabar);
+    transform: translateY(-50%);
+  }
+  .sec-head .title .t-en {
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 2px;
+    margin-left: 10px;
+    font-weight: 400;
+  }
+  .sec-head .aside { font-size: 12px; color: var(--ink-2); }
+
+  /* ═══ KPI Row ═══ */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 16px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .kpi-cell {
+    padding: 22px 24px;
+    border-right: 1px dashed var(--hair);
+    background: var(--paper-2);
+    position: relative;
+  }
+  .kpi-cell:last-child { border-right: none; }
+  .kpi-cell .k-label {
+    font-size: 13px;
+    color: var(--ink-2);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .kpi-cell .k-label::before {
+    content: "◆";
+    color: var(--cinnabar);
+    margin-right: 6px;
+    font-size: 10px;
+  }
+  .kpi-cell .k-value {
+    font-size: 40px;
+    color: var(--ink);
+    font-weight: 700;
+    display: flex; align-items: baseline; gap: 8px;
+    letter-spacing: 1px;
+  }
+  .kpi-cell .k-value .unit {
+    font-size: 14px;
+    color: var(--ink-2);
+    font-weight: 400;
+  }
+  .kpi-cell .k-delta {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--ink-2);
+    padding-top: 10px;
+    border-top: 1px dotted var(--hair);
+  }
+  .kpi-cell .k-delta .up { color: var(--jade); font-weight: 600; }
+  .kpi-cell .k-delta .cin { color: var(--cinnabar); font-weight: 600; }
+
+  /* ═══ Main Grid ═══ */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 28px;
+  }
+
+  /* Street list (left) */
+  .street-list {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--hair);
+    background: var(--paper-2);
+  }
+  .street-item {
+    display: grid;
+    grid-template-columns: 28px 150px 1fr 50px;
+    align-items: center;
+    gap: 18px;
+    padding: 13px 22px;
+    border-bottom: 1px dashed var(--hair);
+    font-size: 14px;
+  }
+  .street-item:last-child { border-bottom: none; }
+  .street-item .ordinal {
+    font-family: "SimSun", "STSong", serif;
+    font-size: 14px;
+    color: var(--ink-3);
+    text-align: center;
+  }
+  .street-item .s-name { color: var(--ink-1); letter-spacing: 1px; }
+  .street-item .s-name .tag-cn {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 5px;
+    background: var(--cinnabar);
+    color: #fff8ea;
+    margin-left: 6px;
+    font-weight: 400;
+  }
+  .street-bar-wrap {
+    height: 10px;
+    background: #ede3ca;
+    position: relative;
+  }
+  .street-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cinnabar), var(--cinnabar-soft));
+  }
+  .street-item.blue .street-bar-fill {
+    background: linear-gradient(90deg, var(--indigo), var(--indigo-soft));
+  }
+  .street-item .s-count {
+    font-size: 16px;
+    color: var(--ink);
+    font-weight: 700;
+    text-align: right;
+    letter-spacing: 1px;
+  }
+  .street-item.top { background: rgba(168,50,44,0.04); }
+
+  /* Right column */
+  .panel {
+    background: var(--paper-2);
+    border: 1px solid var(--hair);
+    padding: 20px 24px 24px;
+  }
+  .panel + .panel { margin-top: 20px; }
+  .panel-title {
+    font-size: 15px;
+    color: var(--ink);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--hair);
+    display: flex; align-items: center; justify-content: space-between;
+    letter-spacing: 1px;
+  }
+  .panel-title .tt {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel-title .tt::before {
+    content: "";
+    display: inline-block;
+    width: 8px; height: 8px;
+    border: 1.5px solid var(--cinnabar);
+    transform: rotate(45deg);
+  }
+
+  /* Tier list */
+  .tier-list { display: flex; flex-direction: column; gap: 14px; }
+  .tier-row {
+    display: grid;
+    grid-template-columns: 44px 1fr 70px;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 4px;
+    border-bottom: 1px dotted var(--hair);
+  }
+  .tier-row:last-child { border-bottom: none; }
+  .tier-char {
+    width: 42px; height: 42px;
+    display: grid; place-items: center;
+    border: 1.5px solid var(--ink);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper);
+    font-family: "SimHei", sans-serif;
+  }
+  .tier-row.a .tier-char { border-color: var(--cinnabar); color: var(--cinnabar); background: rgba(168,50,44,0.06); }
+  .tier-row.b .tier-char { border-color: var(--indigo); color: var(--indigo); }
+  .tier-row.c .tier-char { border-color: var(--gold); color: var(--gold); }
+  .tier-row.d .tier-char { border-color: var(--ink-3); color: var(--ink-3); }
+  .tier-meta .t-name { font-size: 14px; color: var(--ink-1); font-weight: 600; letter-spacing: 1px; }
+  .tier-meta .t-desc { font-size: 12px; color: var(--ink-2); margin-top: 3px; }
+  .tier-track {
+    height: 5px;
+    background: #ede3ca;
+    margin-top: 6px;
+    position: relative;
+  }
+  .tier-fill-a { background: var(--cinnabar); height: 100%; }
+  .tier-fill-b { background: var(--indigo); height: 100%; }
+  .tier-fill-c { background: var(--gold); height: 100%; }
+  .tier-fill-d { background: var(--ink-3); height: 100%; }
+  .tier-val {
+    text-align: right;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .tier-val .pct { font-size: 11px; color: var(--ink-2); display: block; margin-top: 2px; font-weight: 400; }
+
+  /* Charts */
+  .chart { height: 260px; }
+  .chart-sm { height: 220px; }
+
+  /* Bottom grid */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+    margin-top: 32px;
+  }
+
+  /* Top 10 table */
+  .top-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .top-table thead th {
+    padding: 12px 10px;
+    text-align: left;
+    font-weight: 500;
+    color: var(--ink-2);
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-top: 2px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    background: var(--paper-2);
+  }
+  .top-table tbody td {
+    padding: 14px 10px;
+    border-bottom: 1px dashed var(--hair);
+    color: var(--ink-1);
+    vertical-align: middle;
+  }
+  .top-table tbody tr:last-child td { border-bottom: 1px solid var(--ink); }
+  .top-table tbody tr:hover td { background: rgba(168,50,44,0.03); }
+  .top-table .ordinal {
+    font-family: "SimSun", "STSong", serif;
+    font-size: 15px;
+    color: var(--ink-3);
+    letter-spacing: 1px;
+  }
+  .top-table .ordinal-top {
+    color: var(--cinnabar);
+    font-weight: 700;
+  }
+  .top-table .company {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .top-table .score-box {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    padding: 3px 8px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+  }
+  .top-table .score-num {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    font-family: "SimSun", serif;
+  }
+  .top-table .score-max { font-size: 10px; color: var(--ink-3); }
+  .tier-ink {
+    display: inline-block;
+    width: 22px; height: 22px;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--paper);
+  }
+  .tier-ink.a { color: var(--cinnabar); border-color: var(--cinnabar); background: rgba(168,50,44,0.08); }
+  .tier-ink.b { color: var(--indigo); border-color: var(--indigo); }
+
+  .link-btn {
+    background: none;
+    border: none;
+    color: var(--cinnabar);
+    font-size: 13px;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--cinnabar);
+    padding-bottom: 1px;
+  }
+  .link-btn:hover { color: var(--cinnabar-seal); }
+
+  /* Footer */
+  .app-footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--hair);
+    display: flex; justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-meta-row">
+    <div class="header-left-meta">
+      <div class="seal">标的<br>挖掘</div>
+      <div class="org-text">
+        <div class="t1 serif-song">武汉市东西湖区科学技术和经济信息化局</div>
+        <div>高 新 技 术 产 业 处 · 标 的 挖 掘 系 统</div>
+      </div>
+    </div>
+    <div class="header-right-meta">
+      <div class="date num-font">丙午年 · 二零二六 · 四月十五日</div>
+      <div>数据更新于 14:28 · 领导视角</div>
+    </div>
+  </div>
+  <div class="page-banner">
+    <div class="t-en">TARGET MINING DASHBOARD · DONGXIHU · 2026</div>
+    <h1 class="serif-song">高 企 标 的 挖 掘 驾 驶 舱</h1>
+    <div class="subtitle">东西湖区 2026 年度申报全景 <span class="divider">❖</span> 辖十街道二园区 <span class="divider">❖</span> 纳 246 家潜在标的</div>
+  </div>
+</header>
+
+<!-- KPI 栏 -->
+<section class="kpi-row">
+  <div class="kpi-cell">
+    <div class="k-label">本 年 度 申 报 目 标</div>
+    <div class="k-value num-font">120 <span class="unit">家</span></div>
+    <div class="k-delta">较去年 <span class="up">↑ 20 家</span> · 目标增幅 20%</div>
+  </div>
+  <div class="kpi-cell">
+    <div class="k-label">本 年 度 已 认 定</div>
+    <div class="k-value num-font">58 <span class="unit">家 · 48.3%</span></div>
+    <div class="k-delta">本月新增认定 <span class="up">↑ 6 家</span></div>
+  </div>
+  <div class="kpi-cell">
+    <div class="k-label">系 统 识 别 潜 在 标 的</div>
+    <div class="k-value num-font">246 <span class="unit">家</span></div>
+    <div class="k-delta">本月新识别 <span class="up">↑ 34 家</span></div>
+  </div>
+  <div class="kpi-cell">
+    <div class="k-label">预 计 年 度 完 成 率</div>
+    <div class="k-value num-font">138 <span class="unit">%</span></div>
+    <div class="k-delta">超额 23 家 · 依赖 B 类转化 <span class="cin">36 家</span></div>
+  </div>
+</section>
+
+<!-- 辖区分布 + 置信度分档 -->
+<div class="sec-head">
+  <div class="title serif-song">其 一 · 辖 区 格 局<span class="t-en">DISTRIBUTION BY STREET</span></div>
+  <div class="aside">按潜在标的数量排序</div>
+</div>
+
+<div class="main-grid">
+  <div class="street-list">
+    <div class="street-item top">
+      <div class="ordinal">壹</div>
+      <div class="s-name serif-song">国家网安基地<span class="tag-cn">重点</span></div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:100%"></div></div>
+      <div class="s-count num-font">52</div>
+    </div>
+    <div class="street-item top">
+      <div class="ordinal">贰</div>
+      <div class="s-name serif-song">临空港经开区<span class="tag-cn">重点</span></div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:92%"></div></div>
+      <div class="s-count num-font">48</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">叁</div>
+      <div class="s-name serif-song">吴家山街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:73%"></div></div>
+      <div class="s-count num-font">38</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">肆</div>
+      <div class="s-name serif-song">将军路街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:54%"></div></div>
+      <div class="s-count num-font">28</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">伍</div>
+      <div class="s-name serif-song">径河街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:42%"></div></div>
+      <div class="s-count num-font">22</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">陆</div>
+      <div class="s-name serif-song">金银湖街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:35%"></div></div>
+      <div class="s-count num-font">18</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">柒</div>
+      <div class="s-name serif-song">慈惠街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:27%"></div></div>
+      <div class="s-count num-font">14</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">捌</div>
+      <div class="s-name serif-song">走马岭街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:23%"></div></div>
+      <div class="s-count num-font">12</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">玖</div>
+      <div class="s-name serif-song">新沟镇街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:15%"></div></div>
+      <div class="s-count num-font">8</div>
+    </div>
+    <div class="street-item blue">
+      <div class="ordinal">拾</div>
+      <div class="s-name serif-song">东山街道</div>
+      <div class="street-bar-wrap"><div class="street-bar-fill" style="width:12%"></div></div>
+      <div class="s-count num-font">6</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">
+      <div class="tt serif-song">置 信 度 分 档</div>
+      <div style="font-size: 11px; color: var(--ink-3); letter-spacing: 2px;">甲 乙 丙 丁 四 等</div>
+    </div>
+    <div class="tier-list">
+      <div class="tier-row a">
+        <div class="tier-char">甲</div>
+        <div class="tier-meta">
+          <div class="t-name">可立即申报 · A 类</div>
+          <div class="t-desc">综合评分 ≥ 80 · 基本具备申报条件</div>
+          <div class="tier-track"><div class="tier-fill-a" style="width:50%"></div></div>
+        </div>
+        <div class="tier-val num-font">42<span class="pct">17.1%</span></div>
+      </div>
+      <div class="tier-row b">
+        <div class="tier-char">乙</div>
+        <div class="tier-meta">
+          <div class="t-name">缺 1-2 项 · B 类</div>
+          <div class="t-desc">综合评分 60-79 · 定向培育转化</div>
+          <div class="tier-track"><div class="tier-fill-b" style="width:91%"></div></div>
+        </div>
+        <div class="tier-val num-font">76<span class="pct">30.9%</span></div>
+      </div>
+      <div class="tier-row c">
+        <div class="tier-char">丙</div>
+        <div class="tier-meta">
+          <div class="t-name">中远期培育 · C 类</div>
+          <div class="t-desc">综合评分 40-59 · 持续观察跟进</div>
+          <div class="tier-track"><div class="tier-fill-c" style="width:100%"></div></div>
+        </div>
+        <div class="tier-val num-font">82<span class="pct">33.3%</span></div>
+      </div>
+      <div class="tier-row d">
+        <div class="tier-char">丁</div>
+        <div class="tier-meta">
+          <div class="t-name">暂不推荐 · D 类</div>
+          <div class="t-desc">综合评分 &lt; 40 · 当前条件不足</div>
+          <div class="tier-track"><div class="tier-fill-d" style="width:55%"></div></div>
+        </div>
+        <div class="tier-val num-font">46<span class="pct">18.7%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 领域分布 + 年限分布 -->
+<div class="sec-head">
+  <div class="title serif-song">其 二 · 产 业 画 像<span class="t-en">INDUSTRY & FOUNDING YEAR</span></div>
+  <div class="aside">对标《国家重点支持的高新技术领域》八大类</div>
+</div>
+<div class="main-grid">
+  <div class="panel">
+    <div class="panel-title">
+      <div class="tt serif-song">八 大 领 域 分 布</div>
+      <div style="font-size: 11px; color: var(--ink-3);">单位：家</div>
+    </div>
+    <div id="donutChart" class="chart"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">
+      <div class="tt serif-song">企 业 成 立 年 限</div>
+      <div style="font-size: 11px; color: var(--ink-3);">区间分布</div>
+    </div>
+    <div id="yearChart" class="chart-sm"></div>
+  </div>
+</div>
+
+<!-- Top 10 -->
+<div class="sec-head">
+  <div class="title serif-song">其 三 · 高 置 信 标 的 · 前 十 名<span class="t-en">TOP 10 HIGH-CONFIDENCE TARGETS</span></div>
+  <div class="aside">按综合评分降序 · 点击查看打分依据</div>
+</div>
+<table class="top-table">
+  <thead>
+    <tr>
+      <th style="width:50px;">序</th>
+      <th>企业名称</th>
+      <th style="width:100px;">综合评分</th>
+      <th style="width:60px;">档次</th>
+      <th>所属领域</th>
+      <th>所在街道 / 园区</th>
+      <th>专利</th>
+      <th>参保</th>
+      <th style="width:80px;"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="ordinal ordinal-top">壹</span></td><td class="company serif-song">武汉磐石网络安全科技有限公司</td><td><span class="score-box"><span class="score-num">94</span><span class="score-max">/100</span></span></td><td><span class="tier-ink a">甲</span></td><td>电子信息</td><td>国家网安基地</td><td class="num-font">23</td><td class="num-font">186</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal ordinal-top">贰</span></td><td class="company serif-song">武汉鼎盛智能装备股份有限公司</td><td><span class="score-box"><span class="score-num">91</span><span class="score-max">/100</span></span></td><td><span class="tier-ink a">甲</span></td><td>先进制造</td><td>临空港经开区</td><td class="num-font">19</td><td class="num-font">212</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal ordinal-top">叁</span></td><td class="company serif-song">武汉云麦数据科技有限公司</td><td><span class="score-box"><span class="score-num">89</span><span class="score-max">/100</span></span></td><td><span class="tier-ink a">甲</span></td><td>电子信息</td><td>吴家山街道</td><td class="num-font">15</td><td class="num-font">98</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">肆</span></td><td class="company serif-song">武汉楚天生物技术有限公司</td><td><span class="score-box"><span class="score-num">87</span><span class="score-max">/100</span></span></td><td><span class="tier-ink a">甲</span></td><td>生物医药</td><td>金银湖街道</td><td class="num-font">12</td><td class="num-font">76</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">伍</span></td><td class="company serif-song">武汉星纬量子通信有限公司</td><td><span class="score-box"><span class="score-num">85</span><span class="score-max">/100</span></span></td><td><span class="tier-ink a">甲</span></td><td>电子信息</td><td>国家网安基地</td><td class="num-font">11</td><td class="num-font">64</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">陆</span></td><td class="company serif-song">武汉启航物联网有限公司</td><td><span class="score-box"><span class="score-num">78</span><span class="score-max">/100</span></span></td><td><span class="tier-ink b">乙</span></td><td>电子信息</td><td>将军路街道</td><td class="num-font">8</td><td class="num-font">52</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">柒</span></td><td class="company serif-song">武汉食研坊食品装备有限公司</td><td><span class="score-box"><span class="score-num">75</span><span class="score-max">/100</span></span></td><td><span class="tier-ink b">乙</span></td><td>先进制造</td><td>径河街道</td><td class="num-font">7</td><td class="num-font">88</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">捌</span></td><td class="company serif-song">武汉青鸟新能源科技有限公司</td><td><span class="score-box"><span class="score-num">72</span><span class="score-max">/100</span></span></td><td><span class="tier-ink b">乙</span></td><td>新能源</td><td>走马岭街道</td><td class="num-font">6</td><td class="num-font">42</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">玖</span></td><td class="company serif-song">武汉锦绣新材料有限公司</td><td><span class="score-box"><span class="score-num">69</span><span class="score-max">/100</span></span></td><td><span class="tier-ink b">乙</span></td><td>新材料</td><td>慈惠街道</td><td class="num-font">5</td><td class="num-font">38</td><td><button class="link-btn">详情 ❯</button></td></tr>
+    <tr><td><span class="ordinal">拾</span></td><td class="company serif-song">武汉远航航空配件有限公司</td><td><span class="score-box"><span class="score-num">66</span><span class="score-max">/100</span></span></td><td><span class="tier-ink b">乙</span></td><td>先进制造</td><td>临空港经开区</td><td class="num-font">5</td><td class="num-font">54</td><td><button class="link-btn">详情 ❯</button></td></tr>
+  </tbody>
+</table>
+
+<footer class="app-footer">
+  <div>武汉市东西湖区科经局 · 高新技术产业处 © 2026</div>
+  <div>数据来源：工商 · 专利 · 招聘 · 税务 | MOCKUP · PLAN C · CHINESE GOVERN</div>
+</footer>
+
+<script>
+  // Donut chart - ink-and-wash palette
+  echarts.init(document.getElementById('donutChart')).setOption({
+    tooltip: { trigger: 'item', formatter: '{b}：{c} 家 ({d}%)', backgroundColor: '#faf6ea', borderColor: '#c9beab', textStyle: { color: '#1c1a17' } },
+    legend: {
+      orient: 'vertical',
+      right: 8, top: 'middle',
+      icon: 'rect', itemWidth: 10, itemHeight: 3, itemGap: 10,
+      textStyle: { color: '#3d3832', fontSize: 12, fontFamily: 'PingFang SC' }
+    },
+    series: [{
+      type: 'pie',
+      radius: ['50%', '78%'],
+      center: ['36%', '52%'],
+      avoidLabelOverlap: false,
+      itemStyle: { borderColor: '#faf6ea', borderWidth: 2 },
+      label: {
+        show: true, position: 'center',
+        formatter: '{t|二四六}\n{s|潜在标的}',
+        rich: {
+          t: { fontSize: 26, color: '#1c1a17', fontWeight: 700, fontFamily: 'STSong, serif', lineHeight: 32 },
+          s: { fontSize: 12, color: '#9b9388', letterSpacing: 4 }
+        }
+      },
+      labelLine: { show: false },
+      data: [
+        { value: 78, name: '电子信息', itemStyle: { color: '#a8322c' } },
+        { value: 52, name: '先进制造', itemStyle: { color: '#2f4858' } },
+        { value: 38, name: '新材料', itemStyle: { color: '#b68d40' } },
+        { value: 32, name: '生物医药', itemStyle: { color: '#5a7a5a' } },
+        { value: 18, name: '新能源与节能', itemStyle: { color: '#d46a5f' } },
+        { value: 14, name: '资源与环境', itemStyle: { color: '#6b645a' } },
+        { value: 14, name: '高技术服务', itemStyle: { color: '#8a6a3a' } }
+      ]
+    }]
+  });
+
+  // Year bar chart
+  echarts.init(document.getElementById('yearChart')).setOption({
+    grid: { left: 40, right: 20, top: 30, bottom: 36 },
+    tooltip: { trigger: 'axis', backgroundColor: '#faf6ea', borderColor: '#c9beab', textStyle: { color: '#1c1a17' } },
+    xAxis: {
+      type: 'category',
+      data: ['1-3 年', '3-5 年', '5-8 年', '8-15 年', '15 年+'],
+      axisLine: { lineStyle: { color: '#1c1a17' } },
+      axisTick: { show: false },
+      axisLabel: { color: '#3d3832', fontSize: 12, fontFamily: 'PingFang SC' }
+    },
+    yAxis: {
+      type: 'value',
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { lineStyle: { color: '#e2d9c5', type: 'dashed' } },
+      axisLabel: { color: '#9b9388', fontSize: 11 }
+    },
+    series: [{
+      type: 'bar',
+      data: [58, 62, 84, 32, 10],
+      barWidth: 34,
+      itemStyle: {
+        color: function(p) {
+          return p.dataIndex === 2 ? '#a8322c' : '#2f4858';
+        }
+      },
+      label: { show: true, position: 'top', color: '#1c1a17', fontSize: 13, fontWeight: 700, fontFamily: 'STSong, serif' }
+    }]
+  });
+</script>
+</body>
+</html>

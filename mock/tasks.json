@@ -1,0 +1,122 @@
+[
+  {
+    "id": "t001",
+    "companyId": "c0061",
+    "companyName": "武汉磐石网络安全科技有限公司",
+    "assignee": "王科员",
+    "street": "国家网安基地",
+    "status": "in_progress",
+    "createdAt": "2026-04-10",
+    "deadline": "2026-06-30",
+    "notes": "已联系法人，材料准备中，缺研发费用台账",
+    "tier": "A"
+  },
+  {
+    "id": "t002",
+    "companyId": "c0062",
+    "companyName": "武汉鼎盛智能装备股份有限公司",
+    "assignee": "李科员",
+    "street": "临空港经开区",
+    "status": "pending",
+    "createdAt": "2026-04-12",
+    "deadline": "2026-06-30",
+    "notes": "等待企业回复",
+    "tier": "A"
+  },
+  {
+    "id": "t003",
+    "companyId": "c0063",
+    "companyName": "武汉云麦数据科技有限公司",
+    "assignee": "王科员",
+    "street": "吴家山街道",
+    "status": "done",
+    "createdAt": "2026-03-28",
+    "deadline": "2026-05-31",
+    "notes": "已完成初审，材料齐全，已提交区局审核",
+    "tier": "A"
+  },
+  {
+    "id": "t004",
+    "companyId": "c0064",
+    "companyName": "武汉楚天生物技术有限公司",
+    "assignee": "张科员",
+    "street": "金银湖街道",
+    "status": "pending",
+    "createdAt": "2026-04-13",
+    "deadline": "2026-07-15",
+    "notes": "研发费用占比需补材料",
+    "tier": "A"
+  },
+  {
+    "id": "t005",
+    "companyId": "c0065",
+    "companyName": "武汉星纬量子通信有限公司",
+    "assignee": "李科员",
+    "street": "国家网安基地",
+    "status": "in_progress",
+    "createdAt": "2026-04-08",
+    "deadline": "2026-06-30",
+    "notes": "已送达通知，企业在准备专利清单",
+    "tier": "A"
+  },
+  {
+    "id": "t006",
+    "companyId": "c0113",
+    "companyName": "武汉启航物联网有限公司",
+    "assignee": "赵科员",
+    "street": "将军路街道",
+    "status": "pending",
+    "createdAt": "2026-04-14",
+    "deadline": "2026-08-31",
+    "notes": "B 类标的，先做意愿摸底",
+    "tier": "B"
+  },
+  {
+    "id": "t007",
+    "companyId": "c0114",
+    "companyName": "武汉食研坊食品装备有限公司",
+    "assignee": "王科员",
+    "street": "径河街道",
+    "status": "done",
+    "createdAt": "2026-03-20",
+    "deadline": "2026-05-31",
+    "notes": "已指导补充发明专利申请，预计 3 个月内可达标",
+    "tier": "B"
+  },
+  {
+    "id": "t008",
+    "companyId": "c0115",
+    "companyName": "武汉青鸟新能源科技有限公司",
+    "assignee": "张科员",
+    "street": "走马岭街道",
+    "status": "in_progress",
+    "createdAt": "2026-04-05",
+    "deadline": "2026-07-31",
+    "notes": "研发人员占比 8%，需提升至 10%",
+    "tier": "B"
+  },
+  {
+    "id": "t009",
+    "companyId": "c0116",
+    "companyName": "武汉锦绣新材料有限公司",
+    "assignee": "赵科员",
+    "street": "慈惠街道",
+    "status": "pending",
+    "createdAt": "2026-04-15",
+    "deadline": "2026-08-31",
+    "notes": "待约谈法人",
+    "tier": "B"
+  },
+  {
+    "id": "t010",
+    "companyId": "c0117",
+    "companyName": "武汉远航航空配件有限公司",
+    "assignee": "李科员",
+    "street": "临空港经开区",
+    "status": "pending",
+    "createdAt": "2026-04-15",
+    "deadline": "2026-09-30",
+    "notes": "新增派发，等待初接触",
+    "tier": "B"
+  }
+]
