@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, Download, Send, Search, X } from "lucide-react";
@@ -151,7 +151,7 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
 }
 
 // ─── Main Page ───────────────────────────────────────────────
-export default function TargetsPage() {
+function TargetsPageContent() {
   const searchParams = useSearchParams();
   const { weights } = useWeightsStore();
 
@@ -367,5 +367,13 @@ export default function TargetsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function TargetsPage() {
+  return (
+    <Suspense>
+      <TargetsPageContent />
+    </Suspense>
   );
 }
