@@ -7,36 +7,23 @@ import {
   Target,
   CheckSquare,
   SlidersHorizontal,
-  BarChart2,
-  GitCompareArrows,
-  Download,
+  RefreshCcw,
 } from "lucide-react";
-
-interface SidebarProps {
-  role: "leader" | "staff";
-}
 
 const NAV_ITEMS = [
   {
     section: "工作台",
     items: [
-      { href: "/", label: "驾驶舱", icon: LayoutDashboard, badge: "今日", roles: ["leader", "staff"] },
-      { href: "/targets", label: "标的池", icon: Target, badge: "246", roles: ["leader", "staff"] },
-      { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10", roles: ["staff"] },
-      { href: "/model", label: "算法模型", icon: SlidersHorizontal, roles: ["leader", "staff"] },
-    ],
-  },
-  {
-    section: "分析",
-    items: [
-      { href: "/", label: "认定进度", icon: BarChart2, roles: ["leader"] },
-      { href: "/", label: "区域对比", icon: GitCompareArrows, roles: ["leader"] },
-      { href: "/", label: "导出记录", icon: Download, roles: ["staff"] },
+      { href: "/", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
+      { href: "/targets", label: "标的池", icon: Target, badge: "246" },
+      { href: "/renewal", label: "复审管理", icon: RefreshCcw, badge: "38" },
+      { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
+      { href: "/model", label: "算法模型", icon: SlidersHorizontal },
     ],
   },
 ];
 
-export default function Sidebar({ role }: SidebarProps) {
+export default function Sidebar() {
   const pathname = usePathname();
 
   return (
@@ -54,17 +41,12 @@ export default function Sidebar({ role }: SidebarProps) {
 
       {/* Nav */}
       <nav className="flex-1 py-3 overflow-y-auto">
-        {NAV_ITEMS.map((section) => {
-          const visibleItems = section.items.filter((item) =>
-            item.roles.includes(role)
-          );
-          if (visibleItems.length === 0) return null;
-          return (
+        {NAV_ITEMS.map((section) => (
             <div key={section.section} className="px-3 mb-1">
               <div className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide px-2 py-2">
                 {section.section}
               </div>
-              {visibleItems.map((item) => {
+              {section.items.map((item) => {
                 const Icon = item.icon;
                 const active =
                   item.href === "/"
@@ -99,8 +81,7 @@ export default function Sidebar({ role }: SidebarProps) {
                 );
               })}
             </div>
-          );
-        })}
+          ))}
       </nav>
 
       {/* Footer */}

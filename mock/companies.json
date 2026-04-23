@@ -26,6 +26,27 @@
       "name": "王磊",
       "phone": "13800002261",
       "email": "王@武汉.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000001",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.2,
+      "rdExpenseRatioY2": 6.4,
+      "rdExpenseRatioY3": 6.8,
+      "hiTechRevenueRatioY1": 63.4,
+      "hiTechRevenueRatioY2": 65.8,
+      "hiTechRevenueRatioY3": 63.8,
+      "rdStaffRatioY1": 17.3,
+      "rdStaffRatioY2": 17.4,
+      "rdStaffRatioY3": 17.4,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -55,6 +76,27 @@
       "name": "孙静",
       "phone": "18200008607",
       "email": "孙@湖北.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000002",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.9,
+      "rdExpenseRatioY2": 5,
+      "rdExpenseRatioY3": 5.3,
+      "hiTechRevenueRatioY1": 56.4,
+      "hiTechRevenueRatioY2": 56.1,
+      "hiTechRevenueRatioY3": 58.6,
+      "rdStaffRatioY1": 13.2,
+      "rdStaffRatioY2": 13.9,
+      "rdStaffRatioY3": 12.8,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -84,6 +126,27 @@
       "name": "胡霞",
       "phone": "15000002941",
       "email": "胡@江城.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000003",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.6,
+      "rdExpenseRatioY2": 4.3,
+      "rdExpenseRatioY3": 4.1,
+      "hiTechRevenueRatioY1": 50.8,
+      "hiTechRevenueRatioY2": 50.5,
+      "hiTechRevenueRatioY3": 51.2,
+      "rdStaffRatioY1": 10.3,
+      "rdStaffRatioY2": 11.8,
+      "rdStaffRatioY3": 10.9,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -113,6 +176,27 @@
       "name": "罗秀英",
       "phone": "18200004896",
       "email": "罗@武汉.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000004",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.4,
+      "rdExpenseRatioY2": 8.3,
+      "rdExpenseRatioY3": 8.7,
+      "hiTechRevenueRatioY1": 70.8,
+      "hiTechRevenueRatioY2": 70.2,
+      "hiTechRevenueRatioY3": 72,
+      "rdStaffRatioY1": 27.3,
+      "rdStaffRatioY2": 28.6,
+      "rdStaffRatioY3": 27.2,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -142,6 +226,27 @@
       "name": "陈艳",
       "phone": "18200004614",
       "email": "陈@江城.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000005",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.2,
+      "rdExpenseRatioY2": 6.7,
+      "rdExpenseRatioY3": 6.6,
+      "hiTechRevenueRatioY1": 64.5,
+      "hiTechRevenueRatioY2": 62.3,
+      "hiTechRevenueRatioY3": 65.9,
+      "rdStaffRatioY1": 17.4,
+      "rdStaffRatioY2": 18.3,
+      "rdStaffRatioY3": 18.6,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -171,6 +276,27 @@
       "name": "周娟",
       "phone": "13900005409",
       "email": "周@武汉.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000006",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.3,
+      "rdExpenseRatioY2": 4.9,
+      "rdExpenseRatioY3": 5.3,
+      "hiTechRevenueRatioY1": 56.5,
+      "hiTechRevenueRatioY2": 56.7,
+      "hiTechRevenueRatioY3": 58.5,
+      "rdStaffRatioY1": 13.2,
+      "rdStaffRatioY2": 13.7,
+      "rdStaffRatioY3": 12.5,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -200,6 +326,27 @@
       "name": "杨磊",
       "phone": "15800003086",
       "email": "杨@湖北.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000007",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.6,
+      "rdExpenseRatioY2": 4.5,
+      "rdExpenseRatioY3": 4.1,
+      "hiTechRevenueRatioY1": 50.3,
+      "hiTechRevenueRatioY2": 51.1,
+      "hiTechRevenueRatioY3": 53.8,
+      "rdStaffRatioY1": 10.5,
+      "rdStaffRatioY2": 10,
+      "rdStaffRatioY3": 11.7,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -229,6 +376,27 @@
       "name": "高勇",
       "phone": "18200003779",
       "email": "高@江城.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000008",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.9,
+      "rdExpenseRatioY2": 8.6,
+      "rdExpenseRatioY3": 8.6,
+      "hiTechRevenueRatioY1": 71.2,
+      "hiTechRevenueRatioY2": 73,
+      "hiTechRevenueRatioY3": 73.3,
+      "rdStaffRatioY1": 27.3,
+      "rdStaffRatioY2": 29,
+      "rdStaffRatioY3": 28.4,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -258,6 +426,27 @@
       "name": "林霞",
       "phone": "15100001308",
       "email": "林@东湖.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000009",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.4,
+      "rdExpenseRatioY2": 6.5,
+      "rdExpenseRatioY3": 6.4,
+      "hiTechRevenueRatioY1": 64,
+      "hiTechRevenueRatioY2": 64.7,
+      "hiTechRevenueRatioY3": 63.2,
+      "rdStaffRatioY1": 18,
+      "rdStaffRatioY2": 18,
+      "rdStaffRatioY3": 18.9,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -287,6 +476,27 @@
       "name": "罗霞",
       "phone": "18600005032",
       "email": "罗@荆楚.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000010",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.9,
+      "rdExpenseRatioY2": 4.9,
+      "rdExpenseRatioY3": 5.1,
+      "hiTechRevenueRatioY1": 57.8,
+      "hiTechRevenueRatioY2": 58,
+      "hiTechRevenueRatioY3": 56.7,
+      "rdStaffRatioY1": 13.3,
+      "rdStaffRatioY2": 13.5,
+      "rdStaffRatioY3": 12,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -316,6 +526,27 @@
       "name": "孙芳",
       "phone": "15800004252",
       "email": "孙@东湖.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000011",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.1,
+      "rdExpenseRatioY2": 4,
+      "rdExpenseRatioY3": 3.8,
+      "hiTechRevenueRatioY1": 51,
+      "hiTechRevenueRatioY2": 50.8,
+      "hiTechRevenueRatioY3": 53.4,
+      "rdStaffRatioY1": 11.6,
+      "rdStaffRatioY2": 10.4,
+      "rdStaffRatioY3": 11.1,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -345,6 +576,27 @@
       "name": "马娟",
       "phone": "15800008445",
       "email": "马@楚天.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000012",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.3,
+      "rdExpenseRatioY2": 8.4,
+      "rdExpenseRatioY3": 8.8,
+      "hiTechRevenueRatioY1": 73.6,
+      "hiTechRevenueRatioY2": 73.2,
+      "hiTechRevenueRatioY3": 71.9,
+      "rdStaffRatioY1": 28.9,
+      "rdStaffRatioY2": 28.5,
+      "rdStaffRatioY3": 28.6,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -374,6 +626,27 @@
       "name": "徐涛",
       "phone": "15100007278",
       "email": "徐@东湖.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000013",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.8,
+      "rdExpenseRatioY2": 6.1,
+      "rdExpenseRatioY3": 6.3,
+      "hiTechRevenueRatioY1": 64.4,
+      "hiTechRevenueRatioY2": 64.8,
+      "hiTechRevenueRatioY3": 65.1,
+      "rdStaffRatioY1": 18.8,
+      "rdStaffRatioY2": 18.6,
+      "rdStaffRatioY3": 17.4,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -403,6 +676,27 @@
       "name": "黄霞",
       "phone": "18200009709",
       "email": "黄@汉水.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000014",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.9,
+      "rdExpenseRatioY2": 4.9,
+      "rdExpenseRatioY3": 5.1,
+      "hiTechRevenueRatioY1": 59.5,
+      "hiTechRevenueRatioY2": 56.1,
+      "hiTechRevenueRatioY3": 59.2,
+      "rdStaffRatioY1": 13.5,
+      "rdStaffRatioY2": 13.4,
+      "rdStaffRatioY3": 12.1,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -432,6 +726,27 @@
       "name": "何超",
       "phone": "15100008051",
       "email": "何@武汉.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000015",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.1,
+      "rdExpenseRatioY2": 4.3,
+      "rdExpenseRatioY3": 4.2,
+      "hiTechRevenueRatioY1": 50.9,
+      "hiTechRevenueRatioY2": 52.3,
+      "hiTechRevenueRatioY3": 53.6,
+      "rdStaffRatioY1": 10.1,
+      "rdStaffRatioY2": 11.3,
+      "rdStaffRatioY3": 10,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -461,6 +776,27 @@
       "name": "周娜",
       "phone": "15100002111",
       "email": "周@汉水.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000016",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.1,
+      "rdExpenseRatioY2": 8.5,
+      "rdExpenseRatioY3": 8.6,
+      "hiTechRevenueRatioY1": 71.6,
+      "hiTechRevenueRatioY2": 72.4,
+      "hiTechRevenueRatioY3": 70.1,
+      "rdStaffRatioY1": 28.9,
+      "rdStaffRatioY2": 27.3,
+      "rdStaffRatioY3": 28.2,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -490,6 +826,27 @@
       "name": "黄娟",
       "phone": "15000009290",
       "email": "黄@荆楚.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000017",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.6,
+      "rdExpenseRatioY2": 6.8,
+      "rdExpenseRatioY3": 6.6,
+      "hiTechRevenueRatioY1": 62.8,
+      "hiTechRevenueRatioY2": 63.4,
+      "hiTechRevenueRatioY3": 65.3,
+      "rdStaffRatioY1": 18.5,
+      "rdStaffRatioY2": 18,
+      "rdStaffRatioY3": 18.7,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -519,6 +876,27 @@
       "name": "何伟",
       "phone": "18200002618",
       "email": "何@汉水.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000018",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5,
+      "rdExpenseRatioY2": 5.1,
+      "rdExpenseRatioY3": 5.4,
+      "hiTechRevenueRatioY1": 58.7,
+      "hiTechRevenueRatioY2": 56.2,
+      "hiTechRevenueRatioY3": 57.3,
+      "rdStaffRatioY1": 13.5,
+      "rdStaffRatioY2": 12.7,
+      "rdStaffRatioY3": 12.4,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -548,6 +926,27 @@
       "name": "林磊",
       "phone": "15000008904",
       "email": "林@荆楚.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000019",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 3.8,
+      "rdExpenseRatioY2": 4.2,
+      "rdExpenseRatioY3": 4.3,
+      "hiTechRevenueRatioY1": 53.6,
+      "hiTechRevenueRatioY2": 52.5,
+      "hiTechRevenueRatioY3": 52,
+      "rdStaffRatioY1": 11.4,
+      "rdStaffRatioY2": 10.6,
+      "rdStaffRatioY3": 10.4,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -577,6 +976,27 @@
       "name": "朱霞",
       "phone": "15800007928",
       "email": "朱@楚天.com"
+    },
+    "certifiedYear": 2022,
+    "certNo": "GR20224201000020",
+    "expiryYear": 2025,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.8,
+      "rdExpenseRatioY2": 8.9,
+      "rdExpenseRatioY3": 8.2,
+      "hiTechRevenueRatioY1": 73.5,
+      "hiTechRevenueRatioY2": 73.2,
+      "hiTechRevenueRatioY3": 70.3,
+      "rdStaffRatioY1": 27.3,
+      "rdStaffRatioY2": 28.9,
+      "rdStaffRatioY3": 27.9,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -606,6 +1026,27 @@
       "name": "徐静",
       "phone": "15000005896",
       "email": "徐@荆楚.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000021",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.2,
+      "rdExpenseRatioY2": 6.5,
+      "rdExpenseRatioY3": 6.5,
+      "hiTechRevenueRatioY1": 64.8,
+      "hiTechRevenueRatioY2": 64.4,
+      "hiTechRevenueRatioY3": 64.7,
+      "rdStaffRatioY1": 17.7,
+      "rdStaffRatioY2": 17.5,
+      "rdStaffRatioY3": 17.7,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -635,6 +1076,27 @@
       "name": "陈军",
       "phone": "15000009046",
       "email": "陈@楚天.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000022",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.9,
+      "rdExpenseRatioY2": 5.1,
+      "rdExpenseRatioY3": 5.2,
+      "hiTechRevenueRatioY1": 59.9,
+      "hiTechRevenueRatioY2": 57.9,
+      "hiTechRevenueRatioY3": 58.5,
+      "rdStaffRatioY1": 13.8,
+      "rdStaffRatioY2": 13.2,
+      "rdStaffRatioY3": 12.8,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -664,6 +1126,27 @@
       "name": "赵娜",
       "phone": "15000008987",
       "email": "赵@楚天.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000023",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.6,
+      "rdExpenseRatioY2": 4.3,
+      "rdExpenseRatioY3": 4,
+      "hiTechRevenueRatioY1": 50.6,
+      "hiTechRevenueRatioY2": 52,
+      "hiTechRevenueRatioY3": 52.5,
+      "rdStaffRatioY1": 11.6,
+      "rdStaffRatioY2": 11.4,
+      "rdStaffRatioY3": 10.5,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -693,6 +1176,27 @@
       "name": "张芳",
       "phone": "15100007562",
       "email": "张@东湖.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000024",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8,
+      "rdExpenseRatioY2": 8.6,
+      "rdExpenseRatioY3": 8.4,
+      "hiTechRevenueRatioY1": 73.9,
+      "hiTechRevenueRatioY2": 71,
+      "hiTechRevenueRatioY3": 70.6,
+      "rdStaffRatioY1": 28.6,
+      "rdStaffRatioY2": 28.1,
+      "rdStaffRatioY3": 27.4,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -722,6 +1226,27 @@
       "name": "林敏",
       "phone": "15000001621",
       "email": "林@江城.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000025",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.3,
+      "rdExpenseRatioY2": 6.2,
+      "rdExpenseRatioY3": 6.8,
+      "hiTechRevenueRatioY1": 64.4,
+      "hiTechRevenueRatioY2": 64.8,
+      "hiTechRevenueRatioY3": 63.8,
+      "rdStaffRatioY1": 17.8,
+      "rdStaffRatioY2": 18.3,
+      "rdStaffRatioY3": 18,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -751,6 +1276,27 @@
       "name": "黄超",
       "phone": "15800001923",
       "email": "黄@湖北.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000026",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5,
+      "rdExpenseRatioY2": 4.8,
+      "rdExpenseRatioY3": 5.1,
+      "hiTechRevenueRatioY1": 58,
+      "hiTechRevenueRatioY2": 59.3,
+      "hiTechRevenueRatioY3": 58.3,
+      "rdStaffRatioY1": 12.6,
+      "rdStaffRatioY2": 13,
+      "rdStaffRatioY3": 12.9,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -780,6 +1326,27 @@
       "name": "朱磊",
       "phone": "15100004076",
       "email": "朱@荆楚.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000027",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.2,
+      "rdExpenseRatioY2": 4,
+      "rdExpenseRatioY3": 4.3,
+      "hiTechRevenueRatioY1": 52.7,
+      "hiTechRevenueRatioY2": 51.2,
+      "hiTechRevenueRatioY3": 52.8,
+      "rdStaffRatioY1": 11.2,
+      "rdStaffRatioY2": 10.9,
+      "rdStaffRatioY3": 11.6,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -809,6 +1376,27 @@
       "name": "何涛",
       "phone": "15800006261",
       "email": "何@湖北.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000028",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.4,
+      "rdExpenseRatioY2": 8.4,
+      "rdExpenseRatioY3": 8.3,
+      "hiTechRevenueRatioY1": 70.8,
+      "hiTechRevenueRatioY2": 72.8,
+      "hiTechRevenueRatioY3": 72,
+      "rdStaffRatioY1": 28.8,
+      "rdStaffRatioY2": 27.6,
+      "rdStaffRatioY3": 28.1,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -838,6 +1426,27 @@
       "name": "何超",
       "phone": "15100007287",
       "email": "何@湖北.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000029",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.6,
+      "rdExpenseRatioY2": 6.4,
+      "rdExpenseRatioY3": 6.5,
+      "hiTechRevenueRatioY1": 63.4,
+      "hiTechRevenueRatioY2": 66,
+      "hiTechRevenueRatioY3": 63.6,
+      "rdStaffRatioY1": 17.5,
+      "rdStaffRatioY2": 18.7,
+      "rdStaffRatioY3": 17.4,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -867,6 +1476,27 @@
       "name": "赵强",
       "phone": "15100002306",
       "email": "赵@江城.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000030",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.6,
+      "rdExpenseRatioY2": 5.6,
+      "rdExpenseRatioY3": 5.5,
+      "hiTechRevenueRatioY1": 59.1,
+      "hiTechRevenueRatioY2": 59.5,
+      "hiTechRevenueRatioY3": 57.6,
+      "rdStaffRatioY1": 13.9,
+      "rdStaffRatioY2": 13.6,
+      "rdStaffRatioY3": 13.5,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -896,6 +1526,27 @@
       "name": "何艳",
       "phone": "13800006808",
       "email": "何@东湖.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000031",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 3.6,
+      "rdExpenseRatioY2": 4.5,
+      "rdExpenseRatioY3": 4,
+      "hiTechRevenueRatioY1": 54,
+      "hiTechRevenueRatioY2": 51.3,
+      "hiTechRevenueRatioY3": 51.8,
+      "rdStaffRatioY1": 11.9,
+      "rdStaffRatioY2": 10.8,
+      "rdStaffRatioY3": 10.2,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -925,6 +1576,27 @@
       "name": "陈明",
       "phone": "18600002148",
       "email": "陈@荆楚.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000032",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8,
+      "rdExpenseRatioY2": 8.5,
+      "rdExpenseRatioY3": 8.7,
+      "hiTechRevenueRatioY1": 70.5,
+      "hiTechRevenueRatioY2": 72.3,
+      "hiTechRevenueRatioY3": 71.5,
+      "rdStaffRatioY1": 28.2,
+      "rdStaffRatioY2": 27.6,
+      "rdStaffRatioY3": 28.9,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -954,6 +1626,27 @@
       "name": "何洋",
       "phone": "18200001592",
       "email": "何@荆楚.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000033",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.3,
+      "rdExpenseRatioY2": 6.5,
+      "rdExpenseRatioY3": 6.2,
+      "hiTechRevenueRatioY1": 63.2,
+      "hiTechRevenueRatioY2": 63.9,
+      "hiTechRevenueRatioY3": 65.6,
+      "rdStaffRatioY1": 17,
+      "rdStaffRatioY2": 17.7,
+      "rdStaffRatioY3": 17.3,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -983,6 +1676,27 @@
       "name": "吴明",
       "phone": "18200007639",
       "email": "吴@荆楚.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000034",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5,
+      "rdExpenseRatioY2": 5,
+      "rdExpenseRatioY3": 5.3,
+      "hiTechRevenueRatioY1": 56.3,
+      "hiTechRevenueRatioY2": 60,
+      "hiTechRevenueRatioY3": 56.2,
+      "rdStaffRatioY1": 12.4,
+      "rdStaffRatioY2": 12.4,
+      "rdStaffRatioY3": 13.3,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1012,6 +1726,27 @@
       "name": "刘霞",
       "phone": "13900005124",
       "email": "刘@汉水.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000035",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.1,
+      "rdExpenseRatioY2": 3.7,
+      "rdExpenseRatioY3": 4.2,
+      "hiTechRevenueRatioY1": 53.9,
+      "hiTechRevenueRatioY2": 52.1,
+      "hiTechRevenueRatioY3": 51,
+      "rdStaffRatioY1": 12,
+      "rdStaffRatioY2": 10.1,
+      "rdStaffRatioY3": 10.9,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1041,6 +1776,27 @@
       "name": "周强",
       "phone": "18600006664",
       "email": "周@汉水.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000036",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.8,
+      "rdExpenseRatioY2": 8.2,
+      "rdExpenseRatioY3": 8.4,
+      "hiTechRevenueRatioY1": 71,
+      "hiTechRevenueRatioY2": 73.4,
+      "hiTechRevenueRatioY3": 72.3,
+      "rdStaffRatioY1": 28.9,
+      "rdStaffRatioY2": 27.5,
+      "rdStaffRatioY3": 28.4,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1070,6 +1826,27 @@
       "name": "杨秀英",
       "phone": "15800009349",
       "email": "杨@武汉.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000037",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.8,
+      "rdExpenseRatioY2": 6.6,
+      "rdExpenseRatioY3": 6.6,
+      "hiTechRevenueRatioY1": 63.6,
+      "hiTechRevenueRatioY2": 65.2,
+      "hiTechRevenueRatioY3": 65.2,
+      "rdStaffRatioY1": 17.6,
+      "rdStaffRatioY2": 18.1,
+      "rdStaffRatioY3": 18.7,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1099,6 +1876,27 @@
       "name": "罗艳",
       "phone": "18200003875",
       "email": "罗@荆楚.com"
+    },
+    "certifiedYear": 2023,
+    "certNo": "GR20234201000038",
+    "expiryYear": 2026,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.8,
+      "rdExpenseRatioY2": 5,
+      "rdExpenseRatioY3": 5.3,
+      "hiTechRevenueRatioY1": 58.1,
+      "hiTechRevenueRatioY2": 56.8,
+      "hiTechRevenueRatioY3": 59.1,
+      "rdStaffRatioY1": 12.5,
+      "rdStaffRatioY2": 12.1,
+      "rdStaffRatioY3": 13.2,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1128,6 +1926,27 @@
       "name": "赵敏",
       "phone": "15000007904",
       "email": "赵@湖北.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000039",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 3.7,
+      "rdExpenseRatioY2": 4.2,
+      "rdExpenseRatioY3": 4.2,
+      "hiTechRevenueRatioY1": 50.8,
+      "hiTechRevenueRatioY2": 50.3,
+      "hiTechRevenueRatioY3": 52.3,
+      "rdStaffRatioY1": 10.1,
+      "rdStaffRatioY2": 11.8,
+      "rdStaffRatioY3": 10.6,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1157,6 +1976,27 @@
       "name": "郭伟",
       "phone": "13800004377",
       "email": "郭@东湖.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000040",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.7,
+      "rdExpenseRatioY2": 8.7,
+      "rdExpenseRatioY3": 8.3,
+      "hiTechRevenueRatioY1": 72.4,
+      "hiTechRevenueRatioY2": 73,
+      "hiTechRevenueRatioY3": 71.2,
+      "rdStaffRatioY1": 27.8,
+      "rdStaffRatioY2": 28.9,
+      "rdStaffRatioY3": 27.3,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1186,6 +2026,27 @@
       "name": "林伟",
       "phone": "15000004030",
       "email": "林@汉水.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000041",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.1,
+      "rdExpenseRatioY2": 6.3,
+      "rdExpenseRatioY3": 6.4,
+      "hiTechRevenueRatioY1": 62.7,
+      "hiTechRevenueRatioY2": 65.6,
+      "hiTechRevenueRatioY3": 64.9,
+      "rdStaffRatioY1": 17.3,
+      "rdStaffRatioY2": 17.3,
+      "rdStaffRatioY3": 18.3,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1215,6 +2076,27 @@
       "name": "胡伟",
       "phone": "18200004775",
       "email": "胡@江城.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000042",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.2,
+      "rdExpenseRatioY2": 5.1,
+      "rdExpenseRatioY3": 5.2,
+      "hiTechRevenueRatioY1": 58.2,
+      "hiTechRevenueRatioY2": 58.2,
+      "hiTechRevenueRatioY3": 57.5,
+      "rdStaffRatioY1": 12.5,
+      "rdStaffRatioY2": 13.5,
+      "rdStaffRatioY3": 13.2,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1244,6 +2126,27 @@
       "name": "张娜",
       "phone": "13900008070",
       "email": "张@武汉.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000043",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.4,
+      "rdExpenseRatioY2": 3.9,
+      "rdExpenseRatioY3": 3.9,
+      "hiTechRevenueRatioY1": 51.3,
+      "hiTechRevenueRatioY2": 52.6,
+      "hiTechRevenueRatioY3": 52.9,
+      "rdStaffRatioY1": 11.5,
+      "rdStaffRatioY2": 11.2,
+      "rdStaffRatioY3": 11.1,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1273,6 +2176,27 @@
       "name": "何霞",
       "phone": "15000003612",
       "email": "何@湖北.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000044",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.8,
+      "rdExpenseRatioY2": 8.5,
+      "rdExpenseRatioY3": 8.6,
+      "hiTechRevenueRatioY1": 73.9,
+      "hiTechRevenueRatioY2": 70.9,
+      "hiTechRevenueRatioY3": 70.7,
+      "rdStaffRatioY1": 27.2,
+      "rdStaffRatioY2": 27.7,
+      "rdStaffRatioY3": 27,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1302,6 +2226,27 @@
       "name": "徐勇",
       "phone": "18200001489",
       "email": "徐@江城.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000045",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 7,
+      "rdExpenseRatioY2": 6.5,
+      "rdExpenseRatioY3": 6.3,
+      "hiTechRevenueRatioY1": 64.6,
+      "hiTechRevenueRatioY2": 64.2,
+      "hiTechRevenueRatioY3": 64.6,
+      "rdStaffRatioY1": 17.8,
+      "rdStaffRatioY2": 18,
+      "rdStaffRatioY3": 18.5,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1331,6 +2276,27 @@
       "name": "罗敏",
       "phone": "13800009975",
       "email": "罗@江城.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000046",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.5,
+      "rdExpenseRatioY2": 5.6,
+      "rdExpenseRatioY3": 4.9,
+      "hiTechRevenueRatioY1": 58.8,
+      "hiTechRevenueRatioY2": 59.3,
+      "hiTechRevenueRatioY3": 59.3,
+      "rdStaffRatioY1": 12.8,
+      "rdStaffRatioY2": 13.6,
+      "rdStaffRatioY3": 12.7,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1360,6 +2326,27 @@
       "name": "张芳",
       "phone": "13900001658",
       "email": "张@湖北.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000047",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 3.8,
+      "rdExpenseRatioY2": 4.2,
+      "rdExpenseRatioY3": 4.3,
+      "hiTechRevenueRatioY1": 53.7,
+      "hiTechRevenueRatioY2": 50,
+      "hiTechRevenueRatioY3": 52.2,
+      "rdStaffRatioY1": 10.7,
+      "rdStaffRatioY2": 10.4,
+      "rdStaffRatioY3": 11.5,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1389,6 +2376,27 @@
       "name": "胡丽",
       "phone": "15100007599",
       "email": "胡@东湖.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000048",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.3,
+      "rdExpenseRatioY2": 8.9,
+      "rdExpenseRatioY3": 8.4,
+      "hiTechRevenueRatioY1": 71.4,
+      "hiTechRevenueRatioY2": 72.8,
+      "hiTechRevenueRatioY3": 70,
+      "rdStaffRatioY1": 28.6,
+      "rdStaffRatioY2": 28.1,
+      "rdStaffRatioY3": 28.3,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1418,6 +2426,27 @@
       "name": "高超",
       "phone": "15000003022",
       "email": "高@汉水.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000049",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.5,
+      "rdExpenseRatioY2": 6.2,
+      "rdExpenseRatioY3": 6.7,
+      "hiTechRevenueRatioY1": 64.5,
+      "hiTechRevenueRatioY2": 62.5,
+      "hiTechRevenueRatioY3": 63.3,
+      "rdStaffRatioY1": 17.3,
+      "rdStaffRatioY2": 18,
+      "rdStaffRatioY3": 17.6,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1447,6 +2476,27 @@
       "name": "张明",
       "phone": "15000009645",
       "email": "张@荆楚.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000050",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.6,
+      "rdExpenseRatioY2": 5.1,
+      "rdExpenseRatioY3": 5.5,
+      "hiTechRevenueRatioY1": 56.3,
+      "hiTechRevenueRatioY2": 58.2,
+      "hiTechRevenueRatioY3": 57.5,
+      "rdStaffRatioY1": 12.2,
+      "rdStaffRatioY2": 12.9,
+      "rdStaffRatioY3": 13.1,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1476,6 +2526,27 @@
       "name": "徐磊",
       "phone": "15100005647",
       "email": "徐@武汉.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000051",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 3.7,
+      "rdExpenseRatioY2": 3.8,
+      "rdExpenseRatioY3": 4.4,
+      "hiTechRevenueRatioY1": 53.7,
+      "hiTechRevenueRatioY2": 52.4,
+      "hiTechRevenueRatioY3": 54,
+      "rdStaffRatioY1": 11.9,
+      "rdStaffRatioY2": 10.6,
+      "rdStaffRatioY3": 10.3,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1505,6 +2576,27 @@
       "name": "王秀兰",
       "phone": "13800008092",
       "email": "王@荆楚.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000052",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.4,
+      "rdExpenseRatioY2": 8.6,
+      "rdExpenseRatioY3": 8.4,
+      "hiTechRevenueRatioY1": 70.7,
+      "hiTechRevenueRatioY2": 71.7,
+      "hiTechRevenueRatioY3": 70.3,
+      "rdStaffRatioY1": 27.4,
+      "rdStaffRatioY2": 27.4,
+      "rdStaffRatioY3": 27.4,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1534,6 +2626,27 @@
       "name": "周静",
       "phone": "15100006136",
       "email": "周@武汉.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000053",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.1,
+      "rdExpenseRatioY2": 6.5,
+      "rdExpenseRatioY3": 6.7,
+      "hiTechRevenueRatioY1": 65.3,
+      "hiTechRevenueRatioY2": 62.3,
+      "hiTechRevenueRatioY3": 65.4,
+      "rdStaffRatioY1": 18.9,
+      "rdStaffRatioY2": 17.5,
+      "rdStaffRatioY3": 18.8,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1563,6 +2676,27 @@
       "name": "张杰",
       "phone": "13900003813",
       "email": "张@东湖.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000054",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.9,
+      "rdExpenseRatioY2": 5,
+      "rdExpenseRatioY3": 5.4,
+      "hiTechRevenueRatioY1": 59.1,
+      "hiTechRevenueRatioY2": 59.9,
+      "hiTechRevenueRatioY3": 58,
+      "rdStaffRatioY1": 13.6,
+      "rdStaffRatioY2": 13.2,
+      "rdStaffRatioY3": 13,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1592,6 +2726,27 @@
       "name": "杨超",
       "phone": "13900001528",
       "email": "杨@湖北.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000055",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.4,
+      "rdExpenseRatioY2": 4.4,
+      "rdExpenseRatioY3": 4.2,
+      "hiTechRevenueRatioY1": 53.8,
+      "hiTechRevenueRatioY2": 53.5,
+      "hiTechRevenueRatioY3": 53.1,
+      "rdStaffRatioY1": 10.9,
+      "rdStaffRatioY2": 11,
+      "rdStaffRatioY3": 10.7,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1621,6 +2776,27 @@
       "name": "杨伟",
       "phone": "18200006674",
       "email": "杨@楚天.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000056",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.6,
+      "rdExpenseRatioY2": 8.1,
+      "rdExpenseRatioY3": 8.3,
+      "hiTechRevenueRatioY1": 71.7,
+      "hiTechRevenueRatioY2": 71.9,
+      "hiTechRevenueRatioY3": 72,
+      "rdStaffRatioY1": 27.5,
+      "rdStaffRatioY2": 28.2,
+      "rdStaffRatioY3": 28.9,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1650,6 +2826,27 @@
       "name": "罗霞",
       "phone": "15800006695",
       "email": "罗@汉水.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000057",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 6.8,
+      "rdExpenseRatioY2": 6.3,
+      "rdExpenseRatioY3": 6.4,
+      "hiTechRevenueRatioY1": 65.3,
+      "hiTechRevenueRatioY2": 64.8,
+      "hiTechRevenueRatioY3": 65.9,
+      "rdStaffRatioY1": 18.5,
+      "rdStaffRatioY2": 17.3,
+      "rdStaffRatioY3": 17.8,
+      "newPatentsY1": 2,
+      "newPatentsY2": 3,
+      "newPatentsY3": 4,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1679,6 +2876,27 @@
       "name": "高军",
       "phone": "13800006684",
       "email": "高@湖北.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000058",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.5,
+      "rdExpenseRatioY2": 4.9,
+      "rdExpenseRatioY3": 5.2,
+      "hiTechRevenueRatioY1": 59.8,
+      "hiTechRevenueRatioY2": 59.3,
+      "hiTechRevenueRatioY3": 57.6,
+      "rdStaffRatioY1": 12.1,
+      "rdStaffRatioY2": 13.6,
+      "rdStaffRatioY3": 13.1,
+      "newPatentsY1": 1,
+      "newPatentsY2": 2,
+      "newPatentsY3": 2,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {
@@ -1708,6 +2926,27 @@
       "name": "赵勇",
       "phone": "15000003915",
       "email": "赵@楚天.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000059",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 4.3,
+      "rdExpenseRatioY2": 3.8,
+      "rdExpenseRatioY3": 3.9,
+      "hiTechRevenueRatioY1": 52.7,
+      "hiTechRevenueRatioY2": 51,
+      "hiTechRevenueRatioY3": 53.7,
+      "rdStaffRatioY1": 11.2,
+      "rdStaffRatioY2": 11,
+      "rdStaffRatioY3": 10.8,
+      "newPatentsY1": 0,
+      "newPatentsY2": 1,
+      "newPatentsY3": 1,
+      "annualAuditPassedY1": false,
+      "annualAuditPassedY2": false,
+      "annualAuditPassedY3": false,
+      "complianceClean": true
     }
   },
   {
@@ -1737,6 +2976,27 @@
       "name": "朱娜",
       "phone": "15100008177",
       "email": "朱@楚天.com"
+    },
+    "certifiedYear": 2024,
+    "certNo": "GR20244201000060",
+    "expiryYear": 2027,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 8.1,
+      "rdExpenseRatioY2": 8.1,
+      "rdExpenseRatioY3": 8.5,
+      "hiTechRevenueRatioY1": 71.1,
+      "hiTechRevenueRatioY2": 71.4,
+      "hiTechRevenueRatioY3": 74,
+      "rdStaffRatioY1": 28.7,
+      "rdStaffRatioY2": 28.2,
+      "rdStaffRatioY3": 28.8,
+      "newPatentsY1": 4,
+      "newPatentsY2": 5,
+      "newPatentsY3": 6,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
     }
   },
   {

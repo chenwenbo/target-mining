@@ -132,3 +132,129 @@ export interface Task {
   notes: string;
   tier: Tier;
 }
+
+// ─── 复审状态 ────────────────────────────────────────────────────
+export type RenewalStatus =
+  | "overdue"     // 已过期未完成复审
+  | "critical"    // ≤6个月到期（紧急）
+  | "approaching" // 6-12个月（预警）
+  | "active";     // >12个月，无需立即行动
+
+// ─── 三年期经营指标（复审核心数据）──────────────────────────────
+export interface ThreeYearMetrics {
+  rdExpenseRatioY1: number;        // 研发费用占收入比(%)
+  rdExpenseRatioY2: number;
+  rdExpenseRatioY3: number;
+  hiTechRevenueRatioY1: number;   // 高新产品收入占比(%)
+  hiTechRevenueRatioY2: number;
+  hiTechRevenueRatioY3: number;
+  rdStaffRatioY1: number;          // 研发人员占比(%)
+  rdStaffRatioY2: number;
+  rdStaffRatioY3: number;
+  newPatentsY1: number;            // 三年内新增专利数
+  newPatentsY2: number;
+  newPatentsY3: number;
+  annualAuditPassedY1: boolean;
+  annualAuditPassedY2: boolean;
+  annualAuditPassedY3: boolean;
+  complianceClean: boolean;        // 近3年无重大违规
+}
+
+// ─── 已认定高企（复审扩展类型）──────────────────────────────────
+export interface CertifiedCompany extends Company {
+  certifiedYear: number;           // 最近一次认定年份
+  certNo: string;                  // 证书编号
+  expiryYear: number;              // 到期年份 = certifiedYear + 3
+  threeYearMetrics: ThreeYearMetrics;
+  renewalStatus?: RenewalStatus;   // 运行时计算
+}
+
+// ─── 复审准备度评分结果 ──────────────────────────────────────────
+export interface RenewalReadinessScore {
+  total: number;
+  rdRatioScore: number;            // 研发投入比(0-30分)
+  hiTechRevenueScore: number;      // 高新收入比(0-30分)
+  ipGrowthScore: number;           // 知识产权增长(0-20分)
+  complianceScore: number;         // 合规与审计(0-20分)
+  gaps: RenewalGap[];
+  readyToRenew: boolean;           // total≥70 且无紧迫缺项
+}
+
+export interface RenewalGap {
+  criterion: string;
+  currentValue: string;
+  requiredValue: string;
+  urgent: boolean;
+  suggestion: string;
+}
+
+// ─── 走访摸排（移动端）──────────────────────────────────────────
+
+export type VisitorRole = "street_officer" | "tech_officer";
+
+export interface Visitor {
+  id: string;
+  name: string;
+  role: VisitorRole;
+  street: string | null; // 街道办同学有所属街道
+  dept: string;
+}
+
+export type VisitMethod = "in_person" | "phone" | "online_meeting";
+export type WillingnessLevel = "strong" | "moderate" | "hesitant" | "refused" | "unreachable";
+
+export interface VisitRecord {
+  id: string;
+  taskId: string;
+  companyId: string;
+  visitorId: string;
+  visitorName: string;
+
+  visitMethod: VisitMethod;
+  visitedAt: string;
+  visitDurationMinutes?: number;
+  contactReached: boolean;
+  actualContactName?: string;
+  actualContactTitle?: string;
+  actualContactPhone?: string;
+
+  willingness: WillingnessLevel;
+  willingnessNotes?: string;
+
+  fieldVerified: {
+    employeeCount?: number;
+    rdEmployeeCount?: number;
+    annualRevenue?: "under_500w" | "500w_2000w" | "2000w_1yi" | "above_1yi";
+    rdExpenseRatio?: "under_3pct" | "3_5pct" | "5_10pct" | "above_10pct";
+    rdExpenseSource?: "self_invested" | "government_grant" | "both" | "none";
+    hasAccountingFirm?: boolean | null;
+    hasTechDept?: boolean | null;
+    mainProductDesc?: string;
+  };
+
+  acknowledgedGaps: string[];
+  keyObstacles?: string;
+  followUpDate?: string;
+  companyCommitments?: string;
+  nextSteps: string[];
+  notes?: string;
+  submittedAt: string;
+}
+
+// ─── 复审任务 ────────────────────────────────────────────────────
+export type RenewalTaskStatus = "pending" | "in_progress" | "submitted" | "approved" | "rejected";
+
+export interface RenewalTask {
+  id: string;
+  companyId: string;
+  companyName: string;
+  certNo: string;
+  expiryYear: number;
+  assignee: string;
+  street: Street;
+  status: RenewalTaskStatus;
+  createdAt: string;
+  deadline: string;
+  notes: string;
+  urgency: RenewalStatus;
+}

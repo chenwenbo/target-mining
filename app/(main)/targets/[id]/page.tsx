@@ -1,9 +1,13 @@
 "use client";
-import { use, useMemo } from "react";
+import { use, useMemo, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Building2, Phone, Mail, MapPin, CalendarDays, DollarSign, Users, CheckCircle2, XCircle, AlertTriangle, Send } from "lucide-react";
+import {
+  ArrowLeft, Building2, CheckCircle2, XCircle, AlertTriangle, Send,
+} from "lucide-react";
 import { getCompanyById, getCertifiedBenchmarks } from "@/lib/mock-data";
+import { getCertifiedCompanyById } from "@/lib/renewal-data";
+import TabRenewalAnalysis from "./TabRenewalAnalysis";
 import { scoreCompany } from "@/lib/scoring";
 import { useWeightsStore } from "@/store/weights";
 import TierBadge from "@/components/ui/TierBadge";
@@ -11,7 +15,7 @@ import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { cn } from "@/lib/cn";
 import type { ScoredCompany } from "@/lib/types";
 
-// ─── Radar chart ─────────────────────────────────────────────
+// ─── Radar chart ──────────────────────────────────────────────
 function RadarChart({ scored }: { scored: ScoredCompany }) {
   const dims = scored.score.dimensions;
   const option = {
@@ -136,9 +140,7 @@ function BenchmarkCards({ company, scored }: { company: ReturnType<typeof getCom
   return (
     <div className="grid grid-cols-3 gap-3">
       {benchmarks.map((b) => {
-        const similarity = Math.round(
-          70 + Math.random() * 20 // simplified; real version would use cosine similarity
-        );
+        const similarity = Math.round(70 + Math.random() * 20);
         return (
           <div key={b.id} className="p-4 bg-[#f7f8fa] border border-[#e5e7eb] rounded-lg">
             <div className="flex items-center justify-between mb-2">
@@ -159,20 +161,522 @@ function BenchmarkCards({ company, scored }: { company: ReturnType<typeof getCom
   );
 }
 
+// ─── Tab: 基本信息 ────────────────────────────────────────────
+function TabBasicInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
+  const scale = company.employees > 100 ? "中型" : company.employees > 20 ? "小型" : "XS(微型)";
+
+  const shareholders = [
+    { name: company.contact.name, type: "自然人", ratio: "60%", subscribeDate: company.establishedAt, subscribeAmount: String(Math.round(company.registeredCapital * 0.6)) },
+    { name: `${company.contact.name.slice(0, 1)}某某`, type: "自然人", ratio: "40%", subscribeDate: company.establishedAt, subscribeAmount: String(Math.round(company.registeredCapital * 0.4)) },
+  ];
+
+  const formerNames = [
+    { name: `武汉${company.name.slice(2, 5)}信息科技有限公司`, date: company.establishedAt.slice(0, 7).replace("-", "-") + "-01" },
+  ];
+
+  const changeRecords = [
+    { date: "2023-06-15", item: "注册资本变更", before: `${Math.round(company.registeredCapital * 0.6)}万元`, after: `${company.registeredCapital}万元` },
+    { date: "2022-11-08", item: "企业地址变更", before: `${company.street}（原址）`, after: company.street },
+    { date: company.establishedAt.slice(0, 4) + "-12-01", item: "法定代表人变更", before: `${company.contact.name.slice(0, 1)}某某`, after: company.contact.name },
+  ];
+
+  const rows: [string, string, string, string][] = [
+    ["注册资本", `${company.registeredCapital}万元`, "经营状态", "存续（在营、开业、在册）"],
+    ["统一社会信用代码", company.creditCode, "工商注册号", "—"],
+    ["法人", company.contact.name, "组织机构代码", company.creditCode.slice(8, 17)],
+    ["成立时间", company.establishedAt, "企业规模", scale],
+    ["实缴资本", "暂无", "所属行业", company.industry],
+    ["公司类型", "有限责任公司（自然人投资或控股）", "登记机关", "暂无"],
+    ["办公地址", "—", "注册地址", `${company.street}`],
+  ];
+
+  return (
+    <div className="space-y-6">
+      {/* 工商信息 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">工商信息</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-sm">
+            <tbody>
+              {rows.map(([k1, v1, k2, v2], i) => (
+                <tr key={i} className={i % 2 === 1 ? "bg-[#f7f8fa]" : "bg-white"}>
+                  <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs">{k1}</td>
+                  <td className="px-4 py-3 text-[#0f172a] text-xs border-r border-[#e5e7eb]">{v1}</td>
+                  <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs">{k2}</td>
+                  <td className="px-4 py-3 text-[#0f172a] text-xs">{v2}</td>
+                </tr>
+              ))}
+              {/* 经营范围 — full width */}
+              <tr className="bg-[#f7f8fa]">
+                <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs align-top">经营范围</td>
+                <td colSpan={3} className="px-4 py-3 text-[#0f172a] text-xs leading-relaxed">
+                  {company.industry}技术研发；软件开发；计算机软硬件研发及批零兼营；物联网技术服务。（涉及许可经营项目，应取得相关部门许可后方可经营）
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 股东信息 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">股东信息</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["投资人", "投资人类型", "出资比例", "认缴时间", "认缴出资额(万元)", "实缴时间"].map((h) => (
+                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {shareholders.map((s, i) => (
+                <tr key={i} className="hover:bg-[#f7f8fa]">
+                  <td className="px-4 py-3 text-[#0f172a] font-medium">{s.name}</td>
+                  <td className="px-4 py-3 text-[#475569]">{s.type}</td>
+                  <td className="px-4 py-3 text-[#475569]">{s.ratio}</td>
+                  <td className="px-4 py-3 text-[#475569]">{s.subscribeDate}</td>
+                  <td className="px-4 py-3 text-[#475569]">{s.subscribeAmount}</td>
+                  <td className="px-4 py-3 text-[#94a3b8]">—</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 企业曾用名 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">企业曾用名</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "曾用名", "变更日期"].map((h) => (
+                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {formerNames.map((fn, i) => (
+                <tr key={i} className="hover:bg-[#f7f8fa]">
+                  <td className="px-4 py-3 text-[#94a3b8]">{i + 1}</td>
+                  <td className="px-4 py-3 text-[#0f172a]">{fn.name}</td>
+                  <td className="px-4 py-3 text-[#475569]">{fn.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 变更记录 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">变更记录</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "变更日期", "变更项目", "变更前", "变更后"].map((h) => (
+                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {changeRecords.map((r, i) => (
+                <tr key={i} className="hover:bg-[#f7f8fa]">
+                  <td className="px-4 py-3 text-[#94a3b8]">{i + 1}</td>
+                  <td className="px-4 py-3 text-[#475569] whitespace-nowrap">{r.date}</td>
+                  <td className="px-4 py-3 text-[#0f172a] whitespace-nowrap">{r.item}</td>
+                  <td className="px-4 py-3 text-[#475569] max-w-[220px]">{r.before}</td>
+                  <td className="px-4 py-3 text-[#0f172a] max-w-[220px]">{r.after}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Tab: 知识产权信息 ────────────────────────────────────────
+function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
+  const { patents, software } = company;
+  const totalPatents = patents.invention + patents.utility + patents.design;
+
+  const ipStats = [
+    {
+      title: "发明专利",
+      rows: [
+        ["前三年授权数", patents.invention > 0 ? Math.max(0, patents.invention - 1) : 0],
+        ["当年授权数", patents.invention > 0 ? 1 : 0],
+        ["申请中", Math.floor(patents.invention * 0.3)],
+        ["其他年份授权数", 0],
+      ],
+    },
+    {
+      title: "二类知识产权",
+      rows: [
+        ["前三年授权数", patents.utility > 0 ? patents.utility - 1 : 0],
+        ["当年授权数", patents.utility > 0 ? 1 : 0],
+        ["申请中", Math.floor(patents.utility * 0.2)],
+        ["其他年份授权数", 0],
+      ],
+    },
+    {
+      title: "特殊类专利",
+      rows: [
+        ["前三年授权数", 0],
+        ["当年授权数", 0],
+        ["申请中", 0],
+        ["其他年份授权数", 0],
+      ],
+    },
+  ];
+
+  // generate mock patent rows
+  const patentRows = Array.from({ length: Math.min(totalPatents, 5) }, (_, i) => ({
+    seq: i + 1,
+    appNo: `202${2 + (i % 3)}${company.creditCode.slice(2, 8)}${String(i + 1).padStart(4, "0")}`,
+    appDate: `202${2 + (i % 3)}-${String((i % 12) + 1).padStart(2, "0")}-15`,
+    grantDate: i < 3 ? `202${3 + (i % 2)}-06-20` : "—",
+    title: `${company.industry}相关专利（${i + 1}）`,
+    pubNo: `CN${company.creditCode.slice(2, 12)}${i + 1}A`,
+    type: i === 0 ? "发明专利" : i < 3 ? "实用新型" : "外观设计",
+    status: i < 3 ? "有效" : "审中",
+  }));
+
+  // generate mock trademark rows
+  const trademarkCount = Math.max(1, Math.floor((patents.invention + patents.utility) / 4));
+  const trademarkRows = Array.from({ length: Math.min(trademarkCount, 4) }, (_, i) => ({
+    seq: i + 1,
+    regNo: `${62000000 + parseInt(company.creditCode.slice(4, 8)) + i * 317}`,
+    name: `${company.name.slice(0, 2)}${["智联", "云享", "数创", "科芯"][i % 4]}`,
+    applyDate: `202${1 + (i % 3)}-${String((i * 3 + 4) % 12 + 1).padStart(2, "0")}-${String((i * 7 + 10) % 28 + 1).padStart(2, "0")}`,
+    status: i < trademarkCount - 1 ? "已注册" : "审中",
+  }));
+
+  // generate mock website rows
+  const domainBase = company.name.slice(0, 2).split("").map(c => c.charCodeAt(0).toString(16)).join("").slice(0, 6);
+  const websiteRows = [
+    {
+      seq: 1,
+      approveDate: `${parseInt(company.establishedAt.slice(0, 4)) + 1}-06-15`,
+      siteName: `${company.name}官方网站`,
+      homepage: `www.${domainBase}tech.com`,
+      icp: `鄂ICP备${company.creditCode.slice(2, 8)}号`,
+    },
+    {
+      seq: 2,
+      approveDate: `${parseInt(company.establishedAt.slice(0, 4)) + 2}-03-20`,
+      siteName: `${company.name.slice(0, 4)}产品服务平台`,
+      homepage: `app.${domainBase}tech.com`,
+      icp: `鄂ICP备${company.creditCode.slice(2, 8)}号-2`,
+    },
+  ];
+
+  // generate mock copyright rows
+  const copyrightRows = Array.from({ length: Math.min(software, 5) }, (_, i) => ({
+    seq: i + 1,
+    approveDate: `202${2 + (i % 3)}-${String((i % 12) + 1).padStart(2, "0")}-01`,
+    fullName: `${company.name.slice(0, 4)}${["管理系统", "平台软件", "控制系统", "分析工具", "数据平台"][i % 5]}V${i + 1}.0`,
+    shortName: `${["管理系统", "平台", "控制系统", "分析工具", "数据平台"][i % 5]}`,
+    regNo: `2023SR${String(100000 + i * 1234).padStart(6, "0")}`,
+    category: "应用软件",
+    version: `V${i + 1}.0`,
+  }));
+
+  return (
+    <div className="space-y-6">
+      {/* 说明文字 */}
+      <div className="text-xs text-[#94a3b8] bg-[#f7f8fa] rounded-lg px-4 py-3 leading-relaxed">
+        知识产权来源于第三方平台，会根据近年的专利或软著申请，结合国网申请书数据，过滤出当前状态有效的知产数据显示。
+      </div>
+
+      {/* IP 统计卡 */}
+      <div className="grid grid-cols-3 gap-4">
+        {ipStats.map((stat) => (
+          <div key={stat.title} className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+            <div className="bg-[#f7f8fa] px-4 py-2 border-b border-[#e5e7eb]">
+              <span className="text-xs font-semibold text-[#0f172a]">{stat.title}</span>
+            </div>
+            <div className="divide-y divide-[#f1f5f9]">
+              {stat.rows.map(([label, val]) => (
+                <div key={label as string} className="flex items-center justify-between px-4 py-2.5">
+                  <span className="text-xs text-[#64748b]">{label}</span>
+                  <span className="text-sm font-semibold text-[#0f172a] tabular-nums">{val as number}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 专利信息 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">专利信息（共{totalPatents}条）</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "申请号", "申请日期", "授权日期", "专利名称", "申请公布号", "专利类型", "法律状态"].map((h) => (
+                  <th key={h} className="px-3 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {patentRows.length === 0 ? (
+                <tr><td colSpan={8} className="px-4 py-6 text-center text-[#94a3b8]">暂无数据</td></tr>
+              ) : patentRows.map((row) => (
+                <tr key={row.seq} className="hover:bg-[#f7f8fa]">
+                  <td className="px-3 py-2.5 text-[#94a3b8]">{row.seq}</td>
+                  <td className="px-3 py-2.5 text-blue-600 font-mono">{row.appNo}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.appDate}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.grantDate}</td>
+                  <td className="px-3 py-2.5 text-[#0f172a]">{row.title}</td>
+                  <td className="px-3 py-2.5 text-[#475569] font-mono">{row.pubNo}</td>
+                  <td className="px-3 py-2.5">
+                    <span className="px-1.5 py-0.5 bg-blue-50 text-blue-700 rounded text-[11px]">{row.type}</span>
+                  </td>
+                  <td className="px-3 py-2.5">
+                    <span className={cn("px-1.5 py-0.5 rounded text-[11px]",
+                      row.status === "有效" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
+                    )}>{row.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 著作权信息 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">著作权信息（共{software}条）</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "批准日期", "软件全称", "软件简称", "登记号", "分类号", "版本号"].map((h) => (
+                  <th key={h} className="px-3 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {copyrightRows.length === 0 ? (
+                <tr><td colSpan={7} className="px-4 py-6 text-center text-[#94a3b8]">暂无数据</td></tr>
+              ) : copyrightRows.map((row) => (
+                <tr key={row.seq} className="hover:bg-[#f7f8fa]">
+                  <td className="px-3 py-2.5 text-[#94a3b8]">{row.seq}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.approveDate}</td>
+                  <td className="px-3 py-2.5 text-[#0f172a]">{row.fullName}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.shortName}</td>
+                  <td className="px-3 py-2.5 text-blue-600 font-mono">{row.regNo}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.category}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.version}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 商标信息 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">商标信息（共{trademarkRows.length}条）</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "注册号", "图片", "商标名", "申请日期", "商标状态"].map((h) => (
+                  <th key={h} className="px-3 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {trademarkRows.map((row) => (
+                <tr key={row.seq} className="hover:bg-[#f7f8fa]">
+                  <td className="px-3 py-2.5 text-[#94a3b8]">{row.seq}</td>
+                  <td className="px-3 py-2.5 text-blue-600 font-mono">{row.regNo}</td>
+                  <td className="px-3 py-2.5">
+                    <div className="w-10 h-10 rounded bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-400 font-bold text-sm">
+                      {row.name.slice(0, 1)}
+                    </div>
+                  </td>
+                  <td className="px-3 py-2.5 text-[#0f172a] font-medium">{row.name}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.applyDate}</td>
+                  <td className="px-3 py-2.5">
+                    <span className={cn("px-1.5 py-0.5 rounded text-[11px]",
+                      row.status === "已注册" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
+                    )}>{row.status}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 网站备案 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">网站备案（共{websiteRows.length}条）</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "审核日期", "网站名称", "网站首页", "网站备案/许可证号"].map((h) => (
+                  <th key={h} className="px-3 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {websiteRows.map((row) => (
+                <tr key={row.seq} className="hover:bg-[#f7f8fa]">
+                  <td className="px-3 py-2.5 text-[#94a3b8]">{row.seq}</td>
+                  <td className="px-3 py-2.5 text-[#475569]">{row.approveDate}</td>
+                  <td className="px-3 py-2.5 text-[#0f172a]">{row.siteName}</td>
+                  <td className="px-3 py-2.5 text-blue-600">{row.homepage}</td>
+                  <td className="px-3 py-2.5 text-[#475569] font-mono">{row.icp}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Tab: 经营信息 ────────────────────────────────────────────
+function TabBusinessInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
+  const estYear = new Date(company.establishedAt).getFullYear();
+  const certs = [
+    ...(company.alreadyCertified ? [{
+      seq: 1,
+      type: "高新技术企业",
+      no: `GR${estYear + 2}${company.creditCode.slice(2, 6)}${String(Math.abs(company.name.charCodeAt(0) % 10000)).padStart(4, "0")}`,
+      issueDate: String(estYear + 2),
+      expireDate: String(estYear + 5),
+    }] : []),
+    {
+      seq: company.alreadyCertified ? 2 : 1,
+      type: "科技型中小企业",
+      no: `KX${estYear + 1}42010${company.creditCode.slice(6, 12)}`,
+      issueDate: String(estYear + 1),
+      expireDate: String(estYear + 2),
+    },
+    {
+      seq: company.alreadyCertified ? 3 : 2,
+      type: "软件企业认定证书",
+      no: `RJ${estYear + 1}42${company.creditCode.slice(4, 10)}`,
+      issueDate: `${estYear + 1}-09-01`,
+      expireDate: `${estYear + 4}-08-31`,
+    },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">资质证书</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
+                {["序号", "证书类型", "证书编号", "发证日期", "截止日期"].map((h) => (
+                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#f1f5f9]">
+              {certs.length === 0 ? (
+                <tr><td colSpan={5} className="px-4 py-6 text-center text-[#94a3b8]">暂无数据</td></tr>
+              ) : certs.map((cert) => (
+                <tr key={cert.seq} className="hover:bg-[#f7f8fa]">
+                  <td className="px-4 py-3 text-[#94a3b8]">{cert.seq}</td>
+                  <td className="px-4 py-3 text-[#0f172a]">{cert.type}</td>
+                  <td className="px-4 py-3 text-blue-600 font-mono">{cert.no}</td>
+                  <td className="px-4 py-3 text-[#475569]">{cert.issueDate}</td>
+                  <td className="px-4 py-3 text-[#475569]">{cert.expireDate}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Tab: 评估分析 ────────────────────────────────────────────
+function TabAnalysis({ company, scored }: { company: NonNullable<ReturnType<typeof getCompanyById>>; scored: ScoredCompany }) {
+  return (
+    <div className="space-y-4">
+      {/* Actions */}
+      <div className="bg-[#f7f8fa] rounded-lg p-4 border border-[#e5e7eb]">
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">操作</h3>
+        <div className="flex flex-wrap gap-2">
+          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors font-medium">
+            <Send size={13} /> 派发给街道经办人
+          </button>
+          <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
+            标记为跟进中
+          </button>
+          <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
+            加入白名单
+          </button>
+          <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
+            导出企业报告 PDF
+          </button>
+        </div>
+      </div>
+
+      {/* Radar + Rule hits */}
+      <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1.4fr" }}>
+        <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
+          <h2 className="text-sm font-semibold text-[#0f172a] mb-1">六维评估雷达</h2>
+          <p className="text-xs text-[#94a3b8] mb-3">各维度 0-100 分</p>
+          <RadarChart scored={scored} />
+        </div>
+        <div className="bg-white rounded-xl border border-[#e5e7eb] p-5 overflow-y-auto max-h-[420px]">
+          <h2 className="text-sm font-semibold text-[#0f172a] mb-1">规则命中清单</h2>
+          <p className="text-xs text-[#94a3b8] mb-4">每一分都有出处</p>
+          <RuleHitList scored={scored} />
+        </div>
+      </div>
+
+    </div>
+  );
+}
+
 // ─── Main ─────────────────────────────────────────────────────
+type Tab = "基本信息" | "知识产权信息" | "经营信息" | "复审分析" | "评估分析";
+
 export default function CompanyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { weights } = useWeightsStore();
+  const [activeTab, setActiveTab] = useState<Tab>("基本信息");
 
   const company = getCompanyById(id);
   if (!company) notFound();
+
+  const certifiedCompany = company.alreadyCertified ? getCertifiedCompanyById(id) : undefined;
+
+  const TABS: Tab[] = [
+    "基本信息",
+    "知识产权信息",
+    "经营信息",
+    ...(certifiedCompany ? ["复审分析" as Tab] : []),
+    "评估分析",
+  ];
 
   const scored = useMemo(() => ({
     ...company,
     score: scoreCompany(company, weights),
   }), [company, weights]);
 
-  const yearsSince = ((new Date("2026-01-01").getTime() - new Date(company.establishedAt).getTime()) / (1000 * 60 * 60 * 24 * 365)).toFixed(1);
+  const updateDate = "2026-02-27";
 
   return (
     <div>
@@ -185,153 +689,67 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
         <span className="text-sm text-[#475569] truncate max-w-xs">{company.name}</span>
       </div>
 
-      <div className="grid gap-5" style={{ gridTemplateColumns: "1fr 320px" }}>
-        {/* ─── Left column ─── */}
-        <div className="space-y-4">
-          {/* Header card */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-6">
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <div className="flex items-center gap-3 mb-1.5">
-                  <h1 className="text-xl font-bold text-[#0f172a]">{company.name}</h1>
-                  <TierBadge tier={scored.score.tier} showDesc />
-                </div>
-                <div className="flex items-center gap-4 text-xs text-[#94a3b8]">
-                  <span className="font-mono">{company.creditCode}</span>
-                  <span>{company.industry}</span>
-                  {company.techField && (
-                    <span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">{company.techField}</span>
-                  )}
-                </div>
-              </div>
-              <div className="text-center px-5 py-3 bg-gradient-to-b from-[#f8faff] to-[#eef3ff] border border-blue-100 rounded-xl">
-                <div className="text-4xl font-bold text-[#0f172a] tabular-nums leading-none">{scored.score.total}</div>
-                <div className="text-xs text-[#94a3b8] mt-1">综合评分</div>
-              </div>
+      {/* ─── Company Header Card ─── */}
+      <div className="bg-white rounded-xl border border-[#e5e7eb] p-6 mb-4">
+        <div className="flex items-start gap-4">
+          {/* Logo placeholder */}
+          <div className="w-16 h-16 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0">
+            <Building2 size={28} className="text-blue-400" />
+          </div>
+
+          {/* Name + meta */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 mb-1">
+              <h1 className="text-xl font-bold text-[#0f172a] truncate">{company.name}</h1>
+              <span className="text-xs text-[#94a3b8] whitespace-nowrap flex-shrink-0">
+                {updateDate} 更新
+              </span>
             </div>
-            <div className="grid grid-cols-4 gap-3 pt-4 border-t border-[#f1f5f9]">
-              {[
-                { icon: MapPin, label: "所在地", value: company.street },
-                { icon: CalendarDays, label: "成立年限", value: `${yearsSince} 年` },
-                { icon: DollarSign, label: "注册资本", value: `${company.registeredCapital} 万元` },
-                { icon: Users, label: "参保人数", value: `${company.employees} 人` },
-              ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-start gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-[#f7f8fa] flex items-center justify-center flex-shrink-0">
-                    <Icon size={13} className="text-[#94a3b8]" />
-                  </div>
-                  <div>
-                    <div className="text-[11px] text-[#94a3b8]">{label}</div>
-                    <div className="text-sm font-medium text-[#0f172a]">{value}</div>
-                  </div>
-                </div>
-              ))}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-[#475569]">
+              <span>法人：<strong className="text-[#0f172a] font-medium">{company.contact.name}</strong></span>
+              <span>注册资本：<strong className="text-[#0f172a] font-medium">{company.registeredCapital}万元</strong></span>
+              <span>成立时间：<strong className="text-[#0f172a] font-medium">{company.establishedAt}</strong></span>
+              <span>地区：<strong className="text-[#0f172a] font-medium">{company.street}</strong></span>
             </div>
           </div>
 
-          {/* Radar + Rule hits side by side */}
-          <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1.4fr" }}>
-            <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-              <h2 className="text-sm font-semibold text-[#0f172a] mb-1">六维评估雷达</h2>
-              <p className="text-xs text-[#94a3b8] mb-3">各维度 0-100 分</p>
-              <RadarChart scored={scored} />
+          {/* Score */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <TierBadge tier={scored.score.tier} showDesc />
+            <div className="text-center px-4 py-2.5 bg-gradient-to-b from-[#f8faff] to-[#eef3ff] border border-blue-100 rounded-xl">
+              <div className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{scored.score.total}</div>
+              <div className="text-[11px] text-[#94a3b8] mt-0.5">综合评分</div>
             </div>
-            <div className="bg-white rounded-xl border border-[#e5e7eb] p-5 overflow-y-auto max-h-[420px]">
-              <h2 className="text-sm font-semibold text-[#0f172a] mb-1">规则命中清单</h2>
-              <p className="text-xs text-[#94a3b8] mb-4">每一分都有出处 · 点击查看详情</p>
-              <RuleHitList scored={scored} />
-            </div>
-          </div>
-
-          {/* Gap analysis */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-            <h2 className="text-sm font-semibold text-[#0f172a] mb-1">缺项提示</h2>
-            <p className="text-xs text-[#94a3b8] mb-4">距离正式申报还需补齐以下事项</p>
-            <GapList scored={scored} />
-          </div>
-
-          {/* Benchmarks */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-            <h2 className="text-sm font-semibold text-[#0f172a] mb-1">同领域已认定企业对标</h2>
-            <p className="text-xs text-[#94a3b8] mb-4">参考这些企业的申报路径可缩短培育周期</p>
-            <BenchmarkCards company={company} scored={scored} />
           </div>
         </div>
+      </div>
 
-        {/* ─── Right column ─── */}
-        <div className="space-y-4">
-          {/* Actions */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-            <h3 className="text-sm font-semibold text-[#0f172a] mb-3">操作</h3>
-            <div className="space-y-2">
-              <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                <Send size={13} /> 派发给街道经办人
-              </button>
-              <button className="w-full px-4 py-2.5 border border-[#e5e7eb] text-sm rounded-lg text-[#475569] hover:bg-[#f7f8fa] transition-colors">
-                标记为跟进中
-              </button>
-              <button className="w-full px-4 py-2.5 border border-[#e5e7eb] text-sm rounded-lg text-[#475569] hover:bg-[#f7f8fa] transition-colors">
-                加入白名单
-              </button>
-              <button className="w-full px-4 py-2.5 border border-[#e5e7eb] text-sm rounded-lg text-[#475569] hover:bg-[#f7f8fa] transition-colors">
-                导出企业报告 PDF
-              </button>
-            </div>
-          </div>
+      {/* ─── Tab bar ─── */}
+      <div className="bg-white rounded-xl border border-[#e5e7eb] overflow-hidden">
+        <div className="flex border-b border-[#e5e7eb]">
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={cn(
+                "px-6 py-3.5 text-sm font-medium transition-colors relative whitespace-nowrap",
+                activeTab === tab
+                  ? "text-blue-600 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-blue-600"
+                  : "text-[#94a3b8] hover:text-[#475569]"
+              )}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-          {/* Company details */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-            <h3 className="text-sm font-semibold text-[#0f172a] mb-3">企业档案</h3>
-            <div className="space-y-3">
-              {[
-                { label: "联系人", value: company.contact.name },
-                { label: "联系电话", value: company.contact.phone },
-                { label: "联系邮箱", value: company.contact.email },
-              ].map(({ label, value }) => (
-                <div key={label} className="flex items-start gap-2">
-                  <span className="text-xs text-[#94a3b8] w-16 flex-shrink-0 pt-0.5">{label}</span>
-                  <span className="text-xs text-[#0f172a] font-medium break-all">{value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* IP breakdown */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-            <h3 className="text-sm font-semibold text-[#0f172a] mb-3">知识产权详情</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: "发明专利", value: company.patents.invention, color: "text-blue-700 bg-blue-50" },
-                { label: "实用新型", value: company.patents.utility, color: "text-purple-700 bg-purple-50" },
-                { label: "外观设计", value: company.patents.design, color: "text-teal-700 bg-teal-50" },
-                { label: "软件著作权", value: company.software, color: "text-amber-700 bg-amber-50" },
-              ].map(({ label, value, color }) => (
-                <div key={label} className={cn("rounded-lg p-3 text-center", color.split(" ")[1])}>
-                  <div className={cn("text-2xl font-bold tabular-nums", color.split(" ")[0])}>{value}</div>
-                  <div className="text-[11px] text-[#64748b] mt-0.5">{label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Risk + SME */}
-          <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-            <h3 className="text-sm font-semibold text-[#0f172a] mb-3">资质 & 风险</h3>
-            <div className="space-y-2.5">
-              {[
-                { label: "科技型中小企业入库", ok: company.inSMEDatabase },
-                { label: "经营状态正常", ok: !company.risk.abnormal },
-                { label: "无行政处罚记录", ok: !company.risk.penalty },
-              ].map(({ label, ok }) => (
-                <div key={label} className="flex items-center gap-2 text-sm">
-                  {ok
-                    ? <CheckCircle2 size={14} className="text-emerald-500 flex-shrink-0" />
-                    : <XCircle size={14} className="text-red-400 flex-shrink-0" />}
-                  <span className={ok ? "text-[#0f172a]" : "text-red-600"}>{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Tab content */}
+        <div className="p-6">
+          {activeTab === "基本信息" && <TabBasicInfo company={company} />}
+          {activeTab === "知识产权信息" && <TabIPInfo company={company} />}
+          {activeTab === "经营信息" && <TabBusinessInfo company={company} />}
+          {activeTab === "复审分析" && certifiedCompany && <TabRenewalAnalysis company={certifiedCompany} />}
+          {activeTab === "评估分析" && <TabAnalysis company={company} scored={scored} />}
         </div>
       </div>
     </div>

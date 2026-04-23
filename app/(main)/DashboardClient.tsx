@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Target, CheckSquare, TrendingUp, Award, ArrowRight } from "lucide-react";
+import { Target, CheckSquare, TrendingUp, Award, ArrowRight, ShieldAlert } from "lucide-react";
 import KPICard from "@/components/ui/KPICard";
 import TierBadge from "@/components/ui/TierBadge";
 import ScoreBar from "@/components/ui/ScoreBar";
@@ -69,6 +69,74 @@ function TierFunnel({ byTier }: { byTier: Record<string, number> }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ─── Enterprise Funnel ───────────────────────────────────────
+function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
+  const stages = [
+    { name: "全区企业总数", actual: kpi.funnelTotalInDistrict, color: "#94a3b8" },
+    { name: "泛科技型企业", actual: kpi.funnelTech,            color: "#3b82f6" },
+    { name: "现有高企数",   actual: kpi.funnelCertified,       color: "#7c3aed" },
+    { name: "拟申报高企",   actual: kpi.funnelPlanned,         color: "#10b981" },
+  ];
+
+  const sqrtMax = Math.sqrt(kpi.funnelTotalInDistrict);
+
+  const option = {
+    tooltip: {
+      trigger: "item",
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      formatter: (p: any) =>
+        `${p.name}<br/><b>${stages[p.dataIndex].actual.toLocaleString()} 家</b><br/>占全区 ${((stages[p.dataIndex].actual / kpi.funnelTotalInDistrict) * 100).toFixed(1)}%`,
+    },
+    series: [
+      {
+        type: "funnel",
+        sort: "none",
+        gap: 8,
+        left: "8%",
+        width: "84%",
+        top: 24,
+        bottom: 24,
+        min: 0,
+        max: sqrtMax,
+        minSize: "15%",
+        maxSize: "90%",
+        label: {
+          show: true,
+          position: "inside",
+          color: "#fff",
+          fontWeight: "bold",
+          fontSize: 13,
+          lineHeight: 22,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          formatter: (p: any) => {
+            const s = stages[p.dataIndex];
+            const pct = ((s.actual / kpi.funnelTotalInDistrict) * 100).toFixed(1);
+            return `${p.name}    ${s.actual.toLocaleString()} 家  (${pct}%)`;
+          },
+        },
+        itemStyle: { borderWidth: 0, borderColor: "transparent" },
+        data: stages.map((s) => ({
+          name: s.name,
+          value: Math.sqrt(s.actual),
+          itemStyle: { color: s.color },
+        })),
+      },
+    ],
+  };
+
+  return (
+    <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden mb-6">
+      <div className="px-5 py-3.5 border-b border-[#e5e7eb]">
+        <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗总览</h2>
+        <p className="text-xs text-[#94a3b8] mt-0.5">全区企业 → 泛科技型 → 现有高企 → 拟申报（A 档）</p>
+      </div>
+      <div className="px-4 pb-2">
+        <EChartsWrapper option={option} height={300} />
+      </div>
     </div>
   );
 }
@@ -223,13 +291,15 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
         </div>
       </div>
 
+      {/* Enterprise Funnel */}
+      <EnterpriseFunnel kpi={kpi} />
+
       {/* KPI cards */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-5 gap-4 mb-4">
         <KPICard
           label="本年度申报目标"
           value={kpi.yearGoal}
           unit="家"
-          delta={`较去年 +20 家（+20%）`}
           icon={Target}
           iconColor="text-blue-600"
           iconBg="bg-blue-50"
@@ -237,8 +307,7 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
         <KPICard
           label="本年度已认定"
           value={kpi.certified}
-          unit={`家 · ${((kpi.certified / kpi.yearGoal) * 100).toFixed(1)}%`}
-          delta="本月新增认定 +6 家"
+          unit="家"
           icon={CheckSquare}
           iconColor="text-emerald-600"
           iconBg="bg-emerald-50"
@@ -247,7 +316,6 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
           label="系统识别潜在标的"
           value={kpi.total}
           unit="家"
-          delta="本月新识别 +34 家"
           icon={Award}
           iconColor="text-purple-600"
           iconBg="bg-purple-50"
@@ -255,13 +323,50 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
         <KPICard
           label="预计年度完成率"
           value={kpi.estimatedCompletion}
-          unit="% · 超额 23 家"
-          delta="依赖 B 类标的转化 36 家"
-          deltaUp={false}
+          unit="%"
           icon={TrendingUp}
           iconColor="text-amber-600"
           iconBg="bg-amber-50"
         />
+        <KPICard
+          label="复审预警企业"
+          value={kpi.renewalCritical}
+          unit="家"
+          icon={ShieldAlert}
+          iconColor="text-red-600"
+          iconBg="bg-red-50"
+          delta="需立即启动复审"
+          deltaUp={false}
+        />
+      </div>
+
+      {/* Renewal alert banner */}
+      <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-6 flex items-center gap-4">
+        <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center flex-shrink-0">
+          <ShieldAlert className="w-5 h-5 text-red-600" />
+        </div>
+        <div className="flex-1">
+          <div className="text-sm font-semibold text-red-800">复审预警</div>
+          <div className="text-xs text-red-600 mt-0.5">
+            {kpi.renewalTotal} 家已认定高企中，{kpi.renewalCritical} 家须在近期启动复审申报，{kpi.renewalApproaching} 家需提前筹备
+          </div>
+        </div>
+        <div className="flex items-center gap-3 flex-shrink-0">
+          <span className="flex items-center gap-1.5 text-xs font-medium text-red-700 bg-red-100 px-2.5 py-1 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+            紧急 {kpi.renewalCritical} 家
+          </span>
+          <span className="flex items-center gap-1.5 text-xs font-medium text-amber-700 bg-amber-100 px-2.5 py-1 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+            预警 {kpi.renewalApproaching} 家
+          </span>
+          <Link
+            href="/renewal"
+            className="flex items-center gap-1 text-xs font-medium text-red-700 hover:text-red-900 border border-red-300 px-3 py-1.5 rounded-lg hover:bg-red-100 transition-colors"
+          >
+            进入复审管理 <ArrowRight size={12} />
+          </Link>
+        </div>
       </div>
 
       {/* Street + Tier */}
@@ -315,24 +420,6 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
         </div>
       </div>
 
-      {/* Top 10 */}
-      <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
-        <div className="px-5 py-4 border-b border-[#e5e7eb] flex items-start justify-between">
-          <div>
-            <h2 className="text-sm font-semibold text-[#0f172a]">高置信标的 · Top 10</h2>
-            <p className="text-xs text-[#94a3b8] mt-0.5">按综合评分降序排列 · 点击查看详情与打分依据</p>
-          </div>
-          <div className="flex gap-2">
-            <button className="px-3 py-1.5 text-xs border border-[#e5e7eb] bg-white rounded-md text-[#475569] hover:bg-[#f7f8fa] transition-colors">
-              批量派发
-            </button>
-            <button className="px-3 py-1.5 text-xs border border-[#e5e7eb] bg-white rounded-md text-[#475569] hover:bg-[#f7f8fa] transition-colors">
-              导出 CSV
-            </button>
-          </div>
-        </div>
-        <Top10Table companies={kpi.top10 as ScoredCompany[]} />
-      </div>
     </div>
   );
 }

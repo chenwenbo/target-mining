@@ -1,6 +1,8 @@
 import type { Company, Task } from "./types";
 import { scoreCompany, scoreAll } from "./scoring";
 import { DEFAULT_WEIGHTS } from "./types";
+import { getRenewalKPI } from "./renewal";
+import { getCertifiedCompanies } from "./renewal-data";
 
 // ─── Raw data (imported at module load) ────────────────────────
 // We use require() so this works in both server and client contexts.
@@ -81,6 +83,12 @@ export function getDashboardKPI(weights = DEFAULT_WEIGHTS) {
     .sort((a, b) => b.score.total - a.score.total)
     .slice(0, 10);
 
+  const funnelTech = rawCompanies.filter((c) => c.techField !== null).length;
+  const funnelCertified = rawCompanies.filter((c) => c.alreadyCertified).length;
+  const funnelPlanned = byTier.A ?? 0; // A 档 = 可立即申报
+
+  const renewalKPI = getRenewalKPI(getCertifiedCompanies());
+
   return {
     yearGoal: 120,
     certified: 58,
@@ -91,5 +99,12 @@ export function getDashboardKPI(weights = DEFAULT_WEIGHTS) {
     byField,
     byAge,
     top10,
+    funnelTotalInDistrict: 1840,
+    funnelTech,
+    funnelCertified,
+    funnelPlanned,
+    renewalCritical: renewalKPI.overdue + renewalKPI.critical,
+    renewalApproaching: renewalKPI.approaching,
+    renewalTotal: renewalKPI.total,
   };
 }

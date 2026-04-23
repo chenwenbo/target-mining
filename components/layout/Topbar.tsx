@@ -1,15 +1,9 @@
 "use client";
 import { Search, ChevronDown } from "lucide-react";
-import { cn } from "@/lib/cn";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-interface TopbarProps {
-  role: "leader" | "staff";
-  onRoleChange: (role: "leader" | "staff") => void;
-}
-
-export default function Topbar({ role, onRoleChange }: TopbarProps) {
+export default function Topbar() {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
@@ -32,39 +26,19 @@ export default function Topbar({ role, onRoleChange }: TopbarProps) {
         <span className="text-[12px] text-[#94a3b8]">数据更新于 14:28</span>
       </div>
 
-      {/* Search + Role switcher */}
-      <div className="flex items-center gap-3">
-        <form onSubmit={handleSearch} className="relative">
-          <Search
-            size={14}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]"
-          />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-52 pl-8 pr-3 py-1.5 text-sm bg-[#f7f8fa] border border-[#e5e7eb] rounded-md text-[#0f172a] placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
-            placeholder="搜索企业名称…"
-          />
-        </form>
-
-        {/* Role toggle */}
-        <div className="flex bg-[#f7f8fa] rounded-lg p-0.5 border border-[#e5e7eb]">
-          {(["leader", "staff"] as const).map((r) => (
-            <button
-              key={r}
-              onClick={() => onRoleChange(r)}
-              className={cn(
-                "px-3 py-1 text-xs rounded-md transition-all",
-                role === r
-                  ? "bg-white text-[#0f172a] font-medium shadow-sm"
-                  : "text-[#64748b] hover:text-[#0f172a]"
-              )}
-            >
-              {r === "leader" ? "领导视角" : "科员视角"}
-            </button>
-          ))}
-        </div>
-      </div>
+      {/* Search */}
+      <form onSubmit={handleSearch} className="relative">
+        <Search
+          size={14}
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94a3b8]"
+        />
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-52 pl-8 pr-3 py-1.5 text-sm bg-[#f7f8fa] border border-[#e5e7eb] rounded-md text-[#0f172a] placeholder:text-[#94a3b8] focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400"
+          placeholder="搜索企业名称…"
+        />
+      </form>
     </header>
   );
 }
