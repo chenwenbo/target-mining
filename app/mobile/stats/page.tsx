@@ -49,15 +49,6 @@ export default function StatsPage() {
   }
   const maxWilling = Math.max(1, ...Object.values(willingnessCount));
 
-  // 各分级完成情况
-  const tierStats = (["A", "B", "C"] as const).map((tier) => {
-    const tierTasks = myTasks.filter((t) => t.tier === tier);
-    const done = tierTasks.filter((t) => t.status === "done").length;
-    return { tier, total: tierTasks.length, done };
-  });
-
-  const tierColors: Record<string, string> = { A: "bg-emerald-500", B: "bg-blue-500", C: "bg-amber-400" };
-  const tierBg:     Record<string, string> = { A: "text-emerald-700 bg-emerald-50", B: "text-blue-700 bg-blue-50", C: "text-amber-700 bg-amber-50" };
 
   return (
     <div className="flex flex-col h-screen">
@@ -114,31 +105,6 @@ export default function StatsPage() {
                   </div>
                 );
               })}
-            </div>
-          )}
-        </div>
-
-        {/* 各分级任务完成情况 */}
-        <div className="bg-white rounded-xl p-4">
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">各分级任务完成情况</h3>
-          {tierStats.every((s) => s.total === 0) ? (
-            <p className="text-xs text-gray-400 text-center py-4">暂无分配任务</p>
-          ) : (
-            <div className="space-y-4">
-              {tierStats.filter((s) => s.total > 0).map(({ tier, total, done }) => (
-                <div key={tier}>
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className={`text-xs font-bold px-2 py-0.5 rounded ${tierBg[tier]}`}>{tier} 类</span>
-                    <span className="text-xs text-gray-400">{done}/{total} 已完成</span>
-                  </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full ${tierColors[tier]}`}
-                      style={{ width: `${(done / total) * 100}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
             </div>
           )}
         </div>

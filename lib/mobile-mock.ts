@@ -2,10 +2,10 @@ import type { Visitor, VisitRecord, TaskStatus } from "./types";
 
 // ─── Mock 走访人员（与 tasks.json 的 assignee 字段对应）──────────
 export const MOCK_VISITORS: Visitor[] = [
-  { id: "v1", name: "王科员", role: "street_officer", street: "国家网安基地", dept: "国家网安基地管委会" },
-  { id: "v2", name: "李科员", role: "tech_officer",   street: null,         dept: "科创局·高新处" },
-  { id: "v3", name: "张科员", role: "street_officer", street: "金银湖街道",  dept: "金银湖街道办事处" },
-  { id: "v4", name: "赵科员", role: "street_officer", street: "将军路街道",  dept: "将军路街道办事处" },
+  { id: "v1", name: "王科员", street: "国家网安基地", dept: "国家网安基地管委会" },
+  { id: "v2", name: "李科员", street: null,          dept: "科创局·高新处" },
+  { id: "v3", name: "张科员", street: "金银湖街道",   dept: "金银湖街道办事处" },
+  { id: "v4", name: "赵科员", street: "将军路街道",   dept: "将军路街道办事处" },
 ];
 
 // ─── SessionStorage：当前用户 ────────────────────────────────────
@@ -97,4 +97,25 @@ export function getDraft(taskId: string): Partial<VisitRecord> | null {
 
 export function clearDraft(taskId: string): void {
   localStorage.removeItem(DRAFT_KEY_PREFIX + taskId);
+}
+
+// ─── LocalStorage：手动派发的任务 ────────────────────────────────
+import type { Task } from "./types";
+
+const DISPATCHED_TASKS_KEY = "dispatched_tasks";
+
+export function getDispatchedTasks(): Task[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(DISPATCHED_TASKS_KEY);
+    return raw ? (JSON.parse(raw) as Task[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveDispatchedTask(task: Task): void {
+  const tasks = getDispatchedTasks();
+  tasks.push(task);
+  localStorage.setItem(DISPATCHED_TASKS_KEY, JSON.stringify(tasks));
 }

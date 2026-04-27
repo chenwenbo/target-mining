@@ -1,165 +1,15 @@
 "use client";
-import { use, useMemo, useState } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowLeft, Building2, CheckCircle2, XCircle, AlertTriangle, Send,
+  ArrowLeft, Building2,
 } from "lucide-react";
-import { getCompanyById, getCertifiedBenchmarks } from "@/lib/mock-data";
+import { getCompanyById } from "@/lib/mock-data";
 import { getCertifiedCompanyById } from "@/lib/renewal-data";
 import TabRenewalAnalysis from "./TabRenewalAnalysis";
-import { scoreCompany } from "@/lib/scoring";
-import { useWeightsStore } from "@/store/weights";
-import TierBadge from "@/components/ui/TierBadge";
-import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { cn } from "@/lib/cn";
-import type { ScoredCompany } from "@/lib/types";
-
-// ─── Radar chart ──────────────────────────────────────────────
-function RadarChart({ scored }: { scored: ScoredCompany }) {
-  const dims = scored.score.dimensions;
-  const option = {
-    tooltip: { trigger: "item" },
-    radar: {
-      indicator: dims.map((d) => ({ name: d.name, max: 100 })),
-      radius: "65%",
-      axisName: { color: "#475569", fontSize: 11 },
-      splitLine: { lineStyle: { color: "#f1f5f9" } },
-      splitArea: { areaStyle: { color: ["rgba(241,245,249,0.5)", "rgba(255,255,255,0.5)"] } },
-      axisLine: { lineStyle: { color: "#e5e7eb" } },
-    },
-    series: [{
-      type: "radar",
-      data: [{
-        value: dims.map((d) => d.score),
-        name: "评分",
-        areaStyle: { color: "rgba(37,99,235,0.1)" },
-        lineStyle: { color: "#2563eb", width: 2 },
-        itemStyle: { color: "#2563eb" },
-      }],
-    }],
-  };
-  return <EChartsWrapper option={option} height={280} />;
-}
-
-// ─── Rule hit list ────────────────────────────────────────────
-function RuleHitList({ scored }: { scored: ScoredCompany }) {
-  return (
-    <div className="space-y-5">
-      {scored.score.dimensions.map((dim) => (
-        <div key={dim.name}>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-[#0f172a]">{dim.name}</span>
-            <div className="flex items-center gap-2 text-xs">
-              <span className="text-[#94a3b8]">权重 {Math.round(dim.weight * 100)}%</span>
-              <span className="font-bold text-[#0f172a]">{dim.score} 分</span>
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            {dim.hits.map((hit) => (
-              <div
-                key={hit.label}
-                className={cn(
-                  "flex items-center justify-between px-3 py-2 rounded-lg text-xs",
-                  hit.passed ? "bg-emerald-50 border border-emerald-100" : "bg-red-50 border border-red-100"
-                )}
-              >
-                <div className="flex items-center gap-2">
-                  {hit.passed
-                    ? <CheckCircle2 size={12} className="text-emerald-600 flex-shrink-0" />
-                    : <XCircle size={12} className="text-red-400 flex-shrink-0" />}
-                  <span className={hit.passed ? "text-emerald-800" : "text-red-700"}>{hit.label}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-[#475569]">{hit.value}</span>
-                  <span className={cn(
-                    "font-semibold tabular-nums",
-                    hit.points > 0 ? "text-emerald-700" : hit.points < 0 ? "text-red-600" : "text-[#94a3b8]"
-                  )}>
-                    {hit.points > 0 ? `+${hit.points}` : hit.points} 分
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ─── Gap list ────────────────────────────────────────────────
-function GapList({ scored }: { scored: ScoredCompany }) {
-  const { gaps } = scored.score;
-  if (gaps.length === 0) {
-    return (
-      <div className="flex items-center gap-2 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
-        <CheckCircle2 size={16} className="text-emerald-600" />
-        <span className="text-sm text-emerald-800 font-medium">各项指标均已达标，建议尽快推动申报</span>
-      </div>
-    );
-  }
-  return (
-    <div className="space-y-3">
-      {gaps.map((gap, i) => (
-        <div key={i} className={cn(
-          "p-4 rounded-lg border",
-          gap.urgent ? "bg-red-50 border-red-200" : "bg-amber-50 border-amber-200"
-        )}>
-          <div className="flex items-start gap-2">
-            <AlertTriangle size={14} className={cn("flex-shrink-0 mt-0.5", gap.urgent ? "text-red-500" : "text-amber-500")} />
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className={cn("text-xs font-semibold px-1.5 py-0.5 rounded",
-                  gap.urgent ? "bg-red-100 text-red-700" : "bg-amber-100 text-amber-700"
-                )}>{gap.dimension}</span>
-                {gap.urgent && <span className="text-xs text-red-600 font-semibold">⚠ 申报硬性要求</span>}
-              </div>
-              <p className="text-sm text-[#0f172a] mb-1.5">{gap.description}</p>
-              <p className="text-xs text-[#475569]">
-                <span className="font-medium text-blue-700">建议：</span>{gap.suggestion}
-              </p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ─── Benchmark cards ──────────────────────────────────────────
-function BenchmarkCards({ company, scored }: { company: ReturnType<typeof getCompanyById>; scored: ScoredCompany }) {
-  const benchmarks = useMemo(() => {
-    return getCertifiedBenchmarks()
-      .filter((b) => b.techField === company!.techField)
-      .slice(0, 3);
-  }, [company]);
-
-  if (benchmarks.length === 0) return null;
-
-  return (
-    <div className="grid grid-cols-3 gap-3">
-      {benchmarks.map((b) => {
-        const similarity = Math.round(70 + Math.random() * 20);
-        return (
-          <div key={b.id} className="p-4 bg-[#f7f8fa] border border-[#e5e7eb] rounded-lg">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full font-medium">已认定</span>
-              <span className="text-xs text-blue-600 font-semibold">相似度 {similarity}%</span>
-            </div>
-            <p className="text-xs font-medium text-[#0f172a] leading-snug mb-2">{b.name}</p>
-            <div className="grid grid-cols-2 gap-1 text-[11px] text-[#64748b]">
-              <span>专利 {b.patents.invention + b.patents.utility}</span>
-              <span>参保 {b.employees}</span>
-              <span>{b.street}</span>
-              <span>{b.techField}</span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+import { DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 
 // ─── Tab: 基本信息 ────────────────────────────────────────────
 function TabBasicInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
@@ -609,53 +459,11 @@ function TabBusinessInfo({ company }: { company: NonNullable<ReturnType<typeof g
   );
 }
 
-// ─── Tab: 评估分析 ────────────────────────────────────────────
-function TabAnalysis({ company, scored }: { company: NonNullable<ReturnType<typeof getCompanyById>>; scored: ScoredCompany }) {
-  return (
-    <div className="space-y-4">
-      {/* Actions */}
-      <div className="bg-[#f7f8fa] rounded-lg p-4 border border-[#e5e7eb]">
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">操作</h3>
-        <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors font-medium">
-            <Send size={13} /> 派发给街道经办人
-          </button>
-          <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
-            标记为跟进中
-          </button>
-          <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
-            加入白名单
-          </button>
-          <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
-            导出企业报告 PDF
-          </button>
-        </div>
-      </div>
-
-      {/* Radar + Rule hits */}
-      <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1.4fr" }}>
-        <div className="bg-white rounded-xl border border-[#e5e7eb] p-5">
-          <h2 className="text-sm font-semibold text-[#0f172a] mb-1">六维评估雷达</h2>
-          <p className="text-xs text-[#94a3b8] mb-3">各维度 0-100 分</p>
-          <RadarChart scored={scored} />
-        </div>
-        <div className="bg-white rounded-xl border border-[#e5e7eb] p-5 overflow-y-auto max-h-[420px]">
-          <h2 className="text-sm font-semibold text-[#0f172a] mb-1">规则命中清单</h2>
-          <p className="text-xs text-[#94a3b8] mb-4">每一分都有出处</p>
-          <RuleHitList scored={scored} />
-        </div>
-      </div>
-
-    </div>
-  );
-}
-
 // ─── Main ─────────────────────────────────────────────────────
-type Tab = "基本信息" | "知识产权信息" | "经营信息" | "复审分析" | "评估分析";
+type Tab = "基本信息" | "知识产权信息" | "经营信息" | "复审分析";
 
 export default function CompanyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const { weights } = useWeightsStore();
   const [activeTab, setActiveTab] = useState<Tab>("基本信息");
 
   const company = getCompanyById(id);
@@ -668,13 +476,7 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
     "知识产权信息",
     "经营信息",
     ...(certifiedCompany ? ["复审分析" as Tab] : []),
-    "评估分析",
   ];
-
-  const scored = useMemo(() => ({
-    ...company,
-    score: scoreCompany(company, weights),
-  }), [company, weights]);
 
   const updateDate = "2026-02-27";
 
@@ -711,16 +513,33 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
               <span>成立时间：<strong className="text-[#0f172a] font-medium">{company.establishedAt}</strong></span>
               <span>地区：<strong className="text-[#0f172a] font-medium">{company.street}</strong></span>
             </div>
-          </div>
-
-          {/* Score */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <TierBadge tier={scored.score.tier} showDesc />
-            <div className="text-center px-4 py-2.5 bg-gradient-to-b from-[#f8faff] to-[#eef3ff] border border-blue-100 rounded-xl">
-              <div className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{scored.score.total}</div>
-              <div className="text-[11px] text-[#94a3b8] mt-0.5">综合评分</div>
+            <div className="flex items-center gap-3 mt-2">
+              <span className={cn(
+                "inline-flex items-center px-2.5 py-1 text-xs rounded-full font-medium border",
+                company.alreadyCertified
+                  ? "bg-purple-50 text-purple-700 border-purple-200"
+                  : "bg-blue-50 text-blue-700 border-blue-200"
+              )}>
+                {company.alreadyCertified ? "复审" : "新申报"}
+              </span>
+              {(() => {
+                const w = company.declarationWillingness;
+                const styles: Record<string, string> = {
+                  strong: "bg-emerald-50 text-emerald-700 border-emerald-200",
+                  moderate: "bg-teal-50 text-teal-700 border-teal-200",
+                  hesitant: "bg-amber-50 text-amber-700 border-amber-200",
+                  refused: "bg-red-50 text-red-600 border-red-200",
+                  unknown: "bg-[#f1f5f9] text-[#94a3b8] border-[#e5e7eb]",
+                };
+                return (
+                  <span className={cn("inline-flex items-center px-2.5 py-1 text-xs rounded-full border", styles[w])}>
+                    申报意愿：{DECLARATION_WILLINGNESS_LABELS[w]}
+                  </span>
+                );
+              })()}
             </div>
           </div>
+
         </div>
       </div>
 
@@ -749,7 +568,6 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
           {activeTab === "知识产权信息" && <TabIPInfo company={company} />}
           {activeTab === "经营信息" && <TabBusinessInfo company={company} />}
           {activeTab === "复审分析" && certifiedCompany && <TabRenewalAnalysis company={certifiedCompany} />}
-          {activeTab === "评估分析" && <TabAnalysis company={company} scored={scored} />}
         </div>
       </div>
     </div>

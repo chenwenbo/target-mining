@@ -8,8 +8,7 @@
     "status": "in_progress",
     "createdAt": "2026-04-10",
     "deadline": "2026-06-30",
-    "notes": "已联系法人，材料准备中，缺研发费用台账",
-    "tier": "A"
+    "notes": "已联系法人，材料准备中，缺研发费用台账"
   },
   {
     "id": "t002",
@@ -20,8 +19,7 @@
     "status": "pending",
     "createdAt": "2026-04-12",
     "deadline": "2026-06-30",
-    "notes": "等待企业回复",
-    "tier": "A"
+    "notes": "等待企业回复"
   },
   {
     "id": "t003",
@@ -32,8 +30,7 @@
     "status": "done",
     "createdAt": "2026-03-28",
     "deadline": "2026-05-31",
-    "notes": "已完成初审，材料齐全，已提交区局审核",
-    "tier": "A"
+    "notes": "已完成初审，材料齐全，已提交区局审核"
   },
   {
     "id": "t004",
@@ -44,8 +41,7 @@
     "status": "pending",
     "createdAt": "2026-04-13",
     "deadline": "2026-07-15",
-    "notes": "研发费用占比需补材料",
-    "tier": "A"
+    "notes": "研发费用占比需补材料"
   },
   {
     "id": "t005",
@@ -56,8 +52,7 @@
     "status": "in_progress",
     "createdAt": "2026-04-08",
     "deadline": "2026-06-30",
-    "notes": "已送达通知，企业在准备专利清单",
-    "tier": "A"
+    "notes": "已送达通知，企业在准备专利清单"
   },
   {
     "id": "t006",
@@ -68,8 +63,7 @@
     "status": "pending",
     "createdAt": "2026-04-14",
     "deadline": "2026-08-31",
-    "notes": "B 类标的，先做意愿摸底",
-    "tier": "B"
+    "notes": "先做意愿摸底"
   },
   {
     "id": "t007",
@@ -80,8 +74,7 @@
     "status": "done",
     "createdAt": "2026-03-20",
     "deadline": "2026-05-31",
-    "notes": "已指导补充发明专利申请，预计 3 个月内可达标",
-    "tier": "B"
+    "notes": "已指导补充发明专利申请，预计 3 个月内可达标"
   },
   {
     "id": "t008",
@@ -92,8 +85,7 @@
     "status": "in_progress",
     "createdAt": "2026-04-05",
     "deadline": "2026-07-31",
-    "notes": "研发人员占比 8%，需提升至 10%",
-    "tier": "B"
+    "notes": "研发人员占比 8%，需提升至 10%"
   },
   {
     "id": "t009",
@@ -104,8 +96,7 @@
     "status": "pending",
     "createdAt": "2026-04-15",
     "deadline": "2026-08-31",
-    "notes": "待约谈法人",
-    "tier": "B"
+    "notes": "待约谈法人"
   },
   {
     "id": "t010",
@@ -116,7 +107,6 @@
     "status": "pending",
     "createdAt": "2026-04-15",
     "deadline": "2026-09-30",
-    "notes": "新增派发，等待初接触",
-    "tier": "B"
+    "notes": "新增派发，等待初接触"
   }
 ]

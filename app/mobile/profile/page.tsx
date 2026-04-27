@@ -46,15 +46,6 @@ export default function ProfilePage() {
           </div>
           <div className="flex-1 min-w-0">
             <div className="font-bold text-gray-800 text-base">{visitor.name}</div>
-            <div className="flex items-center gap-1.5 mt-1">
-              <span className={`text-[11px] font-medium px-2 py-0.5 rounded ${
-                visitor.role === "street_officer"
-                  ? "bg-amber-100 text-amber-700"
-                  : "bg-purple-100 text-purple-700"
-              }`}>
-                {visitor.role === "street_officer" ? "街道办" : "科技人员"}
-              </span>
-            </div>
           </div>
         </div>
 

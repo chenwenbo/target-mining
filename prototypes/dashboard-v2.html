@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2026 高企申报 · 全景驾驶舱 v2 (5 层漏斗原型)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system','PingFang SC','Microsoft YaHei','Helvetica Neue','Arial','sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { font-family: -apple-system,'PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif; }
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+    /* funnel block hover */
+    .funnel-seg { transition: transform .15s ease, box-shadow .15s ease; cursor: pointer; }
+    .funnel-seg:hover { transform: translateY(-2px); box-shadow: 0 8px 24px -8px rgba(0,0,0,.15); }
+    /* small custom scrollbar */
+    .nice-scroll::-webkit-scrollbar { height: 6px; width: 6px; }
+    .nice-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    /* sparkline svg */
+    .sparkline { stroke-width: 1.5; fill: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+<!-- ============== 整页容器 ============== -->
+<div class="max-w-[1600px] mx-auto px-6 py-6 space-y-6">
+
+  <!-- ============== Header ============== -->
+  <header class="flex items-start justify-between">
+    <div>
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+        </div>
+        <h1 class="text-2xl font-semibold tracking-tight">2026 年高企申报 · 全景驾驶舱</h1>
+        <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">v2 · 5 层漏斗原型</span>
+      </div>
+      <p class="mt-1 text-sm text-slate-500">东西湖区 · 数据更新于 2026-04-27 09:00 · 数据源: 大数据筛查 + 申报跟踪系统</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-1.5">
+        <i data-lucide="download" class="w-4 h-4"></i>导出报告
+      </button>
+      <button class="px-3.5 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 flex items-center gap-1.5 shadow-sm">
+        <i data-lucide="target" class="w-4 h-4"></i>进入标的池
+      </button>
+    </div>
+  </header>
+
+  <!-- ============== KPI 条 (5 张，对齐漏斗) ============== -->
+  <section class="grid grid-cols-5 gap-4">
+    <!-- KPI 1: L1 总库 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center">
+            <i data-lucide="building-2" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-medium text-slate-500">L1 全区企业总库</span>
+        </div>
+        <span class="text-xs text-emerald-600 font-medium flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i>+6%</span>
+      </div>
+      <div class="mt-3 flex items-baseline gap-1">
+        <span class="text-3xl font-bold tabular-nums text-slate-900">1,840</span>
+        <span class="text-sm text-slate-500">家</span>
+      </div>
+      <div class="mt-1 text-xs text-slate-400">较 2025 年同期</div>
+    </div>
+
+    <!-- KPI 2: L2→L3 转化率 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <i data-lucide="git-fork" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-medium text-slate-500">L2→L3 转化率</span>
+        </div>
+        <span class="text-xs text-emerald-600 font-medium flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-0.5"></i>+3pt</span>
+      </div>
+      <div class="mt-3 flex items-baseline gap-1">
+        <span class="text-3xl font-bold tabular-nums text-slate-900">45.1</span>
+        <span class="text-sm text-slate-500">%</span>
+      </div>
+      <div class="mt-1 text-xs text-slate-400">412 → 186 家</div>
+    </div>
+
+    <!-- KPI 3: L4 预备库存量 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-medium text-slate-500">L4 预备库存量</span>
+        </div>
+        <span class="text-xs text-emerald-600 font-medium flex items-center"><i data-lucide="arrow-up-right" class="w-3 h-3 mr-0.5"></i>+12</span>
+      </div>
+      <div class="mt-3 flex items-baseline gap-1">
+        <span class="text-3xl font-bold tabular-nums text-slate-900">78</span>
+        <span class="text-sm text-slate-500">家</span>
+      </div>
+      <div class="mt-1 text-xs text-slate-400">本月净流入 12 家</div>
+    </div>
+
+    <!-- KPI 4: L5 本年新认定 / 目标 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-medium text-slate-500">L5 本年新认定</span>
+        </div>
+        <span class="text-xs text-slate-500 font-medium">目标 120</span>
+      </div>
+      <div class="mt-3 flex items-baseline gap-1">
+        <span class="text-3xl font-bold tabular-nums text-slate-900">58</span>
+        <span class="text-sm text-slate-500">/ 120</span>
+        <span class="ml-auto text-sm font-semibold text-emerald-600">48.3%</span>
+      </div>
+      <div class="mt-2 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+        <div class="h-full bg-gradient-to-r from-emerald-400 to-emerald-600" style="width: 48.3%"></div>
+      </div>
+    </div>
+
+    <!-- KPI 5: 复审待办 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm hover:shadow-md transition">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+          </div>
+          <span class="text-xs font-medium text-slate-500">复审待办</span>
+        </div>
+        <span class="text-xs text-rose-600 font-medium flex items-center"><i data-lucide="alert-triangle" class="w-3 h-3 mr-0.5"></i>紧急 8</span>
+      </div>
+      <div class="mt-3 flex items-baseline gap-1">
+        <span class="text-3xl font-bold tabular-nums text-slate-900">23</span>
+        <span class="text-sm text-slate-500">家</span>
+      </div>
+      <div class="mt-1 text-xs text-slate-400">2026 年内到期 / 含紧急 8 家</div>
+    </div>
+  </section>
+
+  <!-- ============== Hero: 5 层漏斗 ============== -->
+  <section class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-lg font-semibold tracking-tight">高企培育 5 层漏斗</h2>
+        <p class="text-xs text-slate-500 mt-0.5">L1 全区企业总库 → L5 高新技术企业认定成功 · 鼠标悬停查看每层判定标准</p>
+      </div>
+      <div class="flex items-center gap-3 text-xs">
+        <span class="flex items-center gap-1 text-slate-500"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>转化 ≥50%</span>
+        <span class="flex items-center gap-1 text-slate-500"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>30-50%</span>
+        <span class="flex items-center gap-1 text-slate-500"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>&lt;30% 瓶颈</span>
+      </div>
+    </div>
+
+    <!-- 漏斗主体 -->
+    <div id="layerFunnel" class="flex items-stretch gap-2"></div>
+
+    <!-- 瓶颈识别 -->
+    <div id="bottleneckBar" class="mt-4 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 flex items-start gap-3">
+      <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
+        <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+      </div>
+      <div class="text-sm">
+        <div class="font-semibold text-amber-900">当前瓶颈：L1→L2 转化率仅 22.4%</div>
+        <div class="text-amber-700 mt-0.5">建议加大全区企业的科技型筛查力度，挖掘 1428 家"沉睡"企业中的研发活动信号；同时重点推动 L3→L4 临门一脚的 23 家企业。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 5 层健康卡 ============== -->
+  <section>
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold tracking-tight">分层健康度</h2>
+      <span class="text-xs text-slate-500">每层关键指标 · 卡点 · 进入路径</span>
+    </div>
+    <div id="layerCards" class="grid grid-cols-5 gap-4"></div>
+  </section>
+
+  <!-- ============== 街道分布 + 领域分布 (含 Layer 切片) ============== -->
+  <section class="grid grid-cols-2 gap-4">
+    <!-- 街道分布 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-base font-semibold">街道 / 园区分布</h3>
+        <div id="streetSlicer" class="flex items-center gap-1 text-xs"></div>
+      </div>
+      <div id="streetChart" style="height: 320px;"></div>
+    </div>
+    <!-- 领域分布 -->
+    <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-base font-semibold">技术领域分布</h3>
+        <div id="fieldSlicer" class="flex items-center gap-1 text-xs"></div>
+      </div>
+      <div id="fieldChart" style="height: 320px;"></div>
+    </div>
+  </section>
+
+  <!-- ============== 行动中心 (3 栏) ============== -->
+  <section>
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold tracking-tight">行动中心</h2>
+      <span class="text-xs text-slate-500">本周建议优先处理</span>
+    </div>
+    <div class="grid grid-cols-3 gap-4">
+      <!-- L4 重点跟进 -->
+      <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100">L4</span>
+            <h3 class="text-sm font-semibold">重点跟进 Top 5</h3>
+          </div>
+          <span class="text-xs text-slate-400">申报准备度 A/B 档</span>
+        </div>
+        <div id="actionL4" class="space-y-2"></div>
+      </div>
+
+      <!-- L5 复审到期 -->
+      <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">L5</span>
+            <h3 class="text-sm font-semibold">复审到期预警 Top 5</h3>
+          </div>
+          <span class="text-xs text-slate-400">证书 1 年内到期</span>
+        </div>
+        <div id="actionL5" class="space-y-2"></div>
+      </div>
+
+      <!-- L3→L4 临门一脚 -->
+      <div class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">L3→L4</span>
+            <h3 class="text-sm font-semibold">临门一脚 Top 5</h3>
+          </div>
+          <span class="text-xs text-slate-400">仅差 1 项指标</span>
+        </div>
+        <div id="actionL34" class="space-y-2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== A/B/C/D 分档分布 (保留) ============== -->
+  <section class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-lg font-semibold tracking-tight">L3 / L4 内部 · A/B/C/D 申报准备度分档</h2>
+        <p class="text-xs text-slate-500 mt-0.5">基于评分模型 (知识产权 30% + 规模 20% + 领域 15% + 研发 15% + 合规 10% + 成长 10%)</p>
+      </div>
+      <a href="#" class="text-xs text-indigo-600 hover:text-indigo-700 flex items-center gap-1">
+        调整评分权重 <i data-lucide="arrow-right" class="w-3 h-3"></i>
+      </a>
+    </div>
+    <div id="tierGrid" class="grid grid-cols-4 gap-3"></div>
+  </section>
+
+  <!-- ============== 年龄分布 (保留) ============== -->
+  <section class="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
+    <h3 class="text-base font-semibold mb-3">企业年龄分布 (L2-L4 候选)</h3>
+    <div id="ageChart" style="height: 240px;"></div>
+  </section>
+
+  <footer class="text-center text-xs text-slate-400 py-6">
+    Prototype v2 · 与生产驾驶舱 (DashboardClient.tsx) 数据/视觉对齐 · 仅供方案审核
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- ====================== 数据 + 渲染 JS ====================== -->
+<!-- ============================================================ -->
+<script>
+// ====== 1. 全局漏斗聚合数据 (vs. 真实数据时替换为 getDashboardKPI()) ======
+const LAYER_DATA = [
+  {
+    key: 1, short: 'L1', name: '全区企业总库',
+    desc: '所有在册企业 · 大数据基础库',
+    count: 1840,
+    color: 'slate',
+    monthInflow: 28, monthOutflow: 9,
+    health: [
+      { label: '工商正常率', value: 96.2, bench: 95, fmt: 'pct' },
+      { label: '纳税正常率', value: 92.8, bench: 90, fmt: 'pct' },
+      { label: '年报提交率 (近 3 年)', value: 89.5, bench: 90, fmt: 'pct' },
+    ],
+    bottleneck: '142 家年报缺失或纳税异常',
+    criteria: '企业基础信息 + 活跃度 + 产业领域标签',
+  },
+  {
+    key: 2, short: 'L2', name: '科技型企业潜力库',
+    desc: '有研发活动 / 创新基础迹象',
+    count: 412,
+    color: 'sky',
+    monthInflow: 18, monthOutflow: 6,
+    health: [
+      { label: '有研发活动占比', value: 76.5, bench: 70, fmt: 'pct' },
+      { label: '战略性新兴产业占比', value: 58.3, bench: 50, fmt: 'pct' },
+      { label: '重点产业链占比', value: 42.1, bench: 50, fmt: 'pct' },
+    ],
+    bottleneck: '173 家科技人员占比 < 10%',
+    criteria: '研发能力 + 创新基础 + 技术领域 + 人才结构',
+  },
+  {
+    key: 3, short: 'L3', name: '高企培育重点库',
+    desc: '基本符合高企认定条件，重点培育',
+    count: 186,
+    color: 'blue',
+    monthInflow: 14, monthOutflow: 4,
+    health: [
+      { label: '平均 I 类知识产权数', value: 1.8, bench: 1, fmt: 'num' },
+      { label: '研发人员占比达标率', value: 64.0, bench: 70, fmt: 'pct' },
+      { label: '高新收入占比达标率', value: 51.6, bench: 60, fmt: 'pct' },
+    ],
+    bottleneck: '23 家临门一脚 · 仅差 1 项',
+    criteria: '知识产权 + 研发投入 + 人员结构 + 业务匹配 + 合规',
+  },
+  {
+    key: 4, short: 'L4', name: '高企申报预备库',
+    desc: '各项指标基本达标，准备材料',
+    count: 78,
+    color: 'indigo',
+    monthInflow: 12, monthOutflow: 3,
+    health: [
+      { label: '三项核心指标全达标', value: 89.7, bench: 100, fmt: 'pct' },
+      { label: '材料齐备度', value: 73.1, bench: 90, fmt: 'pct' },
+      { label: '审计质量优良率', value: 81.2, bench: 80, fmt: 'pct' },
+    ],
+    bottleneck: '21 家成果转化证明缺失',
+    criteria: '指标达标 + 材料准备 + 质量保障 + 风险控制',
+  },
+  {
+    key: 5, short: 'L5', name: '高新技术企业 (已认定)',
+    desc: '通过认定 · 持续培育 + 复审',
+    count: 58,
+    color: 'emerald',
+    monthInflow: 8, monthOutflow: 2,
+    health: [
+      { label: '三年 R&D 投入趋势', value: '稳健', trend: [3.8, 4.1, 4.5], fmt: 'spark' },
+      { label: '本年新增 IP 总数', value: 142, bench: 100, fmt: 'num' },
+      { label: '复审到期预警', value: 23, bench: 20, fmt: 'num', warn: true },
+    ],
+    bottleneck: '8 家紧急复审 (90 天内)',
+    criteria: '认定结果 + 创新能力评价 + 持续发展',
+  },
+];
+
+// 颜色映射 (Tailwind class 关键字 → 实际 class)
+const COLOR_MAP = {
+  slate:   { bg:'bg-slate-100',   bgSolid:'bg-slate-500',   text:'text-slate-700',   ring:'ring-slate-200',   bgSoft:'bg-slate-50',   border:'border-slate-200' },
+  sky:     { bg:'bg-sky-100',     bgSolid:'bg-sky-500',     text:'text-sky-700',     ring:'ring-sky-200',     bgSoft:'bg-sky-50',     border:'border-sky-200' },
+  blue:    { bg:'bg-blue-100',    bgSolid:'bg-blue-500',    text:'text-blue-700',    ring:'ring-blue-200',    bgSoft:'bg-blue-50',    border:'border-blue-200' },
+  indigo:  { bg:'bg-indigo-100',  bgSolid:'bg-indigo-500',  text:'text-indigo-700',  ring:'ring-indigo-200',  bgSoft:'bg-indigo-50',  border:'border-indigo-200' },
+  emerald: { bg:'bg-emerald-100', bgSolid:'bg-emerald-500', text:'text-emerald-700', ring:'ring-emerald-200', bgSoft:'bg-emerald-50', border:'border-emerald-200' },
+  amber:   { bg:'bg-amber-100',   bgSolid:'bg-amber-500',   text:'text-amber-700',   ring:'ring-amber-200',   bgSoft:'bg-amber-50',   border:'border-amber-200' },
+};
+
+// ====== 2. 计算转化率 + 瓶颈 ======
+function getConversions() {
+  const conv = [];
+  for (let i = 0; i < LAYER_DATA.length - 1; i++) {
+    const from = LAYER_DATA[i].count;
+    const to = LAYER_DATA[i + 1].count;
+    const rate = (to / from) * 100;
+    conv.push({
+      from: LAYER_DATA[i].short,
+      to: LAYER_DATA[i + 1].short,
+      rate,
+      band: rate >= 50 ? 'good' : rate >= 30 ? 'warn' : 'bad',
+    });
+  }
+  return conv;
+}
+
+// ====== 3. 渲染 5 层漏斗 ======
+function renderFunnel() {
+  const conv = getConversions();
+  const total = LAYER_DATA[0].count;
+  const wrap = document.getElementById('layerFunnel');
+  // 计算每个 segment 的视觉宽度。最小 14% 防止 L5 看不见。
+  const minPct = 14;
+  const widths = LAYER_DATA.map(l => Math.max(minPct, (l.count / total) * 100));
+  // 归一化让 sum = 100
+  const sum = widths.reduce((a, b) => a + b, 0);
+  const widthFlex = widths.map(w => (w / sum) * 100);
+
+  let html = '';
+  LAYER_DATA.forEach((l, idx) => {
+    const c = COLOR_MAP[l.color];
+    const pctOfTotal = ((l.count / total) * 100).toFixed(1);
+    html += `
+      <div class="funnel-seg ${c.bgSoft} border ${c.border} rounded-xl px-3 py-3 flex flex-col justify-between" style="flex: ${widthFlex[idx]} 1 0;" onclick="console.log('jump to layer ${l.key}')">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold ${c.text}">${l.short}</span>
+            <span class="text-xs text-slate-500 truncate">${l.name}</span>
+          </div>
+          <div class="flex items-baseline gap-1">
+            <span class="text-2xl font-bold tabular-nums ${c.text}">${l.count.toLocaleString()}</span>
+            <span class="text-xs text-slate-400">家 · 占总库 ${pctOfTotal}%</span>
+          </div>
+        </div>
+        <div class="mt-2 flex items-center justify-between text-[11px]">
+          <span class="text-emerald-600 flex items-center"><i data-lucide="arrow-up-right" class="w-3 h-3"></i>+${l.monthInflow}</span>
+          <span class="text-rose-500 flex items-center"><i data-lucide="arrow-down-right" class="w-3 h-3"></i>-${l.monthOutflow}</span>
+        </div>
+        <!-- 内部填充条 -->
+        <div class="mt-2 h-1.5 rounded-full bg-white border ${c.border} overflow-hidden">
+          <div class="h-full ${c.bgSolid}" style="width: ${pctOfTotal}%"></div>
+        </div>
+      </div>
+    `;
+    if (idx < conv.length) {
+      const cv = conv[idx];
+      const colorMap = { good: 'bg-emerald-500 text-white', warn: 'bg-amber-500 text-white', bad: 'bg-rose-500 text-white' };
+      html += `
+        <div class="flex flex-col items-center justify-center px-1">
+          <div class="text-[10px] text-slate-400 mb-1">转化</div>
+          <div class="px-2 py-1 rounded-full text-xs font-bold tabular-nums ${colorMap[cv.band]}">${cv.rate.toFixed(0)}%</div>
+          <div class="text-slate-300 text-xl mt-1">→</div>
+        </div>
+      `;
+    }
+  });
+  wrap.innerHTML = html;
+}
+
+// ====== 4. 渲染 5 层健康卡 ======
+function renderLayerCards() {
+  const wrap = document.getElementById('layerCards');
+  let html = '';
+  LAYER_DATA.forEach(l => {
+    const c = COLOR_MAP[l.color];
+    let metricsHtml = '';
+    l.health.forEach(m => {
+      if (m.fmt === 'spark') {
+        const max = Math.max(...m.trend);
+        const min = Math.min(...m.trend);
+        const points = m.trend.map((v, i) => {
+          const x = (i / (m.trend.length - 1)) * 100;
+          const y = 30 - ((v - min) / (max - min || 1)) * 25;
+          return `${x},${y}`;
+        }).join(' ');
+        metricsHtml += `
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-slate-500">${m.label}</span>
+            <div class="flex items-center gap-1.5">
+              <svg width="48" height="20" class="sparkline" viewBox="0 0 100 30">
+                <polyline points="${points}" stroke="#10b981" />
+              </svg>
+              <span class="font-semibold text-slate-700">${m.value}</span>
+            </div>
+          </div>
+        `;
+      } else {
+        const isPct = m.fmt === 'pct';
+        const display = isPct ? `${m.value}%` : m.value;
+        const ratio = isPct ? Math.min(100, m.value) : Math.min(100, (m.value / (m.bench * 1.5)) * 100);
+        const ok = isPct ? m.value >= m.bench : (m.warn ? m.value <= m.bench : m.value >= m.bench);
+        const barColor = m.warn ? 'bg-rose-500' : (ok ? c.bgSolid : 'bg-amber-500');
+        metricsHtml += `
+          <div>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-500">${m.label}</span>
+              <span class="font-semibold tabular-nums ${m.warn ? 'text-rose-600' : (ok ? c.text : 'text-amber-600')}">${display}</span>
+            </div>
+            <div class="mt-1 h-1.5 rounded-full bg-slate-100 overflow-hidden">
+              <div class="h-full ${barColor}" style="width: ${ratio}%"></div>
+            </div>
+          </div>
+        `;
+      }
+    });
+    html += `
+      <div class="rounded-2xl bg-white border border-slate-200 p-4 shadow-sm hover:shadow-md transition flex flex-col">
+        <!-- header -->
+        <div class="flex items-start justify-between mb-3">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-xs font-bold ${c.bg} ${c.text}">${l.short}</span>
+              <span class="text-sm font-semibold text-slate-800">${l.name}</span>
+            </div>
+            <div class="text-[11px] text-slate-400 mt-0.5">${l.desc}</div>
+          </div>
+        </div>
+        <!-- count -->
+        <div class="flex items-baseline gap-1 mb-3">
+          <span class="text-2xl font-bold tabular-nums ${c.text}">${l.count.toLocaleString()}</span>
+          <span class="text-xs text-slate-400">家</span>
+        </div>
+        <!-- metrics -->
+        <div class="space-y-2.5 flex-1">${metricsHtml}</div>
+        <!-- bottleneck + cta -->
+        <div class="mt-3 pt-3 border-t border-slate-100">
+          <div class="text-[11px] text-slate-500 mb-1">Top 卡点</div>
+          <div class="text-xs font-medium text-rose-600 mb-2 leading-snug">${l.bottleneck}</div>
+          <button class="w-full text-xs font-medium ${c.text} hover:underline flex items-center justify-end gap-1" onclick="console.log('enter layer ${l.key}')">
+            进入该层 <i data-lucide="arrow-right" class="w-3 h-3"></i>
+          </button>
+        </div>
+      </div>
+    `;
+  });
+  wrap.innerHTML = html;
+}
+
+// ====== 5. 街道 / 领域分布 (含 Layer 切片) ======
+const STREETS = ['临空港经开区','吴家山街道','国家网安基地','金银湖街道','径河街道','将军路街道','慈惠街道','走马岭街道','新沟镇街道','东山街道'];
+const FIELDS = ['电子信息','先进制造与自动化','新材料','生物与新医药','新能源与节能','高技术服务','资源与环境','航空航天'];
+// 不同 Layer 的分布数据 (mock，原型用)
+const STREET_DATA = {
+  all: [320, 268, 245, 198, 176, 152, 138, 125, 118, 100],
+  L2:  [78, 62, 55, 48, 42, 38, 32, 28, 18, 11],
+  L3:  [38, 28, 24, 20, 18, 16, 14, 12, 10, 6],
+  L4:  [16, 12, 10, 9, 8, 7, 6, 5, 3, 2],
+  L34: [54, 40, 34, 29, 26, 23, 20, 17, 13, 8], // L3 + L4 默认
+};
+const FIELD_DATA = {
+  all: [430, 326, 245, 198, 176, 168, 132, 78],
+  L2:  [98, 82, 65, 48, 42, 38, 28, 11],
+  L3:  [42, 38, 28, 22, 18, 16, 14, 8],
+  L4:  [18, 16, 12, 10, 8, 7, 5, 2],
+  L34: [60, 54, 40, 32, 26, 23, 19, 10],
+};
+
+const SLICE_OPTIONS = [
+  { key: 'all', label: '全部', color: 'slate' },
+  { key: 'L2',  label: 'L2',  color: 'sky' },
+  { key: 'L3',  label: 'L3',  color: 'blue' },
+  { key: 'L4',  label: 'L4',  color: 'indigo' },
+  { key: 'L34', label: 'L3+L4 (默认)', color: 'purple' },
+];
+
+let currentStreetSlice = 'L34';
+let currentFieldSlice = 'L34';
+let streetChart, fieldChart, ageChart;
+
+function renderSlicer(elId, current, onChange) {
+  const wrap = document.getElementById(elId);
+  wrap.innerHTML = SLICE_OPTIONS.map(o =>
+    `<button data-key="${o.key}" class="slicer-btn px-2.5 py-1 rounded-md border ${current === o.key ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}">${o.label}</button>`
+  ).join('');
+  wrap.querySelectorAll('.slicer-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const k = b.getAttribute('data-key');
+      onChange(k);
+    });
+  });
+}
+
+function drawStreet() {
+  const data = STREET_DATA[currentStreetSlice];
+  streetChart.setOption({
+    grid: { left: 100, right: 30, top: 10, bottom: 10 },
+    xAxis: { type: 'value', show: false },
+    yAxis: { type: 'category', data: STREETS.slice().reverse(), axisTick: {show:false}, axisLine:{show:false}, axisLabel:{color:'#475569', fontSize:12} },
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 家' },
+    series: [{
+      type: 'bar',
+      data: data.slice().reverse(),
+      barWidth: 14,
+      itemStyle: { borderRadius: [0, 6, 6, 0], color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#a5b4fc'},{offset:1,color:'#6366f1'}]) },
+      label: { show: true, position: 'right', color: '#475569', fontSize: 11, fontWeight: 600 },
+    }],
+  }, true);
+}
+function drawField() {
+  const data = FIELD_DATA[currentFieldSlice];
+  fieldChart.setOption({
+    legend: { bottom: 0, type: 'scroll', textStyle: {color:'#475569', fontSize:11} },
+    tooltip: { trigger: 'item', formatter: '{b}: {c} 家 ({d}%)' },
+    color: ['#6366f1','#3b82f6','#10b981','#f59e0b','#ec4899','#06b6d4','#a855f7','#84cc16'],
+    series: [{
+      type: 'pie',
+      radius: ['50%', '72%'],
+      center: ['50%', '46%'],
+      avoidLabelOverlap: true,
+      label: { show: true, formatter: '{b}\n{d}%', fontSize: 11, color: '#475569' },
+      labelLine: { length: 6, length2: 6 },
+      data: FIELDS.map((f, i) => ({ name: f, value: data[i] })),
+    }],
+  }, true);
+}
+function drawAge() {
+  ageChart.setOption({
+    grid: { left: 40, right: 20, top: 20, bottom: 30 },
+    xAxis: { type: 'category', data: ['1-3年','3-5年','5-8年','8-15年','15+年'], axisLine:{lineStyle:{color:'#cbd5e1'}}, axisLabel:{color:'#475569'} },
+    yAxis: { type: 'value', splitLine:{lineStyle:{color:'#f1f5f9'}}, axisLabel:{color:'#94a3b8'} },
+    tooltip: { trigger: 'axis' },
+    series: [{
+      type: 'bar', barWidth: 36,
+      data: [42, 78, 96, 64, 28],
+      itemStyle: { borderRadius: [6, 6, 0, 0], color: new echarts.graphic.LinearGradient(0,1,0,0,[{offset:0,color:'#c7d2fe'},{offset:1,color:'#6366f1'}]) },
+      label: { show: true, position: 'top', color: '#475569', fontSize: 11, fontWeight: 600 },
+    }],
+  });
+}
+
+// ====== 6. 行动中心数据 (mock) ======
+const L4_TARGETS = [
+  { name: '武汉云途智能科技有限公司', tier: 'A', willingness: 'strong', gap: '材料 90% 齐备 · 仅缺成果转化证明', street: '国家网安基地' },
+  { name: '武汉禾元生物科技股份有限公司', tier: 'A', willingness: 'strong', gap: '指标全达标 · 4 月底前可申报', street: '临空港经开区' },
+  { name: '武汉光迅微电子有限公司', tier: 'B', willingness: 'moderate', gap: '高新收入占比 58% (差 2pt)', street: '吴家山街道' },
+  { name: '武汉卓远新材料科技有限公司', tier: 'B', willingness: 'strong', gap: '专项审计未启动', street: '将军路街道' },
+  { name: '武汉巨力气动有限公司', tier: 'A', willingness: 'hesitant', gap: '材料齐备 · 申报意愿待激发', street: '径河街道' },
+];
+const L5_RENEWALS = [
+  { name: '武汉深蓝股份有限公司', expire: '2026-08-15', urgent: true, trend: [4.2, 4.5, 4.8] },
+  { name: '武汉星网通信技术有限公司', expire: '2026-09-30', urgent: true, trend: [3.8, 4.0, 3.9] },
+  { name: '武汉高远生物医药有限公司', expire: '2026-10-12', urgent: true, trend: [5.1, 5.3, 5.6] },
+  { name: '武汉智擎机器人有限公司', expire: '2026-11-20', urgent: false, trend: [4.0, 4.2, 4.1] },
+  { name: '武汉绿源新能源有限公司', expire: '2026-12-08', urgent: false, trend: [3.5, 3.8, 4.0] },
+];
+const L34_NEAR = [
+  { name: '武汉数链科技有限公司', missing: '缺 1 项发明专利', gap: '其余 6 项达标', currentTier: 'B' },
+  { name: '武汉精测半导体有限公司', missing: '研发占比 4.2% (差 0.8pt)', gap: '其余 6 项达标', currentTier: 'B' },
+  { name: '武汉绿能环保科技有限公司', missing: '科技人员占比 9.1% (差 0.9pt)', gap: '其余 6 项达标', currentTier: 'A' },
+  { name: '武汉康泰生物有限公司', missing: '高新收入占比 56% (差 4pt)', gap: '其余 6 项达标', currentTier: 'B' },
+  { name: '武汉锐捷智控有限公司', missing: '缺成果转化证明 2 项', gap: '其余 6 项达标', currentTier: 'A' },
+];
+
+const TIER_COLOR = {
+  A: 'bg-emerald-100 text-emerald-700 border-emerald-200',
+  B: 'bg-blue-100 text-blue-700 border-blue-200',
+  C: 'bg-amber-100 text-amber-700 border-amber-200',
+  D: 'bg-slate-100 text-slate-600 border-slate-200',
+};
+const WILL_COLOR = {
+  strong: { dot: 'bg-emerald-500', label: '强' },
+  moderate: { dot: 'bg-teal-400', label: '中' },
+  hesitant: { dot: 'bg-amber-400', label: '观望' },
+  refused: { dot: 'bg-rose-500', label: '拒绝' },
+  unknown: { dot: 'bg-slate-300', label: '未知' },
+};
+
+function renderActionCenter() {
+  // L4 重点
+  document.getElementById('actionL4').innerHTML = L4_TARGETS.map(t => `
+    <div class="rounded-xl border border-slate-200 p-3 hover:border-indigo-300 hover:bg-indigo-50/30 transition cursor-pointer" onclick="console.log('open ${t.name}')">
+      <div class="flex items-start justify-between gap-2">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-bold px-1.5 py-0.5 rounded border ${TIER_COLOR[t.tier]}">${t.tier}</span>
+            <span class="font-semibold text-sm text-slate-800 truncate">${t.name}</span>
+          </div>
+          <div class="text-xs text-slate-500 mt-1 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full ${WILL_COLOR[t.willingness].dot}"></span>
+            <span>意愿:${WILL_COLOR[t.willingness].label}</span>
+            <span class="text-slate-300">·</span>
+            <span>${t.street}</span>
+          </div>
+          <div class="text-xs text-slate-600 mt-1.5 leading-snug">${t.gap}</div>
+        </div>
+        <button class="text-xs px-2 py-1 rounded-md bg-indigo-600 text-white font-medium hover:bg-indigo-700 flex-shrink-0">派单</button>
+      </div>
+    </div>
+  `).join('');
+
+  // L5 复审
+  document.getElementById('actionL5').innerHTML = L5_RENEWALS.map(t => {
+    const max = Math.max(...t.trend);
+    const min = Math.min(...t.trend);
+    const points = t.trend.map((v, i) => {
+      const x = (i / (t.trend.length - 1)) * 100;
+      const y = 24 - ((v - min) / (max - min || 1)) * 18;
+      return `${x},${y}`;
+    }).join(' ');
+    return `
+      <div class="rounded-xl border border-slate-200 p-3 hover:border-emerald-300 hover:bg-emerald-50/30 transition cursor-pointer" onclick="console.log('renewal ${t.name}')">
+        <div class="flex items-start justify-between gap-2">
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1.5">
+              ${t.urgent ? `<span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 border border-rose-200">紧急</span>` : ''}
+              <span class="font-semibold text-sm text-slate-800 truncate">${t.name}</span>
+            </div>
+            <div class="text-xs text-slate-500 mt-1">证书有效期 · ${t.expire}</div>
+            <div class="flex items-center gap-2 mt-1.5">
+              <svg width="60" height="24" class="sparkline" viewBox="0 0 100 28">
+                <polyline points="${points}" stroke="#10b981" />
+              </svg>
+              <span class="text-xs text-slate-500">3 年 R&D 占比</span>
+            </div>
+          </div>
+          <button class="text-xs px-2 py-1 rounded-md bg-emerald-600 text-white font-medium hover:bg-emerald-700 flex-shrink-0">复审</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // L3→L4
+  document.getElementById('actionL34').innerHTML = L34_NEAR.map(t => `
+    <div class="rounded-xl border border-slate-200 p-3 hover:border-blue-300 hover:bg-blue-50/30 transition cursor-pointer" onclick="console.log('path ${t.name}')">
+      <div class="flex items-start justify-between gap-2">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-bold px-1.5 py-0.5 rounded border ${TIER_COLOR[t.currentTier]}">${t.currentTier}</span>
+            <span class="font-semibold text-sm text-slate-800 truncate">${t.name}</span>
+          </div>
+          <div class="mt-1.5 inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-rose-50 text-rose-700 text-[11px] font-medium border border-rose-100">
+            <i data-lucide="alert-circle" class="w-3 h-3"></i>${t.missing}
+          </div>
+          <div class="text-xs text-slate-500 mt-1.5">${t.gap}</div>
+        </div>
+        <button class="text-xs px-2 py-1 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 flex-shrink-0">路径</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ====== 7. A/B/C/D 分档 grid (L3+L4 内部 = 264 家) ======
+const TIER_DATA = [
+  { tier: 'A', label: 'A 类', desc: '可立即申报', count: 32, min: 80, color: 'emerald' },
+  { tier: 'B', label: 'B 类', desc: '缺 1-2 项',   count: 89, min: 60, color: 'blue' },
+  { tier: 'C', label: 'C 类', desc: '中远期培育', count: 98, min: 40, color: 'amber' },
+  { tier: 'D', label: 'D 类', desc: '暂不推荐',   count: 45, min: 0,  color: 'slate' },
+];
+function renderTierGrid() {
+  const total = TIER_DATA.reduce((s, t) => s + t.count, 0);
+  document.getElementById('tierGrid').innerHTML = TIER_DATA.map(t => {
+    const c = COLOR_MAP[t.color];
+    const pct = ((t.count / total) * 100).toFixed(1);
+    return `
+      <div class="rounded-xl border ${c.border} ${c.bgSoft} p-4 hover:shadow-md transition cursor-pointer">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-base font-bold ${c.text}">${t.label}</span>
+          <span class="text-xs text-slate-500">${t.desc}</span>
+        </div>
+        <div class="flex items-baseline gap-1">
+          <span class="text-3xl font-bold tabular-nums ${c.text}">${t.count}</span>
+          <span class="text-sm text-slate-500">家</span>
+          <span class="ml-auto text-sm font-medium text-slate-500">${pct}%</span>
+        </div>
+        <div class="mt-2 h-1.5 rounded-full bg-white border ${c.border} overflow-hidden">
+          <div class="h-full ${c.bgSolid}" style="width: ${pct}%"></div>
+        </div>
+        <div class="mt-2 text-[11px] text-slate-500">综合评分 ≥ ${t.min}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ====== 8. 初始化 ======
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    renderFunnel();
+    renderLayerCards();
+    renderActionCenter();
+    renderTierGrid();
+  } catch(e) { console.error('[render error]', e); }
+
+  try {
+    streetChart = echarts.init(document.getElementById('streetChart'));
+    fieldChart = echarts.init(document.getElementById('fieldChart'));
+    ageChart = echarts.init(document.getElementById('ageChart'));
+  } catch(e) { console.error('[echarts init error]', e); }
+
+  function bindStreetSlicer() {
+    renderSlicer('streetSlicer', currentStreetSlice, k => {
+      currentStreetSlice = k;
+      bindStreetSlicer();
+      drawStreet();
+    });
+  }
+  function bindFieldSlicer() {
+    renderSlicer('fieldSlicer', currentFieldSlice, k => {
+      currentFieldSlice = k;
+      bindFieldSlicer();
+      drawField();
+    });
+  }
+  bindStreetSlicer();
+  bindFieldSlicer();
+
+  drawStreet();
+  drawField();
+  drawAge();
+
+  // Lucide 渲染：DOMContentLoaded 时 lucide CDN 可能还未就位，所以多次尝试
+  const tryRenderIcons = (retries = 5) => {
+    if (window.lucide && lucide.createIcons) {
+      lucide.createIcons();
+    } else if (retries > 0) {
+      setTimeout(() => tryRenderIcons(retries - 1), 100);
+    }
+  };
+  tryRenderIcons();
+  window.addEventListener('load', () => { if (window.lucide) lucide.createIcons(); });
+
+  // 监听窗口 resize
+  window.addEventListener('resize', () => {
+    streetChart.resize();
+    fieldChart.resize();
+    ageChart.resize();
+  });
+});
+
+// 让所有 render 函数注入 HTML 之后重渲一次 lucide (action center 内的 alert-circle 图标)
+// 必须延迟到 DOMContentLoaded 之后，因此放在初始化里调用一次即可。
+// 这里再补一道：如果切片按钮等以后增加图标，调用此函数即可，避免 MutationObserver 死循环。
+function _refreshLucideOnce() { if (window.lucide) lucide.createIcons(); }
+
+// (icons are explicitly re-rendered after each innerHTML mutation in the DOMContentLoaded handler)
+</script>
+</body>
+</html>

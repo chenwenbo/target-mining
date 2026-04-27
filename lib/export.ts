@@ -1,15 +1,13 @@
 import Papa from "papaparse";
-import type { ScoredCompany } from "./types";
+import type { Company } from "./types";
 
-export function exportToCSV(companies: ScoredCompany[], filename = "高企潜在标的名单.csv") {
+export function exportToCSV(companies: Company[], filename = "高企潜在标的名单.csv") {
   const rows = companies.map((c) => ({
     企业名称: c.name,
     统一社会信用代码: c.creditCode,
     所在街道园区: c.street,
     所属领域: c.techField ?? "未分类",
     细分行业: c.industry,
-    综合评分: c.score.total,
-    置信度分档: `${c.score.tier} 类`,
     注册资本万元: c.registeredCapital,
     参保人数: c.employees,
     研发人员数: c.rdEmployees,

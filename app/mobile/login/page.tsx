@@ -49,16 +49,7 @@ export default function LoginPage() {
                 {v.name[0]}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-gray-800 text-sm">{v.name}</span>
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${
-                    v.role === "street_officer"
-                      ? "bg-amber-100 text-amber-700"
-                      : "bg-purple-100 text-purple-700"
-                  }`}>
-                    {v.role === "street_officer" ? "街道办" : "科技人员"}
-                  </span>
-                </div>
+                <div className="font-medium text-gray-800 text-sm">{v.name}</div>
                 <div className="text-xs text-gray-400 truncate mt-0.5">{v.dept}</div>
               </div>
               {selectedId === v.id && (

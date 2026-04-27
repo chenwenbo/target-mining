@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { getAllTasks } from "@/lib/mock-data";
 import { getAllRenewalTasks } from "@/lib/renewal-data";
-import TierBadge from "@/components/ui/TierBadge";
 import RenewalTaskCard from "./RenewalTaskCard";
 import { cn } from "@/lib/cn";
 import { CalendarDays, User, ChevronRight, RefreshCcw } from "lucide-react";
@@ -27,7 +26,6 @@ function TaskCard({
   return (
     <div className="bg-white rounded-lg border border-[#e5e7eb] p-4 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] hover:shadow-[0_2px_8px_0_rgba(15,23,42,0.08)] transition-shadow">
       <div className="flex items-start justify-between mb-2">
-        <TierBadge tier={task.tier} size="sm" />
         <span className={cn(
           "text-[10px] px-1.5 py-0.5 rounded-full font-medium",
           isOverdue ? "bg-red-50 text-red-600" : "bg-[#f7f8fa] text-[#94a3b8]"

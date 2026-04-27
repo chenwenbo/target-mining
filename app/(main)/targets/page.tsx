@@ -4,26 +4,23 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, Download, Send, Search, X } from "lucide-react";
 import { getPotentialTargets } from "@/lib/mock-data";
-import { scoreCompany } from "@/lib/scoring";
-import { useWeightsStore } from "@/store/weights";
-import TierBadge from "@/components/ui/TierBadge";
-import ScoreBar from "@/components/ui/ScoreBar";
+import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
-import type { Tier, Street, TechField, ScoredCompany } from "@/lib/types";
-import { STREETS, TECH_FIELDS } from "@/lib/types";
+import { saveDispatchedTask } from "@/lib/mobile-mock";
+import type { Street, TechField, Company, DeclarationWillingness, Visitor } from "@/lib/types";
+import { STREETS, TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 // ─── Filter state ────────────────────────────────────────────
 interface Filters {
   q: string;
-  tiers: Tier[];
   streets: Street[];
   fields: TechField[];
   ageRange: string[];
-  minScore: number;
-  maxScore: number;
   smeOnly: boolean;
   excludeRisk: boolean;
+  willingness: DeclarationWillingness[];
+  declarationType: ("新申报" | "复审")[];
 }
 
 const ALL_AGE_RANGES = ["1-3 年", "3-5 年", "5-8 年", "8-15 年", "15 年+"];
@@ -75,24 +72,15 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
         </span>
         <button
           onClick={() => onChange({
-            q: "", tiers: [], streets: [], fields: [], ageRange: [],
-            minScore: 0, maxScore: 100, smeOnly: false, excludeRisk: true,
+            q: "", streets: [], fields: [], ageRange: [],
+            smeOnly: false, excludeRisk: true,
+            willingness: [], declarationType: [],
           })}
           className="text-xs text-[#94a3b8] hover:text-blue-600"
         >
           重置
         </button>
       </div>
-
-      {section("置信度分档", (
-        <div className="flex flex-wrap gap-1.5">
-          {(["A","B","C","D"] as Tier[]).map((t) =>
-            pill(t + " 类", filters.tiers.includes(t), () =>
-              onChange({ ...filters, tiers: toggle(filters.tiers, t) })
-            )
-          )}
-        </div>
-      ))}
 
       {section("所属领域", (
         <div className="flex flex-wrap gap-1.5">
@@ -130,6 +118,26 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
         </div>
       ))}
 
+      {section("申报类型", (
+        <div className="flex flex-wrap gap-1.5">
+          {(["新申报", "复审"] as const).map((t) =>
+            pill(t, filters.declarationType.includes(t), () =>
+              onChange({ ...filters, declarationType: toggle(filters.declarationType, t) })
+            )
+          )}
+        </div>
+      ))}
+
+      {section("申报意愿", (
+        <div className="flex flex-wrap gap-1.5">
+          {(Object.keys(DECLARATION_WILLINGNESS_LABELS) as DeclarationWillingness[]).map((w) =>
+            pill(DECLARATION_WILLINGNESS_LABELS[w], filters.willingness.includes(w), () =>
+              onChange({ ...filters, willingness: toggle(filters.willingness, w) })
+            )
+          )}
+        </div>
+      ))}
+
       {section("其他", (
         <div className="space-y-2">
           <label className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer">
@@ -153,48 +161,44 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
 // ─── Main Page ───────────────────────────────────────────────
 function TargetsPageContent() {
   const searchParams = useSearchParams();
-  const { weights } = useWeightsStore();
 
   const [filters, setFilters] = useState<Filters>({
     q: searchParams.get("q") ?? "",
-    tiers: [],
     streets: [],
     fields: [],
     ageRange: [],
-    minScore: 0,
-    maxScore: 100,
     smeOnly: false,
     excludeRisk: true,
+    willingness: [],
+    declarationType: [],
   });
   const [selected, setSelected] = useState<Set<string>>(new Set());
-  const [sortBy, setSortBy] = useState<"score" | "name" | "employees">("score");
+  const [sortBy, setSortBy] = useState<"name" | "employees">("name");
+  const [dispatchTargets, setDispatchTargets] = useState<{ id: string; name: string; street: string }[] | null>(null);
 
-  // Score all companies
-  const allScored = useMemo(() => {
-    const raw = getPotentialTargets();
-    return raw.map((c) => ({ ...c, score: scoreCompany(c, weights) }));
-  }, [weights]);
+  const allCompanies = useMemo(() => getPotentialTargets(), []);
 
   // Apply filters
   const filtered = useMemo(() => {
-    return allScored
+    return allCompanies
       .filter((c) => {
         if (filters.q && !c.name.includes(filters.q) && !c.creditCode.includes(filters.q)) return false;
-        if (filters.tiers.length > 0 && !filters.tiers.includes(c.score.tier)) return false;
         if (filters.streets.length > 0 && !filters.streets.includes(c.street)) return false;
         if (filters.fields.length > 0 && (!c.techField || !filters.fields.includes(c.techField))) return false;
         if (filters.ageRange.length > 0 && !filters.ageRange.includes(getAgeRange(c.establishedAt))) return false;
         if (filters.smeOnly && !c.inSMEDatabase) return false;
         if (filters.excludeRisk && (c.risk.abnormal || c.risk.penalty)) return false;
+        if (filters.willingness.length > 0 && !filters.willingness.includes(c.declarationWillingness)) return false;
+        const dtype = c.alreadyCertified ? "复审" : "新申报";
+        if (filters.declarationType.length > 0 && !filters.declarationType.includes(dtype)) return false;
         return true;
       })
       .sort((a, b) => {
-        if (sortBy === "score") return b.score.total - a.score.total;
         if (sortBy === "name") return a.name.localeCompare(b.name);
         if (sortBy === "employees") return b.employees - a.employees;
         return 0;
       });
-  }, [allScored, filters, sortBy]);
+  }, [allCompanies, filters, sortBy]);
 
   function toggleSelect(id: string) {
     setSelected((prev) => {
@@ -212,19 +216,48 @@ function TargetsPageContent() {
     }
   }
 
+  function openDispatch(companies: Company[]) {
+    setDispatchTargets(companies.map((c) => ({
+      id: c.id,
+      name: c.name,
+      street: c.street,
+    })));
+  }
+
+  function handleDispatchConfirm(assignee: Visitor, notes: string) {
+    if (!dispatchTargets) return;
+    const today = new Date().toISOString().slice(0, 10);
+    const deadline = new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    dispatchTargets.forEach((t, i) => {
+      saveDispatchedTask({
+        id: `dispatch_${Date.now()}_${i}`,
+        companyId: t.id,
+        companyName: t.name,
+        assignee: assignee.name,
+        street: (assignee.street ?? t.street) as import("@/lib/types").Street,
+        status: "pending",
+        createdAt: today,
+        deadline,
+        notes,
+      });
+    });
+  }
+
   function handleExport() {
     const toExport = selected.size > 0
-      ? (filtered.filter((c) => selected.has(c.id)) as ScoredCompany[])
-      : (filtered as ScoredCompany[]);
+      ? filtered.filter((c) => selected.has(c.id))
+      : filtered;
     exportToCSV(toExport);
   }
 
   const activeFilterCount = [
-    filters.tiers.length, filters.streets.length, filters.fields.length,
+    filters.streets.length, filters.fields.length,
     filters.ageRange.length, filters.smeOnly ? 1 : 0,
+    filters.willingness.length, filters.declarationType.length,
   ].reduce((a, b) => a + b, 0);
 
   return (
+    <>
     <div className="-m-6 lg:-m-8 flex h-full" style={{ minHeight: "calc(100vh - 56px)" }}>
       <FilterPanel filters={filters} onChange={setFilters} />
 
@@ -258,14 +291,16 @@ function TargetsPageContent() {
               onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
               className="px-2.5 py-1.5 text-xs bg-[#f7f8fa] border border-[#e5e7eb] rounded-md text-[#475569] focus:outline-none"
             >
-              <option value="score">按评分排序</option>
               <option value="name">按名称排序</option>
               <option value="employees">按参保人数</option>
             </select>
             {selected.size > 0 && (
               <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md text-xs text-blue-700">
                 已选 {selected.size} 家
-                <button className="flex items-center gap-1 hover:text-blue-900">
+                <button
+                  onClick={() => openDispatch(filtered.filter((c) => selected.has(c.id)))}
+                  className="flex items-center gap-1 hover:text-blue-900"
+                >
                   <Send size={11} /> 派发
                 </button>
                 <button onClick={handleExport} className="flex items-center gap-1 hover:text-blue-900">
@@ -297,14 +332,14 @@ function TargetsPageContent() {
                   />
                 </th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">企业名称</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-44">综合评分</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">分档</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">领域</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 园区</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">专利总数</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">参保</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">注册资本</th>
-                <th className="px-3 py-3 w-16" />
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">申报类型</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">申报意愿</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">操作</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#f1f5f9]">
@@ -325,13 +360,13 @@ function TargetsPageContent() {
                       />
                     </td>
                     <td className="px-3 py-3">
-                      <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors">
-                        {c.name}
-                      </div>
-                      <div className="text-[11px] text-[#94a3b8] mt-0.5">{c.industry}</div>
+                      <Link href={`/targets/${c.id}`} className="block">
+                        <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors">
+                          {c.name}
+                        </div>
+                        <div className="text-[11px] text-[#94a3b8] mt-0.5">{c.industry}</div>
+                      </Link>
                     </td>
-                    <td className="px-3 py-3"><ScoreBar score={c.score.total} size="sm" /></td>
-                    <td className="px-3 py-3"><TierBadge tier={c.score.tier} size="sm" /></td>
                     <td className="px-3 py-3">
                       <span className="inline-block px-2 py-0.5 bg-[#f1f5f9] text-[#475569] text-xs rounded">
                         {c.techField ?? "—"}
@@ -346,13 +381,40 @@ function TargetsPageContent() {
                     </td>
                     <td className="px-3 py-3 tabular-nums text-[#475569]">{c.employees}</td>
                     <td className="px-3 py-3 tabular-nums text-[#475569] text-xs">{c.registeredCapital}万</td>
+                    <td className="px-3 py-3">
+                      <span className={cn(
+                        "inline-block px-2 py-0.5 text-xs rounded-full font-medium",
+                        c.alreadyCertified
+                          ? "bg-purple-50 text-purple-700 border border-purple-200"
+                          : "bg-blue-50 text-blue-700 border border-blue-200"
+                      )}>
+                        {c.alreadyCertified ? "复审" : "新申报"}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3">
+                      {(() => {
+                        const w = c.declarationWillingness;
+                        const styles: Record<string, string> = {
+                          strong: "bg-emerald-50 text-emerald-700 border-emerald-200",
+                          moderate: "bg-teal-50 text-teal-700 border-teal-200",
+                          hesitant: "bg-amber-50 text-amber-700 border-amber-200",
+                          refused: "bg-red-50 text-red-600 border-red-200",
+                          unknown: "bg-[#f1f5f9] text-[#94a3b8] border-[#e5e7eb]",
+                        };
+                        return (
+                          <span className={cn("inline-block px-2 py-0.5 text-xs rounded-full border", styles[w])}>
+                            {DECLARATION_WILLINGNESS_LABELS[w]}
+                          </span>
+                        );
+                      })()}
+                    </td>
                     <td className="px-3 py-3 text-right pr-4">
-                      <Link
-                        href={`/targets/${c.id}`}
-                        className="text-xs text-blue-600 hover:underline opacity-0 group-hover:opacity-100 transition-opacity"
+                      <span
+                        onClick={() => openDispatch([c])}
+                        className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer whitespace-nowrap"
                       >
-                        详情 ↗
-                      </Link>
+                        <Send size={11} /> 派发
+                      </span>
                     </td>
                   </tr>
                 );
@@ -367,6 +429,17 @@ function TargetsPageContent() {
         </div>
       </div>
     </div>
+
+    {dispatchTargets && (
+      <DispatchModal
+        targets={dispatchTargets}
+        onClose={() => setDispatchTargets(null)}
+        onConfirm={(assignee, notes) => {
+          handleDispatchConfirm(assignee, notes);
+        }}
+      />
+    )}
+    </>
   );
 }
 

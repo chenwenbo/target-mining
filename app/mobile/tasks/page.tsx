@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { getAllTasks } from "@/lib/mock-data";
 import { getCurrentVisitor, getVisitRecordsByTask, getTaskStatusOverrides } from "@/lib/mobile-mock";
-import { TIER_CONFIG } from "@/lib/tiers";
 import type { Task, Visitor, TaskStatus } from "@/lib/types";
 import { Search, ChevronRight, AlertCircle, CheckCircle2, Clock } from "lucide-react";
 
@@ -33,7 +32,6 @@ export default function TasksPage() {
   const [visitor, setVisitor] = useState<Visitor | null>(null);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<TaskStatus | "all">("all");
-  const [tierFilter, setTierFilter] = useState<string[]>([]);
 
   useEffect(() => {
     const v = getCurrentVisitor();
@@ -54,7 +52,6 @@ export default function TasksPage() {
   const filtered = allTasks.filter((t) => {
     if (search && !t.companyName.includes(search)) return false;
     if (statusFilter !== "all" && t.status !== statusFilter) return false;
-    if (tierFilter.length > 0 && !tierFilter.includes(t.tier)) return false;
     return true;
   });
 
@@ -116,34 +113,6 @@ export default function TasksPage() {
         ))}
       </div>
 
-      {/* 分级筛选 Chips */}
-      <div className="bg-white px-4 py-2 flex gap-2 border-b border-gray-100">
-        {(["A", "B", "C"] as const).map((tier) => {
-          const cfg = TIER_CONFIG[tier];
-          const active = tierFilter.includes(tier);
-          return (
-            <button
-              key={tier}
-              onClick={() =>
-                setTierFilter((prev) =>
-                  prev.includes(tier) ? prev.filter((t) => t !== tier) : [...prev, tier]
-                )
-              }
-              className={`text-xs px-2.5 py-1 rounded-full border font-medium transition-all ${
-                active ? `${cfg.bg} ${cfg.color} border-current` : "bg-gray-50 text-gray-400 border-gray-200"
-              }`}
-            >
-              {cfg.label}
-            </button>
-          );
-        })}
-        {tierFilter.length > 0 && (
-          <button onClick={() => setTierFilter([])} className="text-xs text-gray-400 ml-auto">
-            清除
-          </button>
-        )}
-      </div>
-
       {/* 任务列表 */}
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
         {filtered.length === 0 ? (
@@ -160,7 +129,6 @@ export default function TasksPage() {
 }
 
 function TaskCard({ task }: { task: Task & { status: TaskStatus } }) {
-  const cfg = TIER_CONFIG[task.tier];
   const records = getVisitRecordsByTask(task.id);
   const lastRecord = records.sort((a, b) => b.submittedAt.localeCompare(a.submittedAt))[0];
   const isOverdue = task.status !== "done" && new Date(task.deadline) < new Date();
@@ -170,9 +138,6 @@ function TaskCard({ task }: { task: Task & { status: TaskStatus } }) {
       <div className="bg-white rounded-xl p-4 border border-gray-100 active:scale-[0.98] transition-transform">
         <div className="flex items-start justify-between gap-2 mb-2">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${cfg.bg} ${cfg.color}`}>
-              {cfg.label}
-            </span>
             <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${STATUS_STYLES[task.status]}`}>
               {STATUS_LABELS[task.status]}
             </span>

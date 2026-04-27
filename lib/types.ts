@@ -28,8 +28,17 @@ export const STREETS = [
 
 export type Street = (typeof STREETS)[number];
 
-// ─── 置信度分档 ─────────────────────────────────────────────────
-export type Tier = "A" | "B" | "C" | "D";
+// ─── 申报类型 & 申报意愿 ─────────────────────────────────────────
+export type DeclarationType = "新申报" | "复审";
+export type DeclarationWillingness = "strong" | "moderate" | "hesitant" | "refused" | "unknown";
+
+export const DECLARATION_WILLINGNESS_LABELS: Record<DeclarationWillingness, string> = {
+  strong: "意愿强烈",
+  moderate: "基本意愿",
+  hesitant: "犹豫观望",
+  refused: "明确拒绝",
+  unknown: "未接触",
+};
 
 // ─── 企业原始数据 ───────────────────────────────────────────────
 export interface Company {
@@ -60,61 +69,18 @@ export interface Company {
     phone: string;
     email: string;
   };
+  declarationWillingness: DeclarationWillingness;
 }
 
-// ─── 打分权重 ───────────────────────────────────────────────────
-export interface Weights {
-  ip: number; // 知识产权 0-1
-  scale: number; // 规模与成长
-  field: number; // 领域匹配
-  rd: number; // 研发强度
-  compliance: number; // 合规
-  growth: number; // 成长性
-}
+// ─── 知识产权明细条目 ────────────────────────────────────────────
+export type IPType = "invention" | "utility" | "design" | "software";
 
-export const DEFAULT_WEIGHTS: Weights = {
-  ip: 0.30,
-  scale: 0.20,
-  field: 0.15,
-  rd: 0.15,
-  compliance: 0.10,
-  growth: 0.10,
-};
-
-// ─── 评分结果 ───────────────────────────────────────────────────
-export interface DimensionScore {
+export interface IPItem {
   name: string;
-  score: number; // 0-100 normalized
-  rawScore: number;
-  maxRaw: number;
-  weight: number;
-  hits: ScoreHit[];
-}
-
-export interface ScoreHit {
-  label: string;
-  value: string;
-  points: number;
-  passed: boolean;
-}
-
-export interface ScoreResult {
-  total: number; // 0-100
-  tier: Tier;
-  dimensions: DimensionScore[];
-  gaps: Gap[];
-}
-
-export interface Gap {
-  dimension: string;
-  description: string;
-  suggestion: string;
-  urgent: boolean;
-}
-
-// ─── 打过分的企业（用于展示）────────────────────────────────────
-export interface ScoredCompany extends Company {
-  score: ScoreResult;
+  number: string;
+  type: IPType;
+  status: string;
+  date: string; // YYYY-MM-DD
 }
 
 // ─── 任务 ───────────────────────────────────────────────────────
@@ -130,7 +96,6 @@ export interface Task {
   createdAt: string;
   deadline: string;
   notes: string;
-  tier: Tier;
 }
 
 // ─── 复审状态 ────────────────────────────────────────────────────
@@ -190,13 +155,10 @@ export interface RenewalGap {
 
 // ─── 走访摸排（移动端）──────────────────────────────────────────
 
-export type VisitorRole = "street_officer" | "tech_officer";
-
 export interface Visitor {
   id: string;
   name: string;
-  role: VisitorRole;
-  street: string | null; // 街道办同学有所属街道
+  street: string | null;
   dept: string;
 }
 

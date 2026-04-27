@@ -1,278 +1,562 @@
 "use client";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Target, CheckSquare, TrendingUp, Award, ArrowRight, ShieldAlert } from "lucide-react";
-import KPICard from "@/components/ui/KPICard";
-import TierBadge from "@/components/ui/TierBadge";
-import ScoreBar from "@/components/ui/ScoreBar";
+import { Target, Users, ArrowRight, AlertTriangle, Pencil, Check, X } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
-import type { ScoredCompany } from "@/lib/types";
 import type { getDashboardKPI } from "@/lib/mock-data";
 
 type KPI = ReturnType<typeof getDashboardKPI>;
 
-// ─── Street Distribution ──────────────────────────────────────
-function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) {
-  const sorted = Object.entries(byStreet).sort((a, b) => b[1] - a[1]);
-  const max = sorted[0]?.[1] ?? 1;
+// ─── 顶部三张 KPI 卡（横排）─────────────────────────────────
+function useEditableNumber(storageKey: string, defaultValue: number) {
+  const [value, setValue] = useState(defaultValue);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(String(defaultValue));
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(storageKey);
+    if (saved) setValue(Number(saved));
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (editing) inputRef.current?.focus();
+  }, [editing]);
+
+  function startEdit() { setDraft(String(value)); setEditing(true); }
+  function cancel() { setEditing(false); }
+  function commit() {
+    const val = parseInt(draft, 10);
+    if (!isNaN(val) && val > 0) { setValue(val); localStorage.setItem(storageKey, String(val)); }
+    setEditing(false);
+  }
+
+  return { value, editing, draft, setDraft, inputRef, startEdit, commit, cancel };
+}
+
+function TopKPI({ kpi }: { kpi: KPI }) {
+  const goal = useEditableNumber("dashboard_yearGoal", kpi.yearGoal);
+  const certified = useEditableNumber("dashboard_certified", kpi.certified);
+
+  const gap = Math.max(0, goal.value - certified.value);
+  const progressPct = Math.min(100, Math.round((certified.value / goal.value) * 100));
+  const totalTargets = kpi.newDeclTargets + kpi.renewalTotal;
+
   return (
-    <div className="space-y-2.5">
-      {sorted.map(([street, count]) => (
-        <div key={street} className="grid items-center gap-3" style={{ gridTemplateColumns: "130px 1fr 36px" }}>
-          <span className="text-sm text-[#0f172a] font-medium truncate">{street}</span>
-          <div className="h-2 bg-[#f1f5f9] rounded-full overflow-hidden">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all"
-              style={{ width: `${(count / max) * 100}%` }}
-            />
-          </div>
-          <span className="text-sm font-semibold text-[#475569] tabular-nums text-right">{count}</span>
+    <div className="grid grid-cols-3 gap-4 mb-4">
+      {/* ① 本年度申报目标 */}
+      <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5 flex items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+          <Target size={22} className="text-blue-600" />
         </div>
-      ))}
-    </div>
-  );
-}
-
-// ─── Tier Funnel ─────────────────────────────────────────────
-function TierFunnel({ byTier }: { byTier: Record<string, number> }) {
-  const total = Object.values(byTier).reduce((s, v) => s + v, 0);
-  const tiers = [
-    { key: "A", label: "A 类 · 可立即申报", desc: "≥ 80 分", bg: "bg-emerald-50", bar: "bg-emerald-500", text: "text-emerald-700", badge: "bg-emerald-500" },
-    { key: "B", label: "B 类 · 缺 1-2 项", desc: "60-79 分", bg: "bg-blue-50", bar: "bg-blue-500", text: "text-blue-700", badge: "bg-blue-500" },
-    { key: "C", label: "C 类 · 中远期培育", desc: "40-59 分", bg: "bg-amber-50", bar: "bg-amber-400", text: "text-amber-700", badge: "bg-amber-400" },
-    { key: "D", label: "D 类 · 暂不推荐", desc: "< 40 分", bg: "bg-slate-50", bar: "bg-slate-300", text: "text-slate-500", badge: "bg-slate-300" },
-  ] as const;
-
-  return (
-    <div className="space-y-3">
-      {tiers.map(({ key, label, desc, bg, bar, text, badge }) => {
-        const count = byTier[key] ?? 0;
-        const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-        return (
-          <div key={key} className={`rounded-lg p-3.5 border ${bg} relative overflow-hidden`}>
-            <div
-              className={`absolute inset-y-0 left-0 ${bar} opacity-10`}
-              style={{ width: `${pct}%` }}
-            />
-            <div className="relative flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <span className={`w-7 h-7 rounded-md ${badge} flex items-center justify-center text-white font-bold text-xs`}>{key}</span>
-                <div>
-                  <div className={`text-sm font-semibold ${text}`}>{label}</div>
-                  <div className="text-xs text-[#94a3b8]">{desc}</div>
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="text-xl font-bold text-[#0f172a] tabular-nums">{count}</span>
-                <span className="text-xs text-[#94a3b8] ml-1">{pct}%</span>
-              </div>
-            </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs text-[#94a3b8] font-medium">本年度申报目标</span>
+            {!goal.editing && (
+              <button onClick={goal.startEdit} className="text-[#cbd5e1] hover:text-blue-500 transition-colors" title="修改目标">
+                <Pencil size={11} />
+              </button>
+            )}
           </div>
-        );
-      })}
+          {goal.editing ? (
+            <div className="flex items-center gap-1.5 mt-1">
+              <input
+                ref={goal.inputRef}
+                type="number"
+                min={1}
+                value={goal.draft}
+                onChange={e => goal.setDraft(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter") goal.commit(); if (e.key === "Escape") goal.cancel(); }}
+                className="w-20 text-2xl font-bold text-[#0f172a] tabular-nums leading-none border-b-2 border-blue-500 outline-none bg-transparent"
+              />
+              <span className="text-sm text-[#94a3b8]">家</span>
+              <button onClick={goal.commit} className="text-emerald-500 hover:text-emerald-600 transition-colors ml-0.5"><Check size={14} /></button>
+              <button onClick={goal.cancel} className="text-[#94a3b8] hover:text-red-400 transition-colors"><X size={14} /></button>
+            </div>
+          ) : (
+            <div className="flex items-baseline gap-1.5 mt-1">
+              <span className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{goal.value}</span>
+              <span className="text-sm text-[#94a3b8]">家</span>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col items-end shrink-0">
+          <div className="flex items-center gap-1 justify-end">
+            <span className="text-[11px] text-[#94a3b8]">已认定</span>
+            {!certified.editing && (
+              <button onClick={certified.startEdit} className="text-[#cbd5e1] hover:text-emerald-500 transition-colors" title="修改已认定数量">
+                <Pencil size={10} />
+              </button>
+            )}
+          </div>
+          {certified.editing ? (
+            <div className="flex items-center gap-1 mt-0.5">
+              <input
+                ref={certified.inputRef}
+                type="number"
+                min={0}
+                value={certified.draft}
+                onChange={e => certified.setDraft(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter") certified.commit(); if (e.key === "Escape") certified.cancel(); }}
+                className="w-14 text-sm font-semibold text-emerald-600 tabular-nums border-b-2 border-emerald-500 outline-none bg-transparent text-right"
+              />
+              <span className="text-[11px] text-[#94a3b8]">家</span>
+              <button onClick={certified.commit} className="text-emerald-500 hover:text-emerald-600 transition-colors"><Check size={12} /></button>
+              <button onClick={certified.cancel} className="text-[#94a3b8] hover:text-red-400 transition-colors"><X size={12} /></button>
+            </div>
+          ) : (
+            <div className="text-base font-semibold text-emerald-600 tabular-nums leading-tight">{certified.value} 家</div>
+          )}
+          <div className="mt-1.5 w-20 h-1.5 rounded-full bg-[#f1f5f9] overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+          <div className="text-[10px] text-[#94a3b8] mt-1 tabular-nums">完成 {progressPct}%</div>
+        </div>
+      </div>
+
+      {/* ② 潜在标的总数（复审 / 新增） */}
+      <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5 flex items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center shrink-0">
+          <Users size={22} className="text-indigo-600" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-xs text-[#94a3b8] font-medium">潜在标的总数</div>
+          <div className="flex items-baseline gap-1.5 mt-1">
+            <span className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{totalTargets}</span>
+            <span className="text-sm text-[#94a3b8]">家</span>
+          </div>
+        </div>
+        <div className="flex items-stretch gap-3 shrink-0 border-l border-[#e5e7eb] pl-4">
+          <div className="text-center">
+            <div className="text-[11px] text-[#94a3b8]">复审</div>
+            <div className="text-lg font-semibold text-purple-600 tabular-nums leading-tight">{kpi.renewalTotal}</div>
+            <div className="text-[10px] text-[#94a3b8]">家</div>
+          </div>
+          <div className="text-center">
+            <div className="text-[11px] text-[#94a3b8]">新增</div>
+            <div className="text-lg font-semibold text-blue-600 tabular-nums leading-tight">{kpi.newDeclTargets}</div>
+            <div className="text-[10px] text-[#94a3b8]">家</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ③ 目标缺口数量 */}
+      <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] p-5 flex items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+          <AlertTriangle size={22} className="text-amber-600" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="text-xs text-[#94a3b8] font-medium">目标缺口数量</div>
+          <div className="flex items-baseline gap-1.5 mt-1">
+            <span className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{gap}</span>
+            <span className="text-sm text-[#94a3b8]">家</span>
+          </div>
+          <div className="text-[11px] text-[#64748b] mt-1.5">
+            需在年内再认定 <span className="font-semibold text-amber-700 tabular-nums">{gap}</span> 家方可达标
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-// ─── Enterprise Funnel ───────────────────────────────────────
+// ─── 企业漏斗（保留原有 SVG 设计，缩小适配窄列）──────────────
+type FunnelStage =
+  | { type: "single"; name: string; value: number; basis?: number }
+  | {
+      type: "split";
+      left: { name: string; value: number; basis: number };
+      right: { name: string; value: number; basis: number };
+      mergedBasis: number;
+    };
+
 function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
-  const stages = [
-    { name: "全区企业总数", actual: kpi.funnelTotalInDistrict, color: "#94a3b8" },
-    { name: "泛科技型企业", actual: kpi.funnelTech,            color: "#3b82f6" },
-    { name: "现有高企数",   actual: kpi.funnelCertified,       color: "#7c3aed" },
-    { name: "拟申报高企",   actual: kpi.funnelPlanned,         color: "#10b981" },
+  const stages: FunnelStage[] = [
+    { type: "single", name: "企业总数", value: kpi.funnelEnterpriseTotal },
+    { type: "single", name: "泛科技企业总数", value: kpi.funnelEnterpriseTech, basis: kpi.funnelEnterpriseTotal },
+    {
+      type: "split",
+      left: { name: "近三年有专利增长", value: kpi.funnelPatentGrowth, basis: kpi.funnelEnterpriseTech },
+      right: { name: "近三年企业人数增长", value: kpi.funnelEmployeeGrowth, basis: kpi.funnelEnterpriseTech },
+      mergedBasis: kpi.funnelGrowthUnion,
+    },
+    { type: "single", name: "有意愿的企业", value: kpi.funnelWilling, basis: kpi.funnelGrowthUnion },
+    { type: "single", name: "已申报的企业", value: kpi.funnelDeclared, basis: kpi.funnelWilling },
+    { type: "single", name: "认定成功的企业", value: kpi.funnelCertifiedFinal, basis: kpi.funnelDeclared },
   ];
 
-  const sqrtMax = Math.sqrt(kpi.funnelTotalInDistrict);
+  const VW = 660;
+  const VH = 360;
+  const CENTER = 230;
+  const W_TOP = 380;
+  const W_BOT = 110;
+  const Y_START = 16;
+  const LAYER_H = 50;
+  const GAP = 4;
+  const LC = stages.length;
 
-  const option = {
-    tooltip: {
-      trigger: "item",
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      formatter: (p: any) =>
-        `${p.name}<br/><b>${stages[p.dataIndex].actual.toLocaleString()} 家</b><br/>占全区 ${((stages[p.dataIndex].actual / kpi.funnelTotalInDistrict) * 100).toFixed(1)}%`,
-    },
-    series: [
-      {
-        type: "funnel",
-        sort: "none",
-        gap: 8,
-        left: "8%",
-        width: "84%",
-        top: 24,
-        bottom: 24,
-        min: 0,
-        max: sqrtMax,
-        minSize: "15%",
-        maxSize: "90%",
-        label: {
-          show: true,
-          position: "inside",
-          color: "#fff",
-          fontWeight: "bold",
-          fontSize: 13,
-          lineHeight: 22,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          formatter: (p: any) => {
-            const s = stages[p.dataIndex];
-            const pct = ((s.actual / kpi.funnelTotalInDistrict) * 100).toFixed(1);
-            return `${p.name}    ${s.actual.toLocaleString()} 家  (${pct}%)`;
-          },
-        },
-        itemStyle: { borderWidth: 0, borderColor: "transparent" },
-        data: stages.map((s) => ({
-          name: s.name,
-          value: Math.sqrt(s.actual),
-          itemStyle: { color: s.color },
-        })),
-      },
-    ],
-  };
+  const widthAt = (i: number) => W_TOP - (i / LC) * (W_TOP - W_BOT);
+  const yAt = (i: number) => Y_START + i * (LAYER_H + GAP);
+
+  const palette = [
+    { from: "#bae6fd", to: "#7dd3fc" },
+    { from: "#7dd3fc", to: "#38bdf8" },
+    { from: "#38bdf8", to: "#0ea5e9" },
+    { from: "#0ea5e9", to: "#0284c7" },
+    { from: "#0284c7", to: "#0369a1" },
+    { from: "#0369a1", to: "#075985" },
+  ];
+
+  const fmtPct = (num: number, den: number) =>
+    den > 0 ? `${((num / den) * 100).toFixed(1)}%` : "—";
+
+  const RIGHT_COL_X = 470;
 
   return (
-    <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden mb-6">
+    <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden flex flex-col">
       <div className="px-5 py-3.5 border-b border-[#e5e7eb]">
-        <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗总览</h2>
-        <p className="text-xs text-[#94a3b8] mt-0.5">全区企业 → 泛科技型 → 现有高企 → 拟申报（A 档）</p>
+        <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗</h2>
+        <p className="text-xs text-[#94a3b8] mt-0.5">企业总数 → 泛科技 → 近三年增长 → 意愿 → 申报 → 认定</p>
       </div>
-      <div className="px-4 pb-2">
-        <EChartsWrapper option={option} height={300} />
+      <div className="px-3 pt-3 pb-2 flex-1 flex items-center justify-center">
+        <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-auto" role="img" aria-label="企业漏斗">
+          <defs>
+            {palette.map((p, i) => (
+              <linearGradient key={i} id={`fn-grad-${i}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={p.from} />
+                <stop offset="100%" stopColor={p.to} />
+              </linearGradient>
+            ))}
+            <linearGradient id="fn-shine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {stages.map((stage, i) => {
+            const yT = yAt(i);
+            const yB = yT + LAYER_H;
+            const wT = widthAt(i);
+            const wB = widthAt(i + 1);
+            const xLT = CENTER - wT / 2;
+            const xRT = CENTER + wT / 2;
+            const xLB = CENTER - wB / 2;
+            const xRB = CENTER + wB / 2;
+            const fill = `url(#fn-grad-${i})`;
+            const splitGap = 5;
+
+            return (
+              <g key={i}>
+                {stage.type === "split" ? (
+                  <>
+                    <polygon
+                      points={`${xLT},${yT} ${CENTER - splitGap},${yT} ${CENTER - splitGap},${yB} ${xLB},${yB}`}
+                      fill={fill}
+                    />
+                    <polygon
+                      points={`${CENTER + splitGap},${yT} ${xRT},${yT} ${xRB},${yB} ${CENTER + splitGap},${yB}`}
+                      fill={fill}
+                    />
+                    <polygon
+                      points={`${xLT},${yT} ${CENTER - splitGap},${yT} ${CENTER - splitGap - (xLT - xLB) * 0.18},${yT + LAYER_H * 0.36} ${xLT + (xLT - xLB) * 0.18},${yT + LAYER_H * 0.36}`}
+                      fill="url(#fn-shine)"
+                    />
+                    <polygon
+                      points={`${CENTER + splitGap},${yT} ${xRT},${yT} ${xRT - (xRT - xRB) * 0.18},${yT + LAYER_H * 0.36} ${CENTER + splitGap + (xRT - xRB) * 0.18},${yT + LAYER_H * 0.36}`}
+                      fill="url(#fn-shine)"
+                    />
+                    <text x={(xLT + CENTER) / 2 + 1} y={yT + LAYER_H / 2 - 3} textAnchor="middle" fill="#fff" fontSize="10" fontWeight="600">
+                      {stage.left.name}
+                    </text>
+                    <text x={(xLT + CENTER) / 2 + 1} y={yT + LAYER_H / 2 + 13} textAnchor="middle" fill="#fff" fontSize="13" fontWeight="700">
+                      {stage.left.value.toLocaleString()}
+                    </text>
+                    <text x={(CENTER + xRT) / 2 - 1} y={yT + LAYER_H / 2 - 3} textAnchor="middle" fill="#fff" fontSize="10" fontWeight="600">
+                      {stage.right.name}
+                    </text>
+                    <text x={(CENTER + xRT) / 2 - 1} y={yT + LAYER_H / 2 + 13} textAnchor="middle" fill="#fff" fontSize="13" fontWeight="700">
+                      {stage.right.value.toLocaleString()}
+                    </text>
+                  </>
+                ) : (
+                  <>
+                    <polygon
+                      points={`${xLT},${yT} ${xRT},${yT} ${xRB},${yB} ${xLB},${yB}`}
+                      fill={fill}
+                    />
+                    <polygon
+                      points={`${xLT},${yT} ${xRT},${yT} ${xRT - (xRT - xRB) * 0.2},${yT + LAYER_H * 0.36} ${xLT + (xLT - xLB) * 0.2},${yT + LAYER_H * 0.36}`}
+                      fill="url(#fn-shine)"
+                    />
+                    <text x={CENTER} y={yT + LAYER_H / 2 - 2} textAnchor="middle" fill="#fff" fontSize="11" fontWeight="600">
+                      {stage.name}
+                    </text>
+                    <text x={CENTER} y={yT + LAYER_H / 2 + 15} textAnchor="middle" fill="#fff" fontSize="15" fontWeight="700">
+                      {stage.value.toLocaleString()}
+                    </text>
+                  </>
+                )}
+              </g>
+            );
+          })}
+
+          {stages.map((stage, i) => {
+            const yT = yAt(i);
+            const yB = yT + LAYER_H;
+            const yMid = (yT + yB) / 2;
+            const wT = widthAt(i);
+            const wB = widthAt(i + 1);
+            const rightEdge = CENTER + Math.max(wT, wB) / 2;
+
+            if (stage.type === "split") {
+              return (
+                <g key={`a${i}`}>
+                  <line x1={rightEdge} y1={yMid} x2={RIGHT_COL_X - 6} y2={yMid} stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="3 3" />
+                  <circle cx={rightEdge} cy={yMid} r="3" fill="#0ea5e9" />
+                  <rect x={RIGHT_COL_X} y={yMid - 18} width="160" height="16" rx="3" fill="#e0f2fe" />
+                  <text x={RIGHT_COL_X + 8} y={yMid - 6} fill="#0369a1" fontSize="10" fontWeight="600">
+                    专利转化 {fmtPct(stage.left.value, stage.left.basis)}
+                  </text>
+                  <rect x={RIGHT_COL_X} y={yMid + 2} width="160" height="16" rx="3" fill="#e0f2fe" />
+                  <text x={RIGHT_COL_X + 8} y={yMid + 14} fill="#0369a1" fontSize="10" fontWeight="600">
+                    人数转化 {fmtPct(stage.right.value, stage.right.basis)}
+                  </text>
+                </g>
+              );
+            }
+
+            const conv = stage.basis ? fmtPct(stage.value, stage.basis) : null;
+            return (
+              <g key={`a${i}`}>
+                <line x1={rightEdge} y1={yMid} x2={RIGHT_COL_X - 6} y2={yMid} stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="3 3" />
+                <circle cx={rightEdge} cy={yMid} r="3" fill="#0ea5e9" />
+                <rect x={RIGHT_COL_X} y={yMid - 10} width="70" height="20" rx="10" fill="#fff" stroke="#0ea5e9" strokeWidth="1.5" />
+                <text x={RIGHT_COL_X + 35} y={yMid + 4} textAnchor="middle" fill="#0369a1" fontSize="12" fontWeight="700">
+                  {stage.value.toLocaleString()}
+                </text>
+                {conv && (
+                  <text x={RIGHT_COL_X + 78} y={yMid + 4} fill="#0284c7" fontSize="10" fontWeight="600">
+                    转化 {conv}
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
       </div>
     </div>
   );
 }
 
-// ─── Top 10 Table ─────────────────────────────────────────────
-function Top10Table({ companies }: { companies: ScoredCompany[] }) {
+// ─── 卡片外壳 ────────────────────────────────────────────────
+function PanelCard({
+  title,
+  subtitle,
+  action,
+  children,
+}: {
+  title: string;
+  subtitle?: string;
+  action?: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="bg-[#f7f8fa] border-t border-b border-[#e5e7eb]">
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-10">#</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">企业名称</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-44">综合评分</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">分档</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">领域</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 园区</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">专利</th>
-            <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">参保</th>
-            <th className="px-3 py-3 w-16" />
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-[#f1f5f9]">
-          {companies.map((c, i) => (
-            <tr key={c.id} className="hover:bg-[#fafbfc] transition-colors group">
-              <td className="px-3 py-3.5">
-                <span className={`inline-block w-6 h-6 rounded text-center text-xs font-bold leading-6
-                  ${i === 0 ? "bg-amber-100 text-amber-700" : i === 1 ? "bg-slate-100 text-slate-600" : i === 2 ? "bg-orange-100 text-orange-700" : "text-[#94a3b8]"}`}>
-                  {i + 1}
-                </span>
-              </td>
-              <td className="px-3 py-3.5">
-                <span className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors">{c.name}</span>
-              </td>
-              <td className="px-3 py-3.5">
-                <ScoreBar score={c.score.total} size="sm" />
-              </td>
-              <td className="px-3 py-3.5">
-                <TierBadge tier={c.score.tier} size="sm" />
-              </td>
-              <td className="px-3 py-3.5">
-                <span className="inline-block px-2 py-0.5 bg-[#f1f5f9] text-[#475569] text-xs rounded">
-                  {c.techField ?? "—"}
-                </span>
-              </td>
-              <td className="px-3 py-3.5 text-[#475569]">{c.street}</td>
-              <td className="px-3 py-3.5 text-[#475569] tabular-nums">
-                {c.patents.invention + c.patents.utility + c.patents.design + c.software}
-              </td>
-              <td className="px-3 py-3.5 text-[#475569] tabular-nums">{c.employees}</td>
-              <td className="px-3 py-3.5">
-                <Link
-                  href={`/targets/${c.id}`}
-                  className="text-xs text-blue-600 hover:underline opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  详情 ↗
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden flex flex-col">
+      <div className="px-5 py-3.5 border-b border-[#e5e7eb] flex items-start justify-between">
+        <div>
+          <h2 className="text-sm font-semibold text-[#0f172a]">{title}</h2>
+          {subtitle && <p className="text-xs text-[#94a3b8] mt-0.5">{subtitle}</p>}
+        </div>
+        {action}
+      </div>
+      <div className="p-4 flex-1 flex flex-col">{children}</div>
     </div>
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────
-export default function DashboardClient({ kpi }: { kpi: KPI }) {
-  const donutOption = {
-    tooltip: { trigger: "item", formatter: "{b}: {c} 家 ({d}%)" },
-    legend: {
-      orient: "vertical", right: 8, top: "middle",
-      icon: "circle", itemWidth: 8, itemHeight: 8, itemGap: 10,
-      textStyle: { color: "#475569", fontSize: 12 },
-    },
-    series: [{
-      type: "pie",
-      radius: ["55%", "80%"],
-      center: ["34%", "50%"],
-      avoidLabelOverlap: false,
-      itemStyle: { borderColor: "#ffffff", borderWidth: 3, borderRadius: 4 },
-      label: {
-        show: true, position: "center",
-        formatter: `{total|${kpi.total}}\n{sub|潜在标的}`,
-        rich: {
-          total: { fontSize: 26, color: "#0f172a", fontWeight: "bold" },
-          sub: { fontSize: 12, color: "#94a3b8", padding: [6, 0, 0, 0] },
-        },
-      },
-      emphasis: { label: { show: true } },
-      labelLine: { show: false },
-      data: Object.entries(kpi.byField).map(([name, value], i) => ({
-        name, value,
-        itemStyle: { color: ["#2563eb","#7c3aed","#0891b2","#10b981","#f59e0b","#f97316","#ec4899"][i % 7] },
-      })),
-    }],
-  };
-
-  const barOption = {
-    grid: { left: 40, right: 16, top: 16, bottom: 30 },
-    tooltip: { trigger: "axis" },
+// ─── 流失高企分析（柱状图）─────────────────────────────────
+function ChurnAnalysis({ kpi }: { kpi: KPI }) {
+  const reasons = Object.entries(kpi.churnByReason).sort((a, b) => b[1] - a[1]);
+  const option = {
+    grid: { left: 36, right: 16, top: 28, bottom: 56 },
+    tooltip: { trigger: "axis", formatter: "{b}<br/>流失企业 {c} 家" },
     xAxis: {
       type: "category",
-      data: Object.keys(kpi.byAge),
+      data: reasons.map(([r]) => r),
       axisLine: { lineStyle: { color: "#e5e7eb" } },
       axisTick: { show: false },
-      axisLabel: { color: "#64748b", fontSize: 12 },
+      axisLabel: {
+        color: "#64748b",
+        fontSize: 11,
+        interval: 0,
+        rotate: 18,
+      },
     },
     yAxis: {
       type: "value",
       axisLine: { show: false },
       axisTick: { show: false },
       splitLine: { lineStyle: { color: "#f1f5f9" } },
-      axisLabel: { color: "#94a3b8", fontSize: 11 },
+      axisLabel: { color: "#94a3b8", fontSize: 10 },
+    },
+    series: [{
+      type: "bar",
+      data: reasons.map(([, v]) => v),
+      barWidth: 28,
+      itemStyle: {
+        color: {
+          type: "linear",
+          x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: "#fb7185" },
+            { offset: 1, color: "#e11d48" },
+          ],
+        },
+        borderRadius: [4, 4, 0, 0],
+      },
+      label: { show: true, position: "top", color: "#0f172a", fontSize: 11, fontWeight: "bold" },
+    }],
+  };
+
+  return (
+    <PanelCard title="流失高企分析" subtitle="近三年失效及主动放弃复审 · 按原因分布">
+      <div className="mb-2">
+        <div className="text-[11px] text-[#94a3b8]">累计流失</div>
+        <div className="flex items-baseline gap-1.5 mt-0.5">
+          <span className="text-3xl font-bold text-rose-600 tabular-nums leading-none">{kpi.churnTotal}</span>
+          <span className="text-sm text-[#94a3b8]">家</span>
+        </div>
+      </div>
+      <EChartsWrapper option={option} height={260} />
+    </PanelCard>
+  );
+}
+
+// ─── 街道园区分布 ────────────────────────────────────────────
+function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) {
+  const sorted = Object.entries(byStreet).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const max = sorted[0]?.[1] ?? 1;
+  return (
+    <PanelCard
+      title="街道 / 园区分布"
+      subtitle="按潜在标的数量排序"
+      action={<Link href="/targets" className="text-xs text-blue-600 hover:underline">全部 ▸</Link>}
+    >
+      <div className="space-y-2 flex-1">
+        {sorted.map(([street, count]) => (
+          <div key={street} className="grid items-center gap-2" style={{ gridTemplateColumns: "84px 1fr 26px" }}>
+            <span className="text-xs text-[#0f172a] font-medium truncate">{street}</span>
+            <div className="h-1.5 bg-[#f1f5f9] rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-400"
+                style={{ width: `${(count / max) * 100}%` }}
+              />
+            </div>
+            <span className="text-xs font-semibold text-[#475569] tabular-nums text-right">{count}</span>
+          </div>
+        ))}
+      </div>
+    </PanelCard>
+  );
+}
+
+// ─── 八大领域分布（紧凑环形图）────────────────────────────────
+function FieldDonut({ kpi }: { kpi: KPI }) {
+  const colors = ["#2563eb", "#7c3aed", "#0891b2", "#10b981", "#f59e0b", "#f97316", "#ec4899", "#14b8a6"];
+  const option = {
+    tooltip: { trigger: "item", formatter: "{b}: {c} 家 ({d}%)" },
+    legend: {
+      bottom: 0,
+      left: "center",
+      icon: "circle",
+      itemWidth: 7,
+      itemHeight: 7,
+      itemGap: 6,
+      textStyle: { color: "#475569", fontSize: 10 },
+      type: "scroll",
+    },
+    series: [{
+      type: "pie",
+      radius: ["52%", "76%"],
+      center: ["50%", "42%"],
+      avoidLabelOverlap: false,
+      itemStyle: { borderColor: "#ffffff", borderWidth: 2, borderRadius: 4 },
+      label: {
+        show: true,
+        position: "center",
+        formatter: `{total|${kpi.total}}\n{sub|潜在标的}`,
+        rich: {
+          total: { fontSize: 22, color: "#0f172a", fontWeight: "bold" },
+          sub: { fontSize: 11, color: "#94a3b8", padding: [4, 0, 0, 0] },
+        },
+      },
+      labelLine: { show: false },
+      data: Object.entries(kpi.byField).map(([name, value], i) => ({
+        name,
+        value,
+        itemStyle: { color: colors[i % colors.length] },
+      })),
+    }],
+  };
+  return (
+    <PanelCard title="八大领域分布" subtitle="国家重点支持高新技术领域">
+      <EChartsWrapper option={option} height={260} />
+    </PanelCard>
+  );
+}
+
+// ─── 成立年限分布（紧凑柱状）────────────────────────────────
+function AgeBar({ kpi }: { kpi: KPI }) {
+  const option = {
+    grid: { left: 36, right: 12, top: 24, bottom: 28 },
+    tooltip: { trigger: "axis" },
+    xAxis: {
+      type: "category",
+      data: Object.keys(kpi.byAge),
+      axisLine: { lineStyle: { color: "#e5e7eb" } },
+      axisTick: { show: false },
+      axisLabel: { color: "#64748b", fontSize: 10, interval: 0 },
+    },
+    yAxis: {
+      type: "value",
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { lineStyle: { color: "#f1f5f9" } },
+      axisLabel: { color: "#94a3b8", fontSize: 10 },
     },
     series: [{
       type: "bar",
       data: Object.values(kpi.byAge),
-      barWidth: 36,
+      barWidth: 22,
       itemStyle: {
         color: {
-          type: "linear", x: 0, y: 0, x2: 0, y2: 1,
+          type: "linear",
+          x: 0, y: 0, x2: 0, y2: 1,
           colorStops: [
             { offset: 0, color: "#60a5fa" },
             { offset: 1, color: "#2563eb" },
           ],
         },
-        borderRadius: [6, 6, 0, 0],
+        borderRadius: [4, 4, 0, 0],
       },
-      label: { show: true, position: "top", color: "#0f172a", fontSize: 12, fontWeight: "bold" },
+      label: { show: true, position: "top", color: "#0f172a", fontSize: 11, fontWeight: "bold" },
     }],
   };
+  return (
+    <PanelCard title="成立年限分布" subtitle="高企认定偏好 3-8 年期企业">
+      <EChartsWrapper option={option} height={260} />
+    </PanelCard>
+  );
+}
 
+// ─── 主组件 ───────────────────────────────────────────────────
+export default function DashboardClient({ kpi }: { kpi: KPI }) {
   return (
     <div>
-      {/* Page header */}
+      {/* Header */}
       <div className="flex items-end justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold text-[#0f172a]">2026 年高企申报 · 全景概览</h1>
@@ -291,135 +575,21 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
         </div>
       </div>
 
-      {/* Enterprise Funnel */}
-      <EnterpriseFunnel kpi={kpi} />
+      {/* 第一行：3 张 KPI 卡横排 */}
+      <TopKPI kpi={kpi} />
 
-      {/* KPI cards */}
-      <div className="grid grid-cols-5 gap-4 mb-4">
-        <KPICard
-          label="本年度申报目标"
-          value={kpi.yearGoal}
-          unit="家"
-          icon={Target}
-          iconColor="text-blue-600"
-          iconBg="bg-blue-50"
-        />
-        <KPICard
-          label="本年度已认定"
-          value={kpi.certified}
-          unit="家"
-          icon={CheckSquare}
-          iconColor="text-emerald-600"
-          iconBg="bg-emerald-50"
-        />
-        <KPICard
-          label="系统识别潜在标的"
-          value={kpi.total}
-          unit="家"
-          icon={Award}
-          iconColor="text-purple-600"
-          iconBg="bg-purple-50"
-        />
-        <KPICard
-          label="预计年度完成率"
-          value={kpi.estimatedCompletion}
-          unit="%"
-          icon={TrendingUp}
-          iconColor="text-amber-600"
-          iconBg="bg-amber-50"
-        />
-        <KPICard
-          label="复审预警企业"
-          value={kpi.renewalCritical}
-          unit="家"
-          icon={ShieldAlert}
-          iconColor="text-red-600"
-          iconBg="bg-red-50"
-          delta="需立即启动复审"
-          deltaUp={false}
-        />
+      {/* 第二行：企业漏斗 + 流失高企分析 */}
+      <div className="grid grid-cols-2 gap-4 mb-4">
+        <EnterpriseFunnel kpi={kpi} />
+        <ChurnAnalysis kpi={kpi} />
       </div>
 
-      {/* Renewal alert banner */}
-      <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-4 mb-6 flex items-center gap-4">
-        <div className="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center flex-shrink-0">
-          <ShieldAlert className="w-5 h-5 text-red-600" />
-        </div>
-        <div className="flex-1">
-          <div className="text-sm font-semibold text-red-800">复审预警</div>
-          <div className="text-xs text-red-600 mt-0.5">
-            {kpi.renewalTotal} 家已认定高企中，{kpi.renewalCritical} 家须在近期启动复审申报，{kpi.renewalApproaching} 家需提前筹备
-          </div>
-        </div>
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <span className="flex items-center gap-1.5 text-xs font-medium text-red-700 bg-red-100 px-2.5 py-1 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
-            紧急 {kpi.renewalCritical} 家
-          </span>
-          <span className="flex items-center gap-1.5 text-xs font-medium text-amber-700 bg-amber-100 px-2.5 py-1 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            预警 {kpi.renewalApproaching} 家
-          </span>
-          <Link
-            href="/renewal"
-            className="flex items-center gap-1 text-xs font-medium text-red-700 hover:text-red-900 border border-red-300 px-3 py-1.5 rounded-lg hover:bg-red-100 transition-colors"
-          >
-            进入复审管理 <ArrowRight size={12} />
-          </Link>
-        </div>
+      {/* 第三行：3 列分析卡 */}
+      <div className="grid grid-cols-3 gap-4">
+        <StreetDistribution byStreet={kpi.byStreet} />
+        <FieldDonut kpi={kpi} />
+        <AgeBar kpi={kpi} />
       </div>
-
-      {/* Street + Tier */}
-      <div className="grid gap-4 mb-4" style={{ gridTemplateColumns: "1.5fr 1fr" }}>
-        <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#e5e7eb] flex items-start justify-between">
-            <div>
-              <h2 className="text-sm font-semibold text-[#0f172a]">街道 / 园区分布</h2>
-              <p className="text-xs text-[#94a3b8] mt-0.5">按潜在标的数量排序 · 共 10 个辖区</p>
-            </div>
-            <Link href="/targets" className="text-xs text-blue-600 hover:underline">查看全部 ▸</Link>
-          </div>
-          <div className="p-5">
-            <StreetDistribution byStreet={kpi.byStreet} />
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#e5e7eb] flex items-start justify-between">
-            <div>
-              <h2 className="text-sm font-semibold text-[#0f172a]">置信度分档</h2>
-              <p className="text-xs text-[#94a3b8] mt-0.5">A / B / C / D 四档评级</p>
-            </div>
-            <Link href="/model" className="text-xs text-blue-600 hover:underline">调整规则 ▸</Link>
-          </div>
-          <div className="p-5">
-            <TierFunnel byTier={kpi.byTier} />
-          </div>
-        </div>
-      </div>
-
-      {/* Charts */}
-      <div className="grid gap-4 mb-4" style={{ gridTemplateColumns: "1.5fr 1fr" }}>
-        <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#e5e7eb]">
-            <h2 className="text-sm font-semibold text-[#0f172a]">八大领域分布</h2>
-            <p className="text-xs text-[#94a3b8] mt-0.5">国家重点支持高新技术领域</p>
-          </div>
-          <div className="p-4">
-            <EChartsWrapper option={donutOption} height={260} />
-          </div>
-        </div>
-        <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
-          <div className="px-5 py-4 border-b border-[#e5e7eb]">
-            <h2 className="text-sm font-semibold text-[#0f172a]">成立年限分布</h2>
-            <p className="text-xs text-[#94a3b8] mt-0.5">高企认定偏好 3-8 年期企业</p>
-          </div>
-          <div className="p-4">
-            <EChartsWrapper option={barOption} height={260} />
-          </div>
-        </div>
-      </div>
-
     </div>
   );
 }
