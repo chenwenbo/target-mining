@@ -11,6 +11,7 @@ import {
   ChevronRight,
   UsersRound,
   ClipboardList,
+  Sparkles,
 } from "lucide-react";
 import UserSwitcher from "./UserSwitcher";
 import { useCurrentPCUser } from "@/lib/account-mock";
@@ -49,6 +50,12 @@ const REGION_NAV: NavSection[] = [
         icon: UsersRound,
         title: "摸排账户分发配置",
       },
+    ],
+  },
+  {
+    section: "智能分析",
+    items: [
+      { href: "/agent", label: "AI 助手", icon: Sparkles, badge: "NEW" },
     ],
   },
 ];
