@@ -50,6 +50,16 @@ function toggle<T>(arr: T[], val: T): T[] {
 }
 
 // ─── Filter Panel ────────────────────────────────────────────
+
+// Semantic colors for willingness pills — mirrors the badge palette used elsewhere
+const WILLINGNESS_PILL: Record<DeclarationWillingness, { active: string; inactive: string }> = {
+  strong:   { active: "bg-emerald-600 text-white border-emerald-600", inactive: "bg-emerald-50 text-emerald-700 border-emerald-200 hover:border-emerald-400" },
+  moderate: { active: "bg-blue-600 text-white border-blue-600",       inactive: "bg-blue-50 text-blue-700 border-blue-200 hover:border-blue-400" },
+  hesitant: { active: "bg-amber-500 text-white border-amber-500",     inactive: "bg-amber-50 text-amber-700 border-amber-200 hover:border-amber-400" },
+  refused:  { active: "bg-red-500 text-white border-red-500",         inactive: "bg-red-50 text-red-700 border-red-200 hover:border-red-400" },
+  unknown:  { active: "bg-slate-500 text-white border-slate-500",     inactive: "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-400" },
+};
+
 function FilterPanel({
   filters,
   onChange,
@@ -76,8 +86,25 @@ function FilterPanel({
     );
   }
 
-  const section = (title: string, children: React.ReactNode) => (
-    <div className="mb-5">
+  function willingnessPill(key: DeclarationWillingness, label: string, active: boolean, onClick: () => void) {
+    const colors = WILLINGNESS_PILL[key];
+    return (
+      <button
+        key={key}
+        onClick={onClick}
+        className={cn(
+          "px-2.5 py-1 text-xs rounded-full border transition-colors",
+          active ? colors.active : colors.inactive
+        )}
+      >
+        {label}
+      </button>
+    );
+  }
+
+  // accent: Tailwind border-l color class, e.g. "border-l-blue-400"
+  const section = (title: string, accent: string, children: React.ReactNode) => (
+    <div className={cn("mb-5 pl-2.5 border-l-2", accent)}>
       <div className="text-xs font-semibold text-[#94a3b8] uppercase tracking-wide mb-2">{title}</div>
       {children}
     </div>
@@ -112,7 +139,7 @@ function FilterPanel({
         </div>
       )}
 
-      {section("所属领域", (
+      {section("所属领域", "border-l-blue-400", (
         <div className="flex flex-wrap gap-1.5">
           {TECH_FIELDS.map((f) =>
             pill(f.length > 6 ? f.slice(0, 6) + "…" : f, filters.fields.includes(f), () =>
@@ -122,13 +149,13 @@ function FilterPanel({
         </div>
       ))}
 
-      {!lockedStreet && section("所在街道 / 园区", (
+      {!lockedStreet && section("所在街道 / 园区", "border-l-slate-400", (
         <div className="space-y-1">
           {STREETS.map((s) => (
             <label key={s} className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer hover:text-[#0f172a]">
               <input
                 type="checkbox"
-                className="accent-blue-600"
+                className="accent-slate-500"
                 checked={filters.streets.includes(s)}
                 onChange={() => onChange({ ...filters, streets: toggle(filters.streets, s) })}
               />
@@ -138,17 +165,8 @@ function FilterPanel({
         </div>
       ))}
 
-      {section("成立年限", (
-        <div className="flex flex-wrap gap-1.5">
-          {ALL_AGE_RANGES.map((r) =>
-            pill(r, filters.ageRange.includes(r), () =>
-              onChange({ ...filters, ageRange: toggle(filters.ageRange, r) })
-            )
-          )}
-        </div>
-      ))}
 
-      {section("申报类型", (
+      {section("申报类型", "border-l-teal-400", (
         <div className="flex flex-wrap gap-1.5">
           {(["新申报", "复审"] as const).map((t) =>
             pill(t, filters.declarationType.includes(t), () =>
@@ -158,32 +176,16 @@ function FilterPanel({
         </div>
       ))}
 
-      {section("申报意愿", (
+      {section("申报意愿", "border-l-amber-400", (
         <div className="flex flex-wrap gap-1.5">
           {(Object.keys(DECLARATION_WILLINGNESS_LABELS) as DeclarationWillingness[]).map((w) =>
-            pill(DECLARATION_WILLINGNESS_LABELS[w], filters.willingness.includes(w), () =>
+            willingnessPill(w, DECLARATION_WILLINGNESS_LABELS[w], filters.willingness.includes(w), () =>
               onChange({ ...filters, willingness: toggle(filters.willingness, w) })
             )
           )}
         </div>
       ))}
 
-      {section("其他", (
-        <div className="space-y-2">
-          <label className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer">
-            <input type="checkbox" className="accent-blue-600"
-              checked={filters.smeOnly}
-              onChange={(e) => onChange({ ...filters, smeOnly: e.target.checked })} />
-            仅显示已入库科技型中小企业
-          </label>
-          <label className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer">
-            <input type="checkbox" className="accent-blue-600"
-              checked={filters.excludeRisk}
-              onChange={(e) => onChange({ ...filters, excludeRisk: e.target.checked })} />
-            排除风险企业
-          </label>
-        </div>
-      ))}
     </aside>
   );
 }
@@ -410,6 +412,7 @@ function TargetsPageContent() {
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">企业名称</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">领域</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 园区</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">成立年限</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">专利总数</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">参保</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">注册资本</th>
@@ -449,6 +452,7 @@ function TargetsPageContent() {
                       </span>
                     </td>
                     <td className="px-3 py-3 text-[#475569] text-xs">{c.street}</td>
+                    <td className="px-3 py-3 text-[#475569] text-xs">{getAgeRange(c.establishedAt)}</td>
                     <td className="px-3 py-3 tabular-nums text-[#475569]">
                       {totalPatents}
                       {c.patents.invention > 0 && (

@@ -1,7 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User, Loader2, ChevronRight, FileSearch, Sparkles, RotateCcw } from "lucide-react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import {
+  Send, Bot, User, Loader2, ChevronRight, FileSearch, Sparkles, RotateCcw,
+  BarChart3, MapPin, Target, Clock, AlertTriangle, CheckCircle2,
+  Microscope, TrendingUp, AlertOctagon, Lightbulb, Star, Building2,
+  LayoutDashboard, RefreshCw, ClipboardList, FlaskConical, ShieldAlert,
+  HelpCircle, Mic, MicOff, type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
   askAgent,
@@ -10,38 +16,67 @@ import {
   type SourceCard,
 } from "@/lib/agent-mock";
 
-// ─── Tag color map ────────────────────────────────────────────────────────────
+// ─── Icon maps ────────────────────────────────────────────────────────────────
 
-const TAG_COLORS: Record<string, string> = {
-  blue:   "bg-blue-50 text-blue-700 border-blue-200",
-  green:  "bg-emerald-50 text-emerald-700 border-emerald-200",
-  yellow: "bg-amber-50 text-amber-700 border-amber-200",
-  red:    "bg-red-50 text-red-700 border-red-200",
-  purple: "bg-violet-50 text-violet-700 border-violet-200",
-  gray:   "bg-slate-50 text-slate-600 border-slate-200",
+const QUESTION_ICON_MAP: Record<string, LucideIcon> = {
+  BarChart3, MapPin, Target, Clock, AlertTriangle, CheckCircle2,
+  Microscope, TrendingUp, AlertOctagon, Lightbulb, Star, Building2,
+};
+
+const CATEGORY_ICON_MAP: Record<string, LucideIcon> = {
+  overview: LayoutDashboard,
+  renewal:  RefreshCw,
+  task:     ClipboardList,
+  analysis: FlaskConical,
+  risk:     ShieldAlert,
+  company:  Building2,
+};
+
+// ─── Tag styles ───────────────────────────────────────────────────────────────
+
+const TAG_COLORS: Record<string, { badge: string; bar: string }> = {
+  blue:   { badge: "bg-blue-50 text-blue-700 border-blue-200",     bar: "bg-blue-400" },
+  green:  { badge: "bg-emerald-50 text-emerald-700 border-emerald-200", bar: "bg-emerald-400" },
+  yellow: { badge: "bg-amber-50 text-amber-700 border-amber-200",  bar: "bg-amber-400" },
+  red:    { badge: "bg-red-50 text-red-700 border-red-200",        bar: "bg-red-400" },
+  purple: { badge: "bg-violet-50 text-violet-700 border-violet-200", bar: "bg-violet-400" },
+  gray:   { badge: "bg-slate-50 text-slate-600 border-slate-200",  bar: "bg-slate-300" },
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function SourceCardItem({ source }: { source: SourceCard }) {
+function QuestionIcon({ name, size = 14 }: { name: string; size?: number }) {
+  const Icon = QUESTION_ICON_MAP[name] ?? HelpCircle;
+  return <Icon size={size} />;
+}
+
+function SourceCardItem({ source, index }: { source: SourceCard; index?: number }) {
+  const colors = TAG_COLORS[source.tagColor] ?? TAG_COLORS.gray;
   return (
-    <div className="border border-[#e5e7eb] rounded-lg p-3 bg-white hover:border-blue-200 hover:shadow-sm transition-all">
-      <div className="flex items-start justify-between gap-2 mb-1">
-        <span className="text-[13px] font-medium text-[#0f172a] leading-snug line-clamp-1">
-          {source.title}
-        </span>
-        <span className={cn("text-[11px] px-2 py-0.5 rounded-full border flex-shrink-0 font-medium", TAG_COLORS[source.tagColor])}>
-          {source.tag}
-        </span>
+    <div className="flex gap-3 p-3 rounded-xl border border-[#f1f5f9] bg-white hover:border-blue-200 hover:shadow-sm transition-all">
+      <div className={cn("w-0.5 flex-shrink-0 rounded-full self-stretch", colors.bar)} />
+      <div className="flex-1 min-w-0">
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <span className="text-[13px] font-medium text-[#0f172a] leading-snug line-clamp-2 flex-1">
+            {index !== undefined && (
+              <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#f1f5f9] text-[10px] font-bold text-[#94a3b8] mr-1.5 flex-shrink-0 align-middle">
+                {index + 1}
+              </span>
+            )}
+            {source.title}
+          </span>
+          <span className={cn("text-[10px] px-1.5 py-0.5 rounded-md border flex-shrink-0 font-medium", colors.badge)}>
+            {source.tag}
+          </span>
+        </div>
+        <div className="text-[11px] text-[#94a3b8] mb-1">{source.subtitle}</div>
+        <div className="text-[12px] text-[#64748b] leading-relaxed line-clamp-2">{source.snippet}</div>
       </div>
-      <div className="text-[11px] text-[#94a3b8] mb-1.5">{source.subtitle}</div>
-      <div className="text-[12px] text-[#64748b] leading-relaxed">{source.snippet}</div>
     </div>
   );
 }
 
 function MarkdownContent({ text }: { text: string }) {
-  // Minimal markdown: bold, tables, bullet lists, numbered lists, blockquotes, line breaks
   const lines = text.split("\n");
   const elements: React.ReactNode[] = [];
   let i = 0;
@@ -57,25 +92,21 @@ function MarkdownContent({ text }: { text: string }) {
 
   while (i < lines.length) {
     const line = lines[i];
-
-    // Blank line
     if (line.trim() === "") { i++; continue; }
 
-    // Blockquote
     if (line.startsWith("> ")) {
       elements.push(
-        <blockquote key={i} className="border-l-3 border-amber-400 pl-3 py-0.5 bg-amber-50/60 rounded-r text-[13px] text-[#92400e] italic my-1.5">
+        <blockquote key={i} className="border-l-2 border-amber-400 pl-3 py-0.5 bg-amber-50/60 rounded-r text-[13px] text-[#92400e] italic my-1.5">
           {parseInline(line.slice(2))}
         </blockquote>
       );
       i++; continue;
     }
 
-    // Table
     if (line.includes("|") && lines[i + 1]?.includes("---")) {
       const headers = line.split("|").map((h) => h.trim()).filter(Boolean);
       const bodyLines: string[][] = [];
-      i += 2; // skip separator
+      i += 2;
       while (i < lines.length && lines[i].includes("|")) {
         bodyLines.push(lines[i].split("|").map((c) => c.trim()).filter(Boolean));
         i++;
@@ -99,7 +130,6 @@ function MarkdownContent({ text }: { text: string }) {
       continue;
     }
 
-    // Heading
     if (line.startsWith("**") && line.endsWith("**")) {
       elements.push(
         <p key={i} className="text-[14px] font-semibold text-[#0f172a] mt-3 mb-1 first:mt-0">
@@ -109,7 +139,6 @@ function MarkdownContent({ text }: { text: string }) {
       i++; continue;
     }
 
-    // Bullet list
     if (line.startsWith("- ") || line.startsWith("• ")) {
       const bullets: string[] = [];
       while (i < lines.length && (lines[i].startsWith("- ") || lines[i].startsWith("• "))) {
@@ -129,7 +158,6 @@ function MarkdownContent({ text }: { text: string }) {
       continue;
     }
 
-    // Numbered list
     if (/^\d+\./.test(line)) {
       const items: string[] = [];
       while (i < lines.length && /^\d+\./.test(lines[i])) {
@@ -149,7 +177,6 @@ function MarkdownContent({ text }: { text: string }) {
       continue;
     }
 
-    // Normal paragraph
     elements.push(
       <p key={i} className="text-[13px] text-[#334155] leading-relaxed">
         {parseInline(line)}
@@ -186,6 +213,119 @@ function ThinkingBubble() {
   );
 }
 
+// ─── Right panel: Sources ─────────────────────────────────────────────────────
+
+function SourcesPanel({
+  sources,
+  isEmpty,
+}: {
+  sources: SourceCard[] | undefined;
+  isEmpty: boolean;
+}) {
+  const hasData = sources && sources.length > 0;
+
+  return (
+    <div className="flex flex-col flex-1 min-h-0">
+      {/* Header */}
+      <div className="flex-shrink-0 px-4 py-3 border-b border-[#f1f5f9]">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-6 rounded-md bg-[#f1f5f9] flex items-center justify-center">
+              <FileSearch size={13} className="text-[#64748b]" />
+            </div>
+            <span className="text-[13px] font-semibold text-[#334155]">引用来源</span>
+          </div>
+          {hasData && (
+            <span className="text-[11px] px-1.5 py-0.5 rounded-md bg-blue-50 text-blue-600 font-medium border border-blue-100">
+              {sources.length} 条
+            </span>
+          )}
+        </div>
+        <p className="text-[11px] text-[#94a3b8] mt-0.5 ml-8">最新回答检索到的数据记录</p>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto p-3 space-y-2">
+        {hasData ? (
+          sources.map((s, i) => <SourceCardItem key={s.id} source={s} index={i} />)
+        ) : isEmpty ? (
+          <div className="flex flex-col items-center justify-center h-full text-center py-10">
+            <div className="w-12 h-12 rounded-2xl bg-[#f8fafc] border border-[#e5e7eb] flex items-center justify-center mb-3">
+              <FileSearch size={20} className="text-[#cbd5e1]" />
+            </div>
+            <div className="text-[13px] font-medium text-[#94a3b8]">暂无引用来源</div>
+            <div className="text-[12px] text-[#cbd5e1] mt-1 max-w-[160px] leading-relaxed">
+              提问后，RAG 检索到的相关企业数据将显示在此处
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full py-10">
+            <div className="text-[13px] text-[#94a3b8]">该回答无具体引用来源</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── Right panel: Quick questions ────────────────────────────────────────────
+
+function QuickQuestionsPanel({
+  onAsk,
+  setActiveCategory,
+}: {
+  onAsk: (label: string, id: string) => void;
+  setActiveCategory: (key: string) => void;
+}) {
+  return (
+    <div className="flex-shrink-0 border-t border-[#f1f5f9]">
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[#f1f5f9]">
+        <div className="w-6 h-6 rounded-md bg-[#f1f5f9] flex items-center justify-center">
+          <HelpCircle size={13} className="text-[#64748b]" />
+        </div>
+        <span className="text-[13px] font-semibold text-[#334155]">快捷提问</span>
+      </div>
+
+      {/* Category list */}
+      <div className="overflow-y-auto max-h-[260px] p-3 space-y-3">
+        {QUESTION_CATEGORIES.map((cat) => {
+          const CatIcon = CATEGORY_ICON_MAP[cat.key] ?? HelpCircle;
+          return (
+            <div key={cat.key}>
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <CatIcon size={11} className="text-[#94a3b8] flex-shrink-0" />
+                <span className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide">
+                  {cat.label}
+                </span>
+              </div>
+              <div className="space-y-0.5">
+                {cat.questions.slice(0, 2).map((q) => (
+                  <button
+                    key={q.id}
+                    onClick={() => {
+                      setActiveCategory(cat.key);
+                      onAsk(q.label, q.id);
+                    }}
+                    className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left hover:bg-blue-50 transition-colors group"
+                  >
+                    <div className="flex-shrink-0 w-5 h-5 rounded-md bg-[#f8fafc] border border-[#f1f5f9] flex items-center justify-center group-hover:bg-blue-100 group-hover:border-blue-200 transition-colors">
+                      <QuestionIcon name={q.icon} size={11} />
+                    </div>
+                    <span className="text-[12px] text-[#475569] group-hover:text-blue-700 transition-colors line-clamp-1 flex-1">
+                      {q.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function AgentClient() {
@@ -193,10 +333,50 @@ export default function AgentClient() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>("overview");
+  const [isRecording, setIsRecording] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-  const latestAssistant = [...messages].reverse().find((m) => m.role === "assistant");
+  const toggleVoiceInput = useCallback(() => {
+    if (isRecording) {
+      recognitionRef.current?.stop();
+      setIsRecording(false);
+      return;
+    }
+
+    const SpeechRecognition =
+      (window as typeof window & { SpeechRecognition?: typeof window.SpeechRecognition; webkitSpeechRecognition?: typeof window.SpeechRecognition }).SpeechRecognition ??
+      (window as typeof window & { webkitSpeechRecognition?: typeof window.SpeechRecognition }).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("您的浏览器不支持语音输入，请使用 Chrome 或 Edge");
+      return;
+    }
+
+    const rec = new SpeechRecognition();
+    rec.lang = "zh-CN";
+    rec.continuous = false;
+    rec.interimResults = false;
+
+    rec.onresult = (e) => {
+      const transcript = e.results[0][0].transcript;
+      setInput((prev) => (prev ? prev + transcript : transcript));
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.style.height = "auto";
+          inputRef.current.style.height = Math.min(inputRef.current.scrollHeight, 120) + "px";
+        }
+      }, 0);
+    };
+
+    rec.onend = () => setIsRecording(false);
+    rec.onerror = () => setIsRecording(false);
+
+    recognitionRef.current = rec;
+    rec.start();
+    setIsRecording(true);
+  }, [isRecording]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -229,14 +409,17 @@ export default function AgentClient() {
   }
 
   const isEmpty = messages.length === 0;
+  const activeQuestions = QUESTION_CATEGORIES.find((c) => c.key === activeCategory)?.questions ?? [];
 
   return (
     <div className="flex h-full bg-[#f8fafc] overflow-hidden">
-      {/* ── Left: Chat panel ──────────────────────────────────────── */}
-      <div className="flex flex-col flex-1 min-w-0 border-r border-[#e5e7eb]">
+
+      {/* ── Left: Chat panel ──────────────────────────────────────────────── */}
+      <div className="flex flex-col flex-1 min-w-0">
+
         {/* Header */}
         <div className="flex-shrink-0 px-5 py-3.5 border-b border-[#e5e7eb] bg-white flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-sm">
               <Sparkles size={15} className="text-white" />
             </div>
@@ -257,9 +440,10 @@ export default function AgentClient() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+        <div className="flex-1 overflow-y-auto px-5 py-5 space-y-5">
           {isEmpty ? (
-            <div className="flex flex-col items-center justify-center h-full pb-16 select-none">
+            /* ── Empty state ── */
+            <div className="flex flex-col items-center justify-center h-full pb-10 select-none">
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg mb-4">
                 <Sparkles size={26} className="text-white" />
               </div>
@@ -269,45 +453,53 @@ export default function AgentClient() {
               </p>
 
               {/* Category tabs */}
-              <div className="mt-8 w-full max-w-lg">
-                <div className="flex gap-2 mb-3 overflow-x-auto pb-1 scrollbar-none">
-                  {QUESTION_CATEGORIES.map((cat) => (
-                    <button
-                      key={cat.key}
-                      onClick={() => setActiveCategory(cat.key)}
-                      className={cn(
-                        "flex-shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors border",
-                        activeCategory === cat.key
-                          ? "bg-blue-600 text-white border-blue-600"
-                          : "bg-white text-[#475569] border-[#e5e7eb] hover:border-blue-300 hover:text-blue-600"
-                      )}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
+              <div className="mt-8 w-full max-w-xl">
+                <div className="flex gap-2 mb-4 overflow-x-auto pb-1 scrollbar-none">
+                  {QUESTION_CATEGORIES.map((cat) => {
+                    const CatIcon = CATEGORY_ICON_MAP[cat.key] ?? HelpCircle;
+                    return (
+                      <button
+                        key={cat.key}
+                        onClick={() => setActiveCategory(cat.key)}
+                        className={cn(
+                          "flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-medium transition-colors border",
+                          activeCategory === cat.key
+                            ? "bg-blue-600 text-white border-blue-600"
+                            : "bg-white text-[#475569] border-[#e5e7eb] hover:border-blue-300 hover:text-blue-600"
+                        )}
+                      >
+                        <CatIcon size={12} />
+                        {cat.label}
+                      </button>
+                    );
+                  })}
                 </div>
-                <div className="space-y-2">
-                  {QUESTION_CATEGORIES.find((c) => c.key === activeCategory)?.questions.map((q) => (
+
+                {/* Question grid */}
+                <div className="grid grid-cols-2 gap-2">
+                  {activeQuestions.map((q) => (
                     <button
                       key={q.id}
                       onClick={() => sendQuestion(q.label, q.id)}
-                      className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-[#e5e7eb] bg-white hover:border-blue-300 hover:bg-blue-50/50 transition-all text-left group"
+                      className="flex items-center gap-2.5 px-3.5 py-3 rounded-xl border border-[#e5e7eb] bg-white hover:border-blue-300 hover:bg-blue-50/50 transition-all text-left group"
                     >
-                      <span className="text-lg flex-shrink-0">{q.icon}</span>
-                      <span className="text-[13px] text-[#334155] group-hover:text-blue-700 transition-colors flex-1">
+                      <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center group-hover:bg-blue-100 group-hover:border-blue-200 transition-colors">
+                        <QuestionIcon name={q.icon} size={14} />
+                      </div>
+                      <span className="text-[13px] text-[#334155] group-hover:text-blue-700 transition-colors flex-1 leading-snug line-clamp-2">
                         {q.label}
                       </span>
-                      <ChevronRight size={13} className="text-[#cbd5e1] group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                      <ChevronRight size={12} className="text-[#cbd5e1] group-hover:text-blue-400 transition-colors flex-shrink-0" />
                     </button>
                   ))}
                 </div>
               </div>
             </div>
           ) : (
+            /* ── Conversation ── */
             <>
               {messages.map((msg, idx) => (
                 <div key={idx} className={cn("flex gap-3 items-start", msg.role === "user" && "flex-row-reverse")}>
-                  {/* Avatar */}
                   <div className={cn(
                     "w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm",
                     msg.role === "assistant"
@@ -319,7 +511,6 @@ export default function AgentClient() {
                       : <User size={14} className="text-white" />}
                   </div>
 
-                  {/* Bubble */}
                   {msg.role === "user" ? (
                     <div className="bg-blue-600 text-white px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-[70%] text-[13px] leading-relaxed shadow-sm">
                       {msg.content}
@@ -328,22 +519,22 @@ export default function AgentClient() {
                     <div className="bg-white border border-[#e5e7eb] rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm max-w-[85%] space-y-3">
                       <MarkdownContent text={msg.content} />
 
-                      {/* Inline source citations */}
                       {msg.sources && msg.sources.length > 0 && (
-                        <div className="pt-1 border-t border-[#f1f5f9]">
+                        <div className="pt-2 border-t border-[#f1f5f9]">
                           <div className="flex items-center gap-1.5 mb-2">
                             <FileSearch size={12} className="text-[#94a3b8]" />
-                            <span className="text-[11px] text-[#94a3b8] font-medium">检索到 {msg.sources.length} 条相关记录</span>
+                            <span className="text-[11px] text-[#94a3b8] font-medium">
+                              检索到 {msg.sources.length} 条相关记录
+                            </span>
                           </div>
                           <div className="space-y-2">
-                            {msg.sources.map((s) => <SourceCardItem key={s.id} source={s} />)}
+                            {msg.sources.map((s, i) => <SourceCardItem key={s.id} source={s} index={i} />)}
                           </div>
                         </div>
                       )}
 
-                      {/* Follow-up suggestions */}
                       {msg.followUps && msg.followUps.length > 0 && (
-                        <div className="pt-1 border-t border-[#f1f5f9]">
+                        <div className="pt-2 border-t border-[#f1f5f9]">
                           <div className="text-[11px] text-[#94a3b8] font-medium mb-1.5">相关追问</div>
                           <div className="flex flex-wrap gap-1.5">
                             {msg.followUps.map((fu, fi) => (
@@ -370,16 +561,16 @@ export default function AgentClient() {
 
         {/* Input bar */}
         <div className="flex-shrink-0 px-5 pb-5 pt-3 bg-white border-t border-[#e5e7eb]">
-          {/* Quick pills — show top 3 from active category when not empty */}
           {!isEmpty && !loading && (
             <div className="flex gap-1.5 mb-2.5 overflow-x-auto pb-0.5 scrollbar-none">
-              {QUESTION_CATEGORIES.find((c) => c.key === activeCategory)?.questions.slice(0, 3).map((q) => (
+              {activeQuestions.slice(0, 3).map((q) => (
                 <button
                   key={q.id}
                   onClick={() => sendQuestion(q.label, q.id)}
-                  className="flex-shrink-0 text-[12px] px-3 py-1 rounded-full border border-[#e5e7eb] bg-white text-[#475569] hover:border-blue-300 hover:text-blue-700 transition-all"
+                  className="flex-shrink-0 flex items-center gap-1.5 text-[12px] px-3 py-1.5 rounded-full border border-[#e5e7eb] bg-white text-[#475569] hover:border-blue-300 hover:text-blue-700 transition-all"
                 >
-                  {q.icon} {q.label}
+                  <QuestionIcon name={q.icon} size={11} />
+                  {q.label}
                 </button>
               ))}
             </div>
@@ -401,6 +592,18 @@ export default function AgentClient() {
               }}
             />
             <button
+              onClick={toggleVoiceInput}
+              title={isRecording ? "停止录音" : "语音输入"}
+              className={cn(
+                "w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all shadow-sm",
+                isRecording
+                  ? "bg-red-500 text-white hover:bg-red-600 animate-pulse"
+                  : "bg-[#f1f5f9] text-[#94a3b8] hover:bg-[#e2e8f0] hover:text-[#475569]"
+              )}
+            >
+              {isRecording ? <MicOff size={16} /> : <Mic size={16} />}
+            </button>
+            <button
               onClick={() => sendQuestion(input)}
               disabled={!input.trim() || loading}
               className={cn(
@@ -419,63 +622,6 @@ export default function AgentClient() {
         </div>
       </div>
 
-      {/* ── Right: Sources & context panel ───────────────────────── */}
-      <div className="w-[300px] flex-shrink-0 flex flex-col bg-white overflow-hidden">
-        <div className="px-4 py-3.5 border-b border-[#e5e7eb]">
-          <div className="flex items-center gap-2">
-            <FileSearch size={14} className="text-[#94a3b8]" />
-            <span className="text-[13px] font-semibold text-[#334155]">引用来源</span>
-          </div>
-          <div className="text-[11px] text-[#94a3b8] mt-0.5">最新回答检索到的数据记录</div>
-        </div>
-
-        <div className="flex-1 overflow-y-auto p-3 space-y-2.5">
-          {latestAssistant?.sources && latestAssistant.sources.length > 0 ? (
-            <>
-              {latestAssistant.sources.map((s) => <SourceCardItem key={s.id} source={s} />)}
-              <div className="text-[11px] text-[#cbd5e1] text-center pt-1">
-                共 {latestAssistant.sources.length} 条相关记录
-              </div>
-            </>
-          ) : isEmpty ? (
-            <div className="flex flex-col items-center justify-center h-full text-center pb-10">
-              <div className="w-10 h-10 rounded-xl bg-[#f1f5f9] flex items-center justify-center mb-3">
-                <FileSearch size={18} className="text-[#cbd5e1]" />
-              </div>
-              <div className="text-[13px] text-[#94a3b8] font-medium">暂无引用来源</div>
-              <div className="text-[12px] text-[#cbd5e1] mt-1 max-w-[180px] leading-relaxed">
-                提问后，RAG 检索到的相关企业数据将显示在此处
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full text-center pb-10">
-              <div className="text-[13px] text-[#94a3b8]">该回答无具体引用来源</div>
-            </div>
-          )}
-        </div>
-
-        {/* Guide panel bottom: all question categories */}
-        <div className="border-t border-[#e5e7eb] p-3 space-y-3">
-          <div className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide">常用问题</div>
-          {QUESTION_CATEGORIES.map((cat) => (
-            <div key={cat.key}>
-              <div className="text-[11px] text-[#94a3b8] mb-1">{cat.label}</div>
-              <div className="space-y-1">
-                {cat.questions.slice(0, 2).map((q) => (
-                  <button
-                    key={q.id}
-                    onClick={() => { setActiveCategory(cat.key); sendQuestion(q.label, q.id); }}
-                    className="w-full text-left text-[12px] text-[#475569] hover:text-blue-700 flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-blue-50 transition-colors"
-                  >
-                    <span className="text-sm">{q.icon}</span>
-                    <span className="line-clamp-1">{q.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

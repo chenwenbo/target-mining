@@ -11,6 +11,7 @@ import {
   ChevronRight,
   UsersRound,
   ClipboardList,
+  ClipboardCheck,
   Sparkles,
 } from "lucide-react";
 import UserSwitcher from "./UserSwitcher";
@@ -26,52 +27,23 @@ interface NavItem {
   title?: string;
 }
 
-interface NavSection {
-  section: string;
-  items: NavItem[];
-}
-
-const REGION_NAV: NavSection[] = [
-  {
-    section: "工作台",
-    items: [
-      { href: "/", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
-      { href: "/targets", label: "标的池", icon: Target, badge: "246" },
-      { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
-      { href: "/surveys", label: "摸排统计", icon: ClipboardList },
-    ],
-  },
-  {
-    section: "配置",
-    items: [
-      {
-        href: "/admin/dispatch",
-        label: "账户分发",
-        icon: UsersRound,
-        title: "摸排账户分发配置",
-      },
-    ],
-  },
-  {
-    section: "智能分析",
-    items: [
-      { href: "/agent", label: "AI 助手", icon: Sparkles, badge: "NEW" },
-    ],
-  },
+const REGION_NAV: NavItem[] = [
+  { href: "/", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
+  { href: "/targets", label: "标的池", icon: Target, badge: "246" },
+  { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
+  { href: "/surveys", label: "摸排统计", icon: ClipboardList },
+  { href: "/hi-eval", label: "高企测评", icon: ClipboardCheck },
+  { href: "/admin/dispatch", label: "摸排小程序", icon: UsersRound, title: "摸排账户分发配置" },
+  { href: "/agent", label: "AI 助手", icon: Sparkles },
 ];
 
-const STREET_NAV: NavSection[] = [
-  {
-    section: "工作台",
-    items: [
-      { href: "/targets", label: "标的池", icon: Target },
-      { href: "/tasks", label: "任务管理", icon: CheckSquare },
-      { href: "/surveys", label: "摸排统计", icon: ClipboardList },
-    ],
-  },
+const STREET_NAV: NavItem[] = [
+  { href: "/targets", label: "标的池", icon: Target },
+  { href: "/tasks", label: "任务管理", icon: CheckSquare },
+  { href: "/surveys", label: "摸排统计", icon: ClipboardList },
 ];
 
-function navForRole(role: RoleType): NavSection[] {
+function navForRole(role: RoleType): NavItem[] {
   return role === "region_admin" ? REGION_NAV : STREET_NAV;
 }
 
@@ -80,7 +52,7 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const { user, mounted } = useCurrentPCUser();
   // 首屏 SSR 渲染区域管理员菜单，挂载后才切到真实角色，避免 hydration mismatch
-  const sections = navForRole(mounted ? user.role : "region_admin");
+  const items = navForRole(mounted ? user.role : "region_admin");
 
   return (
     <aside
@@ -113,56 +85,48 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 py-3 overflow-y-auto overflow-x-hidden">
-        {sections.map((section) => (
-          <div key={section.section} className="px-2 mb-1">
-            {!collapsed && (
-              <div className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide px-2 py-2 whitespace-nowrap">
-                {section.section}
-              </div>
-            )}
-            {collapsed && <div className="py-1" />}
-            {section.items.map((item) => {
-              const Icon = item.icon;
-              const active =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  title={collapsed ? item.title ?? item.label : item.title}
-                  className={cn(
-                    "flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm mb-0.5 transition-colors",
-                    collapsed && "justify-center px-0",
-                    active
-                      ? "bg-blue-50 text-blue-700 font-medium"
-                      : "text-[#475569] hover:bg-[#f7f8fa] hover:text-[#0f172a]"
-                  )}
-                >
-                  <Icon size={15} className="flex-shrink-0 opacity-80" />
-                  {!collapsed && (
-                    <>
-                      <span className="flex-1 whitespace-nowrap">{item.label}</span>
-                      {item.badge && (
-                        <span
-                          className={cn(
-                            "text-[11px] px-1.5 py-0.5 rounded-full font-medium",
-                            active
-                              ? "bg-white text-blue-700"
-                              : "bg-[#f1f5f9] text-[#64748b]"
-                          )}
-                        >
-                          {item.badge}
-                        </span>
-                      )}
-                    </>
-                  )}
-                </Link>
-              );
-            })}
-          </div>
-        ))}
+        <div className="px-2">
+          {items.map((item) => {
+            const Icon = item.icon;
+            const active =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                title={collapsed ? item.title ?? item.label : item.title}
+                className={cn(
+                  "flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm mb-0.5 transition-colors",
+                  collapsed && "justify-center px-0",
+                  active
+                    ? "bg-blue-50 text-blue-700 font-medium"
+                    : "text-[#475569] hover:bg-[#f7f8fa] hover:text-[#0f172a]"
+                )}
+              >
+                <Icon size={15} className="flex-shrink-0 opacity-80" />
+                {!collapsed && (
+                  <>
+                    <span className="flex-1 whitespace-nowrap">{item.label}</span>
+                    {item.badge && (
+                      <span
+                        className={cn(
+                          "text-[11px] px-1.5 py-0.5 rounded-full font-medium",
+                          active
+                            ? "bg-white text-blue-700"
+                            : "bg-[#f1f5f9] text-[#64748b]"
+                        )}
+                      >
+                        {item.badge}
+                      </span>
+                    )}
+                  </>
+                )}
+              </Link>
+            );
+          })}
+        </div>
       </nav>
 
       {/* Footer: 用户切换器 */}

@@ -236,8 +236,8 @@ function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
         <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗</h2>
         <p className="text-xs text-[#94a3b8] mt-0.5">企业总数 → 泛科技 → 近三年增长 → 意愿 → 申报 → 认定</p>
       </div>
-      <div className="px-3 pt-3 pb-2 flex-1 flex items-center justify-center">
-        <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-auto" role="img" aria-label="企业漏斗">
+      <div className="px-3 pt-3 pb-2 flex-1 min-h-0">
+        <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-full" role="img" aria-label="企业漏斗">
           <defs>
             {palette.map((p, i) => (
               <linearGradient key={i} id={`fn-grad-${i}`} x1="0" y1="0" x2="0" y2="1">
@@ -394,7 +394,7 @@ function PanelCard({
 
 // ─── 街道园区分布 ────────────────────────────────────────────
 function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) {
-  const sorted = Object.entries(byStreet).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const sorted = Object.entries(byStreet).sort((a, b) => b[1] - a[1]).slice(0, 10);
   const max = sorted[0]?.[1] ?? 1;
   return (
     <PanelCard
@@ -402,17 +402,17 @@ function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) 
       subtitle="按潜在标的数量排序"
       action={<Link href="/targets" className="text-xs text-blue-600 hover:underline">全部 ▸</Link>}
     >
-      <div className="space-y-2 flex-1">
+      <div className="space-y-3 flex-1">
         {sorted.map(([street, count]) => (
-          <div key={street} className="grid items-center gap-2" style={{ gridTemplateColumns: "84px 1fr 26px" }}>
-            <span className="text-xs text-[#0f172a] font-medium truncate">{street}</span>
-            <div className="h-1.5 bg-[#f1f5f9] rounded-full overflow-hidden">
+          <div key={street} className="grid items-center gap-3" style={{ gridTemplateColumns: "100px 1fr 32px" }}>
+            <span className="text-sm text-[#0f172a] font-medium truncate">{street}</span>
+            <div className="h-2.5 bg-[#f1f5f9] rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-blue-600 to-blue-400"
                 style={{ width: `${(count / max) * 100}%` }}
               />
             </div>
-            <span className="text-xs font-semibold text-[#475569] tabular-nums text-right">{count}</span>
+            <span className="text-sm font-semibold text-[#475569] tabular-nums text-right">{count}</span>
           </div>
         ))}
       </div>

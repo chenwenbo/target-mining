@@ -44,7 +44,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     acknowledgedGaps: ["研发费用台账需规范化", "需补充近三年财务审计报告"],
     keyObstacles: "财务账套尚未完全分离，需协调财务团队",
     followUpDate: "2026-05-10", companyCommitments: "承诺在5月底前完成账套整理",
-    nextSteps: ["发送申报材料清单", "联系中介机构对接", "5月初回访确认进度"],
+    nextSteps: ["申报材料清单与流程指导", "研发费用归集与加计扣除辅导", "财务规范化（事务所/审计对接）"],
     notes: "企业在网安基地有独立研发中心，条件较成熟", submittedAt: "2026-04-15T12:00:00",
   },
   {
@@ -55,7 +55,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     fieldVerified: { employeeCount: 86, rdEmployeeCount: 22, annualRevenue: "500w_2000w", rdExpenseRatio: "5_10pct", rdExpenseSource: "both", hasAccountingFirm: true, hasTechDept: true, mainProductDesc: "大数据分析与云计算平台" },
     acknowledgedGaps: [],
     followUpDate: "2026-04-20", companyCommitments: "4月底前完成材料整理并提交",
-    nextSteps: ["确认材料完整性", "协助网上申报系统注册", "跟踪审核进度"],
+    nextSteps: ["申报材料清单与流程指导"],
     notes: "已完成初审，材料齐全，已提交区局审核", submittedAt: "2026-04-02T16:00:00",
   },
   {
@@ -67,7 +67,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     acknowledgedGaps: ["研发费用占比偏低（约3.8%，需达5%）", "尚未聘请专业会计师事务所"],
     keyObstacles: "今年产值增长较快但研发费用增长慢，比例可能不达标",
     followUpDate: "2026-05-05", companyCommitments: "考虑追加研发投入或推迟至明年申报",
-    nextSteps: ["测算研发费用比例", "给出方案建议"],
+    nextSteps: ["研发费用归集与加计扣除辅导", "财务规范化（事务所/审计对接）"],
     notes: "需继续跟进，有一定风险", submittedAt: "2026-04-18T09:30:00",
   },
 
@@ -80,7 +80,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     fieldVerified: { employeeCount: 62, rdEmployeeCount: 28, annualRevenue: "500w_2000w", rdExpenseRatio: "above_10pct", rdExpenseSource: "both", hasAccountingFirm: true, hasTechDept: true, mainProductDesc: "量子加密通信设备及解决方案" },
     acknowledgedGaps: ["专利转化收入需进一步核实"],
     followUpDate: "2026-04-25", companyCommitments: "本周内完成专利清单整理",
-    nextSteps: ["协助核实高新技术产品收入占比", "督促完成专利清单"],
+    nextSteps: ["知识产权培育（专利/软著）", "申报材料清单与流程指导"],
     notes: "企业在准备专利清单，进展顺利", submittedAt: "2026-04-11T11:30:00",
   },
   {
@@ -92,7 +92,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     acknowledgedGaps: ["研发费用占比偏低", "高新产品收入认定需梳理"],
     keyObstacles: "管理层认为认定流程繁琐，性价比不高",
     followUpDate: "2026-04-28", companyCommitments: "下周与管理层开会讨论",
-    nextSteps: ["发送高企认定政策收益说明", "安排上门拜访管理层"],
+    nextSteps: ["高新政策详解与一对一辅导"],
     notes: "等待企业回复，态度观望", submittedAt: "2026-04-14T16:00:00",
   },
   {
@@ -104,7 +104,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     acknowledgedGaps: ["缺乏独立研发部门", "部分核心技术人员学历证明需补全"],
     keyObstacles: "没有设立独立研发部门，研发人员分散在各业务部门",
     followUpDate: "2026-05-08",
-    nextSteps: ["建议设立正式研发中心", "指导填写研发活动辅助账"],
+    nextSteps: ["高新政策详解与一对一辅导", "研发费用归集与加计扣除辅导"],
     notes: "新能源领域，有一定申报价值", submittedAt: "2026-04-20T15:00:00",
   },
 
@@ -117,7 +117,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     fieldVerified: { employeeCount: 78, rdEmployeeCount: 20, annualRevenue: "500w_2000w", rdExpenseRatio: "5_10pct", rdExpenseSource: "both", hasAccountingFirm: true, hasTechDept: true, mainProductDesc: "医疗器械智能检测设备" },
     acknowledgedGaps: ["部分软著尚在登记中"],
     followUpDate: "2026-04-30",
-    nextSteps: ["督促软著登记完成", "协助完善申报材料"],
+    nextSteps: ["知识产权培育（专利/软著）", "申报材料清单与流程指导"],
     notes: "进展顺利，预计5月可提交", submittedAt: "2026-04-16T11:00:00",
   },
   {
@@ -129,7 +129,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     acknowledgedGaps: [],
     keyObstacles: "联系不上企业负责人",
     followUpDate: "2026-04-24",
-    nextSteps: ["尝试通过工商登记地址上门拜访", "联系金银湖街道协助联络"],
+    nextSteps: ["暂无明确需求"],
     notes: "研发费用占比需补材料，但暂时无法联系", submittedAt: "2026-04-17T16:30:00",
   },
 
@@ -143,7 +143,7 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     acknowledgedGaps: ["员工总数偏少，研发人员比例勉强达标", "尚无知识产权中介合作"],
     keyObstacles: "企业规模较小，人手有限，申报材料整理压力大",
     followUpDate: "2026-05-03", companyCommitments: "愿意配合，请求提供材料模板",
-    nextSteps: ["发送申报材料清单模板", "推荐当地代理机构"],
+    nextSteps: ["申报材料清单与流程指导", "知识产权培育（专利/软著）", "科技金融（贷款/担保/投融资）"],
     notes: "初创型IoT企业，有潜力，需重点帮扶", submittedAt: "2026-04-19T11:30:00",
   },
   {
@@ -154,24 +154,23 @@ const SEED_VISIT_RECORDS: VisitRecord[] = [
     fieldVerified: { employeeCount: 120, rdEmployeeCount: 18, annualRevenue: "2000w_1yi", rdExpenseRatio: "3_5pct", rdExpenseSource: "self_invested", hasAccountingFirm: true, hasTechDept: false },
     acknowledgedGaps: [],
     keyObstacles: "企业正在进行内部架构调整，管理层明确拒绝",
-    nextSteps: ["记录拒绝原因", "明年重新评估跟进"],
+    nextSteps: ["暂无明确需求"],
     notes: "今年无法推进，保持联系留待明年", submittedAt: "2026-04-21T14:50:00",
   },
 ];
 
-// 将种子数据写入 localStorage（仅当尚未初始化时）
+const SEED_IDS = new Set(SEED_VISIT_RECORDS.map((r) => r.id));
+
+// 将种子数据写入 localStorage，始终以最新种子覆盖旧版种子记录，保留用户自建记录
 export function initSeedVisitRecords(): void {
   if (typeof window === "undefined") return;
   const raw = localStorage.getItem(RECORDS_KEY);
   if (raw) {
-    // 已有数据：补充种子中缺失的条目（避免重复）
     try {
       const stored = JSON.parse(raw) as VisitRecord[];
-      const storedIds = new Set(stored.map((r) => r.id));
-      const missing = SEED_VISIT_RECORDS.filter((r) => !storedIds.has(r.id));
-      if (missing.length > 0) {
-        localStorage.setItem(RECORDS_KEY, JSON.stringify([...missing, ...stored]));
-      }
+      // 过滤掉旧种子记录（ID 在 SEED_IDS 内），保留用户新建的记录
+      const userRecords = stored.filter((r) => !SEED_IDS.has(r.id));
+      localStorage.setItem(RECORDS_KEY, JSON.stringify([...SEED_VISIT_RECORDS, ...userRecords]));
     } catch { /* ignore */ }
   } else {
     localStorage.setItem(RECORDS_KEY, JSON.stringify(SEED_VISIT_RECORDS));

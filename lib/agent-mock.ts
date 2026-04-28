@@ -38,23 +38,23 @@ export interface GuidedQuestion {
 
 export const GUIDED_QUESTIONS: GuidedQuestion[] = [
   // 概览
-  { id: "q1", label: "当前标的池整体情况如何？", category: "overview", icon: "📊" },
-  { id: "q2", label: "各街道高潜力企业分布情况？", category: "overview", icon: "🗺️" },
-  { id: "q3", label: "今年高企申报目标完成进度？", category: "overview", icon: "🎯" },
+  { id: "q1", label: "当前标的池整体情况如何？", category: "overview", icon: "BarChart3" },
+  { id: "q2", label: "各街道高潜力企业分布情况？", category: "overview", icon: "MapPin" },
+  { id: "q3", label: "今年高企申报目标完成进度？", category: "overview", icon: "Target" },
   // 复审
-  { id: "q4", label: "哪些企业复审期限最紧迫？", category: "renewal", icon: "⏰" },
-  { id: "q5", label: "复审准备度不足的企业有哪些？", category: "renewal", icon: "⚠️" },
+  { id: "q4", label: "哪些企业复审期限最紧迫？", category: "renewal", icon: "Clock" },
+  { id: "q5", label: "复审准备度不足的企业有哪些？", category: "renewal", icon: "AlertTriangle" },
   // 任务
-  { id: "q6", label: "本期任务完成情况如何？", category: "task", icon: "✅" },
+  { id: "q6", label: "本期任务完成情况如何？", category: "task", icon: "CheckCircle2" },
   // 分析
-  { id: "q7", label: "电子信息领域企业研发投入分析", category: "analysis", icon: "🔬" },
-  { id: "q8", label: "哪类技术领域企业数量最多？", category: "analysis", icon: "📈" },
+  { id: "q7", label: "电子信息领域企业研发投入分析", category: "analysis", icon: "Microscope" },
+  { id: "q8", label: "哪类技术领域企业数量最多？", category: "analysis", icon: "TrendingUp" },
   // 风险
-  { id: "q9", label: "有哪些企业存在合规或经营风险？", category: "risk", icon: "🚨" },
+  { id: "q9", label: "有哪些企业存在合规或经营风险？", category: "risk", icon: "AlertOctagon" },
   // 企业画像
-  { id: "q10", label: "近三年知识产权增长最快的企业？", category: "company", icon: "💡" },
-  { id: "q11", label: "未接触的高潜力企业有哪些？", category: "company", icon: "🌟" },
-  { id: "q12", label: "注册资本最高的潜在标的企业？", category: "company", icon: "🏢" },
+  { id: "q10", label: "近三年知识产权增长最快的企业？", category: "company", icon: "Lightbulb" },
+  { id: "q11", label: "未接触的高潜力企业有哪些？", category: "company", icon: "Star" },
+  { id: "q12", label: "注册资本最高的潜在标的企业？", category: "company", icon: "Building2" },
 ];
 
 // ─── Category pill groups for the UI ────────────────────────────────────────

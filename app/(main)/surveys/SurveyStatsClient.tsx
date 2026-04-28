@@ -6,7 +6,6 @@ import {
   Users,
   CheckCircle2,
   TrendingUp,
-  Clock,
   MapPin,
   Activity,
   RotateCw,
@@ -90,10 +89,27 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
     () => computeKeywordTop(scopedRecords, "keyObstacles", 12),
     [scopedRecords]
   );
-  const commitmentKeywords = useMemo(
-    () => computeKeywordTop(scopedRecords, "companyCommitments", 12),
-    [scopedRecords]
-  );
+  const needsStats = useMemo(() => {
+    const OPTS = [
+      "高新政策详解与一对一辅导",
+      "申报材料清单与流程指导",
+      "知识产权培育（专利/软著）",
+      "研发费用归集与加计扣除辅导",
+      "财务规范化（事务所/审计对接）",
+      "科技项目与专项资金申报",
+      "高层次人才引进政策对接",
+      "产学研合作（高校院所对接）",
+      "科技金融（贷款/担保/投融资）",
+      "暂无明确需求",
+    ];
+    const counts: Record<string, number> = Object.fromEntries(OPTS.map((o) => [o, 0]));
+    for (const r of scopedRecords) {
+      for (const s of r.nextSteps ?? []) {
+        if (s in counts) counts[s]++;
+      }
+    }
+    return OPTS.map((o) => ({ label: o, count: counts[o] })).sort((a, b) => b.count - a.count);
+  }, [scopedRecords]);
 
   if (!mounted) {
     return (
@@ -153,28 +169,15 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
             </PanelCard>
           </div>
 
-          {/* ④ 街道横向对比（街道管理员视角下仅一条街道，隐藏对比图表） */}
-          {!lockedStreet && (
-            <PanelCard title="按街道横向对比" subtitle="走访量 + 意愿层级堆叠">
-              <StreetStackedBar rows={streetBreakdown} />
-            </PanelCard>
-          )}
-
-          {/* ⑤ 走访员排行 */}
-          <PanelCard title="走访员排行" subtitle="按走访次数排序,显示意愿转化率">
-            <VisitorTable rows={visitors} />
-          </PanelCard>
-
-          {/* ⑥-⑧ 企业自述 */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <PanelCard title="企业规模(参保员工)" subtitle="按区间分布">
-              <SimpleBar buckets={fieldDist.empBuckets} color="#3b82f6" />
-            </PanelCard>
-            <PanelCard title="研发投入比例" subtitle="研发费用占年营收比">
-              <SimpleBar buckets={fieldDist.rdBuckets} color="#8b5cf6" />
-            </PanelCard>
-            <PanelCard title="年营收档位" subtitle="企业自述区间">
-              <SimpleBar buckets={fieldDist.revBuckets} color="#10b981" />
+          {/* ④⑤ 街道横向对比 + 走访员排行 */}
+          <div className={`grid grid-cols-1 gap-4 ${!lockedStreet ? "xl:grid-cols-2" : ""}`}>
+            {!lockedStreet && (
+              <PanelCard title="按街道横向对比" subtitle="走访量 + 意愿层级堆叠">
+                <StreetStackedBar rows={streetBreakdown} />
+              </PanelCard>
+            )}
+            <PanelCard title="走访员排行" subtitle="按走访次数排序,显示意愿转化率">
+              <VisitorTable rows={visitors} />
             </PanelCard>
           </div>
 
@@ -183,8 +186,8 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
             <PanelCard title="高频企业障碍" subtitle="走访员记录的关键障碍词频 Top 12">
               <KeywordList items={obstacleKeywords} accent="amber" />
             </PanelCard>
-            <PanelCard title="高频企业承诺/反馈" subtitle="企业表态及承诺词频 Top 12">
-              <KeywordList items={commitmentKeywords} accent="emerald" />
+            <PanelCard title="企业需求" subtitle="走访记录中企业选择的需求项（按频次排序）">
+              <NeedsBar items={needsStats} />
             </PanelCard>
           </div>
         </div>
@@ -243,15 +246,6 @@ function KPIGrid({
       sub: "意愿强烈 + 有一定意愿",
     },
     {
-      icon: Clock,
-      label: "平均走访时长",
-      value: kpi.avgDurationMin ?? "—",
-      unit: kpi.avgDurationMin != null ? "分钟" : undefined,
-      iconColor: "text-amber-600",
-      iconBg: "bg-amber-50",
-      sub: kpi.avgDurationMin != null ? "仅含已记录时长的走访" : "暂无时长记录",
-    },
-    {
       icon: MapPin,
       label: "覆盖街道",
       value: kpi.coveredStreets,
@@ -272,7 +266,7 @@ function KPIGrid({
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3">
       {cards.map((c) => {
         const Icon = c.icon;
         return (
@@ -595,4 +589,74 @@ function KeywordList({
       ))}
     </div>
   );
+}
+
+// ─── 企业需求横向柱状图 ───────────────────────────────────
+function NeedsBar({ items }: { items: { label: string; count: number }[] }) {
+  const total = items.reduce((s, i) => s + i.count, 0);
+  if (total === 0) {
+    return <div className="text-xs text-[#94a3b8] text-center py-6">暂无需求记录</div>;
+  }
+  // 按计数降序，过滤掉 0 项后展示
+  const sorted = [...items].sort((a, b) => b.count - a.count).filter((i) => i.count > 0);
+
+  // 渐变色：从蓝色主调到紫色辅调，营造层次感
+  const COLORS = [
+    "#2563eb", "#3b82f6", "#60a5fa", "#818cf8",
+    "#a78bfa", "#c084fc", "#e879f9", "#f472b6",
+    "#fb7185", "#fda4af",
+  ];
+
+  const option = {
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "shadow" },
+      formatter: (params: { name: string; value: number }[]) => {
+        const p = params[0];
+        const pct = total > 0 ? ((p.value / total) * 100).toFixed(1) : "0.0";
+        return `${p.name}<br/><b>${p.value} 家</b>（占 ${pct}%）`;
+      },
+    },
+    grid: { left: 0, right: 56, top: 4, bottom: 4, containLabel: true },
+    xAxis: {
+      type: "value",
+      axisLine: { show: false },
+      axisTick: { show: false },
+      splitLine: { lineStyle: { color: "#f1f5f9" } },
+      axisLabel: { color: "#94a3b8", fontSize: 10 },
+    },
+    yAxis: {
+      type: "category",
+      data: sorted.map((i) => i.label),
+      inverse: true,
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: { color: "#475569", fontSize: 11, width: 160, overflow: "truncate" },
+    },
+    series: [
+      {
+        type: "bar",
+        barWidth: 14,
+        barMaxWidth: 14,
+        data: sorted.map((item, idx) => ({
+          value: item.count,
+          itemStyle: {
+            color: COLORS[idx % COLORS.length],
+            borderRadius: [0, 6, 6, 0],
+          },
+        })),
+        label: {
+          show: true,
+          position: "right",
+          color: "#0f172a",
+          fontSize: 11,
+          fontWeight: "bold",
+          formatter: "{c}",
+        },
+      },
+    ],
+  };
+
+  const height = Math.max(200, sorted.length * 30 + 24);
+  return <EChartsWrapper option={option} height={height} />;
 }

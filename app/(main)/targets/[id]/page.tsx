@@ -12,24 +12,9 @@ import TabAssessment from "./TabAssessment";
 import { cn } from "@/lib/cn";
 import { DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 
-// ─── Tab: 基本信息 ────────────────────────────────────────────
-function TabBasicInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
+// ─── Tab: 企业画像 ────────────────────────────────────────────
+function TabCompanyProfile({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
   const scale = company.employees > 100 ? "中型" : company.employees > 20 ? "小型" : "XS(微型)";
-
-  const shareholders = [
-    { name: company.contact.name, type: "自然人", ratio: "60%", subscribeDate: company.establishedAt, subscribeAmount: String(Math.round(company.registeredCapital * 0.6)) },
-    { name: `${company.contact.name.slice(0, 1)}某某`, type: "自然人", ratio: "40%", subscribeDate: company.establishedAt, subscribeAmount: String(Math.round(company.registeredCapital * 0.4)) },
-  ];
-
-  const formerNames = [
-    { name: `武汉${company.name.slice(2, 5)}信息科技有限公司`, date: company.establishedAt.slice(0, 7).replace("-", "-") + "-01" },
-  ];
-
-  const changeRecords = [
-    { date: "2023-06-15", item: "注册资本变更", before: `${Math.round(company.registeredCapital * 0.6)}万元`, after: `${company.registeredCapital}万元` },
-    { date: "2022-11-08", item: "企业地址变更", before: `${company.street}（原址）`, after: company.street },
-    { date: company.establishedAt.slice(0, 4) + "-12-01", item: "法定代表人变更", before: `${company.contact.name.slice(0, 1)}某某`, after: company.contact.name },
-  ];
 
   const rows: [string, string, string, string][] = [
     ["注册资本", `${company.registeredCapital}万元`, "经营状态", "存续（在营、开业、在册）"],
@@ -41,119 +26,6 @@ function TabBasicInfo({ company }: { company: NonNullable<ReturnType<typeof getC
     ["办公地址", "—", "注册地址", `${company.street}`],
   ];
 
-  return (
-    <div className="space-y-6">
-      {/* 工商信息 */}
-      <div>
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">工商信息</h3>
-        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
-          <table className="w-full text-sm">
-            <tbody>
-              {rows.map(([k1, v1, k2, v2], i) => (
-                <tr key={i} className={i % 2 === 1 ? "bg-[#f7f8fa]" : "bg-white"}>
-                  <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs">{k1}</td>
-                  <td className="px-4 py-3 text-[#0f172a] text-xs border-r border-[#e5e7eb]">{v1}</td>
-                  <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs">{k2}</td>
-                  <td className="px-4 py-3 text-[#0f172a] text-xs">{v2}</td>
-                </tr>
-              ))}
-              {/* 经营范围 — full width */}
-              <tr className="bg-[#f7f8fa]">
-                <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs align-top">经营范围</td>
-                <td colSpan={3} className="px-4 py-3 text-[#0f172a] text-xs leading-relaxed">
-                  {company.industry}技术研发；软件开发；计算机软硬件研发及批零兼营；物联网技术服务。（涉及许可经营项目，应取得相关部门许可后方可经营）
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* 股东信息 */}
-      <div>
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">股东信息</h3>
-        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
-                {["投资人", "投资人类型", "出资比例", "认缴时间", "认缴出资额(万元)", "实缴时间"].map((h) => (
-                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#f1f5f9]">
-              {shareholders.map((s, i) => (
-                <tr key={i} className="hover:bg-[#f7f8fa]">
-                  <td className="px-4 py-3 text-[#0f172a] font-medium">{s.name}</td>
-                  <td className="px-4 py-3 text-[#475569]">{s.type}</td>
-                  <td className="px-4 py-3 text-[#475569]">{s.ratio}</td>
-                  <td className="px-4 py-3 text-[#475569]">{s.subscribeDate}</td>
-                  <td className="px-4 py-3 text-[#475569]">{s.subscribeAmount}</td>
-                  <td className="px-4 py-3 text-[#94a3b8]">—</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* 企业曾用名 */}
-      <div>
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">企业曾用名</h3>
-        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
-                {["序号", "曾用名", "变更日期"].map((h) => (
-                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#f1f5f9]">
-              {formerNames.map((fn, i) => (
-                <tr key={i} className="hover:bg-[#f7f8fa]">
-                  <td className="px-4 py-3 text-[#94a3b8]">{i + 1}</td>
-                  <td className="px-4 py-3 text-[#0f172a]">{fn.name}</td>
-                  <td className="px-4 py-3 text-[#475569]">{fn.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* 变更记录 */}
-      <div>
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">变更记录</h3>
-        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
-                {["序号", "变更日期", "变更项目", "变更前", "变更后"].map((h) => (
-                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#f1f5f9]">
-              {changeRecords.map((r, i) => (
-                <tr key={i} className="hover:bg-[#f7f8fa]">
-                  <td className="px-4 py-3 text-[#94a3b8]">{i + 1}</td>
-                  <td className="px-4 py-3 text-[#475569] whitespace-nowrap">{r.date}</td>
-                  <td className="px-4 py-3 text-[#0f172a] whitespace-nowrap">{r.item}</td>
-                  <td className="px-4 py-3 text-[#475569] max-w-[220px]">{r.before}</td>
-                  <td className="px-4 py-3 text-[#0f172a] max-w-[220px]">{r.after}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── Tab: 知识产权信息 ────────────────────────────────────────
-function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
   const { patents, software } = company;
   const totalPatents = patents.invention + patents.utility + patents.design;
 
@@ -187,7 +59,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
     },
   ];
 
-  // generate mock patent rows
   const patentRows = Array.from({ length: Math.min(totalPatents, 5) }, (_, i) => ({
     seq: i + 1,
     appNo: `202${2 + (i % 3)}${company.creditCode.slice(2, 8)}${String(i + 1).padStart(4, "0")}`,
@@ -199,7 +70,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
     status: i < 3 ? "有效" : "审中",
   }));
 
-  // generate mock trademark rows
   const trademarkCount = Math.max(1, Math.floor((patents.invention + patents.utility) / 4));
   const trademarkRows = Array.from({ length: Math.min(trademarkCount, 4) }, (_, i) => ({
     seq: i + 1,
@@ -209,7 +79,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
     status: i < trademarkCount - 1 ? "已注册" : "审中",
   }));
 
-  // generate mock website rows
   const domainBase = company.name.slice(0, 2).split("").map(c => c.charCodeAt(0).toString(16)).join("").slice(0, 6);
   const websiteRows = [
     {
@@ -228,7 +97,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
     },
   ];
 
-  // generate mock copyright rows
   const copyrightRows = Array.from({ length: Math.min(software, 5) }, (_, i) => ({
     seq: i + 1,
     approveDate: `202${2 + (i % 3)}-${String((i % 12) + 1).padStart(2, "0")}-01`,
@@ -241,12 +109,36 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
 
   return (
     <div className="space-y-6">
-      {/* 说明文字 */}
+      {/* 工商信息 */}
+      <div>
+        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">工商信息</h3>
+        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
+          <table className="w-full text-sm">
+            <tbody>
+              {rows.map(([k1, v1, k2, v2], i) => (
+                <tr key={i} className={i % 2 === 1 ? "bg-[#f7f8fa]" : "bg-white"}>
+                  <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs">{k1}</td>
+                  <td className="px-4 py-3 text-[#0f172a] text-xs border-r border-[#e5e7eb]">{v1}</td>
+                  <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs">{k2}</td>
+                  <td className="px-4 py-3 text-[#0f172a] text-xs">{v2}</td>
+                </tr>
+              ))}
+              <tr className="bg-[#f7f8fa]">
+                <td className="px-4 py-3 text-[#64748b] w-[130px] border-r border-[#e5e7eb] font-medium text-xs align-top">经营范围</td>
+                <td colSpan={3} className="px-4 py-3 text-[#0f172a] text-xs leading-relaxed">
+                  {company.industry}技术研发；软件开发；计算机软硬件研发及批零兼营；物联网技术服务。（涉及许可经营项目，应取得相关部门许可后方可经营）
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* 知识产权信息 */}
       <div className="text-xs text-[#94a3b8] bg-[#f7f8fa] rounded-lg px-4 py-3 leading-relaxed">
         知识产权来源于第三方平台，会根据近年的专利或软著申请，结合国网申请书数据，过滤出当前状态有效的知产数据显示。
       </div>
 
-      {/* IP 统计卡 */}
       <div className="grid grid-cols-3 gap-4">
         {ipStats.map((stat) => (
           <div key={stat.title} className="border border-[#e5e7eb] rounded-lg overflow-hidden">
@@ -265,7 +157,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
         ))}
       </div>
 
-      {/* 专利信息 */}
       <div>
         <h3 className="text-sm font-semibold text-[#0f172a] mb-3">专利信息（共{totalPatents}条）</h3>
         <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
@@ -303,7 +194,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
         </div>
       </div>
 
-      {/* 著作权信息 */}
       <div>
         <h3 className="text-sm font-semibold text-[#0f172a] mb-3">著作权信息（共{software}条）</h3>
         <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
@@ -334,7 +224,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
         </div>
       </div>
 
-      {/* 商标信息 */}
       <div>
         <h3 className="text-sm font-semibold text-[#0f172a] mb-3">商标信息（共{trademarkRows.length}条）</h3>
         <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
@@ -370,7 +259,6 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
         </div>
       </div>
 
-      {/* 网站备案 */}
       <div>
         <h3 className="text-sm font-semibold text-[#0f172a] mb-3">网站备案（共{websiteRows.length}条）</h3>
         <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
@@ -400,72 +288,12 @@ function TabIPInfo({ company }: { company: NonNullable<ReturnType<typeof getComp
   );
 }
 
-// ─── Tab: 经营信息 ────────────────────────────────────────────
-function TabBusinessInfo({ company }: { company: NonNullable<ReturnType<typeof getCompanyById>> }) {
-  const estYear = new Date(company.establishedAt).getFullYear();
-  const certs = [
-    ...(company.alreadyCertified ? [{
-      seq: 1,
-      type: "高新技术企业",
-      no: `GR${estYear + 2}${company.creditCode.slice(2, 6)}${String(Math.abs(company.name.charCodeAt(0) % 10000)).padStart(4, "0")}`,
-      issueDate: String(estYear + 2),
-      expireDate: String(estYear + 5),
-    }] : []),
-    {
-      seq: company.alreadyCertified ? 2 : 1,
-      type: "科技型中小企业",
-      no: `KX${estYear + 1}42010${company.creditCode.slice(6, 12)}`,
-      issueDate: String(estYear + 1),
-      expireDate: String(estYear + 2),
-    },
-    {
-      seq: company.alreadyCertified ? 3 : 2,
-      type: "软件企业认定证书",
-      no: `RJ${estYear + 1}42${company.creditCode.slice(4, 10)}`,
-      issueDate: `${estYear + 1}-09-01`,
-      expireDate: `${estYear + 4}-08-31`,
-    },
-  ];
-
-  return (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">资质证书</h3>
-        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
-                {["序号", "证书类型", "证书编号", "发证日期", "截止日期"].map((h) => (
-                  <th key={h} className="px-4 py-2.5 text-left text-[#64748b] font-medium">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#f1f5f9]">
-              {certs.length === 0 ? (
-                <tr><td colSpan={5} className="px-4 py-6 text-center text-[#94a3b8]">暂无数据</td></tr>
-              ) : certs.map((cert) => (
-                <tr key={cert.seq} className="hover:bg-[#f7f8fa]">
-                  <td className="px-4 py-3 text-[#94a3b8]">{cert.seq}</td>
-                  <td className="px-4 py-3 text-[#0f172a]">{cert.type}</td>
-                  <td className="px-4 py-3 text-blue-600 font-mono">{cert.no}</td>
-                  <td className="px-4 py-3 text-[#475569]">{cert.issueDate}</td>
-                  <td className="px-4 py-3 text-[#475569]">{cert.expireDate}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Main ─────────────────────────────────────────────────────
-type Tab = "基本信息" | "知识产权信息" | "经营信息" | "复审分析" | "专业测评";
+type Tab = "企业画像" | "复审分析" | "专业测评";
 
 export default function CompanyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const [activeTab, setActiveTab] = useState<Tab>("基本信息");
+  const [activeTab, setActiveTab] = useState<Tab>("企业画像");
 
   const company = getCompanyById(id);
   if (!company) notFound();
@@ -473,9 +301,7 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
   const certifiedCompany = company.alreadyCertified ? getCertifiedCompanyById(id) : undefined;
 
   const TABS: Tab[] = [
-    "基本信息",
-    "知识产权信息",
-    "经营信息",
+    "企业画像",
     ...(certifiedCompany ? ["复审分析" as Tab] : []),
     "专业测评",
   ];
@@ -566,9 +392,7 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
 
         {/* Tab content */}
         <div className="p-6">
-          {activeTab === "基本信息" && <TabBasicInfo company={company} />}
-          {activeTab === "知识产权信息" && <TabIPInfo company={company} />}
-          {activeTab === "经营信息" && <TabBusinessInfo company={company} />}
+          {activeTab === "企业画像" && <TabCompanyProfile company={company} />}
           {activeTab === "复审分析" && certifiedCompany && <TabRenewalAnalysis company={certifiedCompany} />}
           {activeTab === "专业测评" && <TabAssessment company={company} />}
         </div>

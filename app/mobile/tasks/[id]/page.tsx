@@ -46,6 +46,8 @@ import {
   ClipboardList,
   PenLine,
   RefreshCcw,
+  QrCode,
+  X,
 } from "lucide-react";
 
 const WILLINGNESS_LABELS: Record<string, { label: string; color: string }> = {
@@ -202,6 +204,7 @@ function AssessmentTab({
   const [pending, setPending] = useState<AssessmentRecord | null>(null);
   const [shareUrl, setShareUrl] = useState("");
   const [copied, setCopied] = useState(false);
+  const [showQr, setShowQr] = useState(false);
 
   useEffect(() => {
     const c = getLatestCompletedByCompany(company.id) ?? null;
@@ -273,7 +276,32 @@ function AssessmentTab({
                 {copied ? <Check size={11} /> : <Copy size={11} />}
                 {copied ? "已复制" : "复制链接"}
               </button>
+              <button
+                onClick={() => setShowQr((v) => !v)}
+                className={`flex items-center gap-1 text-[10px] font-medium px-2.5 py-1 rounded-lg transition-colors shrink-0 ${
+                  showQr
+                    ? "bg-purple-100 text-purple-600"
+                    : "bg-gray-100 text-gray-500 active:bg-gray-200"
+                }`}
+              >
+                {showQr ? <X size={11} /> : <QrCode size={11} />}
+                {showQr ? "关闭" : "二维码"}
+              </button>
             </div>
+
+            {showQr && (
+              <div className="flex flex-col items-center gap-2 bg-gray-50 rounded-xl p-4 border border-gray-100">
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(shareUrl)}`}
+                  alt="测评二维码"
+                  width={180}
+                  height={180}
+                  className="rounded-lg"
+                />
+                <p className="text-[10px] text-gray-400">扫码即可完成企业自主测评</p>
+              </div>
+            )}
+
             <button
               onClick={handleGenerate}
               className="flex items-center gap-1 text-[10px] text-gray-400 active:text-gray-600"
