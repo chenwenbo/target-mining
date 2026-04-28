@@ -10,6 +10,7 @@ import {
   RefreshCcw,
   ChevronLeft,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -20,6 +21,12 @@ const NAV_ITEMS = [
       { href: "/targets", label: "标的池", icon: Target, badge: "246" },
       { href: "/renewal", label: "复审管理", icon: RefreshCcw, badge: "38" },
       { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
+    ],
+  },
+  {
+    section: "智能分析",
+    items: [
+      { href: "/agent", label: "AI 助手", icon: Sparkles, badge: "NEW" },
     ],
   },
 ];
