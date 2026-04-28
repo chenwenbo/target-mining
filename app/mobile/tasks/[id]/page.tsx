@@ -374,7 +374,7 @@ function HistoryTab({ records }: { records: VisitRecord[] }) {
             >
               <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
                 <span className="text-xs">
-                  {r.visitMethod === "in_person" ? "🏢" : r.visitMethod === "phone" ? "📞" : "💻"}
+                  {r.visitMethod === "in_person" ? "🏢" : "💻"}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
