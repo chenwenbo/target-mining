@@ -21,9 +21,8 @@ export const WILLINGNESS_ORDER: WillingnessLevel[] = [
 ];
 
 export const VISIT_METHOD_META: Record<VisitMethod, { label: string; color: string }> = {
-  in_person:      { label: "上门走访", color: "#2563eb" },
-  phone:          { label: "电话沟通", color: "#0891b2" },
-  online_meeting: { label: "线上会议", color: "#7c3aed" },
+  in_person: { label: "上门走访", color: "#2563eb" },
+  online:    { label: "线上沟通", color: "#7c3aed" },
 };
 
 // ─── 输入聚合参数 ─────────────────────────────────────────────
@@ -118,12 +117,14 @@ export interface MethodSlice {
 }
 
 export function computeMethodDist(records: VisitRecord[]): MethodSlice[] {
-  const counts: Record<VisitMethod, number> = { in_person: 0, phone: 0, online_meeting: 0 };
-  for (const r of records) counts[r.visitMethod]++;
-  return (Object.keys(counts) as VisitMethod[]).map((k) => ({
+  const counts: Record<VisitMethod, number> = { in_person: 0, online: 0 };
+  for (const r of records) {
+    if (r.visitMethod in counts) counts[r.visitMethod as VisitMethod]++;
+  }
+  return (Object.keys(VISIT_METHOD_META) as VisitMethod[]).map((k) => ({
     key: k,
     name: VISIT_METHOD_META[k].label,
-    value: counts[k],
+    value: counts[k] ?? 0,
     color: VISIT_METHOD_META[k].color,
   }));
 }
