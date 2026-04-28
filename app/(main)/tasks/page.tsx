@@ -1,260 +1,324 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { getAllTasks } from "@/lib/mock-data";
-import { getAllRenewalTasks } from "@/lib/renewal-data";
-import RenewalTaskCard from "./RenewalTaskCard";
-import { cn } from "@/lib/cn";
-import { CalendarDays, User, ChevronRight, RefreshCcw } from "lucide-react";
-import type { Task, TaskStatus, RenewalTask, RenewalTaskStatus } from "@/lib/types";
+import { Building2, ChevronRight, RotateCw, Search, X } from "lucide-react";
+import { getAllTasks, getCompanyById, getDashboardKPI } from "@/lib/mock-data";
+import {
+  getDispatchedTasks,
+  getVisitRecords,
+  getTaskStatusOverrides,
+  setTaskStatus,
+  getDraft,
+  MOCK_VISITORS,
+} from "@/lib/mobile-mock";
+import { useCurrentPCUser } from "@/lib/account-mock";
+import { STREETS, type Street, type Task, type VisitRecord, type WillingnessLevel } from "@/lib/types";
+import {
+  getTaskLifecycleStage,
+  latestVisitRecord,
+  LIFECYCLE_ORDER,
+  WILLINGNESS_META,
+  type LifecycleStage,
+} from "./lifecycle";
+import PipelineRibbon from "./PipelineRibbon";
+import PoolSummary from "./PoolSummary";
+import TaskRow from "./TaskRow";
+import TaskDetailDrawer from "./TaskDetailDrawer";
 
-const COLUMNS: { key: TaskStatus; label: string; color: string; dot: string }[] = [
-  { key: "pending", label: "待处理", color: "bg-slate-50 border-slate-200", dot: "bg-slate-300" },
-  { key: "in_progress", label: "处理中", color: "bg-blue-50 border-blue-200", dot: "bg-blue-500" },
-  { key: "done", label: "已完成", color: "bg-emerald-50 border-emerald-200", dot: "bg-emerald-500" },
-];
+type StageWithAll = LifecycleStage | "all";
 
-function TaskCard({
-  task,
-  onMove,
-}: {
+type TaskWithStage = {
   task: Task;
-  onMove: (id: string, to: TaskStatus) => void;
-}) {
-  const isOverdue = new Date(task.deadline) < new Date("2026-04-15");
+  stage: Exclude<LifecycleStage, "pool">;
+  records: VisitRecord[];
+  latest?: VisitRecord;
+  hasDraft: boolean;
+};
+
+export default function TasksPage() {
+  const { user, mounted } = useCurrentPCUser();
+  const lockedStreet: Street | null =
+    mounted && user.role === "street_admin" && user.street ? (user.street as Street) : null;
+
+  const [version, setVersion] = useState(0);
+  const [stage, setStage] = useState<StageWithAll>("all");
+  const [q, setQ] = useState("");
+  const [streetFilter, setStreetFilter] = useState<string>("all");
+  const [assigneeFilter, setAssigneeFilter] = useState<string>("all");
+  const [willingnessFilter, setWillingnessFilter] = useState<WillingnessLevel | "all">("all");
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+
+  // 街道管理员视角：街道筛选锁定为本街道，经办人筛选不再适用
+  useEffect(() => {
+    if (lockedStreet && streetFilter !== lockedStreet) setStreetFilter(lockedStreet);
+    if (lockedStreet && assigneeFilter !== "all") setAssigneeFilter("all");
+  }, [lockedStreet, streetFilter, assigneeFilter]);
+
+  // localStorage 数据（每次 version 变化重读，避免在 SSR 时访问）
+  const [allRecords, setAllRecords] = useState<VisitRecord[]>([]);
+  const [statusOverrides, setStatusOverrides] = useState<Record<string, Task["status"]>>({});
+  const [dispatched, setDispatched] = useState<Task[]>([]);
+
+  useEffect(() => {
+    setAllRecords(getVisitRecords());
+    setStatusOverrides(getTaskStatusOverrides());
+    setDispatched(getDispatchedTasks());
+  }, [version]);
+
+  const kpi = useMemo(() => getDashboardKPI(), []);
+
+  // 合并所有任务并附加生命周期信息
+  const enriched: TaskWithStage[] = useMemo(() => {
+    const merged = [...getAllTasks(), ...dispatched];
+    // 按 id 去重，dispatched 的覆盖 base
+    const byId = new Map<string, Task>();
+    for (const t of merged) byId.set(t.id, t);
+
+    const out: TaskWithStage[] = [];
+    for (const baseTask of byId.values()) {
+      const overriddenStatus = statusOverrides[baseTask.id] ?? baseTask.status;
+      const task: Task = { ...baseTask, status: overriddenStatus };
+      const records = allRecords.filter((r) => r.taskId === task.id);
+      const draft = typeof window !== "undefined" ? getDraft(task.id) : null;
+      const lifecycleStage = getTaskLifecycleStage(task, records, !!draft);
+      out.push({
+        task,
+        stage: lifecycleStage,
+        records,
+        latest: latestVisitRecord(records),
+        hasDraft: !!draft,
+      });
+    }
+    return out;
+  }, [allRecords, statusOverrides, dispatched]);
+
+  // 阶段计数
+  const counts: Record<LifecycleStage, number> = useMemo(() => {
+    const c: Record<LifecycleStage, number> = {
+      pool: kpi.funnelGrowthUnion,
+      dispatched: 0,
+      investigating: 0,
+      done: 0,
+    };
+    for (const e of enriched) c[e.stage]++;
+    return c;
+  }, [enriched, kpi.funnelGrowthUnion]);
+
+  const total = enriched.length;
+
+  // 筛选
+  const filtered = useMemo(() => {
+    return enriched
+      .filter((e) => {
+        if (stage !== "all" && stage !== "pool" && e.stage !== stage) return false;
+        if (q && !e.task.companyName.includes(q)) return false;
+        if (streetFilter !== "all" && e.task.street !== streetFilter) return false;
+        if (assigneeFilter !== "all" && e.task.assignee !== assigneeFilter) return false;
+        if (
+          willingnessFilter !== "all" &&
+          (!e.latest || e.latest.willingness !== willingnessFilter)
+        ) {
+          return false;
+        }
+        return true;
+      })
+      .sort((a, b) => {
+        // 同阶段内：超期优先，然后按截止日期升序
+        const stageOrder = LIFECYCLE_ORDER.indexOf(a.stage) - LIFECYCLE_ORDER.indexOf(b.stage);
+        if (stageOrder !== 0) return stageOrder;
+        return a.task.deadline.localeCompare(b.task.deadline);
+      });
+  }, [enriched, stage, q, streetFilter, assigneeFilter, willingnessFilter]);
+
+  // 经办人选项 = MOCK_VISITORS ∪ 任务里出现过的 assignee
+  const assigneeOptions = useMemo(() => {
+    const set = new Set<string>(MOCK_VISITORS.map((v) => v.name));
+    for (const e of enriched) set.add(e.task.assignee);
+    return Array.from(set).sort();
+  }, [enriched]);
+
+  const selected = enriched.find((e) => e.task.id === selectedTaskId);
+  const selectedCompany = selected ? getCompanyById(selected.task.companyId) : undefined;
+
+  function clearFilters() {
+    setQ("");
+    setStreetFilter(lockedStreet ?? "all");
+    setAssigneeFilter("all");
+    setWillingnessFilter("all");
+  }
+
+  function advanceTask(taskId: string) {
+    setTaskStatus(taskId, "in_progress");
+    setVersion((v) => v + 1);
+  }
+
+  const willingnessFilterEnabled = stage === "done" || stage === "all";
 
   return (
-    <div className="bg-white rounded-lg border border-[#e5e7eb] p-4 shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] hover:shadow-[0_2px_8px_0_rgba(15,23,42,0.08)] transition-shadow">
-      <div className="flex items-start justify-between mb-2">
-        <span className={cn(
-          "text-[10px] px-1.5 py-0.5 rounded-full font-medium",
-          isOverdue ? "bg-red-50 text-red-600" : "bg-[#f7f8fa] text-[#94a3b8]"
-        )}>
-          {isOverdue ? "⚠ 已超期" : task.deadline}
-        </span>
-      </div>
-
-      <Link
-        href={`/targets/${task.companyId}`}
-        className="block text-sm font-semibold text-[#0f172a] hover:text-blue-600 transition-colors leading-snug mb-2"
-      >
-        {task.companyName}
-      </Link>
-
-      {task.notes && (
-        <p className="text-xs text-[#64748b] mb-3 leading-relaxed line-clamp-2">{task.notes}</p>
-      )}
-
-      <div className="flex items-center justify-between pt-2 border-t border-[#f1f5f9]">
-        <div className="flex items-center gap-3 text-[11px] text-[#94a3b8]">
-          <span className="flex items-center gap-1"><User size={10} /> {task.assignee}</span>
-          <span className="flex items-center gap-1"><CalendarDays size={10} /> {task.createdAt}</span>
+    <div>
+      {/* 头部 */}
+      <div className="flex items-end justify-between mb-5">
+        <div>
+          <h1 className="text-xl font-semibold text-[#0f172a]">任务管理</h1>
+          <p className="text-sm text-[#94a3b8] mt-1 flex items-center gap-2">
+            从标的池到摸排闭环的全流程跟踪
+            {lockedStreet && (
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 border border-blue-100 rounded text-[11px] text-blue-700">
+                <Building2 size={10} />
+                当前视图：{lockedStreet} · 仅本街道
+              </span>
+            )}
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setVersion((v) => v + 1)}
+            className="flex items-center gap-1.5 px-3 py-2 text-sm text-[#475569] bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f7f8fa] transition-colors"
+            title="重新读取最新摸排数据"
+          >
+            <RotateCw size={13} /> 刷新
+          </button>
+          <Link
+            href="/targets"
+            className="flex items-center gap-1 px-3.5 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            从标的池派发 <ChevronRight size={13} />
+          </Link>
         </div>
       </div>
 
-      {/* Move buttons */}
-      <div className="flex gap-1.5 mt-3">
-        {COLUMNS.filter((c) => c.key !== task.status).map((col) => (
-          <button
-            key={col.key}
-            onClick={() => onMove(task.id, col.key)}
-            className="flex-1 text-[11px] px-2 py-1 border border-[#e5e7eb] rounded-md text-[#475569] hover:bg-[#f7f8fa] hover:text-[#0f172a] transition-colors flex items-center justify-center gap-1"
-          >
-            → {col.label}
-          </button>
-        ))}
-      </div>
+      {/* 生命周期管道 */}
+      <PipelineRibbon counts={counts} total={total} selected={stage} onSelect={setStage} />
+
+      {/* 筛选条 */}
+      {stage !== "pool" && (
+        <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] px-4 py-3 mb-4 flex items-center gap-3 flex-wrap">
+          <div className="relative flex-1 min-w-[200px] max-w-[280px]">
+            <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8]" />
+            <input
+              type="text"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="搜索企业名称…"
+              className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400"
+            />
+          </div>
+
+          {!lockedStreet && (
+            <Selector
+              label="街道"
+              value={streetFilter}
+              onChange={setStreetFilter}
+              options={[{ value: "all", label: "全部街道" }, ...STREETS.map((s) => ({ value: s, label: s }))]}
+            />
+          )}
+
+          {!lockedStreet && (
+            <Selector
+              label="经办人"
+              value={assigneeFilter}
+              onChange={setAssigneeFilter}
+              options={[{ value: "all", label: "全部经办人" }, ...assigneeOptions.map((a) => ({ value: a, label: a }))]}
+            />
+          )}
+
+          <Selector
+            label="意愿"
+            value={willingnessFilter}
+            onChange={(v) => setWillingnessFilter(v as WillingnessLevel | "all")}
+            disabled={!willingnessFilterEnabled}
+            options={[
+              { value: "all", label: "全部意愿" },
+              ...(["strong", "moderate", "hesitant", "refused", "unreachable"] as WillingnessLevel[]).map((w) => ({
+                value: w,
+                label: WILLINGNESS_META[w].label,
+              })),
+            ]}
+          />
+
+          {(q || (!lockedStreet && streetFilter !== "all") || (!lockedStreet && assigneeFilter !== "all") || willingnessFilter !== "all") && (
+            <button
+              onClick={clearFilters}
+              className="ml-auto flex items-center gap-1 text-xs text-[#64748b] hover:text-[#0f172a] transition-colors"
+            >
+              <X size={12} /> 清除筛选
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* 主内容 */}
+      {stage === "pool" ? (
+        <PoolSummary
+          funnelPatentGrowth={kpi.funnelPatentGrowth}
+          funnelEmployeeGrowth={kpi.funnelEmployeeGrowth}
+          funnelGrowthUnion={kpi.funnelGrowthUnion}
+        />
+      ) : (
+        <div className="space-y-2.5">
+          {filtered.length === 0 ? (
+            <div className="rounded-xl border-2 border-dashed border-[#e5e7eb] bg-white p-12 text-center text-sm text-[#94a3b8]">
+              暂无符合条件的任务
+            </div>
+          ) : (
+            filtered.map((e) => (
+              <TaskRow
+                key={e.task.id}
+                stage={e.stage}
+                task={e.task}
+                company={getCompanyById(e.task.companyId)}
+                latestRecord={e.latest}
+                recordCount={e.records.length}
+                hasDraft={e.hasDraft}
+                onOpen={() => setSelectedTaskId(e.task.id)}
+                onAdvance={e.stage === "dispatched" ? () => advanceTask(e.task.id) : undefined}
+              />
+            ))
+          )}
+        </div>
+      )}
+
+      <TaskDetailDrawer
+        open={!!selected}
+        onClose={() => setSelectedTaskId(null)}
+        task={selected?.task ?? null}
+        company={selectedCompany}
+        records={selected?.records ?? []}
+        stage={selected?.stage}
+      />
     </div>
   );
 }
 
-const RENEWAL_COLUMNS: { key: RenewalTaskStatus; label: string; color: string; dot: string }[] = [
-  { key: "pending",    label: "待处理", color: "bg-slate-50 border-slate-200",   dot: "bg-slate-300" },
-  { key: "in_progress",label: "进行中", color: "bg-blue-50 border-blue-200",     dot: "bg-blue-500" },
-  { key: "submitted",  label: "已提交", color: "bg-purple-50 border-purple-200", dot: "bg-purple-500" },
-  { key: "approved",   label: "已批准", color: "bg-emerald-50 border-emerald-200",dot: "bg-emerald-500" },
-  { key: "rejected",   label: "已驳回", color: "bg-red-50 border-red-200",       dot: "bg-red-400" },
-];
-
-export default function TasksPage() {
-  const [activeTab, setActiveTab] = useState<"application" | "renewal">("application");
-  const [tasks, setTasks] = useState<Task[]>(getAllTasks());
-  const [renewalTasks, setRenewalTasks] = useState<RenewalTask[]>(getAllRenewalTasks());
-  const [filterAssignee, setFilterAssignee] = useState("all");
-
-  const assignees = ["all", ...Array.from(new Set(tasks.map((t) => t.assignee)))];
-  const visibleTasks = filterAssignee === "all" ? tasks : tasks.filter((t) => t.assignee === filterAssignee);
-
-  function moveTask(id: string, to: TaskStatus) {
-    setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, status: to } : t)));
-  }
-  function moveRenewalTask(id: string, to: RenewalTaskStatus) {
-    setRenewalTasks((prev) => prev.map((t) => (t.id === id ? { ...t, status: to } : t)));
-  }
-
+// ─── 简化的下拉组件 ─────────────────────────────────────────────
+function Selector({
+  label,
+  value,
+  onChange,
+  options,
+  disabled = false,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: { value: string; label: string }[];
+  disabled?: boolean;
+}) {
   return (
-    <div>
-      {/* Header */}
-      <div className="flex items-end justify-between mb-5">
-        <div>
-          <h1 className="text-xl font-semibold text-[#0f172a]">任务管理</h1>
-          <p className="text-sm text-[#94a3b8] mt-1">派发跟进与复审管理</p>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-sm text-[#475569]">
-            <span>经办人</span>
-            <select
-              value={filterAssignee}
-              onChange={(e) => setFilterAssignee(e.target.value)}
-              className="px-2.5 py-1.5 text-sm bg-white border border-[#e5e7eb] rounded-md focus:outline-none"
-            >
-              {assignees.map((a) => (
-                <option key={a} value={a}>{a === "all" ? "全部" : a}</option>
-              ))}
-            </select>
-          </div>
-          {activeTab === "application" ? (
-            <Link
-              href="/targets"
-              className="flex items-center gap-1 px-3.5 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              从标的池派发 <ChevronRight size={13} />
-            </Link>
-          ) : (
-            <Link
-              href="/renewal"
-              className="flex items-center gap-1 px-3.5 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <RefreshCcw size={13} /> 进入复审管理
-            </Link>
-          )}
-        </div>
-      </div>
-
-      {/* Tab switcher */}
-      <div className="flex gap-1 mb-5 bg-[#f8fafc] border border-[#e5e7eb] rounded-xl p-1 w-fit">
-        <button
-          onClick={() => setActiveTab("application")}
-          className={cn(
-            "px-4 py-2 text-sm font-medium rounded-lg transition-colors",
-            activeTab === "application" ? "bg-white text-blue-700 shadow-sm" : "text-[#64748b] hover:text-[#0f172a]"
-          )}
-        >
-          初次申报任务 <span className="ml-1 text-xs text-[#94a3b8]">{tasks.length}</span>
-        </button>
-        <button
-          onClick={() => setActiveTab("renewal")}
-          className={cn(
-            "px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-1.5",
-            activeTab === "renewal" ? "bg-white text-blue-700 shadow-sm" : "text-[#64748b] hover:text-[#0f172a]"
-          )}
-        >
-          <RefreshCcw size={13} /> 复审任务 <span className="ml-1 text-xs text-[#94a3b8]">{renewalTasks.length}</span>
-        </button>
-      </div>
-
-      {activeTab === "application" && (
-        <>
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            {COLUMNS.map((col) => {
-              const count = visibleTasks.filter((t) => t.status === col.key).length;
-              return (
-                <div key={col.key} className={cn("rounded-xl border p-4", col.color)}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className={cn("w-2 h-2 rounded-full", col.dot)} />
-                    <span className="text-sm font-semibold text-[#0f172a]">{col.label}</span>
-                  </div>
-                  <div className="text-2xl font-bold text-[#0f172a] tabular-nums">{count}</div>
-                  <div className="text-xs text-[#94a3b8] mt-0.5">条任务</div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Kanban */}
-          <div className="grid grid-cols-3 gap-5">
-            {COLUMNS.map((col) => {
-              const colTasks = visibleTasks.filter((t) => t.status === col.key);
-              return (
-                <div key={col.key}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={cn("w-2 h-2 rounded-full", col.dot)} />
-                    <span className="text-sm font-semibold text-[#475569]">{col.label}</span>
-                    <span className="ml-auto text-xs bg-[#f1f5f9] text-[#94a3b8] px-2 py-0.5 rounded-full tabular-nums">
-                      {colTasks.length}
-                    </span>
-                  </div>
-                  <div className="space-y-3 min-h-[200px]">
-                    {colTasks.map((task) => (
-                      <TaskCard key={task.id} task={task} onMove={moveTask} />
-                    ))}
-                    {colTasks.length === 0 && (
-                      <div className="rounded-lg border-2 border-dashed border-[#e5e7eb] p-6 text-center text-xs text-[#94a3b8]">
-                        暂无任务
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
-
-      {activeTab === "renewal" && (
-        <>
-          {/* Renewal stats */}
-          <div className="grid grid-cols-5 gap-3 mb-6">
-            {RENEWAL_COLUMNS.map((col) => {
-              const count = renewalTasks.filter((t) => t.status === col.key).length;
-              return (
-                <div key={col.key} className={cn("rounded-xl border p-4", col.color)}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className={cn("w-2 h-2 rounded-full", col.dot)} />
-                    <span className="text-sm font-semibold text-[#0f172a]">{col.label}</span>
-                  </div>
-                  <div className="text-2xl font-bold text-[#0f172a] tabular-nums">{count}</div>
-                  <div className="text-xs text-[#94a3b8] mt-0.5">条任务</div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Renewal kanban (5 columns) */}
-          <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(5, 1fr)" }}>
-            {RENEWAL_COLUMNS.map((col) => {
-              const colTasks = renewalTasks.filter((t) => t.status === col.key);
-              return (
-                <div key={col.key}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={cn("w-2 h-2 rounded-full", col.dot)} />
-                    <span className="text-sm font-semibold text-[#475569]">{col.label}</span>
-                    <span className="ml-auto text-xs bg-[#f1f5f9] text-[#94a3b8] px-2 py-0.5 rounded-full tabular-nums">
-                      {colTasks.length}
-                    </span>
-                  </div>
-                  <div className="space-y-3 min-h-[200px]">
-                    {colTasks.map((task) => (
-                      <RenewalTaskCard
-                        key={task.id}
-                        task={task}
-                        columns={RENEWAL_COLUMNS}
-                        onMove={moveRenewalTask}
-                      />
-                    ))}
-                    {colTasks.length === 0 && (
-                      <div className="rounded-lg border-2 border-dashed border-[#e5e7eb] p-6 text-center text-xs text-[#94a3b8]">
-                        暂无任务
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </>
-      )}
-    </div>
+    <label className={`flex items-center gap-1.5 text-sm ${disabled ? "opacity-40" : ""}`}>
+      <span className="text-[#475569]">{label}</span>
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        disabled={disabled}
+        className="px-2.5 py-1.5 text-sm bg-white border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400 disabled:cursor-not-allowed min-w-[110px]"
+      >
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }

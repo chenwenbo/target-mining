@@ -13,6 +13,9 @@ const tabs = [
 export default function BottomNav() {
   const pathname = usePathname();
 
+  // Focused workflows (走访表单流程) hide the global tab bar.
+  if (pathname.includes("/visit")) return null;
+
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] h-14 bg-white border-t border-gray-200 flex z-50">
       {tabs.map(({ label, href, icon: Icon }) => {

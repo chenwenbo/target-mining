@@ -73,7 +73,7 @@ export default function VisitSuccessPage() {
             )}
             {record.nextSteps.length > 0 && (
               <div>
-                <span className="text-xs text-gray-400 block mb-1.5">后续行动</span>
+                <span className="text-xs text-gray-400 block mb-1.5">企业需求</span>
                 <div className="flex flex-wrap gap-1">
                   {record.nextSteps.map((s) => (
                     <span key={s} className="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded">{s}</span>

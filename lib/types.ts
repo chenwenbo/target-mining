@@ -162,7 +162,7 @@ export interface Visitor {
   dept: string;
 }
 
-export type VisitMethod = "in_person" | "phone" | "online_meeting";
+export type VisitMethod = "in_person" | "online";
 export type WillingnessLevel = "strong" | "moderate" | "hesitant" | "refused" | "unreachable";
 
 export interface VisitRecord {
@@ -201,6 +201,70 @@ export interface VisitRecord {
   nextSteps: string[];
   notes?: string;
   submittedAt: string;
+}
+
+// ─── 专业测评 ───────────────────────────────────────────────────
+
+export type AssessmentDimension =
+  | "rd_expense"
+  | "rd_staff"
+  | "ip"
+  | "hi_tech_revenue"
+  | "management";
+
+export interface AssessmentOption {
+  value: string;
+  label: string;
+  score: number;
+}
+
+export interface AssessmentQuestion {
+  id: string;
+  dimension: AssessmentDimension;
+  text: string;
+  hint?: string;
+  options: AssessmentOption[];
+  isQualifier: boolean;
+}
+
+export type AssessmentAnswers = Record<string, string>;
+
+export interface AssessmentDimensionScore {
+  dimension: AssessmentDimension;
+  label: string;
+  score: number;
+  maxScore: number;
+}
+
+export interface CultivationSuggestion {
+  dimension: AssessmentDimension;
+  urgent: boolean;
+  title: string;
+  body: string;
+}
+
+export interface AssessmentScore {
+  total: number;
+  grade: "优秀" | "符合" | "待培育";
+  dimensionScores: AssessmentDimensionScore[];
+  suggestions: CultivationSuggestion[];
+}
+
+export type AssessmentSource = "enterprise_self" | "staff_agent";
+export type AssessmentStatus = "pending" | "completed";
+
+export interface AssessmentRecord {
+  id: string;
+  companyId: string;
+  token: string;
+  source: AssessmentSource;
+  status: AssessmentStatus;
+  createdAt: string;
+  submittedAt?: string;
+  submitterName?: string;
+  answers?: AssessmentAnswers;
+  score?: AssessmentScore;
+  taskId?: string;
 }
 
 // ─── 复审任务 ────────────────────────────────────────────────────

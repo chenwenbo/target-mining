@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAllTasks } from "@/lib/mock-data";
-import { getCurrentVisitor, getVisitRecords, getTaskStatusOverrides } from "@/lib/mobile-mock";
-import type { Visitor, TaskStatus } from "@/lib/types";
+import { getCurrentVisitor, getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords } from "@/lib/mobile-mock";
+import type { Visitor, TaskStatus, VisitRecord } from "@/lib/types";
 import { BarChart2, Users, CheckCircle2, TrendingUp, Clock } from "lucide-react";
 
 const WILLINGNESS_MAP: Record<string, { label: string; color: string; bar: string }> = {
@@ -15,39 +15,67 @@ const WILLINGNESS_MAP: Record<string, { label: string; color: string; bar: strin
   unreachable: { label: "无法联系",   color: "text-gray-400",    bar: "bg-gray-300" },
 };
 
-export default function StatsPage() {
-  const router = useRouter();
-  const [visitor, setVisitor] = useState<Visitor | null>(null);
+interface StatsState {
+  allRecords: VisitRecord[];
+  visitedCompanies: number;
+  doneCount: number;
+  completionRate: number;
+  willingCount: number;
+  avgDuration: number;
+  willingnessCount: Record<string, number>;
+  maxWilling: number;
+  pendingCount: number;
+  inProgressCount: number;
+}
 
-  useEffect(() => {
-    const v = getCurrentVisitor();
-    if (!v) { router.replace("/mobile/login"); return; }
-    setVisitor(v);
-  }, [router]);
-
-  if (!visitor) return null;
-
+function computeStats(visitorId: string, visitorName: string): StatsState {
   const overrides = getTaskStatusOverrides();
   const myTasks = getAllTasks()
-    .filter((t) => t.assignee === visitor.name)
+    .filter((t) => t.assignee === visitorName)
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
-
-  const allRecords = getVisitRecords().filter((r) => r.visitorId === visitor.id);
-
+  const allRecords = getVisitRecords().filter((r) => r.visitorId === visitorId);
   const visitedCompanies = new Set(allRecords.map((r) => r.companyId)).size;
   const doneCount = myTasks.filter((t) => t.status === "done").length;
   const completionRate = myTasks.length > 0 ? Math.round((doneCount / myTasks.length) * 100) : 0;
   const willingCount = allRecords.filter((r) => r.willingness === "strong" || r.willingness === "moderate").length;
-  const avgDuration = allRecords.length > 0
-    ? Math.round(allRecords.filter((r) => r.visitDurationMinutes).reduce((s, r) => s + (r.visitDurationMinutes ?? 0), 0) / allRecords.filter((r) => r.visitDurationMinutes).length || 0)
+  const withDuration = allRecords.filter((r) => r.visitDurationMinutes);
+  const avgDuration = withDuration.length > 0
+    ? Math.round(withDuration.reduce((s, r) => s + (r.visitDurationMinutes ?? 0), 0) / withDuration.length)
     : 0;
-
-  // 意愿分布
   const willingnessCount: Record<string, number> = {};
   for (const r of allRecords) {
     willingnessCount[r.willingness] = (willingnessCount[r.willingness] ?? 0) + 1;
   }
-  const maxWilling = Math.max(1, ...Object.values(willingnessCount));
+  return {
+    allRecords,
+    visitedCompanies,
+    doneCount,
+    completionRate,
+    willingCount,
+    avgDuration,
+    willingnessCount,
+    maxWilling: Math.max(1, ...Object.values(willingnessCount)),
+    pendingCount: myTasks.filter((t) => t.status === "pending").length,
+    inProgressCount: myTasks.filter((t) => t.status === "in_progress").length,
+  };
+}
+
+export default function StatsPage() {
+  const router = useRouter();
+  const [visitor, setVisitor] = useState<Visitor | null>(null);
+  const [stats, setStats] = useState<StatsState | null>(null);
+
+  useEffect(() => {
+    const v = getCurrentVisitor();
+    if (!v) { router.replace("/mobile/login"); return; }
+    initSeedVisitRecords();
+    setVisitor(v);
+    setStats(computeStats(v.id, v.name));
+  }, [router]);
+
+  if (!visitor || !stats) return null;
+
+  const { allRecords, visitedCompanies, doneCount, completionRate, willingCount, avgDuration, willingnessCount, maxWilling, pendingCount, inProgressCount } = stats;
 
 
   return (
@@ -114,8 +142,8 @@ export default function StatsPage() {
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">任务总览</h3>
           <div className="grid grid-cols-3 gap-3 text-center">
             {[
-              { label: "待走访", count: myTasks.filter((t) => t.status === "pending").length, color: "text-gray-600" },
-              { label: "进行中", count: myTasks.filter((t) => t.status === "in_progress").length, color: "text-blue-600" },
+              { label: "待走访", count: pendingCount, color: "text-gray-600" },
+              { label: "进行中", count: inProgressCount, color: "text-blue-600" },
               { label: "已完成", count: doneCount, color: "text-emerald-600" },
             ].map(({ label, count, color }) => (
               <div key={label} className="bg-gray-50 rounded-lg py-3">

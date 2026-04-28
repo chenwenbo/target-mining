@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Target, Users, ArrowRight, AlertTriangle, Pencil, Check, X } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import type { getDashboardKPI } from "@/lib/mock-data";
+import { useRoleGuard } from "@/lib/account-mock";
 
 type KPI = ReturnType<typeof getDashboardKPI>;
 
@@ -38,9 +39,10 @@ function TopKPI({ kpi }: { kpi: KPI }) {
   const goal = useEditableNumber("dashboard_yearGoal", kpi.yearGoal);
   const certified = useEditableNumber("dashboard_certified", kpi.certified);
 
-  const gap = Math.max(0, goal.value - certified.value);
-  const progressPct = Math.min(100, Math.round((certified.value / goal.value) * 100));
   const totalTargets = kpi.newDeclTargets + kpi.renewalTotal;
+  const gapValue = goal.value - totalTargets;
+  const hasGap = gapValue > 0;
+  const progressPct = Math.min(100, Math.round((certified.value / goal.value) * 100));
 
   return (
     <div className="grid grid-cols-3 gap-4 mb-4">
@@ -82,9 +84,9 @@ function TopKPI({ kpi }: { kpi: KPI }) {
         </div>
         <div className="flex flex-col items-end shrink-0">
           <div className="flex items-center gap-1 justify-end">
-            <span className="text-[11px] text-[#94a3b8]">已认定</span>
+            <span className="text-[11px] text-[#94a3b8]">有申报意愿</span>
             {!certified.editing && (
-              <button onClick={certified.startEdit} className="text-[#cbd5e1] hover:text-emerald-500 transition-colors" title="修改已认定数量">
+              <button onClick={certified.startEdit} className="text-[#cbd5e1] hover:text-emerald-500 transition-colors" title="修改有申报意愿数量">
                 <Pencil size={10} />
               </button>
             )}
@@ -150,13 +152,26 @@ function TopKPI({ kpi }: { kpi: KPI }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="text-xs text-[#94a3b8] font-medium">目标缺口数量</div>
-          <div className="flex items-baseline gap-1.5 mt-1">
-            <span className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{gap}</span>
-            <span className="text-sm text-[#94a3b8]">家</span>
-          </div>
-          <div className="text-[11px] text-[#64748b] mt-1.5">
-            需在年内再认定 <span className="font-semibold text-amber-700 tabular-nums">{gap}</span> 家方可达标
-          </div>
+          {hasGap ? (
+            <>
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span className="text-3xl font-bold text-[#0f172a] tabular-nums leading-none">{gapValue}</span>
+                <span className="text-sm text-[#94a3b8]">家</span>
+              </div>
+              <div className="text-[11px] text-[#64748b] mt-1.5">
+                需在年内再挖掘 <span className="font-semibold text-amber-700 tabular-nums">{gapValue}</span> 家方可达标
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-baseline gap-1.5 mt-1">
+                <span className="text-3xl font-bold text-emerald-600 leading-none">无缺口</span>
+              </div>
+              <div className="text-[11px] text-[#64748b] mt-1.5">
+                潜在标的已满足年度申报目标
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
@@ -377,64 +392,6 @@ function PanelCard({
   );
 }
 
-// ─── 流失高企分析（柱状图）─────────────────────────────────
-function ChurnAnalysis({ kpi }: { kpi: KPI }) {
-  const reasons = Object.entries(kpi.churnByReason).sort((a, b) => b[1] - a[1]);
-  const option = {
-    grid: { left: 36, right: 16, top: 28, bottom: 56 },
-    tooltip: { trigger: "axis", formatter: "{b}<br/>流失企业 {c} 家" },
-    xAxis: {
-      type: "category",
-      data: reasons.map(([r]) => r),
-      axisLine: { lineStyle: { color: "#e5e7eb" } },
-      axisTick: { show: false },
-      axisLabel: {
-        color: "#64748b",
-        fontSize: 11,
-        interval: 0,
-        rotate: 18,
-      },
-    },
-    yAxis: {
-      type: "value",
-      axisLine: { show: false },
-      axisTick: { show: false },
-      splitLine: { lineStyle: { color: "#f1f5f9" } },
-      axisLabel: { color: "#94a3b8", fontSize: 10 },
-    },
-    series: [{
-      type: "bar",
-      data: reasons.map(([, v]) => v),
-      barWidth: 28,
-      itemStyle: {
-        color: {
-          type: "linear",
-          x: 0, y: 0, x2: 0, y2: 1,
-          colorStops: [
-            { offset: 0, color: "#fb7185" },
-            { offset: 1, color: "#e11d48" },
-          ],
-        },
-        borderRadius: [4, 4, 0, 0],
-      },
-      label: { show: true, position: "top", color: "#0f172a", fontSize: 11, fontWeight: "bold" },
-    }],
-  };
-
-  return (
-    <PanelCard title="流失高企分析" subtitle="近三年失效及主动放弃复审 · 按原因分布">
-      <div className="mb-2">
-        <div className="text-[11px] text-[#94a3b8]">累计流失</div>
-        <div className="flex items-baseline gap-1.5 mt-0.5">
-          <span className="text-3xl font-bold text-rose-600 tabular-nums leading-none">{kpi.churnTotal}</span>
-          <span className="text-sm text-[#94a3b8]">家</span>
-        </div>
-      </div>
-      <EChartsWrapper option={option} height={260} />
-    </PanelCard>
-  );
-}
-
 // ─── 街道园区分布 ────────────────────────────────────────────
 function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) {
   const sorted = Object.entries(byStreet).sort((a, b) => b[1] - a[1]).slice(0, 8);
@@ -554,6 +511,14 @@ function AgeBar({ kpi }: { kpi: KPI }) {
 
 // ─── 主组件 ───────────────────────────────────────────────────
 export default function DashboardClient({ kpi }: { kpi: KPI }) {
+  const allowed = useRoleGuard("region_admin");
+  if (!allowed) {
+    return (
+      <div className="flex items-center justify-center py-32 text-sm text-[#94a3b8]">
+        加载中…
+      </div>
+    );
+  }
   return (
     <div>
       {/* Header */}
@@ -578,15 +543,14 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
       {/* 第一行：3 张 KPI 卡横排 */}
       <TopKPI kpi={kpi} />
 
-      {/* 第二行：企业漏斗 + 流失高企分析 */}
+      {/* 第二行：企业漏斗 + 园区街道分布 */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <EnterpriseFunnel kpi={kpi} />
-        <ChurnAnalysis kpi={kpi} />
+        <StreetDistribution byStreet={kpi.byStreet} />
       </div>
 
-      {/* 第三行：3 列分析卡 */}
-      <div className="grid grid-cols-3 gap-4">
-        <StreetDistribution byStreet={kpi.byStreet} />
+      {/* 第三行：2 列分析卡 */}
+      <div className="grid grid-cols-2 gap-4">
         <FieldDonut kpi={kpi} />
         <AgeBar kpi={kpi} />
       </div>

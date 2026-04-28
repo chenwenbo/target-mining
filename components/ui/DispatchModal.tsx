@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
-import { Send, X, CheckCircle2 } from "lucide-react";
-import { MOCK_VISITORS } from "@/lib/mobile-mock";
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { Send, X, CheckCircle2, KeyRound } from "lucide-react";
+import { getStreetAccounts, type StreetAccount } from "@/lib/account-mock";
 import type { Visitor } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
@@ -17,10 +18,36 @@ interface Props {
   onConfirm: (assignee: Visitor, notes: string) => void;
 }
 
+function accountToVisitor(a: StreetAccount): Visitor {
+  return {
+    id: `acct_${a.street}`,
+    name: `${a.street}·管理员`,
+    street: a.street,
+    dept: `${a.street}办事处`,
+  };
+}
+
 export default function DispatchModal({ targets, onClose, onConfirm }: Props) {
+  const [accounts, setAccounts] = useState<StreetAccount[]>([]);
   const [selected, setSelected] = useState<Visitor | null>(null);
   const [notes, setNotes] = useState("");
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setAccounts(getStreetAccounts());
+  }, []);
+
+  // 派发候选：仅启用且已生成账号；如所有目标同街道，候选限制为该街道
+  const candidates = useMemo(() => {
+    const usable = accounts.filter((a) => a.enabled && a.username && a.password);
+    const targetStreets = new Set(targets.map((t) => t.street));
+    if (targetStreets.size === 1) {
+      const onlyStreet = Array.from(targetStreets)[0];
+      const matched = usable.filter((a) => a.street === onlyStreet);
+      return matched.length > 0 ? matched : usable;
+    }
+    return usable;
+  }, [accounts, targets]);
 
   function handleConfirm() {
     if (!selected) return;
@@ -75,24 +102,42 @@ export default function DispatchModal({ targets, onClose, onConfirm }: Props) {
 
             {/* Assignee selection */}
             <div>
-              <p className="text-xs text-[#94a3b8] mb-2">选择经办人</p>
-              <div className="grid grid-cols-2 gap-2">
-                {MOCK_VISITORS.map((v) => (
-                  <button
-                    key={v.id}
-                    onClick={() => setSelected(v)}
-                    className={cn(
-                      "flex flex-col items-start px-3 py-2.5 rounded-xl border text-left transition-all",
-                      selected?.id === v.id
-                        ? "border-blue-500 bg-blue-50 ring-1 ring-blue-400"
-                        : "border-[#e5e7eb] bg-white hover:bg-[#f7f8fa]"
-                    )}
-                  >
-                    <span className="text-xs font-semibold text-[#0f172a]">{v.name}</span>
-                    <span className="text-[11px] text-[#94a3b8] mt-0.5">{v.dept}</span>
-                  </button>
-                ))}
-              </div>
+              <p className="text-xs text-[#94a3b8] mb-2">选择经办街道（管理员账号）</p>
+              {candidates.length === 0 ? (
+                <div className="px-3 py-4 bg-amber-50/60 border border-amber-200 rounded-lg flex items-start gap-2 text-xs text-amber-800">
+                  <KeyRound size={13} className="mt-0.5 flex-shrink-0" />
+                  <div className="flex-1 leading-relaxed">
+                    暂无可派发的街道管理员账号，请先到{" "}
+                    <Link href="/admin/dispatch" onClick={onClose} className="underline font-medium">
+                      摸排账户分发配置
+                    </Link>{" "}
+                    页生成账号后再派发。
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-2">
+                  {candidates.map((a) => {
+                    const v = accountToVisitor(a);
+                    return (
+                      <button
+                        key={a.street}
+                        onClick={() => setSelected(v)}
+                        className={cn(
+                          "flex flex-col items-start px-3 py-2.5 rounded-xl border text-left transition-all",
+                          selected?.id === v.id
+                            ? "border-blue-500 bg-blue-50 ring-1 ring-blue-400"
+                            : "border-[#e5e7eb] bg-white hover:bg-[#f7f8fa]"
+                        )}
+                      >
+                        <span className="text-xs font-semibold text-[#0f172a]">{v.name}</span>
+                        <span className="text-[11px] text-[#94a3b8] mt-0.5 font-mono truncate w-full">
+                          {a.username}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Notes */}

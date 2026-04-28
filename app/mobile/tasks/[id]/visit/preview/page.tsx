@@ -6,32 +6,14 @@ import { getAllTasks } from "@/lib/mock-data";
 import { saveVisitRecord, setTaskStatus } from "@/lib/mobile-mock";
 import type { VisitRecord } from "@/lib/types";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
-
-const WILLINGNESS_MAP: Record<string, { label: string; color: string }> = {
-  strong:      { label: "意愿强烈",   color: "text-emerald-600 bg-emerald-50" },
-  moderate:    { label: "有一定意愿", color: "text-blue-600 bg-blue-50" },
-  hesitant:    { label: "态度观望",   color: "text-amber-600 bg-amber-50" },
-  refused:     { label: "明确拒绝",   color: "text-red-600 bg-red-50" },
-  unreachable: { label: "无法联系",   color: "text-gray-500 bg-gray-100" },
-};
-
-const METHOD_MAP: Record<string, string> = {
-  in_person: "🏢 上门拜访", phone: "📞 电话沟通", online_meeting: "💻 视频会议",
-};
-
-const REVENUE_MAP: Record<string, string> = {
-  under_500w: "500万以下", "500w_2000w": "500-2000万", "2000w_1yi": "2000万-1亿", above_1yi: "1亿以上",
-};
-const RD_RATIO_MAP: Record<string, string> = {
-  under_3pct: "<3%", "3_5pct": "3-5%", "5_10pct": "5-10%", above_10pct: ">10%",
-};
-const RD_SOURCE_MAP: Record<string, string> = {
-  self_invested: "企业自投", government_grant: "政府补贴", both: "两者均有", none: "几乎无研发投入",
-};
-
-function bool3Map(v: string): string {
-  return v === "true" ? "是" : v === "false" ? "否" : "不清楚";
-}
+import {
+  WILLINGNESS_META,
+  METHOD_MAP,
+  REVENUE_MAP,
+  RD_RATIO_MAP,
+  RD_SOURCE_MAP,
+  bool3Map,
+} from "@/app/(main)/tasks/lifecycle";
 
 export default function VisitPreviewPage() {
   const router = useRouter();
@@ -49,7 +31,7 @@ export default function VisitPreviewPage() {
   const task = getAllTasks().find((t) => t.id === id);
   if (!task) return null;
 
-  const w = WILLINGNESS_MAP[form.willingness as string] ?? { label: "未填写", color: "text-gray-400 bg-gray-50" };
+  const w = WILLINGNESS_META[form.willingness as keyof typeof WILLINGNESS_META] ?? { label: "未填写", badge: "text-gray-400 bg-gray-50" };
 
   function handleSubmit() {
     const record: VisitRecord = {
@@ -138,7 +120,7 @@ export default function VisitPreviewPage() {
         <PreviewSection title="申报意愿与后续">
           <div className="flex items-center justify-between py-1">
             <span className="text-xs text-gray-500">申报意愿</span>
-            <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${w.color}`}>{w.label}</span>
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${w.badge}`}>{w.label}</span>
           </div>
           {!!form.willingnessNotes && <Row label="意愿备注" value={String(form.willingnessNotes)} />}
           {(form.acknowledgedGaps as string[]).length > 0 && (
@@ -153,7 +135,7 @@ export default function VisitPreviewPage() {
           )}
           {(form.nextSteps as string[]).length > 0 && (
             <div className="py-1">
-              <span className="text-xs text-gray-500 block mb-1.5">后续行动</span>
+              <span className="text-xs text-gray-500 block mb-1.5">企业需求</span>
               <div className="flex flex-wrap gap-1">
                 {(form.nextSteps as string[]).map((s) => (
                   <span key={s} className="text-[10px] bg-blue-50 text-blue-700 px-2 py-0.5 rounded">{s}</span>

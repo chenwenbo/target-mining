@@ -21,7 +21,7 @@ export default function ProfilePage() {
 
   const overrides = getTaskStatusOverrides();
   const myTasks = getAllTasks()
-    .filter((t) => t.assignee === visitor.name)
+    .filter((t) => (visitor.street ? t.street === visitor.street : t.assignee === visitor.name))
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
   const myRecords = getVisitRecords().filter((r) => r.visitorId === visitor.id);
   const doneCount = myTasks.filter((t) => t.status === "done").length;

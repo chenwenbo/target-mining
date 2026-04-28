@@ -62,8 +62,16 @@ const GAP_OPTIONS = [
 ];
 
 const NEXT_STEP_OPTIONS = [
-  "协助联系专利代理机构", "发送政策材料", "邀请参加宣讲会",
-  "邀请科技人员上门评估", "提交区局审核", "暂时搁置",
+  "高新政策详解与一对一辅导",
+  "申报材料清单与流程指导",
+  "知识产权培育（专利/软著）",
+  "研发费用归集与加计扣除辅导",
+  "财务规范化（事务所/审计对接）",
+  "科技项目与专项资金申报",
+  "高层次人才引进政策对接",
+  "产学研合作（高校院所对接）",
+  "科技金融（贷款/担保/投融资）",
+  "暂无明确需求",
 ];
 
 export default function VisitFormPage() {
@@ -242,8 +250,7 @@ function Step1({ form, company, update }: { form: FormData; company: Company; up
             onChange={(v) => update("visitMethod", v as VisitMethod)}
             options={[
               { value: "in_person", label: "🏢 上门拜访" },
-              { value: "phone", label: "📞 电话沟通" },
-              { value: "online_meeting", label: "💻 视频会议" },
+              { value: "online", label: "💻 线上沟通" },
             ]}
           />
         </FormRow>
@@ -582,7 +589,7 @@ function Step3({
             className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
           />
         </FormRow>
-        <FormRow label="后续行动（多选）">
+        <FormRow label="企业需求（多选）">
           <div className="flex flex-wrap gap-2">
             {NEXT_STEP_OPTIONS.map((opt) => {
               const checked = form.nextSteps.includes(opt);

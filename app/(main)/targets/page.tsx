@@ -1,17 +1,27 @@
 "use client";
-import { useMemo, useState, Suspense } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { SlidersHorizontal, Download, Send, Search, X } from "lucide-react";
+import { SlidersHorizontal, Download, Send, Search, X, Building2 } from "lucide-react";
 import { getPotentialTargets } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
 import { saveDispatchedTask } from "@/lib/mobile-mock";
+import { useCurrentPCUser } from "@/lib/account-mock";
 import type { Street, TechField, Company, DeclarationWillingness, Visitor } from "@/lib/types";
 import { STREETS, TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 // ─── Filter state ────────────────────────────────────────────
+type PoolTier = "all" | "patent_growth" | "employee_growth" | "willing";
+
+const POOL_TIERS: { id: PoolTier; label: string; desc: string }[] = [
+  { id: "all",            label: "泛科技企业",       desc: "全部泛科技企业" },
+  { id: "patent_growth",  label: "近三年有专利增长",  desc: "近三年新增专利的企业" },
+  { id: "employee_growth",label: "近三年企业人数增长", desc: "近三年参保人数持续增长的企业" },
+  { id: "willing",        label: "有意愿的企业",      desc: "申报意愿强烈或基本有意愿的企业" },
+];
+
 interface Filters {
   q: string;
   streets: Street[];
@@ -21,6 +31,7 @@ interface Filters {
   excludeRisk: boolean;
   willingness: DeclarationWillingness[];
   declarationType: ("新申报" | "复审")[];
+  poolTier: PoolTier;
 }
 
 const ALL_AGE_RANGES = ["1-3 年", "3-5 年", "5-8 年", "8-15 年", "15 年+"];
@@ -39,7 +50,15 @@ function toggle<T>(arr: T[], val: T): T[] {
 }
 
 // ─── Filter Panel ────────────────────────────────────────────
-function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Filters) => void }) {
+function FilterPanel({
+  filters,
+  onChange,
+  lockedStreet,
+}: {
+  filters: Filters;
+  onChange: (f: Filters) => void;
+  lockedStreet?: Street | null;
+}) {
   function pill(label: string, active: boolean, onClick: () => void) {
     return (
       <button
@@ -72,15 +91,26 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
         </span>
         <button
           onClick={() => onChange({
-            q: "", streets: [], fields: [], ageRange: [],
+            q: "", streets: lockedStreet ? [lockedStreet] : [], fields: [], ageRange: [],
             smeOnly: false, excludeRisk: true,
-            willingness: [], declarationType: [],
+            willingness: [], declarationType: [], poolTier: "all",
           })}
           className="text-xs text-[#94a3b8] hover:text-blue-600"
         >
           重置
         </button>
       </div>
+
+      {lockedStreet && (
+        <div className="mb-5 px-3 py-2 bg-blue-50 border border-blue-100 rounded-md flex items-start gap-2">
+          <Building2 size={12} className="text-blue-600 mt-0.5 flex-shrink-0" />
+          <div className="text-[11px] text-[#475569] leading-relaxed">
+            当前视图：<span className="font-semibold text-blue-700">{lockedStreet}</span>
+            <br />
+            仅本街道企业
+          </div>
+        </div>
+      )}
 
       {section("所属领域", (
         <div className="flex flex-wrap gap-1.5">
@@ -92,7 +122,7 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
         </div>
       ))}
 
-      {section("所在街道 / 园区", (
+      {!lockedStreet && section("所在街道 / 园区", (
         <div className="space-y-1">
           {STREETS.map((s) => (
             <label key={s} className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer hover:text-[#0f172a]">
@@ -161,6 +191,9 @@ function FilterPanel({ filters, onChange }: { filters: Filters; onChange: (f: Fi
 // ─── Main Page ───────────────────────────────────────────────
 function TargetsPageContent() {
   const searchParams = useSearchParams();
+  const { user, mounted } = useCurrentPCUser();
+  const lockedStreet: Street | null =
+    mounted && user.role === "street_admin" && user.street ? (user.street as Street) : null;
 
   const [filters, setFilters] = useState<Filters>({
     q: searchParams.get("q") ?? "",
@@ -171,7 +204,15 @@ function TargetsPageContent() {
     excludeRisk: true,
     willingness: [],
     declarationType: [],
+    poolTier: "all",
   });
+
+  // 街道管理员视角：强制把街道筛选锁定为本街道
+  useEffect(() => {
+    if (lockedStreet && (filters.streets.length !== 1 || filters.streets[0] !== lockedStreet)) {
+      setFilters((f) => ({ ...f, streets: [lockedStreet] }));
+    }
+  }, [lockedStreet, filters.streets]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [sortBy, setSortBy] = useState<"name" | "employees">("name");
   const [dispatchTargets, setDispatchTargets] = useState<{ id: string; name: string; street: string }[] | null>(null);
@@ -191,6 +232,17 @@ function TargetsPageContent() {
         if (filters.willingness.length > 0 && !filters.willingness.includes(c.declarationWillingness)) return false;
         const dtype = c.alreadyCertified ? "复审" : "新申报";
         if (filters.declarationType.length > 0 && !filters.declarationType.includes(dtype)) return false;
+        // Pool tier quick-filter
+        if (filters.poolTier === "patent_growth") {
+          const totalPatents = c.patents.invention + c.patents.utility + c.patents.design + c.software;
+          if (totalPatents === 0) return false;
+        }
+        if (filters.poolTier === "employee_growth") {
+          if (c.employees < 30 && c.rdEmployees < 10) return false;
+        }
+        if (filters.poolTier === "willing") {
+          if (!["strong", "moderate"].includes(c.declarationWillingness)) return false;
+        }
         return true;
       })
       .sort((a, b) => {
@@ -259,9 +311,33 @@ function TargetsPageContent() {
   return (
     <>
     <div className="-m-6 lg:-m-8 flex h-full" style={{ minHeight: "calc(100vh - 56px)" }}>
-      <FilterPanel filters={filters} onChange={setFilters} />
+      <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Pool tier quick-filter bar */}
+        <div className="bg-[#f0f6ff] border-b border-[#d1e3fa] px-5 py-2.5 flex items-center gap-2 flex-shrink-0 overflow-x-auto">
+          <span className="text-[11px] font-semibold text-[#64748b] whitespace-nowrap mr-1">标的池</span>
+          {POOL_TIERS.map((tier, idx) => {
+            const isActive = filters.poolTier === tier.id;
+            return (
+              <button
+                key={tier.id}
+                title={tier.desc}
+                onClick={() => setFilters((f) => ({ ...f, poolTier: tier.id }))}
+                className={cn(
+                  "flex items-center gap-1.5 px-3 py-1 text-xs rounded-full border transition-all whitespace-nowrap",
+                  isActive
+                    ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                    : "bg-white text-[#475569] border-[#c5d9f5] hover:border-blue-400 hover:text-blue-600"
+                )}
+              >
+                {idx > 0 && <span className={cn("text-[10px]", isActive ? "text-blue-200" : "text-[#94a3b8]")}>▸</span>}
+                {tier.label}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Toolbar */}
         <div className="bg-white border-b border-[#e5e7eb] px-5 py-3 flex items-center justify-between gap-3 flex-shrink-0">
           <div className="flex items-center gap-3">

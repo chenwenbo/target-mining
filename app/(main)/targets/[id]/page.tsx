@@ -8,6 +8,7 @@ import {
 import { getCompanyById } from "@/lib/mock-data";
 import { getCertifiedCompanyById } from "@/lib/renewal-data";
 import TabRenewalAnalysis from "./TabRenewalAnalysis";
+import TabAssessment from "./TabAssessment";
 import { cn } from "@/lib/cn";
 import { DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 
@@ -460,7 +461,7 @@ function TabBusinessInfo({ company }: { company: NonNullable<ReturnType<typeof g
 }
 
 // ─── Main ─────────────────────────────────────────────────────
-type Tab = "基本信息" | "知识产权信息" | "经营信息" | "复审分析";
+type Tab = "基本信息" | "知识产权信息" | "经营信息" | "复审分析" | "专业测评";
 
 export default function CompanyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -476,6 +477,7 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
     "知识产权信息",
     "经营信息",
     ...(certifiedCompany ? ["复审分析" as Tab] : []),
+    "专业测评",
   ];
 
   const updateDate = "2026-02-27";
@@ -568,6 +570,7 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
           {activeTab === "知识产权信息" && <TabIPInfo company={company} />}
           {activeTab === "经营信息" && <TabBusinessInfo company={company} />}
           {activeTab === "复审分析" && certifiedCompany && <TabRenewalAnalysis company={certifiedCompany} />}
+          {activeTab === "专业测评" && <TabAssessment company={company} />}
         </div>
       </div>
     </div>

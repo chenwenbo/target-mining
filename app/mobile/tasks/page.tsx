@@ -45,8 +45,10 @@ export default function TasksPage() {
   if (!visitor) return null;
 
   const overrides = getTaskStatusOverrides();
+  // 街道管理员视角：以街道为隔离边界，凡本街道任务都可见
+  // （历史 mock 任务的 assignee 仍是中文姓名，街道字段才是稳定标识）
   const allTasks = getAllTasks()
-    .filter((t) => t.assignee === visitor.name)
+    .filter((t) => (visitor.street ? t.street === visitor.street : t.assignee === visitor.name))
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
 
   const filtered = allTasks.filter((t) => {

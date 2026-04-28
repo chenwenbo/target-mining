@@ -7,26 +7,73 @@ import {
   LayoutDashboard,
   Target,
   CheckSquare,
-  RefreshCcw,
   ChevronLeft,
   ChevronRight,
+  UsersRound,
+  ClipboardList,
 } from "lucide-react";
+import UserSwitcher from "./UserSwitcher";
+import { useCurrentPCUser } from "@/lib/account-mock";
+import type { LucideIcon } from "lucide-react";
+import type { RoleType } from "@/lib/account-mock";
 
-const NAV_ITEMS = [
+interface NavItem {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  badge?: string;
+  title?: string;
+}
+
+interface NavSection {
+  section: string;
+  items: NavItem[];
+}
+
+const REGION_NAV: NavSection[] = [
   {
     section: "工作台",
     items: [
       { href: "/", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
       { href: "/targets", label: "标的池", icon: Target, badge: "246" },
-      { href: "/renewal", label: "复审管理", icon: RefreshCcw, badge: "38" },
       { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
+      { href: "/surveys", label: "摸排统计", icon: ClipboardList },
+    ],
+  },
+  {
+    section: "配置",
+    items: [
+      {
+        href: "/admin/dispatch",
+        label: "账户分发",
+        icon: UsersRound,
+        title: "摸排账户分发配置",
+      },
     ],
   },
 ];
 
+const STREET_NAV: NavSection[] = [
+  {
+    section: "工作台",
+    items: [
+      { href: "/targets", label: "标的池", icon: Target },
+      { href: "/tasks", label: "任务管理", icon: CheckSquare },
+      { href: "/surveys", label: "摸排统计", icon: ClipboardList },
+    ],
+  },
+];
+
+function navForRole(role: RoleType): NavSection[] {
+  return role === "region_admin" ? REGION_NAV : STREET_NAV;
+}
+
 export default function Sidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const { user, mounted } = useCurrentPCUser();
+  // 首屏 SSR 渲染区域管理员菜单，挂载后才切到真实角色，避免 hydration mismatch
+  const sections = navForRole(mounted ? user.role : "region_admin");
 
   return (
     <aside
@@ -59,7 +106,7 @@ export default function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 py-3 overflow-y-auto overflow-x-hidden">
-        {NAV_ITEMS.map((section) => (
+        {sections.map((section) => (
           <div key={section.section} className="px-2 mb-1">
             {!collapsed && (
               <div className="text-[11px] font-semibold text-[#94a3b8] uppercase tracking-wide px-2 py-2 whitespace-nowrap">
@@ -77,7 +124,7 @@ export default function Sidebar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  title={collapsed ? item.label : undefined}
+                  title={collapsed ? item.title ?? item.label : item.title}
                   className={cn(
                     "flex items-center gap-2.5 px-2.5 py-2 rounded-md text-sm mb-0.5 transition-colors",
                     collapsed && "justify-center px-0",
@@ -111,18 +158,8 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className={cn("p-4 border-t border-[#e5e7eb] flex items-center gap-2.5", collapsed && "justify-center p-3")}>
-        <div className="w-7 h-7 flex-shrink-0 rounded-full bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center text-white text-[11px] font-semibold">
-          李
-        </div>
-        {!collapsed && (
-          <div className="overflow-hidden">
-            <div className="text-xs font-medium text-[#0f172a] whitespace-nowrap">李明</div>
-            <div className="text-[11px] text-[#94a3b8] whitespace-nowrap">科创局 · 高新处</div>
-          </div>
-        )}
-      </div>
+      {/* Footer: 用户切换器 */}
+      <UserSwitcher collapsed={collapsed} />
     </aside>
   );
 }
