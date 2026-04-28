@@ -1,25 +1,19 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, Users, Layers } from "lucide-react";
+import { ArrowRight, Target } from "lucide-react";
 
 type Props = {
-  funnelPatentGrowth: number;
-  funnelEmployeeGrowth: number;
   funnelGrowthUnion: number;
 };
 
-export default function PoolSummary({
-  funnelPatentGrowth,
-  funnelEmployeeGrowth,
-  funnelGrowthUnion,
-}: Props) {
+export default function PoolSummary({ funnelGrowthUnion }: Props) {
   return (
     <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)]">
       <div className="px-5 py-3.5 border-b border-[#e5e7eb] flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold text-[#0f172a]">标的池来源</h2>
           <p className="text-xs text-[#94a3b8] mt-0.5">
-            企业漏斗·近三年专利与人数增长 → 形成挖掘候选池
+            近三年专利或人数有增长的企业 → 形成挖掘候选池
           </p>
         </div>
         <Link
@@ -30,29 +24,14 @@ export default function PoolSummary({
         </Link>
       </div>
 
-      <div className="grid grid-cols-3 divide-x divide-[#e5e7eb]">
-        <Block
-          icon={<TrendingUp size={20} className="text-blue-600" />}
-          iconBg="bg-blue-50"
-          label="近三年专利增长"
-          value={funnelPatentGrowth}
-          sub="近三年专利数有增长的企业"
-        />
-        <Block
-          icon={<Users size={20} className="text-purple-600" />}
-          iconBg="bg-purple-50"
-          label="近三年企业人数增长"
-          value={funnelEmployeeGrowth}
-          sub="近三年参保人数增长的企业"
-        />
-        <Block
-          icon={<Layers size={20} className="text-emerald-600" />}
-          iconBg="bg-emerald-50"
-          label="合计标的池"
-          value={funnelGrowthUnion}
-          sub="去重合集 · 形成挖掘候选池"
-          highlighted
-        />
+      <div className="px-5 py-4 flex items-center gap-4">
+        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center">
+          <Target size={20} className="text-emerald-600" />
+        </div>
+        <div>
+          <div className="text-2xl font-bold text-emerald-600 tabular-nums">{funnelGrowthUnion.toLocaleString()}</div>
+          <div className="text-xs text-[#64748b] mt-0.5">潜在标的企业（近三年专利或人数有增长）</div>
+        </div>
       </div>
 
       <div className="px-5 py-3 bg-[#f7f8fa] border-t border-[#e5e7eb] text-xs text-[#64748b] leading-relaxed">

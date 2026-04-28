@@ -1,5 +1,6 @@
 "use client";
 import { use, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -7,8 +8,8 @@ import {
 } from "lucide-react";
 import { getCompanyById } from "@/lib/mock-data";
 import { getCertifiedCompanyById } from "@/lib/renewal-data";
-import TabRenewalAnalysis from "./TabRenewalAnalysis";
 import TabAssessment from "./TabAssessment";
+import TabMoPai from "./TabMoPai";
 import { cn } from "@/lib/cn";
 import { DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 
@@ -289,22 +290,20 @@ function TabCompanyProfile({ company }: { company: NonNullable<ReturnType<typeof
 }
 
 // ─── Main ─────────────────────────────────────────────────────
-type Tab = "企业画像" | "复审分析" | "专业测评";
+type Tab = "企业画像" | "专业测评" | "企业摸排";
 
 export default function CompanyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const [activeTab, setActiveTab] = useState<Tab>("企业画像");
+  const searchParams = useSearchParams();
+  const initialTab = (searchParams.get("tab") as Tab | null) ?? "企业画像";
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
 
   const company = getCompanyById(id);
   if (!company) notFound();
 
   const certifiedCompany = company.alreadyCertified ? getCertifiedCompanyById(id) : undefined;
 
-  const TABS: Tab[] = [
-    "企业画像",
-    ...(certifiedCompany ? ["复审分析" as Tab] : []),
-    "专业测评",
-  ];
+  const TABS: Tab[] = ["企业画像", "专业测评", "企业摸排"];
 
   const updateDate = "2026-02-27";
 
@@ -393,8 +392,8 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
         {/* Tab content */}
         <div className="p-6">
           {activeTab === "企业画像" && <TabCompanyProfile company={company} />}
-          {activeTab === "复审分析" && certifiedCompany && <TabRenewalAnalysis company={certifiedCompany} />}
           {activeTab === "专业测评" && <TabAssessment company={company} />}
+          {activeTab === "企业摸排" && <TabMoPai companyId={company.id} />}
         </div>
       </div>
     </div>

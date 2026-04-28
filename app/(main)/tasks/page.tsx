@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { Building2, ChevronRight, RotateCw, Search, X } from "lucide-react";
-import { getAllTasks, getCompanyById, getDashboardKPI } from "@/lib/mock-data";
+import { Building2, Search, X, Check } from "lucide-react";
+import { getAllTasks, getCompanyById, getAllCompanies } from "@/lib/mock-data";
 import {
   getDispatchedTasks,
   getVisitRecords,
   getTaskStatusOverrides,
-  setTaskStatus,
+  getCustomTasks,
+  addCustomTask,
   getDraft,
   MOCK_VISITORS,
 } from "@/lib/mobile-mock";
@@ -16,16 +16,11 @@ import { STREETS, type Street, type Task, type VisitRecord, type WillingnessLeve
 import {
   getTaskLifecycleStage,
   latestVisitRecord,
-  LIFECYCLE_ORDER,
   WILLINGNESS_META,
   type LifecycleStage,
 } from "./lifecycle";
-import PipelineRibbon from "./PipelineRibbon";
-import PoolSummary from "./PoolSummary";
-import TaskRow from "./TaskRow";
-import TaskDetailDrawer from "./TaskDetailDrawer";
-
-type StageWithAll = LifecycleStage | "all";
+import KanbanPoolColumn from "./KanbanPoolColumn";
+import KanbanColumn from "./KanbanColumn";
 
 type TaskWithStage = {
   task: Task;
@@ -41,36 +36,36 @@ export default function TasksPage() {
     mounted && user.role === "street_admin" && user.street ? (user.street as Street) : null;
 
   const [version, setVersion] = useState(0);
-  const [stage, setStage] = useState<StageWithAll>("all");
   const [q, setQ] = useState("");
   const [streetFilter, setStreetFilter] = useState<string>("all");
   const [assigneeFilter, setAssigneeFilter] = useState<string>("all");
   const [willingnessFilter, setWillingnessFilter] = useState<WillingnessLevel | "all">("all");
-  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+  // 拖拽派发
+  const [draggingCompanyId, setDraggingCompanyId] = useState<string | null>(null);
+  const [pendingCompanyId, setPendingCompanyId] = useState<string | null>(null);
+  const [selectedAssignee, setSelectedAssignee] = useState<string>("");
 
-  // 街道管理员视角：街道筛选锁定为本街道，经办人筛选不再适用
   useEffect(() => {
     if (lockedStreet && streetFilter !== lockedStreet) setStreetFilter(lockedStreet);
     if (lockedStreet && assigneeFilter !== "all") setAssigneeFilter("all");
   }, [lockedStreet, streetFilter, assigneeFilter]);
 
-  // localStorage 数据（每次 version 变化重读，避免在 SSR 时访问）
   const [allRecords, setAllRecords] = useState<VisitRecord[]>([]);
   const [statusOverrides, setStatusOverrides] = useState<Record<string, Task["status"]>>({});
   const [dispatched, setDispatched] = useState<Task[]>([]);
+  const [customTasks, setCustomTasks] = useState<Task[]>([]);
 
   useEffect(() => {
     setAllRecords(getVisitRecords());
     setStatusOverrides(getTaskStatusOverrides());
     setDispatched(getDispatchedTasks());
+    setCustomTasks(getCustomTasks());
   }, [version]);
 
-  const kpi = useMemo(() => getDashboardKPI(), []);
+  const allCompanies = useMemo(() => getAllCompanies(), []);
 
-  // 合并所有任务并附加生命周期信息
   const enriched: TaskWithStage[] = useMemo(() => {
-    const merged = [...getAllTasks(), ...dispatched];
-    // 按 id 去重，dispatched 的覆盖 base
+    const merged = [...getAllTasks(), ...dispatched, ...customTasks];
     const byId = new Map<string, Task>();
     for (const t of merged) byId.set(t.id, t);
 
@@ -90,55 +85,82 @@ export default function TasksPage() {
       });
     }
     return out;
-  }, [allRecords, statusOverrides, dispatched]);
+  }, [allRecords, statusOverrides, dispatched, customTasks]);
 
-  // 阶段计数
-  const counts: Record<LifecycleStage, number> = useMemo(() => {
-    const c: Record<LifecycleStage, number> = {
-      pool: kpi.funnelGrowthUnion,
-      dispatched: 0,
-      investigating: 0,
-      done: 0,
-    };
-    for (const e of enriched) c[e.stage]++;
-    return c;
-  }, [enriched, kpi.funnelGrowthUnion]);
-
-  const total = enriched.length;
-
-  // 筛选
-  const filtered = useMemo(() => {
-    return enriched
-      .filter((e) => {
-        if (stage !== "all" && stage !== "pool" && e.stage !== stage) return false;
-        if (q && !e.task.companyName.includes(q)) return false;
-        if (streetFilter !== "all" && e.task.street !== streetFilter) return false;
-        if (assigneeFilter !== "all" && e.task.assignee !== assigneeFilter) return false;
-        if (
-          willingnessFilter !== "all" &&
-          (!e.latest || e.latest.willingness !== willingnessFilter)
-        ) {
-          return false;
-        }
-        return true;
-      })
-      .sort((a, b) => {
-        // 同阶段内：超期优先，然后按截止日期升序
-        const stageOrder = LIFECYCLE_ORDER.indexOf(a.stage) - LIFECYCLE_ORDER.indexOf(b.stage);
-        if (stageOrder !== 0) return stageOrder;
-        return a.task.deadline.localeCompare(b.task.deadline);
-      });
-  }, [enriched, stage, q, streetFilter, assigneeFilter, willingnessFilter]);
-
-  // 经办人选项 = MOCK_VISITORS ∪ 任务里出现过的 assignee
   const assigneeOptions = useMemo(() => {
     const set = new Set<string>(MOCK_VISITORS.map((v) => v.name));
     for (const e of enriched) set.add(e.task.assignee);
     return Array.from(set).sort();
   }, [enriched]);
 
-  const selected = enriched.find((e) => e.task.id === selectedTaskId);
-  const selectedCompany = selected ? getCompanyById(selected.task.companyId) : undefined;
+  const filtersActive = !!(
+    q ||
+    streetFilter !== "all" ||
+    assigneeFilter !== "all" ||
+    willingnessFilter !== "all"
+  );
+
+  function makeColumnItems(stagePredicate: (s: Exclude<LifecycleStage, "pool">) => boolean) {
+    return enriched
+      .filter((e) => {
+        if (!stagePredicate(e.stage)) return false;
+        if (q && !e.task.companyName.includes(q)) return false;
+        if (streetFilter !== "all" && e.task.street !== streetFilter) return false;
+        if (assigneeFilter !== "all" && e.task.assignee !== assigneeFilter) return false;
+        if (
+          willingnessFilter !== "all" &&
+          (!e.latest || e.latest.willingness !== willingnessFilter)
+        )
+          return false;
+        return true;
+      })
+      .sort((a, b) => a.task.deadline.localeCompare(b.task.deadline))
+      .map((e) => ({ ...e, company: getCompanyById(e.task.companyId) }));
+  }
+
+  // 已派发待摸排 = dispatched + investigating 合并
+  const activeItems = useMemo(
+    () => makeColumnItems((s) => s === "dispatched" || s === "investigating"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [enriched, q, streetFilter, assigneeFilter, willingnessFilter],
+  );
+
+  const doneItems = useMemo(
+    () => makeColumnItems((s) => s === "done"),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [enriched, q, streetFilter, assigneeFilter, willingnessFilter],
+  );
+
+  function handleDropToDispatched() {
+    if (!draggingCompanyId) return;
+    setSelectedAssignee(MOCK_VISITORS[0]?.name ?? "");
+    setPendingCompanyId(draggingCompanyId);
+    setDraggingCompanyId(null);
+  }
+
+  function confirmDispatch() {
+    if (!pendingCompanyId || !selectedAssignee) return;
+    const company = allCompanies.find((c) => c.id === pendingCompanyId);
+    if (!company) return;
+    const today = new Date();
+    const deadline = new Date(today.setMonth(today.getMonth() + 3))
+      .toISOString()
+      .slice(0, 10);
+    const newTask: Task = {
+      id: `custom_${Date.now()}`,
+      companyId: company.id,
+      companyName: company.name,
+      assignee: selectedAssignee,
+      street: company.street as import("@/lib/types").Street,
+      status: "pending",
+      createdAt: new Date().toISOString().slice(0, 10),
+      deadline,
+      notes: "",
+    };
+    addCustomTask(newTask);
+    setPendingCompanyId(null);
+    setVersion((v) => v + 1);
+  }
 
   function clearFilters() {
     setQ("");
@@ -147,17 +169,10 @@ export default function TasksPage() {
     setWillingnessFilter("all");
   }
 
-  function advanceTask(taskId: string) {
-    setTaskStatus(taskId, "in_progress");
-    setVersion((v) => v + 1);
-  }
-
-  const willingnessFilterEnabled = stage === "done" || stage === "all";
-
   return (
-    <div>
-      {/* 头部 */}
-      <div className="flex items-end justify-between mb-5">
+    <div className="flex flex-col min-h-full">
+      {/* 标题行 */}
+      <div className="flex items-end justify-between mb-4">
         <div>
           <h1 className="text-xl font-semibold text-[#0f172a]">任务管理</h1>
           <p className="text-sm text-[#94a3b8] mt-1 flex items-center gap-2">
@@ -170,148 +185,170 @@ export default function TasksPage() {
             )}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setVersion((v) => v + 1)}
-            className="flex items-center gap-1.5 px-3 py-2 text-sm text-[#475569] bg-white border border-[#e5e7eb] rounded-lg hover:bg-[#f7f8fa] transition-colors"
-            title="重新读取最新摸排数据"
-          >
-            <RotateCw size={13} /> 刷新
-          </button>
-          <Link
-            href="/targets"
-            className="flex items-center gap-1 px-3.5 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            从标的池派发 <ChevronRight size={13} />
-          </Link>
-        </div>
       </div>
 
-      {/* 生命周期管道 */}
-      <PipelineRibbon counts={counts} total={total} selected={stage} onSelect={setStage} />
-
       {/* 筛选条 */}
-      {stage !== "pool" && (
-        <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] px-4 py-3 mb-4 flex items-center gap-3 flex-wrap">
-          <div className="relative flex-1 min-w-[200px] max-w-[280px]">
-            <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8]" />
-            <input
-              type="text"
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="搜索企业名称…"
-              className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400"
-            />
-          </div>
+      <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] px-4 py-3 mb-4 flex items-center gap-3 flex-wrap">
+        <div className="relative flex-1 min-w-[200px] max-w-[280px]">
+          <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8]" />
+          <input
+            type="text"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="搜索企业名称…"
+            className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400"
+          />
+        </div>
 
-          {!lockedStreet && (
-            <Selector
-              label="街道"
-              value={streetFilter}
-              onChange={setStreetFilter}
-              options={[{ value: "all", label: "全部街道" }, ...STREETS.map((s) => ({ value: s, label: s }))]}
-            />
-          )}
-
-          {!lockedStreet && (
-            <Selector
-              label="经办人"
-              value={assigneeFilter}
-              onChange={setAssigneeFilter}
-              options={[{ value: "all", label: "全部经办人" }, ...assigneeOptions.map((a) => ({ value: a, label: a }))]}
-            />
-          )}
-
+        {!lockedStreet && (
           <Selector
-            label="意愿"
-            value={willingnessFilter}
-            onChange={(v) => setWillingnessFilter(v as WillingnessLevel | "all")}
-            disabled={!willingnessFilterEnabled}
+            label="街道"
+            value={streetFilter}
+            onChange={setStreetFilter}
             options={[
-              { value: "all", label: "全部意愿" },
-              ...(["strong", "moderate", "hesitant", "refused", "unreachable"] as WillingnessLevel[]).map((w) => ({
-                value: w,
-                label: WILLINGNESS_META[w].label,
-              })),
+              { value: "all", label: "全部街道" },
+              ...STREETS.map((s) => ({ value: s, label: s })),
             ]}
           />
+        )}
 
-          {(q || (!lockedStreet && streetFilter !== "all") || (!lockedStreet && assigneeFilter !== "all") || willingnessFilter !== "all") && (
-            <button
-              onClick={clearFilters}
-              className="ml-auto flex items-center gap-1 text-xs text-[#64748b] hover:text-[#0f172a] transition-colors"
-            >
-              <X size={12} /> 清除筛选
-            </button>
-          )}
-        </div>
-      )}
+        {!lockedStreet && (
+          <Selector
+            label="经办人"
+            value={assigneeFilter}
+            onChange={setAssigneeFilter}
+            options={[
+              { value: "all", label: "全部经办人" },
+              ...assigneeOptions.map((a) => ({ value: a, label: a })),
+            ]}
+          />
+        )}
 
-      {/* 主内容 */}
-      {stage === "pool" ? (
-        <PoolSummary
-          funnelPatentGrowth={kpi.funnelPatentGrowth}
-          funnelEmployeeGrowth={kpi.funnelEmployeeGrowth}
-          funnelGrowthUnion={kpi.funnelGrowthUnion}
+        <Selector
+          label="意愿"
+          value={willingnessFilter}
+          onChange={(v) => setWillingnessFilter(v as WillingnessLevel | "all")}
+          options={[
+            { value: "all", label: "全部意愿" },
+            ...(
+              ["strong", "moderate", "hesitant", "refused", "unreachable"] as WillingnessLevel[]
+            ).map((w) => ({
+              value: w,
+              label: WILLINGNESS_META[w].label,
+            })),
+          ]}
         />
-      ) : (
-        <div className="space-y-2.5">
-          {filtered.length === 0 ? (
-            <div className="rounded-xl border-2 border-dashed border-[#e5e7eb] bg-white p-12 text-center text-sm text-[#94a3b8]">
-              暂无符合条件的任务
-            </div>
-          ) : (
-            filtered.map((e) => (
-              <TaskRow
-                key={e.task.id}
-                stage={e.stage}
-                task={e.task}
-                company={getCompanyById(e.task.companyId)}
-                latestRecord={e.latest}
-                recordCount={e.records.length}
-                hasDraft={e.hasDraft}
-                onOpen={() => setSelectedTaskId(e.task.id)}
-                onAdvance={e.stage === "dispatched" ? () => advanceTask(e.task.id) : undefined}
-              />
-            ))
-          )}
-        </div>
-      )}
 
-      <TaskDetailDrawer
-        open={!!selected}
-        onClose={() => setSelectedTaskId(null)}
-        task={selected?.task ?? null}
-        company={selectedCompany}
-        records={selected?.records ?? []}
-        stage={selected?.stage}
-      />
+        {filtersActive && (
+          <button
+            onClick={clearFilters}
+            className="ml-auto flex items-center gap-1 text-xs text-[#64748b] hover:text-[#0f172a] transition-colors"
+          >
+            <X size={12} /> 清除筛选
+          </button>
+        )}
+      </div>
+
+      {/* 看板：3 列 */}
+      <div
+        className="flex gap-3 flex-1 min-h-0 overflow-x-auto pb-1"
+        onDragEnd={() => setDraggingCompanyId(null)}
+      >
+        {/* 标的池（所有企业） */}
+        <KanbanPoolColumn
+          companies={allCompanies}
+          onDragStart={setDraggingCompanyId}
+          onDragEnd={() => setDraggingCompanyId(null)}
+        />
+
+        {/* 已派发待摸排（dispatched + investigating） */}
+        <KanbanColumn
+          stage="dispatched"
+          label="已派发待摸排"
+          items={activeItems}
+          filtersActive={filtersActive}
+          isDropTarget
+          isDragging={!!draggingCompanyId}
+          onDrop={handleDropToDispatched}
+        />
+
+        {/* 已完成 */}
+        <KanbanColumn
+          stage="done"
+          label="已完成"
+          items={doneItems}
+          filtersActive={filtersActive}
+        />
+      </div>
+
+      {/* 派发确认弹窗 */}
+      {pendingCompanyId && (() => {
+        const company = allCompanies.find((c) => c.id === pendingCompanyId);
+        return (
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-50 flex items-center justify-center">
+            <div className="bg-white rounded-2xl shadow-2xl w-[340px] p-6">
+              <h3 className="text-base font-semibold text-[#0f172a] mb-0.5">派发企业</h3>
+              <p className="text-xs text-[#94a3b8] mb-4 truncate">{company?.name}</p>
+
+              <p className="text-xs text-[#475569] font-medium mb-2">选择跟进经办人</p>
+              <div className="space-y-2 mb-5">
+                {MOCK_VISITORS.map((v) => (
+                  <button
+                    key={v.id}
+                    onClick={() => setSelectedAssignee(v.name)}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-sm transition-colors ${
+                      selectedAssignee === v.name
+                        ? "border-blue-500 bg-blue-50 text-blue-700"
+                        : "border-[#e5e7eb] text-[#0f172a] hover:border-[#cbd5e1]"
+                    }`}
+                  >
+                    <span className="font-medium">{v.name}</span>
+                    {selectedAssignee === v.name && <Check size={14} className="text-blue-600" />}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setPendingCompanyId(null)}
+                  className="flex-1 py-2 text-sm border border-[#e5e7eb] rounded-lg text-[#475569] hover:bg-[#f7f8fa] transition-colors"
+                >
+                  取消
+                </button>
+                <button
+                  onClick={confirmDispatch}
+                  disabled={!selectedAssignee}
+                  className="flex-1 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-medium"
+                >
+                  确认派发
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
 
-// ─── 简化的下拉组件 ─────────────────────────────────────────────
 function Selector({
   label,
   value,
   onChange,
   options,
-  disabled = false,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
-  disabled?: boolean;
 }) {
   return (
-    <label className={`flex items-center gap-1.5 text-sm ${disabled ? "opacity-40" : ""}`}>
+    <label className="flex items-center gap-1.5 text-sm">
       <span className="text-[#475569]">{label}</span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        disabled={disabled}
-        className="px-2.5 py-1.5 text-sm bg-white border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400 disabled:cursor-not-allowed min-w-[110px]"
+        className="px-2.5 py-1.5 text-sm bg-white border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400 min-w-[110px]"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>

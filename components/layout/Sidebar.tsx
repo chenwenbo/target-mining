@@ -11,8 +11,6 @@ import {
   ChevronRight,
   UsersRound,
   ClipboardList,
-  ClipboardCheck,
-  Sparkles,
 } from "lucide-react";
 import UserSwitcher from "./UserSwitcher";
 import { useCurrentPCUser } from "@/lib/account-mock";
@@ -32,9 +30,7 @@ const REGION_NAV: NavItem[] = [
   { href: "/targets", label: "标的池", icon: Target, badge: "246" },
   { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
   { href: "/surveys", label: "摸排统计", icon: ClipboardList },
-  { href: "/hi-eval", label: "高企测评", icon: ClipboardCheck },
   { href: "/admin/dispatch", label: "摸排小程序", icon: UsersRound, title: "摸排账户分发配置" },
-  { href: "/agent", label: "AI 助手", icon: Sparkles },
 ];
 
 const STREET_NAV: NavItem[] = [

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Target, Users, ArrowRight, AlertTriangle, Pencil, Check, X } from "lucide-react";
+import { Target, Users, AlertTriangle, Pencil, Check, X } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import type { getDashboardKPI } from "@/lib/mock-data";
 import { useRoleGuard } from "@/lib/account-mock";
@@ -85,30 +85,8 @@ function TopKPI({ kpi }: { kpi: KPI }) {
         <div className="flex flex-col items-end shrink-0">
           <div className="flex items-center gap-1 justify-end">
             <span className="text-[11px] text-[#94a3b8]">有申报意愿</span>
-            {!certified.editing && (
-              <button onClick={certified.startEdit} className="text-[#cbd5e1] hover:text-emerald-500 transition-colors" title="修改有申报意愿数量">
-                <Pencil size={10} />
-              </button>
-            )}
           </div>
-          {certified.editing ? (
-            <div className="flex items-center gap-1 mt-0.5">
-              <input
-                ref={certified.inputRef}
-                type="number"
-                min={0}
-                value={certified.draft}
-                onChange={e => certified.setDraft(e.target.value)}
-                onKeyDown={e => { if (e.key === "Enter") certified.commit(); if (e.key === "Escape") certified.cancel(); }}
-                className="w-14 text-sm font-semibold text-emerald-600 tabular-nums border-b-2 border-emerald-500 outline-none bg-transparent text-right"
-              />
-              <span className="text-[11px] text-[#94a3b8]">家</span>
-              <button onClick={certified.commit} className="text-emerald-500 hover:text-emerald-600 transition-colors"><Check size={12} /></button>
-              <button onClick={certified.cancel} className="text-[#94a3b8] hover:text-red-400 transition-colors"><X size={12} /></button>
-            </div>
-          ) : (
-            <div className="text-base font-semibold text-emerald-600 tabular-nums leading-tight">{certified.value} 家</div>
-          )}
+          <div className="text-base font-semibold text-emerald-600 tabular-nums leading-tight">{certified.value} 家</div>
           <div className="mt-1.5 w-20 h-1.5 rounded-full bg-[#f1f5f9] overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400"
@@ -192,12 +170,7 @@ function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
   const stages: FunnelStage[] = [
     { type: "single", name: "企业总数", value: kpi.funnelEnterpriseTotal },
     { type: "single", name: "泛科技企业总数", value: kpi.funnelEnterpriseTech, basis: kpi.funnelEnterpriseTotal },
-    {
-      type: "split",
-      left: { name: "近三年有专利增长", value: kpi.funnelPatentGrowth, basis: kpi.funnelEnterpriseTech },
-      right: { name: "近三年企业人数增长", value: kpi.funnelEmployeeGrowth, basis: kpi.funnelEnterpriseTech },
-      mergedBasis: kpi.funnelGrowthUnion,
-    },
+    { type: "single", name: "潜在标的企业", value: kpi.funnelGrowthUnion, basis: kpi.funnelEnterpriseTech },
     { type: "single", name: "有意愿的企业", value: kpi.funnelWilling, basis: kpi.funnelGrowthUnion },
     { type: "single", name: "已申报的企业", value: kpi.funnelDeclared, basis: kpi.funnelWilling },
     { type: "single", name: "认定成功的企业", value: kpi.funnelCertifiedFinal, basis: kpi.funnelDeclared },
@@ -526,17 +499,6 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
         <div>
           <h1 className="text-xl font-semibold text-[#0f172a]">2026 年高企申报 · 全景概览</h1>
           <p className="text-sm text-[#94a3b8] mt-1">东西湖区 · 数据来源：工商 · 专利 · 招聘 · 税务</p>
-        </div>
-        <div className="flex gap-2">
-          <button className="px-3.5 py-2 text-sm border border-[#e5e7eb] bg-white rounded-lg text-[#475569] hover:bg-[#f7f8fa] transition-colors">
-            导出报告
-          </button>
-          <Link
-            href="/targets"
-            className="px-3.5 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-1.5"
-          >
-            进入标的池 <ArrowRight size={13} />
-          </Link>
         </div>
       </div>
 

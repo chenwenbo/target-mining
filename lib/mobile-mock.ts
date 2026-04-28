@@ -223,6 +223,46 @@ export function setTaskStatus(taskId: string, status: TaskStatus): void {
   localStorage.setItem(TASK_STATUS_KEY, JSON.stringify(overrides));
 }
 
+// ─── LocalStorage：经办人覆盖 ─────────────────────────────────────
+const TASK_ASSIGNEE_KEY = "task_assignee_overrides";
+
+type AssigneeOverrides = Record<string, string>;
+
+export function getTaskAssigneeOverrides(): AssigneeOverrides {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(TASK_ASSIGNEE_KEY);
+    return raw ? (JSON.parse(raw) as AssigneeOverrides) : {};
+  } catch {
+    return {};
+  }
+}
+
+export function setTaskAssignee(taskId: string, assignee: string): void {
+  const overrides = getTaskAssigneeOverrides();
+  overrides[taskId] = assignee;
+  localStorage.setItem(TASK_ASSIGNEE_KEY, JSON.stringify(overrides));
+}
+
+// ─── LocalStorage：从标的池手动派发的任务 ────────────────────────
+const CUSTOM_TASKS_KEY = "custom_dispatched_tasks";
+
+export function getCustomTasks(): Task[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(CUSTOM_TASKS_KEY);
+    return raw ? (JSON.parse(raw) as Task[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function addCustomTask(task: Task): void {
+  const tasks = getCustomTasks();
+  tasks.push(task);
+  localStorage.setItem(CUSTOM_TASKS_KEY, JSON.stringify(tasks));
+}
+
 // ─── 走访记录草稿 ────────────────────────────────────────────────
 const DRAFT_KEY_PREFIX = "visit_draft_";
 

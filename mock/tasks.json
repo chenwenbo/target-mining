@@ -108,5 +108,60 @@
     "createdAt": "2026-04-15",
     "deadline": "2026-09-30",
     "notes": "新增派发，等待初接触"
+  },
+  {
+    "id": "t011",
+    "companyId": "c0011",
+    "companyName": "东湖深蓝科技有限公司",
+    "assignee": "王科员",
+    "street": "国家网安基地",
+    "status": "pending",
+    "createdAt": "2026-04-20",
+    "deadline": "2026-07-31",
+    "notes": ""
+  },
+  {
+    "id": "t012",
+    "companyId": "c0017",
+    "companyName": "荆楚数盾技术股份有限公司",
+    "assignee": "赵科员",
+    "street": "国家网安基地",
+    "status": "pending",
+    "createdAt": "2026-04-21",
+    "deadline": "2026-07-31",
+    "notes": ""
+  },
+  {
+    "id": "t013",
+    "companyId": "c0021",
+    "companyName": "荆楚远航技术有限公司",
+    "assignee": "李科员",
+    "street": "临空港经开区",
+    "status": "pending",
+    "createdAt": "2026-04-22",
+    "deadline": "2026-08-15",
+    "notes": ""
+  },
+  {
+    "id": "t014",
+    "companyId": "c0023",
+    "companyName": "楚天镀膜科技股份有限公司",
+    "assignee": "张科员",
+    "street": "临空港经开区",
+    "status": "pending",
+    "createdAt": "2026-04-22",
+    "deadline": "2026-08-15",
+    "notes": ""
+  },
+  {
+    "id": "t015",
+    "companyId": "c0019",
+    "companyName": "荆楚启航科技股份有限公司",
+    "assignee": "王科员",
+    "street": "国家网安基地",
+    "status": "pending",
+    "createdAt": "2026-04-23",
+    "deadline": "2026-09-30",
+    "notes": ""
   }
 ]

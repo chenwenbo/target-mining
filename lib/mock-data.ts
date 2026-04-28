@@ -71,8 +71,6 @@ export function getDashboardKPI() {
   // ─── 企业漏斗（驾驶舱）─ 6 层从全区企业到认定成功
   const funnelEnterpriseTotal = 8520;
   const funnelEnterpriseTech = 2480;
-  const funnelPatentGrowth = 1530;
-  const funnelEmployeeGrowth = 1280;
   const funnelGrowthUnion = 1820;
   const funnelWilling = 412;
   const funnelDeclared = 286;
@@ -107,8 +105,6 @@ export function getDashboardKPI() {
     funnelCertified,
     funnelEnterpriseTotal,
     funnelEnterpriseTech,
-    funnelPatentGrowth,
-    funnelEmployeeGrowth,
     funnelGrowthUnion,
     funnelWilling,
     funnelDeclared,

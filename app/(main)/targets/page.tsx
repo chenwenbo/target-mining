@@ -13,13 +13,12 @@ import { STREETS, TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/type
 import { cn } from "@/lib/cn";
 
 // ─── Filter state ────────────────────────────────────────────
-type PoolTier = "all" | "patent_growth" | "employee_growth" | "willing";
+type PoolTier = "all" | "potential_target" | "willing";
 
 const POOL_TIERS: { id: PoolTier; label: string; desc: string }[] = [
-  { id: "all",            label: "泛科技企业",       desc: "全部泛科技企业" },
-  { id: "patent_growth",  label: "近三年有专利增长",  desc: "近三年新增专利的企业" },
-  { id: "employee_growth",label: "近三年企业人数增长", desc: "近三年参保人数持续增长的企业" },
-  { id: "willing",        label: "有意愿的企业",      desc: "申报意愿强烈或基本有意愿的企业" },
+  { id: "all",              label: "泛科技企业",     desc: "全部泛科技企业" },
+  { id: "potential_target", label: "潜在标的企业",   desc: "近三年专利或人数有增长的企业" },
+  { id: "willing",          label: "有意愿的企业",   desc: "申报意愿强烈或基本有意愿的企业" },
 ];
 
 interface Filters {
@@ -235,12 +234,10 @@ function TargetsPageContent() {
         const dtype = c.alreadyCertified ? "复审" : "新申报";
         if (filters.declarationType.length > 0 && !filters.declarationType.includes(dtype)) return false;
         // Pool tier quick-filter
-        if (filters.poolTier === "patent_growth") {
+        if (filters.poolTier === "potential_target") {
           const totalPatents = c.patents.invention + c.patents.utility + c.patents.design + c.software;
-          if (totalPatents === 0) return false;
-        }
-        if (filters.poolTier === "employee_growth") {
-          if (c.employees < 30 && c.rdEmployees < 10) return false;
+          const hasEmployeeGrowth = c.employees >= 30 || c.rdEmployees >= 10;
+          if (totalPatents === 0 && !hasEmployeeGrowth) return false;
         }
         if (filters.poolTier === "willing") {
           if (!["strong", "moderate"].includes(c.declarationWillingness)) return false;
