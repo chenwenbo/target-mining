@@ -27,8 +27,8 @@ interface NavItem {
 }
 
 const REGION_NAV: NavItem[] = [
-  { href: "/", label: "智能体", icon: Sparkles, badge: "新" },
-  { href: "/dashboard", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
+  { href: "/", label: "智能体", icon: Sparkles },
+  { href: "/dashboard", label: "驾驶舱", icon: LayoutDashboard },
   { href: "/targets", label: "标的池", icon: Target, badge: "246" },
   { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
   { href: "/surveys", label: "摸排统计", icon: ClipboardList },
@@ -36,7 +36,7 @@ const REGION_NAV: NavItem[] = [
 ];
 
 const STREET_NAV: NavItem[] = [
-  { href: "/", label: "智能体", icon: Sparkles, badge: "新" },
+  { href: "/", label: "智能体", icon: Sparkles },
   { href: "/targets", label: "标的池", icon: Target },
   { href: "/tasks", label: "任务管理", icon: CheckSquare },
   { href: "/surveys", label: "摸排统计", icon: ClipboardList },
