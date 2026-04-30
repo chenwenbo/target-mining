@@ -11,6 +11,7 @@ import {
   ChevronRight,
   UsersRound,
   ClipboardList,
+  Sparkles,
 } from "lucide-react";
 import UserSwitcher from "./UserSwitcher";
 import { useCurrentPCUser } from "@/lib/account-mock";
@@ -26,7 +27,8 @@ interface NavItem {
 }
 
 const REGION_NAV: NavItem[] = [
-  { href: "/", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
+  { href: "/", label: "智能体", icon: Sparkles, badge: "新" },
+  { href: "/dashboard", label: "驾驶舱", icon: LayoutDashboard, badge: "今日" },
   { href: "/targets", label: "标的池", icon: Target, badge: "246" },
   { href: "/tasks", label: "任务管理", icon: CheckSquare, badge: "10" },
   { href: "/surveys", label: "摸排统计", icon: ClipboardList },
@@ -34,6 +36,7 @@ const REGION_NAV: NavItem[] = [
 ];
 
 const STREET_NAV: NavItem[] = [
+  { href: "/", label: "智能体", icon: Sparkles, badge: "新" },
   { href: "/targets", label: "标的池", icon: Target },
   { href: "/tasks", label: "任务管理", icon: CheckSquare },
   { href: "/surveys", label: "摸排统计", icon: ClipboardList },

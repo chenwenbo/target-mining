@@ -1,7 +1,5 @@
-import { getDashboardKPI } from "@/lib/mock-data";
-import DashboardClient from "./DashboardClient";
+import AgentHomeClient from "./AgentHomeClient";
 
-export default function DashboardPage() {
-  const kpi = getDashboardKPI();
-  return <DashboardClient kpi={kpi} />;
+export default function HomePage() {
+  return <AgentHomeClient />;
 }
