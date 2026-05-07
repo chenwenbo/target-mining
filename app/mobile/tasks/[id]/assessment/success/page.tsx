@@ -123,10 +123,10 @@ export default function AssessmentSuccessPage() {
           </Link>
         )}
 
-        <Link href={`/mobile/tasks/${id}`}>
+        <Link href={`/mobile/tasks/${id}?tab=assessment`}>
           <button className="w-full text-gray-400 font-medium text-sm py-2 flex items-center justify-center gap-1">
             <ArrowLeft size={14} />
-            返回当前任务
+            查看测评结果
           </button>
         </Link>
       </div>

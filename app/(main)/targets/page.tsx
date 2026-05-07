@@ -372,12 +372,18 @@ function TargetsPageContent() {
             {selected.size > 0 && (
               <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-md text-xs text-blue-700">
                 已选 {selected.size} 家
-                <button
-                  onClick={() => openDispatch(filtered.filter((c) => selected.has(c.id)))}
-                  className="flex items-center gap-1 hover:text-blue-900"
-                >
-                  <Send size={11} /> 派发
-                </button>
+                {filters.poolTier === "willing" ? (
+                  <span className="flex items-center gap-1 text-[#cbd5e1] cursor-not-allowed select-none" title="有意愿的企业已在跟进中，无需再次派发">
+                    <Send size={11} /> 派发
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => openDispatch(filtered.filter((c) => selected.has(c.id)))}
+                    className="flex items-center gap-1 hover:text-blue-900"
+                  >
+                    <Send size={11} /> 派发
+                  </button>
+                )}
                 <button onClick={handleExport} className="flex items-center gap-1 hover:text-blue-900">
                   <Download size={11} /> 导出
                 </button>
@@ -486,12 +492,18 @@ function TargetsPageContent() {
                       })()}
                     </td>
                     <td className="px-3 py-3 text-right pr-4">
-                      <span
-                        onClick={() => openDispatch([c])}
-                        className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer whitespace-nowrap"
-                      >
-                        <Send size={11} /> 派发
-                      </span>
+                      {filters.poolTier === "willing" ? (
+                        <span className="flex items-center gap-1 text-xs text-[#cbd5e1] cursor-not-allowed whitespace-nowrap select-none" title="有意愿的企业已在跟进中，无需再次派发">
+                          <Send size={11} /> 派发
+                        </span>
+                      ) : (
+                        <span
+                          onClick={() => openDispatch([c])}
+                          className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 cursor-pointer whitespace-nowrap"
+                        >
+                          <Send size={11} /> 派发
+                        </span>
+                      )}
                     </td>
                   </tr>
                 );

@@ -38,7 +38,7 @@ interface FormData {
 }
 
 const INITIAL_FORM: FormData = {
-  visitMethod: "", visitedAt: new Date().toISOString().slice(0, 10),
+  visitMethod: "in_person", visitedAt: new Date().toISOString().slice(0, 10),
   visitDurationMinutes: "", contactReached: null,
   actualContactName: "", actualContactTitle: "", actualContactPhone: "",
   employeeCount: "", rdEmployeeCount: "", annualRevenue: "", rdExpenseRatio: "",
@@ -105,7 +105,7 @@ export default function VisitFormPage() {
   }
 
   // Step 1 validation
-  const step1Valid = form.visitMethod !== "" && form.visitedAt !== "" &&
+  const step1Valid = form.visitedAt !== "" &&
     form.contactReached !== null &&
     (form.contactReached || (form.actualContactName !== ""));
 
@@ -243,17 +243,7 @@ function Step1({ form, company, update }: { form: FormData; company: Company; up
   return (
     <div className="space-y-1">
       <div className="bg-white rounded-xl p-4 mb-4">
-        <SectionTitle>走访方式</SectionTitle>
-        <FormRow label="走访方式" required>
-          <RadioGroup
-            value={form.visitMethod}
-            onChange={(v) => update("visitMethod", v as VisitMethod)}
-            options={[
-              { value: "in_person", label: "🏢 上门拜访" },
-              { value: "online", label: "💻 线上沟通" },
-            ]}
-          />
-        </FormRow>
+        <SectionTitle>走访基本信息</SectionTitle>
         <FormRow label="走访日期" required>
           <input
             type="date"

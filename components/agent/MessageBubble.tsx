@@ -2,7 +2,6 @@
 import { Sparkles, User } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Markdown from "./Markdown";
-import SourceCardList from "./SourceCardList";
 import ReportPanel from "./ReportPanel";
 import ActionChips from "./ActionChips";
 import { useAgentStore, type ExtendedAssistantMessage } from "@/lib/agent/store";
@@ -42,10 +41,6 @@ export function AssistantBubble({ message }: { message: ExtendedAssistantMessage
               filename={message.report.filename}
               markdown={message.report.markdown}
             />
-          )}
-
-          {message.sources && message.sources.length > 0 && (
-            <SourceCardList sources={message.sources} />
           )}
 
           {message.actions && message.actions.length > 0 && (

@@ -19,7 +19,6 @@ import {
   computeWillingnessDist,
   computeMethodDist,
   computeStreetBreakdown,
-  computeVisitorRanking,
   computeFieldVerifiedDist,
   computeKeywordTop,
   WILLINGNESS_META,
@@ -83,7 +82,6 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
   const willingness = useMemo(() => computeWillingnessDist(scopedRecords), [scopedRecords]);
   const methods = useMemo(() => computeMethodDist(scopedRecords), [scopedRecords]);
   const streetBreakdown = useMemo(() => computeStreetBreakdown(inputs), [inputs]);
-  const visitors = useMemo(() => computeVisitorRanking(scopedRecords), [scopedRecords]);
   const fieldDist = useMemo(() => computeFieldVerifiedDist(scopedRecords), [scopedRecords]);
   const obstacleKeywords = useMemo(
     () => computeKeywordTop(scopedRecords, "keyObstacles", 12),
@@ -157,28 +155,16 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
           {/* ① KPI */}
           <KPIGrid kpi={kpi} />
 
-          {/* ② / ③ 意愿 + 走访方式 */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <div className="xl:col-span-2">
-              <PanelCard title="申报意愿分布" subtitle={`基于 ${scopedRecords.length} 条走访记录`}>
-                <WillingnessPie data={willingness} />
-              </PanelCard>
-            </div>
-            <PanelCard title="走访方式构成" subtitle="上门 vs 线上沟通">
-              <MethodPie data={methods} />
-            </PanelCard>
-          </div>
-
-          {/* ④⑤ 街道横向对比 + 走访员排行 */}
+          {/* ② 意愿分布 + 街道横向对比 */}
           <div className={`grid grid-cols-1 gap-4 ${!lockedStreet ? "xl:grid-cols-2" : ""}`}>
+            <PanelCard title="申报意愿分布" subtitle={`基于 ${scopedRecords.length} 条走访记录`}>
+              <WillingnessPie data={willingness} />
+            </PanelCard>
             {!lockedStreet && (
               <PanelCard title="按街道横向对比" subtitle="走访量 + 意愿层级堆叠">
                 <StreetStackedBar rows={streetBreakdown} />
               </PanelCard>
             )}
-            <PanelCard title="走访员排行" subtitle="按走访次数排序,显示意愿转化率">
-              <VisitorTable rows={visitors} />
-            </PanelCard>
           </div>
 
           {/* ⑨ 关键词 */}

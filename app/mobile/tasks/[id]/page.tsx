@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { getAllTasks, getCompanyById, getIPItems } from "@/lib/mock-data";
 import {
@@ -83,7 +83,11 @@ const DIM_COLORS: Record<AssessmentDimension, string> = {
 export default function TaskDetailPage() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
-  const [activeTab, setActiveTab] = useState<"overview" | "history" | "assessment">("overview");
+  const searchParams = useSearchParams();
+  const initialTab = (searchParams.get("tab") === "assessment" || searchParams.get("tab") === "history")
+    ? (searchParams.get("tab") as "history" | "assessment")
+    : "overview";
+  const [activeTab, setActiveTab] = useState<"overview" | "history" | "assessment">(initialTab);
 
   useEffect(() => {
     if (!getCurrentVisitor()) router.replace("/mobile/login");
