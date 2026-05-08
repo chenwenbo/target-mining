@@ -13,7 +13,6 @@ import {
   ClipboardList,
   Sparkles,
 } from "lucide-react";
-import UserSwitcher from "./UserSwitcher";
 import { useCurrentPCUser } from "@/lib/account-mock";
 import type { LucideIcon } from "lucide-react";
 import type { RoleType } from "@/lib/account-mock";
@@ -128,8 +127,6 @@ export default function Sidebar() {
         </div>
       </nav>
 
-      {/* Footer: 用户切换器 */}
-      <UserSwitcher collapsed={collapsed} />
     </aside>
   );
 }

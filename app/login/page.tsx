@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   AlertCircle,
-  Building2,
+  CheckCircle,
   ChevronDown,
+  ClipboardList,
+  Database,
   KeyRound,
-  ShieldCheck,
-  UsersRound,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
@@ -24,11 +24,8 @@ import {
   type StreetAccount,
 } from "@/lib/account-mock";
 
-type Tab = "region" | "street";
-
 export default function PCLoginPage() {
   const router = useRouter();
-  const [tab, setTab] = useState<Tab>("region");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -36,7 +33,6 @@ export default function PCLoginPage() {
   const [hints, setHints] = useState<StreetAccount[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  // 已登录用户直接跳过登录页
   useEffect(() => {
     setMounted(true);
     const stored = getStoredPCUser();
@@ -48,35 +44,26 @@ export default function PCLoginPage() {
     );
   }, [router]);
 
-  function switchTab(next: Tab) {
-    setTab(next);
-    setUsername("");
-    setPassword("");
-    setError("");
-  }
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
 
-    if (tab === "region") {
-      const user = authenticateRegionAdmin(username, password);
-      if (!user) {
-        setError("区域管理员账号或密码错误");
-        return;
-      }
-      setCurrentPCUser(user);
+    // 先尝试区域管理员，再尝试街道管理员
+    const regionUser = authenticateRegionAdmin(username, password);
+    if (regionUser) {
+      setCurrentPCUser(regionUser);
       window.location.href = "/";
       return;
     }
 
     const account = authenticateAccount(username, password);
-    if (!account) {
-      setError("街道管理员账号或密码错误，或该账号已被禁用");
+    if (account) {
+      setCurrentPCUser(buildStreetAdminUser(account));
+      window.location.href = "/targets";
       return;
     }
-    setCurrentPCUser(buildStreetAdminUser(account));
-    window.location.href = "/targets";
+
+    setError("账号或密码错误，或该账号已被禁用");
   }
 
   function fillHint(a: StreetAccount) {
@@ -112,30 +99,41 @@ export default function PCLoginPage() {
             高企申报标的挖掘平台
           </h1>
           <p className="text-sm text-blue-100/90 leading-relaxed max-w-md">
-            面向区域管理层和街道管理员的高企申报作业台，覆盖标的池、任务派发、走访摸排闭环。
+            覆盖标的发现、任务派发、走访摸排的高企申报协同平台，区域与街道高效联动。
           </p>
         </div>
 
         <div className="space-y-4 max-w-md">
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
-              <ShieldCheck size={15} />
+              <Database size={15} />
             </div>
             <div>
-              <div className="text-sm font-semibold">区域管理员</div>
+              <div className="text-sm font-semibold">标的精准发现</div>
               <div className="text-xs text-blue-100/80 mt-0.5">
-                查看驾驶舱、全区标的池、任务调度，统一分发摸排账号
+                汇聚全区企业数据，自动筛选高潜力高企标的，驾驶舱实时纵览区域进度
               </div>
             </div>
           </div>
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
-              <Building2 size={15} />
+              <ClipboardList size={15} />
             </div>
             <div>
-              <div className="text-sm font-semibold">街道管理员</div>
+              <div className="text-sm font-semibold">任务高效调度</div>
               <div className="text-xs text-blue-100/80 mt-0.5">
-                聚焦本街道企业池与任务，凭区科创局分发的账号登录
+                区域管理层一键向各街道派发走访任务，优先级与进度统一管理
+              </div>
+            </div>
+          </div>
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+              <CheckCircle size={15} />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">走访闭环沉淀</div>
+              <div className="text-xs text-blue-100/80 mt-0.5">
+                街道管理员结构化录入走访结果，申报意愿与企业信息实时回流
               </div>
             </div>
           </div>
@@ -160,38 +158,8 @@ export default function PCLoginPage() {
 
           <h2 className="text-xl font-semibold text-[#0f172a] mb-1.5">登录</h2>
           <p className="text-sm text-[#64748b] mb-6">
-            请选择对应身份登录到 PC 工作台
+            输入账号密码，系统自动识别角色与权限
           </p>
-
-          {/* 角色切换 */}
-          <div className="grid grid-cols-2 gap-1 p-1 bg-[#f1f5f9] rounded-lg mb-5">
-            <button
-              type="button"
-              onClick={() => switchTab("region")}
-              className={cn(
-                "flex items-center justify-center gap-1.5 py-2 text-sm rounded-md transition-all",
-                tab === "region"
-                  ? "bg-white text-blue-700 shadow-sm font-medium"
-                  : "text-[#64748b] hover:text-[#0f172a]",
-              )}
-            >
-              <ShieldCheck size={13} />
-              区域管理员
-            </button>
-            <button
-              type="button"
-              onClick={() => switchTab("street")}
-              className={cn(
-                "flex items-center justify-center gap-1.5 py-2 text-sm rounded-md transition-all",
-                tab === "street"
-                  ? "bg-white text-blue-700 shadow-sm font-medium"
-                  : "text-[#64748b] hover:text-[#0f172a]",
-              )}
-            >
-              <UsersRound size={13} />
-              街道管理员
-            </button>
-          </div>
 
           {/* 表单 */}
           <form onSubmit={handleSubmit} className="space-y-3">
@@ -207,7 +175,7 @@ export default function PCLoginPage() {
                 }}
                 type="text"
                 autoComplete="username"
-                placeholder={tab === "region" ? "例如：admin" : "例如：wh-dxh-jyh-01"}
+                placeholder="请输入用户名"
                 className="w-full px-3.5 py-2.5 text-sm bg-white border border-[#e5e7eb] rounded-lg outline-none focus:border-blue-500 placeholder:text-[#cbd5e1] font-mono"
               />
             </label>
@@ -246,54 +214,62 @@ export default function PCLoginPage() {
             </button>
           </form>
 
-          {/* 提示区 */}
-          {tab === "region" ? (
-            <div className="mt-5 px-3 py-2.5 bg-blue-50/60 border border-blue-100 rounded-lg text-[11px] text-[#475569] leading-relaxed">
-              演示账号：<span className="font-mono text-blue-700">{REGION_ADMIN_USERNAME}</span>
-              {" / "}
-              <span className="font-mono text-blue-700">{REGION_ADMIN_PASSWORD}</span>
-            </div>
-          ) : hints.length > 0 ? (
-            <div className="mt-5">
-              <button
-                type="button"
-                onClick={() => setShowHints((v) => !v)}
-                className="w-full flex items-center justify-between text-xs text-[#64748b] hover:text-[#475569] transition-colors"
-              >
-                <span>查看可用街道账号（{hints.length}）</span>
-                <ChevronDown
-                  size={13}
-                  className={cn("transition-transform", showHints && "rotate-180")}
-                />
-              </button>
-              {showHints && (
-                <div className="mt-2 bg-white border border-[#e5e7eb] rounded-lg p-1.5 space-y-0.5 max-h-56 overflow-y-auto">
-                  {hints.map((a) => (
-                    <button
-                      key={a.street}
-                      type="button"
-                      onClick={() => fillHint(a)}
-                      className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
-                    >
-                      <div className="text-xs font-medium text-[#0f172a]">
-                        {a.street}·管理员
-                      </div>
-                      <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
-                        {a.username} / {a.password}
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              )}
-              <p className="text-[10px] text-[#cbd5e1] mt-2 text-center">
-                账号统一在「摸排账户分发配置」生成
-              </p>
-            </div>
-          ) : (
-            <div className="mt-5 px-3 py-2.5 bg-amber-50 border border-amber-200 rounded-lg text-[11px] text-amber-800 leading-relaxed">
-              当前还没有已生成的街道管理员账号。请先以区域管理员身份登录，到「摸排账户分发配置」页生成账号。
-            </div>
-          )}
+          {/* 演示账号提示 */}
+          <div className="mt-5">
+            <button
+              type="button"
+              onClick={() => setShowHints((v) => !v)}
+              className="w-full flex items-center justify-between text-xs text-[#64748b] hover:text-[#475569] transition-colors"
+            >
+              <span>查看演示账号</span>
+              <ChevronDown
+                size={13}
+                className={cn("transition-transform", showHints && "rotate-180")}
+              />
+            </button>
+            {showHints && (
+              <div className="mt-2 bg-white border border-[#e5e7eb] rounded-lg p-1.5 space-y-0.5 max-h-64 overflow-y-auto">
+                {/* 区域管理员 */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setUsername(REGION_ADMIN_USERNAME);
+                    setPassword(REGION_ADMIN_PASSWORD);
+                    setError("");
+                  }}
+                  className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
+                >
+                  <div className="text-xs font-medium text-[#0f172a]">
+                    区域管理员
+                  </div>
+                  <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
+                    {REGION_ADMIN_USERNAME} / {REGION_ADMIN_PASSWORD}
+                  </div>
+                </button>
+                {/* 街道管理员列表 */}
+                {hints.map((a) => (
+                  <button
+                    key={a.street}
+                    type="button"
+                    onClick={() => fillHint(a)}
+                    className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
+                  >
+                    <div className="text-xs font-medium text-[#0f172a]">
+                      {a.street}·管理员
+                    </div>
+                    <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
+                      {a.username} / {a.password}
+                    </div>
+                  </button>
+                ))}
+                {hints.length === 0 && (
+                  <p className="px-2.5 py-2 text-[11px] text-[#94a3b8]">
+                    暂无街道账号，请先以区域管理员身份登录并生成账号
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
 
           <p className="text-center text-[10px] text-[#cbd5e1] mt-8">
             标的挖掘平台 · 演示版本

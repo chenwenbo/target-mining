@@ -35,6 +35,7 @@ export const REGION_ADMIN_SEED: CurrentPCUser = {
 // 区域管理员凭证（演示用，硬编码）
 export const REGION_ADMIN_USERNAME = "admin";
 export const REGION_ADMIN_PASSWORD = "admin123";
+const REGION_ADMIN_PWD_OVERRIDE_KEY = "pc_region_admin_pwd";
 
 export const REGION_LABEL = "武汉市·东西湖区";
 
@@ -204,12 +205,42 @@ export function authenticateAccount(username: string, password: string): StreetA
   return match ?? null;
 }
 
-// 区域管理员校验：硬编码凭证；成功则返回种子身份
+function getRegionAdminPassword(): string {
+  if (typeof window === "undefined") return REGION_ADMIN_PASSWORD;
+  return localStorage.getItem(REGION_ADMIN_PWD_OVERRIDE_KEY) ?? REGION_ADMIN_PASSWORD;
+}
+
+// 区域管理员校验：优先读 localStorage 中的覆盖密码
 export function authenticateRegionAdmin(username: string, password: string): CurrentPCUser | null {
-  if (username.trim() === REGION_ADMIN_USERNAME && password.trim() === REGION_ADMIN_PASSWORD) {
+  if (username.trim() === REGION_ADMIN_USERNAME && password.trim() === getRegionAdminPassword()) {
     return REGION_ADMIN_SEED;
   }
   return null;
+}
+
+export type ChangePasswordResult = "ok" | "wrong_old" | "same" | "error";
+
+export function changeRegionAdminPassword(oldPwd: string, newPwd: string): ChangePasswordResult {
+  const current = getRegionAdminPassword();
+  if (oldPwd.trim() !== current) return "wrong_old";
+  if (newPwd.trim() === current) return "same";
+  localStorage.setItem(REGION_ADMIN_PWD_OVERRIDE_KEY, newPwd.trim());
+  return "ok";
+}
+
+export function changeStreetAdminPassword(
+  username: string,
+  oldPwd: string,
+  newPwd: string,
+): ChangePasswordResult {
+  const list = getStreetAccounts();
+  const idx = list.findIndex((a) => a.username === username);
+  if (idx < 0) return "error";
+  if (list[idx].password !== oldPwd.trim()) return "wrong_old";
+  if (newPwd.trim() === oldPwd.trim()) return "same";
+  list[idx] = { ...list[idx], password: newPwd.trim() };
+  saveStreetAccounts(list);
+  return "ok";
 }
 
 // ─── 客户端 hooks ────────────────────────────────────────────
