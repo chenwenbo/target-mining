@@ -234,8 +234,8 @@ export default function PCLoginPage() {
                     className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
                   >
                     <div className="text-xs font-medium text-[#0f172a]">
-                      区域管理员
-                      <span className="text-[#94a3b8] font-normal ml-1">· {demo.tenantName} · {demo.displayName}</span>
+                      {demo.tenantName}
+                      <span className="text-[#94a3b8] font-normal ml-1">· {demo.displayName}</span>
                     </div>
                     <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
                       {demo.username} / {demo.password}
