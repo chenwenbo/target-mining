@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { SlidersHorizontal, Download, Send, Search, X, Building2, AlertTriangle } from "lucide-react";
+import { SlidersHorizontal, Download, Send, Search, X, Building2 } from "lucide-react";
 import { getPotentialTargets } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
@@ -443,18 +443,8 @@ function TargetsPageContent() {
                     </td>
                     <td className="px-3 py-3">
                       <Link href={`/targets/${c.id}`} className="block">
-                        <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors flex items-center gap-1.5 flex-wrap">
+                        <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors">
                           {c.name}
-                          {c.inSMEDatabase && (
-                            <span className="inline-block px-1.5 py-0.5 text-[10px] bg-teal-50 text-teal-700 border border-teal-200 rounded font-medium leading-none flex-shrink-0">科小</span>
-                          )}
-                          {(c.risk.abnormal || c.risk.penalty) && (
-                            <AlertTriangle
-                              size={12}
-                              className="text-amber-500 flex-shrink-0"
-                              title={[c.risk.abnormal && "经营异常", c.risk.penalty && "行政处罚"].filter(Boolean).join("、")}
-                            />
-                          )}
                         </div>
                         <div className="text-[11px] text-[#94a3b8] mt-0.5">{c.industry}</div>
                       </Link>

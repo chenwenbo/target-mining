@@ -1090,7 +1090,7 @@
     "alreadyCertified": true,
     "inSMEDatabase": true,
     "risk": {
-      "abnormal": false,
+      "abnormal": true,
       "penalty": false
     },
     "contact": {
@@ -1396,7 +1396,7 @@
     "alreadyCertified": true,
     "inSMEDatabase": true,
     "risk": {
-      "abnormal": false,
+      "abnormal": true,
       "penalty": false
     },
     "contact": {
@@ -1447,8 +1447,8 @@
     "alreadyCertified": true,
     "inSMEDatabase": true,
     "risk": {
-      "abnormal": false,
-      "penalty": false
+      "abnormal": true,
+      "penalty": true
     },
     "contact": {
       "name": "何超",
@@ -1754,7 +1754,7 @@
     "inSMEDatabase": true,
     "risk": {
       "abnormal": false,
-      "penalty": false
+      "penalty": true
     },
     "contact": {
       "name": "刘霞",
@@ -1805,7 +1805,7 @@
     "inSMEDatabase": true,
     "risk": {
       "abnormal": false,
-      "penalty": false
+      "penalty": true
     },
     "contact": {
       "name": "周强",
@@ -1907,7 +1907,7 @@
     "inSMEDatabase": true,
     "risk": {
       "abnormal": false,
-      "penalty": false
+      "penalty": true
     },
     "contact": {
       "name": "罗艳",
@@ -5329,7 +5329,7 @@
     "alreadyCertified": false,
     "inSMEDatabase": true,
     "risk": {
-      "abnormal": false,
+      "abnormal": true,
       "penalty": false
     },
     "contact": {
@@ -5599,7 +5599,7 @@
     "alreadyCertified": false,
     "inSMEDatabase": false,
     "risk": {
-      "abnormal": false,
+      "abnormal": true,
       "penalty": false
     },
     "contact": {
@@ -5899,8 +5899,8 @@
     "alreadyCertified": false,
     "inSMEDatabase": false,
     "risk": {
-      "abnormal": false,
-      "penalty": false
+      "abnormal": true,
+      "penalty": true
     },
     "contact": {
       "name": "何敏",
