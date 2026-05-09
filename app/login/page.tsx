@@ -17,12 +17,10 @@ import {
   buildSurveyAdminUser,
   getRegionAdminDemoList,
   getStoredPCUser,
-  getSurveyAccounts,
   REGION_LABEL,
   setCurrentPCUser,
   setRegionAdminUser,
   type RegionAdminDemo,
-  type SurveyAccount,
 } from "@/lib/account-mock";
 
 export default function PCLoginPage() {
@@ -31,7 +29,6 @@ export default function PCLoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showHints, setShowHints] = useState(false);
-  const [hints, setHints] = useState<SurveyAccount[]>([]);
   const [regionAdminDemos, setRegionAdminDemos] = useState<RegionAdminDemo[]>([]);
   const [mounted, setMounted] = useState(false);
 
@@ -41,7 +38,6 @@ export default function PCLoginPage() {
     if (stored) {
       router.replace(stored.role === "region_admin" ? "/" : "/targets");
     }
-    setHints(getSurveyAccounts().filter((a) => a.enabled));
     setRegionAdminDemos(getRegionAdminDemoList());
   }, [router]);
 
@@ -66,12 +62,6 @@ export default function PCLoginPage() {
     }
 
     setError("账号或密码错误，或该账号已被禁用");
-  }
-
-  function fillHint(a: SurveyAccount) {
-    setUsername(a.username);
-    setPassword(a.password);
-    setError("");
   }
 
   if (!mounted) {
@@ -252,28 +242,6 @@ export default function PCLoginPage() {
                     </div>
                   </button>
                 ))}
-                {/* 摸排账号列表 */}
-                {hints.map((a) => (
-                  <button
-                    key={a.id}
-                    type="button"
-                    onClick={() => fillHint(a)}
-                    className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
-                  >
-                    <div className="text-xs font-medium text-[#0f172a]">
-                      {a.displayName}
-                      {a.orgUnit && <span className="text-[#94a3b8] font-normal ml-1">· {a.orgUnit}</span>}
-                    </div>
-                    <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
-                      {a.username} / {a.password}
-                    </div>
-                  </button>
-                ))}
-                {hints.length === 0 && (
-                  <p className="px-2.5 py-2 text-[11px] text-[#94a3b8]">
-                    暂无摸排账号，请先以区域管理员身份登录并新建账号
-                  </p>
-                )}
               </div>
             )}
           </div>
