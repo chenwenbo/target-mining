@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords } from "@/lib/mobile-mock";
-import { useCurrentPCUser } from "@/lib/account-mock";
 import type { Company, Street, Task, TaskStatus, VisitRecord } from "@/lib/types";
 import {
   computeKPI,
@@ -36,13 +35,7 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
   const [version, setVersion] = useState(0);
   const [records, setRecords] = useState<VisitRecord[]>([]);
   const [taskStatusOverrides, setTaskStatusOverrides] = useState<Record<string, TaskStatus>>({});
-  const { user, mounted: userMounted } = useCurrentPCUser();
-
-  // 街道管理员视角：按 street 过滤数据；区域管理员视角：保持全量
-  const lockedStreet: Street | null =
-    userMounted && user.role === "street_admin" && user.street
-      ? (user.street as Street)
-      : null;
+  const lockedStreet: Street | null = null;
 
   useEffect(() => {
     initSeedVisitRecords();

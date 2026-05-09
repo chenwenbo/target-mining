@@ -13,9 +13,7 @@ import {
   ClipboardList,
   Sparkles,
 } from "lucide-react";
-import { useCurrentPCUser } from "@/lib/account-mock";
 import type { LucideIcon } from "lucide-react";
-import type { RoleType } from "@/lib/account-mock";
 
 interface NavItem {
   href: string;
@@ -25,7 +23,7 @@ interface NavItem {
   title?: string;
 }
 
-const REGION_NAV: NavItem[] = [
+const NAV_ITEMS: NavItem[] = [
   { href: "/", label: "智能体", icon: Sparkles },
   { href: "/dashboard", label: "驾驶舱", icon: LayoutDashboard },
   { href: "/targets", label: "标的池", icon: Target },
@@ -34,25 +32,10 @@ const REGION_NAV: NavItem[] = [
   { href: "/admin/dispatch", label: "摸排小程序", icon: UsersRound, title: "摸排账户分发配置" },
 ];
 
-const STREET_NAV: NavItem[] = [
-  { href: "/", label: "智能体", icon: Sparkles },
-  { href: "/targets", label: "标的池", icon: Target },
-  { href: "/tasks", label: "任务管理", icon: CheckSquare },
-  { href: "/surveys", label: "摸排统计", icon: ClipboardList },
-];
-
-function navForRole(role: RoleType): NavItem[] {
-  return role === "region_admin" ? REGION_NAV : STREET_NAV;
-}
-
 export default function Sidebar() {
   const pathname = usePathname();
   const collapsed = useLayoutStore((s) => s.sidebarCollapsed);
   const toggleSidebar = useLayoutStore((s) => s.toggleSidebar);
-  const { user, mounted } = useCurrentPCUser();
-  // 首屏 SSR 渲染区域管理员菜单，挂载后才切到真实角色，避免 hydration mismatch
-  const items = navForRole(mounted ? user.role : "region_admin");
-
   return (
     <aside
       className={cn(
@@ -85,7 +68,7 @@ export default function Sidebar() {
       {/* Nav */}
       <nav className="flex-1 py-3 overflow-y-auto overflow-x-hidden">
         <div className="px-2">
-          {items.map((item) => {
+          {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const active =
               item.href === "/"

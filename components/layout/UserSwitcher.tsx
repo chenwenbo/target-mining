@@ -3,14 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, LogOut } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
-  buildSurveyAdminUser,
   getRegionAdminUser,
-  getSurveyAccounts,
   logoutPCUser,
   setCurrentPCUser,
   useCurrentPCUser,
   type CurrentPCUser,
-  type SurveyAccount,
 } from "@/lib/account-mock";
 
 interface Props {
@@ -20,13 +17,11 @@ interface Props {
 export default function UserSwitcher({ collapsed }: Props) {
   const { user, mounted } = useCurrentPCUser();
   const [open, setOpen] = useState(false);
-  const [accounts, setAccounts] = useState<SurveyAccount[]>([]);
   const [regionAdmin, setRegionAdmin] = useState<CurrentPCUser | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    setAccounts(getSurveyAccounts());
     setRegionAdmin(getRegionAdminUser());
     function onClick(e: MouseEvent) {
       if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
@@ -57,10 +52,7 @@ export default function UserSwitcher({ collapsed }: Props) {
 
   const display = mounted ? user : { role: "region_admin" as const, street: null, displayName: "", dept: "", username: null };
   const initial = display.displayName.slice(0, 1);
-  const usableStreetAccounts = accounts.filter((a) => a.enabled);
-  const isCurrent = (target: CurrentPCUser) =>
-    target.role === display.role &&
-    (target.role === "region_admin" || target.username === display.username);
+  const isCurrent = (target: CurrentPCUser) => target.role === display.role;
 
   return (
     <div ref={wrapRef} className={cn("relative p-4 border-t border-[#e5e7eb]", collapsed && "p-3")}>
@@ -132,39 +124,6 @@ export default function UserSwitcher({ collapsed }: Props) {
               </div>
               {isCurrent(regionAdmin) && <Check size={13} className="text-blue-600 flex-shrink-0" />}
             </button>
-          )}
-
-          {/* 摸排账号列表 */}
-          {usableStreetAccounts.length > 0 ? (
-            <div className="border-t border-[#f1f5f9] max-h-72 overflow-y-auto">
-              {usableStreetAccounts.map((a) => {
-                const target = buildSurveyAdminUser(a);
-                const current = isCurrent(target);
-                return (
-                  <button
-                    key={a.id}
-                    onClick={() => switchTo(target)}
-                    className={cn(
-                      "w-full flex items-center gap-2.5 px-3 py-2.5 text-left hover:bg-[#f7f8fa] transition-colors",
-                      current && "bg-blue-50/50"
-                    )}
-                  >
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-[11px] font-semibold flex-shrink-0">
-                      {a.displayName.slice(0, 1)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-medium text-[#0f172a] truncate">{a.displayName}</div>
-                      <div className="text-[11px] text-[#94a3b8] truncate font-mono">{a.username}</div>
-                    </div>
-                    {current && <Check size={13} className="text-blue-600 flex-shrink-0" />}
-                  </button>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="border-t border-[#f1f5f9] px-3 py-3 text-[11px] text-[#94a3b8] leading-relaxed">
-              暂无摸排账号。可在「摸排账号管理」页新建。
-            </div>
           )}
 
           {/* 退出登录 */}

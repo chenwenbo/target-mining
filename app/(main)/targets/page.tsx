@@ -7,7 +7,6 @@ import { getPotentialTargets } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
 import { saveDispatchedTask } from "@/lib/mobile-mock";
-import { useCurrentPCUser } from "@/lib/account-mock";
 import type { Street, TechField, Company, DeclarationWillingness, Visitor } from "@/lib/types";
 import { STREETS, TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
@@ -192,9 +191,7 @@ function FilterPanel({
 // ─── Main Page ───────────────────────────────────────────────
 function TargetsPageContent() {
   const searchParams = useSearchParams();
-  const { user, mounted } = useCurrentPCUser();
-  const lockedStreet: string | null =
-    mounted && user.role === "street_admin" && user.street ? user.street : null;
+  const lockedStreet: string | null = null;
 
   const [filters, setFilters] = useState<Filters>({
     q: searchParams.get("q") ?? "",

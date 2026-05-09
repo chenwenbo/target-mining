@@ -12,9 +12,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
-  authenticateAccount,
   authenticateRegionAdmin,
-  buildSurveyAdminUser,
   getRegionAdminDemoList,
   getStoredPCUser,
   REGION_LABEL,
@@ -45,19 +43,11 @@ export default function PCLoginPage() {
     e.preventDefault();
     setError("");
 
-    // 先尝试区域管理员，再尝试街道管理员
     const regionUser = authenticateRegionAdmin(username, password);
     if (regionUser) {
       setCurrentPCUser(regionUser);
       setRegionAdminUser(regionUser);
       window.location.href = "/";
-      return;
-    }
-
-    const account = authenticateAccount(username, password);
-    if (account) {
-      setCurrentPCUser(buildSurveyAdminUser(account));
-      window.location.href = "/targets";
       return;
     }
 

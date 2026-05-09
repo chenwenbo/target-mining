@@ -11,7 +11,6 @@ import {
   getDraft,
   MOCK_VISITORS,
 } from "@/lib/mobile-mock";
-import { useCurrentPCUser } from "@/lib/account-mock";
 import { type Task, type VisitRecord, type WillingnessLevel } from "@/lib/types";
 import {
   getTaskLifecycleStage,
@@ -31,9 +30,7 @@ type TaskWithStage = {
 };
 
 export default function TasksPage() {
-  const { user, mounted } = useCurrentPCUser();
-  const lockedStreet: string | null =
-    mounted && user.role === "street_admin" && user.street ? user.street : null;
+  const lockedStreet: string | null = null;
 
   const [version, setVersion] = useState(0);
   const [q, setQ] = useState("");
