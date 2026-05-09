@@ -23,7 +23,7 @@ const POOL_TIERS: { id: PoolTier; label: string; desc: string }[] = [
 
 interface Filters {
   q: string;
-  streets: Street[];
+  streets: string[];
   fields: TechField[];
   ageRange: string[];
   smeOnly: boolean;
@@ -66,7 +66,7 @@ function FilterPanel({
 }: {
   filters: Filters;
   onChange: (f: Filters) => void;
-  lockedStreet?: Street | null;
+  lockedStreet?: string | null;
 }) {
   function pill(label: string, active: boolean, onClick: () => void) {
     return (
@@ -193,8 +193,8 @@ function FilterPanel({
 function TargetsPageContent() {
   const searchParams = useSearchParams();
   const { user, mounted } = useCurrentPCUser();
-  const lockedStreet: Street | null =
-    mounted && user.role === "street_admin" && user.street ? (user.street as Street) : null;
+  const lockedStreet: string | null =
+    mounted && user.role === "street_admin" && user.street ? user.street : null;
 
   const [filters, setFilters] = useState<Filters>({
     q: searchParams.get("q") ?? "",
@@ -285,7 +285,7 @@ function TargetsPageContent() {
         companyId: t.id,
         companyName: t.name,
         assignee: assignee.name,
-        street: (assignee.street ?? t.street) as import("@/lib/types").Street,
+        street: assignee.street ?? t.street,
         status: "pending",
         createdAt: today,
         deadline,

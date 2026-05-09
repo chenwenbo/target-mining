@@ -2,22 +2,24 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
-import { STREETS, type Street, type Visitor } from "./types";
+import type { Visitor } from "./types";
 
 // ─── 类型 ────────────────────────────────────────────────────
 export type RoleType = "region_admin" | "street_admin";
 
-export interface StreetAccount {
-  street: Street;
+export interface SurveyAccount {
+  id: string;           // "sa_<timestamp>_<random4>"
+  displayName: string;  // 管理员自定义名称
+  orgUnit: string;      // 所属单位，自由文本，可留空
+  username: string;     // 自动生成：survey-001, survey-002...
+  password: string;     // 随机生成，可重置
   enabled: boolean;
-  username: string | null;
-  password: string | null;
-  generatedAt: string | null;
+  createdAt: string;    // ISO timestamp
 }
 
 export interface CurrentPCUser {
   role: RoleType;
-  street: Street | null;
+  street: string | null;  // 存 orgUnit 或 displayName（兼容旧逻辑字段名）
   displayName: string;
   dept: string;
   username: string | null;
@@ -32,36 +34,17 @@ export const REGION_ADMIN_SEED: CurrentPCUser = {
   username: "admin",
 };
 
-// 区域管理员凭证（演示用，硬编码）
 export const REGION_ADMIN_USERNAME = "admin";
 export const REGION_ADMIN_PASSWORD = "admin123";
 const REGION_ADMIN_PWD_OVERRIDE_KEY = "pc_region_admin_pwd";
 
 export const REGION_LABEL = "武汉市·东西湖区";
 
-// ─── 街道拼音首字母字典（用于生成 username）─────────────────
-const STREET_PINYIN: Record<Street, string> = {
-  "国家网安基地": "gja",
-  "临空港经开区": "lkg",
-  "吴家山街道": "wjs",
-  "将军路街道": "jjl",
-  "径河街道": "jhe",
-  "金银湖街道": "jyh",
-  "慈惠街道": "chu",
-  "走马岭街道": "zml",
-  "新沟镇街道": "xgz",
-  "东山街道": "dsh",
-};
-
 // ─── LocalStorage keys ───────────────────────────────────────
-const ACCOUNTS_KEY = "pc_street_accounts";
+const ACCOUNTS_KEY = "pc_survey_accounts";
 const CURRENT_USER_KEY = "pc_current_user";
 
-// ─── 凭证生成 ────────────────────────────────────────────────
-export function generateUsername(street: Street): string {
-  return `wh-dxh-${STREET_PINYIN[street] ?? "xxx"}-01`;
-}
-
+// ─── 密码生成 ────────────────────────────────────────────────
 const PWD_CHARSET = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789";
 
 function generatePassword(): string {
@@ -75,81 +58,126 @@ function generatePassword(): string {
   return "Pwd" + s;
 }
 
-// ─── 街道账号 CRUD ──────────────────────────────────────────
-function seedAccounts(): StreetAccount[] {
-  return STREETS.map((s) => ({
-    street: s,
-    enabled: true,
-    username: null,
-    password: null,
-    generatedAt: null,
-  }));
+// ─── 用户名生成：survey-001 格式 ────────────────────────────
+function generateSurveyUsername(list: SurveyAccount[]): string {
+  let max = 0;
+  for (const a of list) {
+    const m = a.username.match(/^survey-(\d+)$/);
+    if (m) max = Math.max(max, parseInt(m[1], 10));
+  }
+  return `survey-${String(max + 1).padStart(3, "0")}`;
 }
 
-export function getStreetAccounts(): StreetAccount[] {
-  if (typeof window === "undefined") return seedAccounts();
+// ─── ID 生成 ─────────────────────────────────────────────────
+function generateId(): string {
+  const ts = Date.now().toString(36);
+  const rand = Math.random().toString(36).slice(2, 6);
+  return `sa_${ts}_${rand}`;
+}
+
+// ─── SurveyAccount CRUD ──────────────────────────────────────
+export function getSurveyAccounts(): SurveyAccount[] {
+  if (typeof window === "undefined") return [];
+  // 清除旧 key（迁移）
+  if (localStorage.getItem("pc_street_accounts")) {
+    localStorage.removeItem("pc_street_accounts");
+  }
   try {
     const raw = localStorage.getItem(ACCOUNTS_KEY);
-    if (!raw) {
-      const seed = seedAccounts();
-      localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(seed));
-      return seed;
-    }
-    const parsed = JSON.parse(raw) as StreetAccount[];
-    // 容错：如果 STREETS 之后扩展，自动补齐缺失的街道
-    const known = new Set(parsed.map((a) => a.street));
-    const missing = STREETS.filter((s) => !known.has(s)).map<StreetAccount>((s) => ({
-      street: s,
-      enabled: true,
-      username: null,
-      password: null,
-      generatedAt: null,
-    }));
-    if (missing.length > 0) {
-      const merged = [...parsed, ...missing];
-      localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(merged));
-      return merged;
-    }
-    return parsed;
+    return raw ? (JSON.parse(raw) as SurveyAccount[]) : [];
   } catch {
-    return seedAccounts();
+    return [];
   }
 }
 
-export function saveStreetAccounts(list: StreetAccount[]): void {
+export function saveSurveyAccounts(list: SurveyAccount[]): void {
   localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(list));
 }
 
-export function getStreetAccount(street: Street): StreetAccount | undefined {
-  return getStreetAccounts().find((a) => a.street === street);
-}
-
-export function generateStreetAccount(street: Street): StreetAccount {
-  const list = getStreetAccounts();
-  const idx = list.findIndex((a) => a.street === street);
-  const updated: StreetAccount = {
-    street,
-    enabled: idx >= 0 ? list[idx].enabled : true,
-    username: generateUsername(street),
+export function createSurveyAccount(displayName: string, orgUnit: string): SurveyAccount {
+  const list = getSurveyAccounts();
+  const account: SurveyAccount = {
+    id: generateId(),
+    displayName: displayName.trim(),
+    orgUnit: orgUnit.trim(),
+    username: generateSurveyUsername(list),
     password: generatePassword(),
-    generatedAt: new Date().toISOString(),
+    enabled: true,
+    createdAt: new Date().toISOString(),
   };
-  if (idx >= 0) list[idx] = updated;
-  else list.push(updated);
-  saveStreetAccounts(list);
-  return updated;
+  list.push(account);
+  saveSurveyAccounts(list);
+  return account;
 }
 
-export function setStreetEnabled(street: Street, enabled: boolean): void {
-  const list = getStreetAccounts();
-  const idx = list.findIndex((a) => a.street === street);
+export function updateSurveyAccount(
+  id: string,
+  patch: Partial<Pick<SurveyAccount, "displayName" | "orgUnit" | "enabled">>,
+): void {
+  const list = getSurveyAccounts();
+  const idx = list.findIndex((a) => a.id === id);
   if (idx < 0) return;
-  list[idx] = { ...list[idx], enabled };
-  saveStreetAccounts(list);
+  list[idx] = { ...list[idx], ...patch };
+  saveSurveyAccounts(list);
+}
+
+export function deleteSurveyAccount(id: string): void {
+  const list = getSurveyAccounts().filter((a) => a.id !== id);
+  saveSurveyAccounts(list);
+}
+
+export function resetSurveyAccountPassword(id: string): void {
+  const list = getSurveyAccounts();
+  const idx = list.findIndex((a) => a.id === id);
+  if (idx < 0) return;
+  list[idx] = { ...list[idx], password: generatePassword() };
+  saveSurveyAccounts(list);
+}
+
+// ─── 认证 ────────────────────────────────────────────────────
+export function authenticateAccount(username: string, password: string): SurveyAccount | null {
+  const u = username.trim();
+  const p = password.trim();
+  if (!u || !p) return null;
+  const match = getSurveyAccounts().find(
+    (a) => a.enabled && a.username === u && a.password === p,
+  );
+  return match ?? null;
+}
+
+function getRegionAdminPassword(): string {
+  if (typeof window === "undefined") return REGION_ADMIN_PASSWORD;
+  return localStorage.getItem(REGION_ADMIN_PWD_OVERRIDE_KEY) ?? REGION_ADMIN_PASSWORD;
+}
+
+export function authenticateRegionAdmin(username: string, password: string): CurrentPCUser | null {
+  if (username.trim() === REGION_ADMIN_USERNAME && password.trim() === getRegionAdminPassword()) {
+    return REGION_ADMIN_SEED;
+  }
+  return null;
+}
+
+// ─── 身份转换 ────────────────────────────────────────────────
+export function buildSurveyAdminUser(account: SurveyAccount): CurrentPCUser {
+  return {
+    role: "street_admin",
+    street: account.orgUnit || account.displayName,
+    displayName: account.displayName,
+    dept: account.orgUnit || account.displayName,
+    username: account.username,
+  };
+}
+
+export function surveyAccountToVisitor(account: SurveyAccount): Visitor {
+  return {
+    id: account.id,
+    name: account.displayName,
+    street: account.orgUnit || account.displayName,
+    dept: account.orgUnit || account.displayName,
+  };
 }
 
 // ─── 当前 PC 用户 ────────────────────────────────────────────
-// 读取存储的登录态（不带回退）；用于鉴权判断"是否登录"
 export function getStoredPCUser(): CurrentPCUser | null {
   if (typeof window === "undefined") return null;
   try {
@@ -160,7 +188,6 @@ export function getStoredPCUser(): CurrentPCUser | null {
   }
 }
 
-// 带回退到种子身份；用于 UI 无害渲染默认占位
 export function getCurrentPCUser(): CurrentPCUser {
   return getStoredPCUser() ?? REGION_ADMIN_SEED;
 }
@@ -173,51 +200,7 @@ export function logoutPCUser(): void {
   localStorage.removeItem(CURRENT_USER_KEY);
 }
 
-export function buildStreetAdminUser(account: StreetAccount): CurrentPCUser {
-  return {
-    role: "street_admin",
-    street: account.street,
-    displayName: `${account.street}·管理员`,
-    dept: `${account.street}办事处`,
-    username: account.username,
-  };
-}
-
-// ─── 移动端登录辅助 ─────────────────────────────────────────
-// 把 StreetAccount 投影为移动端使用的 Visitor 形态
-export function streetAccountToVisitor(account: StreetAccount): Visitor {
-  return {
-    id: account.username ?? `acct_${account.street}`,
-    name: `${account.street}·管理员`,
-    street: account.street,
-    dept: `${account.street}办事处`,
-  };
-}
-
-// 凭证校验：返回匹配的账号或 null（启用且 username/password 都对得上）
-export function authenticateAccount(username: string, password: string): StreetAccount | null {
-  const u = username.trim();
-  const p = password.trim();
-  if (!u || !p) return null;
-  const match = getStreetAccounts().find(
-    (a) => a.enabled && a.username === u && a.password === p,
-  );
-  return match ?? null;
-}
-
-function getRegionAdminPassword(): string {
-  if (typeof window === "undefined") return REGION_ADMIN_PASSWORD;
-  return localStorage.getItem(REGION_ADMIN_PWD_OVERRIDE_KEY) ?? REGION_ADMIN_PASSWORD;
-}
-
-// 区域管理员校验：优先读 localStorage 中的覆盖密码
-export function authenticateRegionAdmin(username: string, password: string): CurrentPCUser | null {
-  if (username.trim() === REGION_ADMIN_USERNAME && password.trim() === getRegionAdminPassword()) {
-    return REGION_ADMIN_SEED;
-  }
-  return null;
-}
-
+// ─── 密码修改 ────────────────────────────────────────────────
 export type ChangePasswordResult = "ok" | "wrong_old" | "same" | "error";
 
 export function changeRegionAdminPassword(oldPwd: string, newPwd: string): ChangePasswordResult {
@@ -228,20 +211,23 @@ export function changeRegionAdminPassword(oldPwd: string, newPwd: string): Chang
   return "ok";
 }
 
-export function changeStreetAdminPassword(
+export function changeSurveyAccountPassword(
   username: string,
   oldPwd: string,
   newPwd: string,
 ): ChangePasswordResult {
-  const list = getStreetAccounts();
+  const list = getSurveyAccounts();
   const idx = list.findIndex((a) => a.username === username);
   if (idx < 0) return "error";
   if (list[idx].password !== oldPwd.trim()) return "wrong_old";
   if (newPwd.trim() === oldPwd.trim()) return "same";
   list[idx] = { ...list[idx], password: newPwd.trim() };
-  saveStreetAccounts(list);
+  saveSurveyAccounts(list);
   return "ok";
 }
+
+// 向下兼容别名
+export const changeStreetAdminPassword = changeSurveyAccountPassword;
 
 // ─── 客户端 hooks ────────────────────────────────────────────
 export function useCurrentPCUser(): { user: CurrentPCUser; mounted: boolean } {
@@ -266,13 +252,11 @@ export function useRoleGuard(required: RoleType): boolean {
   const { user, mounted } = useCurrentPCUser();
   useEffect(() => {
     if (!mounted) return;
-    // 未登录的情况由 useAuthGuard 兜底跳到 /login，这里仅处理"登录但角色不匹配"
     if (getStoredPCUser() && user.role !== required) router.replace("/targets");
   }, [user.role, mounted, required, router]);
   return mounted && user.role === required;
 }
 
-// 登录态守卫：未登录则跳到 /login。在 (main) 布局壳里调用一次即可
 export function useAuthGuard(): boolean {
   const router = useRouter();
   const [authed, setAuthed] = useState(false);
@@ -290,20 +274,23 @@ export function useAuthGuard(): boolean {
 }
 
 // ─── 导出 / 复制工具 ─────────────────────────────────────────
-export function formatAllAccountsForClipboard(list: StreetAccount[]): string {
-  const rows = list.filter((a) => a.enabled && a.username && a.password);
-  const header = "街道\t用户名\t密码";
-  const body = rows.map((a) => `${a.street}\t${a.username}\t${a.password}`).join("\n");
-  return rows.length > 0 ? `${header}\n${body}` : "（暂无已生成的账号）";
+export function formatAllAccountsForClipboard(list: SurveyAccount[]): string {
+  const rows = list.filter((a) => a.enabled);
+  const header = "账号名称\t所属单位\t用户名\t密码";
+  const body = rows
+    .map((a) => `${a.displayName}\t${a.orgUnit}\t${a.username}\t${a.password}`)
+    .join("\n");
+  return rows.length > 0 ? `${header}\n${body}` : "（暂无已启用的账号）";
 }
 
-export function exportAccountsCSV(list: StreetAccount[], filename?: string): void {
+export function exportAccountsCSV(list: SurveyAccount[], filename?: string): void {
   const rows = list.map((a) => ({
-    街道: a.street,
+    账号名称: a.displayName,
+    所属单位: a.orgUnit,
     启用: a.enabled ? "是" : "否",
-    用户名: a.username ?? "",
-    密码: a.password ?? "",
-    生成时间: a.generatedAt ? a.generatedAt.slice(0, 19).replace("T", " ") : "",
+    用户名: a.username,
+    密码: a.password,
+    创建时间: a.createdAt.slice(0, 19).replace("T", " "),
   }));
   const csv = Papa.unparse(rows, { header: true });
   const bom = "﻿";
@@ -312,7 +299,7 @@ export function exportAccountsCSV(list: StreetAccount[], filename?: string): voi
   const a = document.createElement("a");
   const date = new Date().toISOString().slice(0, 10);
   a.href = url;
-  a.download = filename ?? `摸排账户分发-${date}.csv`;
+  a.download = filename ?? `摸排账号列表-${date}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }

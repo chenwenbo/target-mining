@@ -14,14 +14,14 @@ import { cn } from "@/lib/cn";
 import {
   authenticateAccount,
   authenticateRegionAdmin,
-  buildStreetAdminUser,
+  buildSurveyAdminUser,
   getStoredPCUser,
-  getStreetAccounts,
+  getSurveyAccounts,
   REGION_ADMIN_PASSWORD,
   REGION_ADMIN_USERNAME,
   REGION_LABEL,
   setCurrentPCUser,
-  type StreetAccount,
+  type SurveyAccount,
 } from "@/lib/account-mock";
 
 export default function PCLoginPage() {
@@ -30,7 +30,7 @@ export default function PCLoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showHints, setShowHints] = useState(false);
-  const [hints, setHints] = useState<StreetAccount[]>([]);
+  const [hints, setHints] = useState<SurveyAccount[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -39,9 +39,7 @@ export default function PCLoginPage() {
     if (stored) {
       router.replace(stored.role === "region_admin" ? "/" : "/targets");
     }
-    setHints(
-      getStreetAccounts().filter((a) => a.enabled && a.username && a.password),
-    );
+    setHints(getSurveyAccounts().filter((a) => a.enabled));
   }, [router]);
 
   function handleSubmit(e: React.FormEvent) {
@@ -58,7 +56,7 @@ export default function PCLoginPage() {
 
     const account = authenticateAccount(username, password);
     if (account) {
-      setCurrentPCUser(buildStreetAdminUser(account));
+      setCurrentPCUser(buildSurveyAdminUser(account));
       window.location.href = "/targets";
       return;
     }
@@ -66,9 +64,9 @@ export default function PCLoginPage() {
     setError("账号或密码错误，或该账号已被禁用");
   }
 
-  function fillHint(a: StreetAccount) {
-    setUsername(a.username ?? "");
-    setPassword(a.password ?? "");
+  function fillHint(a: SurveyAccount) {
+    setUsername(a.username);
+    setPassword(a.password);
     setError("");
   }
 
@@ -246,16 +244,17 @@ export default function PCLoginPage() {
                     {REGION_ADMIN_USERNAME} / {REGION_ADMIN_PASSWORD}
                   </div>
                 </button>
-                {/* 街道管理员列表 */}
+                {/* 摸排账号列表 */}
                 {hints.map((a) => (
                   <button
-                    key={a.street}
+                    key={a.id}
                     type="button"
                     onClick={() => fillHint(a)}
                     className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
                   >
                     <div className="text-xs font-medium text-[#0f172a]">
-                      {a.street}·管理员
+                      {a.displayName}
+                      {a.orgUnit && <span className="text-[#94a3b8] font-normal ml-1">· {a.orgUnit}</span>}
                     </div>
                     <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
                       {a.username} / {a.password}
@@ -264,7 +263,7 @@ export default function PCLoginPage() {
                 ))}
                 {hints.length === 0 && (
                   <p className="px-2.5 py-2 text-[11px] text-[#94a3b8]">
-                    暂无街道账号，请先以区域管理员身份登录并生成账号
+                    暂无摸排账号，请先以区域管理员身份登录并新建账号
                   </p>
                 )}
               </div>

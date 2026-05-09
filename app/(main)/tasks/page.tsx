@@ -12,7 +12,7 @@ import {
   MOCK_VISITORS,
 } from "@/lib/mobile-mock";
 import { useCurrentPCUser } from "@/lib/account-mock";
-import { STREETS, type Street, type Task, type VisitRecord, type WillingnessLevel } from "@/lib/types";
+import { type Task, type VisitRecord, type WillingnessLevel } from "@/lib/types";
 import {
   getTaskLifecycleStage,
   latestVisitRecord,
@@ -32,8 +32,8 @@ type TaskWithStage = {
 
 export default function TasksPage() {
   const { user, mounted } = useCurrentPCUser();
-  const lockedStreet: Street | null =
-    mounted && user.role === "street_admin" && user.street ? (user.street as Street) : null;
+  const lockedStreet: string | null =
+    mounted && user.role === "street_admin" && user.street ? user.street : null;
 
   const [version, setVersion] = useState(0);
   const [q, setQ] = useState("");
@@ -151,7 +151,7 @@ export default function TasksPage() {
       companyId: company.id,
       companyName: company.name,
       assignee: selectedAssignee,
-      street: company.street as import("@/lib/types").Street,
+      street: company.street,
       status: "pending",
       createdAt: new Date().toISOString().slice(0, 10),
       deadline,
@@ -180,7 +180,7 @@ export default function TasksPage() {
             {lockedStreet && (
               <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 border border-blue-100 rounded text-[11px] text-blue-700">
                 <Building2 size={10} />
-                当前视图：{lockedStreet} · 仅本街道
+                当前视图：{lockedStreet}
               </span>
             )}
           </p>
@@ -200,17 +200,20 @@ export default function TasksPage() {
           />
         </div>
 
-        {!lockedStreet && (
-          <Selector
-            label="街道"
-            value={streetFilter}
-            onChange={setStreetFilter}
-            options={[
-              { value: "all", label: "全部街道" },
-              ...STREETS.map((s) => ({ value: s, label: s })),
-            ]}
-          />
-        )}
+        {!lockedStreet && (() => {
+          const streetOptions = Array.from(new Set(enriched.map((e) => e.task.street))).filter(Boolean).sort();
+          return (
+            <Selector
+              label="经办单位"
+              value={streetFilter}
+              onChange={setStreetFilter}
+              options={[
+                { value: "all", label: "全部" },
+                ...streetOptions.map((s) => ({ value: s, label: s })),
+              ]}
+            />
+          );
+        })()}
 
         {!lockedStreet && (
           <Selector

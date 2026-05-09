@@ -25,7 +25,7 @@ export default function ProfilePage() {
 
   const isRegion = user.role === "region_admin";
   const initial = user.displayName.slice(0, 1);
-  const roleLabel = isRegion ? "区域管理员" : "街道管理员";
+  const roleLabel = isRegion ? "区域管理员" : "摸排账号";
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

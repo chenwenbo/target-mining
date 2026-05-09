@@ -91,7 +91,7 @@ export interface Task {
   companyId: string;
   companyName: string;
   assignee: string;
-  street: Street;
+  street: string;
   status: TaskStatus;
   createdAt: string;
   deadline: string;
