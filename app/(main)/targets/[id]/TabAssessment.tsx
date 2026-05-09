@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   Copy,
   Check,
@@ -9,10 +11,8 @@ import {
   RefreshCcw,
   X,
   Sparkles,
-  TrendingUp,
-  AlertTriangle,
-  ListChecks,
   Eye,
+  Download,
 } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import {
@@ -335,27 +335,290 @@ function AssessmentDrawer({
   );
 }
 
-// ── AI analysis panel ─────────────────────────────────────────────
+// ── AI analysis helpers ───────────────────────────────────────────
 
-function ProbabilityRing({ value }: { value: number }) {
-  const color =
-    value >= 70 ? "#10b981" : value >= 45 ? "#f59e0b" : "#ef4444";
-  const deg = Math.round(value * 3.6);
-  return (
-    <div
-      className="relative w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0"
-      style={{
-        background: `conic-gradient(${color} ${deg}deg, #e2e8f0 0deg)`,
-      }}
-    >
-      <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center">
-        <span className="text-sm font-bold text-[#0f172a]">{value}%</span>
-      </div>
-    </div>
+function aiAnalysisToMarkdown(analysis: AiAnalysis): string {
+  const { summary, certProbability, strengths, risks, roadmap } = analysis;
+  const NUMS = ["一", "二", "三", "四"];
+  const lines: string[] = [];
+
+  lines.push(summary);
+  lines.push("");
+
+  const probLabel =
+    certProbability >= 80
+      ? "综合条件良好，认定成功率高"
+      : certProbability >= 60
+      ? "基本满足条件，建议继续优化"
+      : certProbability >= 40
+      ? "存在明显差距，需重点培育"
+      : "距认定标准较远，需系统性提升";
+  lines.push(
+    `> 认定可能性综合评估：**${certProbability}%** — ${probLabel}`,
   );
+  lines.push("");
+
+  if (strengths.length > 0) {
+    lines.push("## ✅ 优势维度");
+    lines.push("");
+    for (const s of strengths) {
+      lines.push(`**${s.title}**`);
+      lines.push("");
+      lines.push(s.body);
+      lines.push("");
+    }
+  }
+
+  if (risks.length > 0) {
+    lines.push("---");
+    lines.push("");
+    lines.push("## ⚠️ 风险维度");
+    lines.push("");
+    for (const r of risks) {
+      lines.push(`**${r.title}**`);
+      lines.push("");
+      lines.push(r.body);
+      lines.push("");
+    }
+  }
+
+  if (roadmap.length > 0) {
+    lines.push("---");
+    lines.push("");
+    lines.push("## 📋 行动路线图");
+    lines.push("");
+    roadmap.forEach((phase, i) => {
+      lines.push(
+        `**第${NUMS[i] ?? i + 1}阶段：${phase.phase}**（${phase.timeframe}）`,
+      );
+      lines.push("");
+      for (const action of phase.actions) {
+        lines.push(`- ${action}`);
+      }
+      lines.push("");
+    });
+  }
+
+  return lines.join("\n");
 }
 
-function AiAnalysisPanel({ analysis }: { analysis: AiAnalysis }) {
+function exportAssessmentReport(
+  company: Company,
+  record: AssessmentRecord,
+  analysis: AiAnalysis,
+) {
+  const { score } = record;
+  if (!score) return;
+
+  const markdown = aiAnalysisToMarkdown(analysis);
+
+  const dimRows = score.dimensionScores
+    .map(
+      (d) => `
+      <tr>
+        <td>${d.label}</td>
+        <td>${d.score} / ${d.maxScore}</td>
+        <td>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${Math.round((d.score / d.maxScore) * 100)}%"></div>
+          </div>
+        </td>
+      </tr>`,
+    )
+    .join("");
+
+  const mdHtml = markdown
+    .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+    .replace(/^---$/gm, "<hr>")
+    .replace(/^> (.+)$/gm, "<blockquote>$1</blockquote>")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/^- (.+)$/gm, "<li>$1</li>")
+    .replace(/(<li>.*<\/li>\n?)+/g, (m) => `<ul>${m}</ul>`)
+    .replace(/\n{2,}/g, "</p><p>")
+    .replace(/^(?!<[hublpi])/gm, "")
+    .split("\n")
+    .filter(Boolean)
+    .map((l) =>
+      l.startsWith("<") ? l : `<p>${l}</p>`,
+    )
+    .join("\n");
+
+  const gradeMeta: Record<string, { label: string; color: string }> = {
+    优秀:   { label: "条件优秀",    color: "#059669" },
+    符合:   { label: "符合申报条件", color: "#2563eb" },
+    待培育: { label: "待重点培育",   color: "#d97706" },
+  };
+  const gm = gradeMeta[score.grade] ?? { label: score.grade, color: "#64748b" };
+
+  const suggestionHtml = score.suggestions
+    .map(
+      (s) => `
+      <div class="suggestion ${s.urgent ? "urgent" : ""}">
+        <strong>${s.urgent ? "⚠ 重要 · " : ""}${s.title}</strong>
+        <p>${s.body}</p>
+      </div>`,
+    )
+    .join("");
+
+  const html = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>高企测评报告 · ${company.name}</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+    color: #0f172a;
+    background: #fff;
+    padding: 48px 56px;
+    max-width: 860px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .report-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 2px solid #0f172a;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+  }
+  .report-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+  .report-meta { font-size: 12px; color: #64748b; }
+  .grade-badge {
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    background: ${gm.color};
+  }
+  .score-section {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    padding: 20px 24px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .score-total { font-size: 48px; font-weight: 800; color: ${gm.color}; line-height: 1; }
+  .score-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 8px 0; font-size: 13px; }
+  td:first-child { width: 80px; color: #475569; }
+  td:nth-child(2) { width: 60px; font-weight: 600; color: #0f172a; text-align: right; padding-right: 12px; }
+  .bar-track { background: #e2e8f0; border-radius: 99px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; background: ${gm.color}; border-radius: 99px; }
+  h2.section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 28px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  h2 { font-size: 14px; font-weight: 700; color: #0f172a; margin: 20px 0 8px; }
+  hr { border: none; border-top: 1px solid #e2e8f0; margin: 16px 0; }
+  blockquote {
+    border-left: 4px solid #2563eb;
+    background: #eff6ff;
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: #1e40af;
+  }
+  p { margin: 8px 0; color: #475569; }
+  strong { color: #0f172a; }
+  ul { margin: 8px 0 8px 16px; }
+  li { color: #475569; margin: 4px 0; font-size: 13px; }
+  .suggestion {
+    padding: 12px 16px;
+    border: 1px solid #fef3c7;
+    background: #fffbeb;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .suggestion.urgent {
+    border-color: #fecaca;
+    background: #fef2f2;
+  }
+  .suggestion strong { display: block; margin-bottom: 4px; font-size: 13px; }
+  .suggestion p { margin: 0; font-size: 13px; }
+  .footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 11px;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media print {
+    body { padding: 24px 32px; }
+    .no-print { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="report-header">
+    <div>
+      <div class="report-title">${company.name}</div>
+      <div class="report-meta">
+        高企认定专业测评报告 &nbsp;·&nbsp;
+        测评日期：${record.submittedAt?.slice(0, 10) ?? record.createdAt.slice(0, 10)} &nbsp;·&nbsp;
+        生成时间：${new Date().toLocaleDateString("zh-CN")}
+      </div>
+    </div>
+    <div class="grade-badge">${gm.label}</div>
+  </div>
+
+  <div class="score-section">
+    <div>
+      <div class="score-total">${score.total}</div>
+      <div class="score-label">综合得分（满分 100 分）</div>
+    </div>
+    <table>${dimRows}</table>
+  </div>
+
+  <h2 class="section-title">✦ AI 智能分析</h2>
+  ${mdHtml}
+
+  ${score.suggestions.length > 0 ? `<h2 class="section-title">✦ 培育建议</h2>${suggestionHtml}` : ""}
+
+  <div class="footer">
+    <span>本报告由 AI 辅助生成，仅供参考，不构成正式认定依据</span>
+    <span>高企标的挖掘系统</span>
+  </div>
+
+  <script>setTimeout(() => window.print(), 300);</script>
+</body>
+</html>`;
+
+  const win = window.open("", "_blank");
+  if (win) {
+    win.document.write(html);
+    win.document.close();
+  }
+}
+
+// ── AI analysis panel ─────────────────────────────────────────────
+
+function AiAnalysisPanel({
+  analysis,
+  company,
+  record,
+}: {
+  analysis: AiAnalysis;
+  company: Company;
+  record: AssessmentRecord;
+}) {
+  const markdown = aiAnalysisToMarkdown(analysis);
+
   return (
     <div className="bg-white border border-[#e5e7eb] rounded-xl overflow-hidden">
       {/* Header */}
@@ -364,123 +627,75 @@ function AiAnalysisPanel({ analysis }: { analysis: AiAnalysis }) {
           <Sparkles size={15} className="text-white" />
           <span className="text-white font-semibold text-sm">AI 智能分析</span>
         </div>
-        <span className="text-xs text-blue-100 bg-white/20 px-2 py-0.5 rounded-full">
-          由 AI 生成
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-blue-100 bg-white/20 px-2 py-0.5 rounded-full">
+            由 AI 生成
+          </span>
+          <button
+            onClick={() => exportAssessmentReport(company, record, analysis)}
+            className="flex items-center gap-1.5 text-xs text-white bg-white/20 hover:bg-white/30 px-3 py-1 rounded-lg transition-colors"
+          >
+            <Download size={12} />
+            导出报告
+          </button>
+        </div>
       </div>
 
-      <div className="p-5 space-y-5">
-        {/* Summary */}
-        <p className="text-sm text-[#475569] leading-relaxed bg-[#f8fafc] rounded-xl p-4 border border-[#f1f5f9]">
-          {analysis.summary}
-        </p>
-
-        {/* Probability */}
-        <div className="flex items-center gap-4 p-4 rounded-xl border border-[#e5e7eb]">
-          <ProbabilityRing value={analysis.certProbability} />
-          <div>
-            <p className="text-sm font-semibold text-[#0f172a]">认定可能性评估</p>
-            <p className="text-xs text-[#64748b] mt-0.5">
-              {analysis.certProbability >= 80
-                ? "综合条件良好，认定成功率高"
-                : analysis.certProbability >= 60
-                ? "基本满足条件，建议继续优化"
-                : analysis.certProbability >= 40
-                ? "存在明显差距，需重点培育"
-                : "距认定标准较远，需系统性提升"}
-            </p>
-          </div>
-        </div>
-
-        {/* Strengths + Risks */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-emerald-700 flex items-center gap-1.5">
-              <TrendingUp size={12} />
-              优势项
-            </h4>
-            {analysis.strengths.length > 0 ? (
-              analysis.strengths.map((s, i) => (
-                <div
-                  key={i}
-                  className="p-3 bg-emerald-50 border border-emerald-100 rounded-xl"
-                >
-                  <p className="text-xs font-semibold text-emerald-800 mb-1">
-                    {s.title}
-                  </p>
-                  <p className="text-xs text-emerald-700 leading-relaxed">{s.body}</p>
-                </div>
-              ))
-            ) : (
-              <p className="text-xs text-[#94a3b8] italic">暂无明显优势项</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <h4 className="text-xs font-semibold text-red-600 flex items-center gap-1.5">
-              <AlertTriangle size={12} />
-              风险项
-            </h4>
-            {analysis.risks.length > 0 ? (
-              analysis.risks.map((r, i) => (
-                <div
-                  key={i}
-                  className="p-3 bg-red-50 border border-red-100 rounded-xl"
-                >
-                  <p className="text-xs font-semibold text-red-800 mb-1">
-                    {r.title}
-                  </p>
-                  <p className="text-xs text-red-700 leading-relaxed">{r.body}</p>
-                </div>
-              ))
-            ) : (
-              <p className="text-xs text-[#94a3b8] italic">暂无明显风险项</p>
-            )}
-          </div>
-        </div>
-
-        {/* Roadmap */}
-        <div>
-          <h4 className="text-xs font-semibold text-[#0f172a] mb-3 flex items-center gap-1.5">
-            <ListChecks size={13} className="text-blue-600" />
-            行动路线图
-          </h4>
-          <div className="space-y-1">
-            {analysis.roadmap.map((phase, i) => (
-              <div key={i} className="flex gap-3">
-                <div className="flex flex-col items-center">
-                  <div className="w-6 h-6 rounded-full bg-blue-600 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
-                    {i + 1}
+      {/* Markdown content */}
+      <div className="p-5">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h2({ children }) {
+              return (
+                <h2 className="text-sm font-semibold text-[#0f172a] mt-5 mb-2 first:mt-0">
+                  {children}
+                </h2>
+              );
+            },
+            p({ children }) {
+              return (
+                <p className="text-sm text-[#475569] leading-relaxed mb-3">
+                  {children}
+                </p>
+              );
+            },
+            strong({ children }) {
+              return (
+                <strong className="font-semibold text-[#0f172a]">
+                  {children}
+                </strong>
+              );
+            },
+            ul({ children }) {
+              return <ul className="mb-3 space-y-1.5 ml-1">{children}</ul>;
+            },
+            li({ children }) {
+              return (
+                <li className="flex items-start gap-2 text-sm text-[#475569]">
+                  <span className="text-blue-400 mt-0.5 flex-shrink-0 select-none">
+                    •
+                  </span>
+                  <span>{children}</span>
+                </li>
+              );
+            },
+            blockquote({ children }) {
+              return (
+                <div className="my-3 pl-4 py-3 pr-4 bg-blue-50 border-l-4 border-blue-400 rounded-r-xl">
+                  <div className="text-sm text-blue-700 leading-relaxed">
+                    {children}
                   </div>
-                  {i < analysis.roadmap.length - 1 && (
-                    <div className="w-px flex-1 bg-[#e2e8f0] my-1 min-h-[16px]" />
-                  )}
                 </div>
-                <div className="pb-4">
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-xs font-semibold text-[#0f172a]">
-                      {phase.phase}
-                    </span>
-                    <span className="text-xs text-[#94a3b8] bg-[#f1f5f9] px-2 py-0.5 rounded-full">
-                      {phase.timeframe}
-                    </span>
-                  </div>
-                  <ul className="space-y-1">
-                    {phase.actions.map((action, j) => (
-                      <li
-                        key={j}
-                        className="text-xs text-[#64748b] flex items-start gap-1.5"
-                      >
-                        <span className="text-blue-400 mt-0.5 flex-shrink-0">•</span>
-                        {action}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+              );
+            },
+            hr() {
+              return <hr className="my-4 border-[#f1f5f9]" />;
+            },
+          }}
+        >
+          {markdown}
+        </ReactMarkdown>
       </div>
     </div>
   );
@@ -493,6 +708,7 @@ export default function TabAssessment({ company }: { company: Company }) {
   const [pending, setPending] = useState<AssessmentRecord | null>(null);
   const [shareUrl, setShareUrl] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showSharePanel, setShowSharePanel] = useState(false);
 
   useEffect(() => {
     setCompleted(getLatestCompletedByCompany(company.id) ?? null);
@@ -526,67 +742,87 @@ export default function TabAssessment({ company }: { company: Company }) {
     <div className="space-y-6">
       {/* ── Status overview ── */}
       <div className="bg-white border border-[#e5e7eb] rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3 flex items-center gap-2">
-          <ClipboardList size={15} className="text-blue-600" />
-          测评状态
-        </h3>
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-[#0f172a] flex items-center gap-2">
+            <ClipboardList size={15} className="text-blue-600" />
+            测评状态
+          </h3>
+          {completed && (
+            <button
+              onClick={() => setShowSharePanel((v) => !v)}
+              className={cn(
+                "flex items-center gap-1.5 text-xs font-medium rounded-lg px-3 py-1.5 border transition-colors",
+                showSharePanel
+                  ? "bg-blue-50 text-blue-600 border-blue-200"
+                  : "text-[#64748b] border-[#e5e7eb] hover:text-blue-600 hover:border-blue-200",
+              )}
+            >
+              <RefreshCcw size={12} />
+              重新发起测评
+            </button>
+          )}
+        </div>
 
         {completed ? (
-          <div className="grid grid-cols-4 gap-4 text-sm">
-            <div>
-              <p className="text-xs text-[#94a3b8] mb-1">发起时间</p>
-              <p className="text-[#0f172a] font-medium text-xs">
-                {completed.createdAt.slice(0, 10)}
-              </p>
+          <>
+            <div className="grid grid-cols-4 gap-4 text-sm">
+              <div>
+                <p className="text-xs text-[#94a3b8] mb-1">发起时间</p>
+                <p className="text-[#0f172a] font-medium text-xs">
+                  {completed.createdAt.slice(0, 10)}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-[#94a3b8] mb-1">填写方式</p>
+                <p className="text-[#0f172a] font-medium text-xs">
+                  {completed.source === "enterprise_self" ? "企业自填" : "工作人员代填"}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-[#94a3b8] mb-1">提交时间</p>
+                <p className="text-[#0f172a] font-medium text-xs">
+                  {completed.submittedAt?.slice(0, 10) ?? "—"}
+                </p>
+              </div>
+              <div>
+                <p className="text-xs text-[#94a3b8] mb-1">状态</p>
+                <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+                  已完成
+                </span>
+              </div>
             </div>
-            <div>
-              <p className="text-xs text-[#94a3b8] mb-1">填写方式</p>
-              <p className="text-[#0f172a] font-medium text-xs">
-                {completed.source === "enterprise_self" ? "企业自填" : "工作人员代填"}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-[#94a3b8] mb-1">提交时间</p>
-              <p className="text-[#0f172a] font-medium text-xs">
-                {completed.submittedAt?.slice(0, 10) ?? "—"}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-[#94a3b8] mb-1">状态</p>
-              <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
-                已完成
-              </span>
-            </div>
-          </div>
+
+            {showSharePanel && (
+              <div className="mt-4 pt-4 border-t border-[#e5e7eb]">
+                <SharePanel
+                  shareUrl={shareUrl || buildShareUrl(pending?.token ?? completed.token)}
+                  onRegenerate={handleGenerate}
+                />
+              </div>
+            )}
+          </>
         ) : (
           <p className="text-sm text-[#94a3b8]">尚未发起测评，点击下方按钮生成测评链接</p>
         )}
       </div>
 
-      {/* ── Share panel ── */}
-      <div className="bg-white border border-[#e5e7eb] rounded-xl p-5 space-y-4">
-        <div className="flex items-center justify-between">
+      {/* ── Share panel (only when no results yet) ── */}
+      {!completed && (
+        <div className="bg-white border border-[#e5e7eb] rounded-xl p-5 space-y-4">
           <h3 className="text-sm font-semibold text-[#0f172a]">发起测评</h3>
-          {completed && (
-            <span className="text-xs text-[#94a3b8]">已有测评结果，可重新生成链接发起新一轮</span>
+          {pending ? (
+            <SharePanel shareUrl={shareUrl} onRegenerate={handleGenerate} />
+          ) : (
+            <button
+              onClick={handleGenerate}
+              className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white rounded-xl py-3 text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              <QrCode size={16} />
+              生成测评链接
+            </button>
           )}
         </div>
-
-        {pending || completed ? (
-          <SharePanel
-            shareUrl={shareUrl || buildShareUrl(pending?.token ?? completed?.token ?? "")}
-            onRegenerate={handleGenerate}
-          />
-        ) : (
-          <button
-            onClick={handleGenerate}
-            className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white rounded-xl py-3 text-sm font-medium hover:bg-blue-700 transition-colors"
-          >
-            <QrCode size={16} />
-            生成测评链接
-          </button>
-        )}
-      </div>
+      )}
 
       {/* ── Results ── */}
       {score && (
@@ -646,7 +882,13 @@ export default function TabAssessment({ company }: { company: Company }) {
           </div>
 
           {/* AI analysis */}
-          {aiAnalysis && <AiAnalysisPanel analysis={aiAnalysis} />}
+          {aiAnalysis && completed && (
+            <AiAnalysisPanel
+              analysis={aiAnalysis}
+              company={company}
+              record={completed}
+            />
+          )}
 
           {/* Cultivation suggestions */}
           {score.suggestions.length > 0 && (

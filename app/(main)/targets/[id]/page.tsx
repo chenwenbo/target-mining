@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowLeft, Building2,
+  ArrowLeft, Building2, Phone, Mail,
 } from "lucide-react";
 import { getCompanyById } from "@/lib/mock-data";
 import { getCertifiedCompanyById } from "@/lib/renewal-data";
@@ -339,6 +339,20 @@ export default function CompanyDetailPage({ params }: { params: Promise<{ id: st
               <span>注册资本：<strong className="text-[#0f172a] font-medium">{company.registeredCapital}万元</strong></span>
               <span>成立时间：<strong className="text-[#0f172a] font-medium">{company.establishedAt}</strong></span>
               <span>地区：<strong className="text-[#0f172a] font-medium">{company.street}</strong></span>
+              <a
+                href={`tel:${company.contact.phone}`}
+                className="flex items-center gap-1.5 text-[#475569] hover:text-blue-600 transition-colors"
+              >
+                <Phone size={13} className="flex-shrink-0" />
+                <strong className="text-[#0f172a] font-medium">{company.contact.phone}</strong>
+              </a>
+              <a
+                href={`mailto:${company.contact.email}`}
+                className="flex items-center gap-1.5 text-[#475569] hover:text-blue-600 transition-colors"
+              >
+                <Mail size={13} className="flex-shrink-0" />
+                <strong className="text-[#0f172a] font-medium">{company.contact.email}</strong>
+              </a>
             </div>
             <div className="flex items-center gap-3 mt-2">
               <span className={cn(

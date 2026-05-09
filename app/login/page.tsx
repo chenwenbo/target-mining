@@ -15,12 +15,12 @@ import {
   authenticateAccount,
   authenticateRegionAdmin,
   buildSurveyAdminUser,
+  getRegionAdminDemoCredentials,
   getStoredPCUser,
   getSurveyAccounts,
-  REGION_ADMIN_PASSWORD,
-  REGION_ADMIN_USERNAME,
   REGION_LABEL,
   setCurrentPCUser,
+  setRegionAdminUser,
   type SurveyAccount,
 } from "@/lib/account-mock";
 
@@ -31,6 +31,7 @@ export default function PCLoginPage() {
   const [error, setError] = useState("");
   const [showHints, setShowHints] = useState(false);
   const [hints, setHints] = useState<SurveyAccount[]>([]);
+  const [regionAdminDemo, setRegionAdminDemo] = useState<{ username: string; password: string; displayName: string } | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function PCLoginPage() {
       router.replace(stored.role === "region_admin" ? "/" : "/targets");
     }
     setHints(getSurveyAccounts().filter((a) => a.enabled));
+    setRegionAdminDemo(getRegionAdminDemoCredentials());
   }, [router]);
 
   function handleSubmit(e: React.FormEvent) {
@@ -50,6 +52,7 @@ export default function PCLoginPage() {
     const regionUser = authenticateRegionAdmin(username, password);
     if (regionUser) {
       setCurrentPCUser(regionUser);
+      setRegionAdminUser(regionUser);
       window.location.href = "/";
       return;
     }
@@ -228,22 +231,25 @@ export default function PCLoginPage() {
             {showHints && (
               <div className="mt-2 bg-white border border-[#e5e7eb] rounded-lg p-1.5 space-y-0.5 max-h-64 overflow-y-auto">
                 {/* 区域管理员 */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setUsername(REGION_ADMIN_USERNAME);
-                    setPassword(REGION_ADMIN_PASSWORD);
-                    setError("");
-                  }}
-                  className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
-                >
-                  <div className="text-xs font-medium text-[#0f172a]">
-                    区域管理员
-                  </div>
-                  <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
-                    {REGION_ADMIN_USERNAME} / {REGION_ADMIN_PASSWORD}
-                  </div>
-                </button>
+                {regionAdminDemo && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUsername(regionAdminDemo.username);
+                      setPassword(regionAdminDemo.password);
+                      setError("");
+                    }}
+                    className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
+                  >
+                    <div className="text-xs font-medium text-[#0f172a]">
+                      区域管理员
+                      <span className="text-[#94a3b8] font-normal ml-1">· {regionAdminDemo.displayName}</span>
+                    </div>
+                    <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
+                      {regionAdminDemo.username} / {regionAdminDemo.password}
+                    </div>
+                  </button>
+                )}
                 {/* 摸排账号列表 */}
                 {hints.map((a) => (
                   <button

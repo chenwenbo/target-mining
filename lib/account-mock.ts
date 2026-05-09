@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Papa from "papaparse";
 import type { Visitor } from "./types";
+import { getTenants, saveTenants } from "./ops-mock";
 
 // ─── 类型 ────────────────────────────────────────────────────
 export type RoleType = "region_admin" | "street_admin";
@@ -23,20 +24,8 @@ export interface CurrentPCUser {
   displayName: string;
   dept: string;
   username: string | null;
+  tenantId?: string;      // 仅 region_admin 登录后携带
 }
-
-// ─── 区域管理员种子身份（固定）─────────────────────────────
-export const REGION_ADMIN_SEED: CurrentPCUser = {
-  role: "region_admin",
-  street: null,
-  displayName: "李明",
-  dept: "科创局·高新处",
-  username: "admin",
-};
-
-export const REGION_ADMIN_USERNAME = "admin";
-export const REGION_ADMIN_PASSWORD = "admin123";
-const REGION_ADMIN_PWD_OVERRIDE_KEY = "pc_region_admin_pwd";
 
 export const REGION_LABEL = "武汉市·东西湖区";
 
@@ -145,16 +134,31 @@ export function authenticateAccount(username: string, password: string): SurveyA
   return match ?? null;
 }
 
-function getRegionAdminPassword(): string {
-  if (typeof window === "undefined") return REGION_ADMIN_PASSWORD;
-  return localStorage.getItem(REGION_ADMIN_PWD_OVERRIDE_KEY) ?? REGION_ADMIN_PASSWORD;
+export function authenticateRegionAdmin(username: string, password: string): CurrentPCUser | null {
+  const u = username.trim();
+  const p = password.trim();
+  if (!u || !p) return null;
+  const tenant = getTenants().find(
+    (t) => t.adminUsername === u && t.adminPassword === p
+      && t.enabled && t.status !== "expired" && t.status !== "disabled",
+  );
+  if (!tenant) return null;
+  return {
+    role: "region_admin",
+    street: null,
+    displayName: tenant.adminDisplayName,
+    dept: tenant.adminDept,
+    username: tenant.adminUsername,
+    tenantId: tenant.id,
+  };
 }
 
-export function authenticateRegionAdmin(username: string, password: string): CurrentPCUser | null {
-  if (username.trim() === REGION_ADMIN_USERNAME && password.trim() === getRegionAdminPassword()) {
-    return REGION_ADMIN_SEED;
-  }
-  return null;
+export function getRegionAdminDemoCredentials(): { username: string; password: string; displayName: string } | null {
+  const demo = getTenants().find(
+    (t) => t.enabled && (t.status === "active" || t.status === "trial"),
+  );
+  if (!demo) return null;
+  return { username: demo.adminUsername, password: demo.adminPassword, displayName: demo.adminDisplayName };
 }
 
 // ─── 身份转换 ────────────────────────────────────────────────
@@ -188,8 +192,10 @@ export function getStoredPCUser(): CurrentPCUser | null {
   }
 }
 
+const EMPTY_PC_USER: CurrentPCUser = { role: "region_admin", street: null, displayName: "", dept: "", username: null };
+
 export function getCurrentPCUser(): CurrentPCUser {
-  return getStoredPCUser() ?? REGION_ADMIN_SEED;
+  return getStoredPCUser() ?? EMPTY_PC_USER;
 }
 
 export function setCurrentPCUser(user: CurrentPCUser): void {
@@ -200,14 +206,36 @@ export function logoutPCUser(): void {
   localStorage.removeItem(CURRENT_USER_KEY);
 }
 
+// ─── region_admin 专项存储（供 UserSwitcher 切换回来用）──────
+const REGION_ADMIN_USER_KEY = "pc_region_admin_user";
+
+export function setRegionAdminUser(user: CurrentPCUser): void {
+  localStorage.setItem(REGION_ADMIN_USER_KEY, JSON.stringify(user));
+}
+
+export function getRegionAdminUser(): CurrentPCUser | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(REGION_ADMIN_USER_KEY);
+    return raw ? (JSON.parse(raw) as CurrentPCUser) : null;
+  } catch {
+    return null;
+  }
+}
+
 // ─── 密码修改 ────────────────────────────────────────────────
 export type ChangePasswordResult = "ok" | "wrong_old" | "same" | "error";
 
 export function changeRegionAdminPassword(oldPwd: string, newPwd: string): ChangePasswordResult {
-  const current = getRegionAdminPassword();
-  if (oldPwd.trim() !== current) return "wrong_old";
-  if (newPwd.trim() === current) return "same";
-  localStorage.setItem(REGION_ADMIN_PWD_OVERRIDE_KEY, newPwd.trim());
+  const currentUser = getStoredPCUser();
+  if (!currentUser?.tenantId) return "error";
+  const tenants = getTenants();
+  const idx = tenants.findIndex((t) => t.id === currentUser.tenantId);
+  if (idx < 0) return "error";
+  if (tenants[idx].adminPassword !== oldPwd.trim()) return "wrong_old";
+  if (newPwd.trim() === oldPwd.trim()) return "same";
+  tenants[idx] = { ...tenants[idx], adminPassword: newPwd.trim() };
+  saveTenants(tenants);
   return "ok";
 }
 
@@ -231,7 +259,7 @@ export const changeStreetAdminPassword = changeSurveyAccountPassword;
 
 // ─── 客户端 hooks ────────────────────────────────────────────
 export function useCurrentPCUser(): { user: CurrentPCUser; mounted: boolean } {
-  const [user, setUser] = useState<CurrentPCUser>(REGION_ADMIN_SEED);
+  const [user, setUser] = useState<CurrentPCUser>(EMPTY_PC_USER);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

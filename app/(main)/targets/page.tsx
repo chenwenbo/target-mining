@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { SlidersHorizontal, Download, Send, Search, X, Building2 } from "lucide-react";
+import { SlidersHorizontal, Download, Send, Search, X, Building2, AlertTriangle } from "lucide-react";
 import { getPotentialTargets } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
@@ -415,9 +415,9 @@ function TargetsPageContent() {
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">企业名称</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">领域</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 园区</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">成立年限</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">专利总数</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">参保</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">成立年限</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-36">知识产权</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-28">参保/研发</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">注册资本</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">申报类型</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">申报意愿</th>
@@ -443,8 +443,18 @@ function TargetsPageContent() {
                     </td>
                     <td className="px-3 py-3">
                       <Link href={`/targets/${c.id}`} className="block">
-                        <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors">
+                        <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors flex items-center gap-1.5 flex-wrap">
                           {c.name}
+                          {c.inSMEDatabase && (
+                            <span className="inline-block px-1.5 py-0.5 text-[10px] bg-teal-50 text-teal-700 border border-teal-200 rounded font-medium leading-none flex-shrink-0">科小</span>
+                          )}
+                          {(c.risk.abnormal || c.risk.penalty) && (
+                            <AlertTriangle
+                              size={12}
+                              className="text-amber-500 flex-shrink-0"
+                              title={[c.risk.abnormal && "经营异常", c.risk.penalty && "行政处罚"].filter(Boolean).join("、")}
+                            />
+                          )}
                         </div>
                         <div className="text-[11px] text-[#94a3b8] mt-0.5">{c.industry}</div>
                       </Link>
@@ -455,14 +465,38 @@ function TargetsPageContent() {
                       </span>
                     </td>
                     <td className="px-3 py-3 text-[#475569] text-xs">{c.street}</td>
-                    <td className="px-3 py-3 text-[#475569] text-xs">{getAgeRange(c.establishedAt)}</td>
-                    <td className="px-3 py-3 tabular-nums text-[#475569]">
-                      {totalPatents}
-                      {c.patents.invention > 0 && (
-                        <span className="ml-1 text-[10px] text-blue-500">发{c.patents.invention}</span>
+                    <td className="px-3 py-3 text-xs">
+                      <div className="text-[#475569]">{getAgeRange(c.establishedAt)}</div>
+                      <div className="text-[11px] text-[#94a3b8] mt-0.5">{new Date(c.establishedAt).getFullYear()}年成立</div>
+                    </td>
+                    <td className="px-3 py-3 text-xs text-[#475569]">
+                      <div className="tabular-nums font-medium text-[#0f172a]">
+                        {totalPatents} 件
+                      </div>
+                      <div className="mt-0.5 text-[11px] text-[#94a3b8]">
+                        <span>发</span>
+                        <span className="tabular-nums ml-0.5">{c.patents.invention}</span>
+                        <span className="mx-1 text-[#e2e8f0]">/</span>
+                        <span>实</span>
+                        <span className="tabular-nums ml-0.5">{c.patents.utility}</span>
+                        <span className="mx-1 text-[#e2e8f0]">/</span>
+                        <span>软著</span>
+                        <span className="tabular-nums ml-0.5">{c.software}</span>
+                      </div>
+                    </td>
+                    <td className="px-3 py-3 text-xs tabular-nums text-[#475569]">
+                      {c.employees}/{c.rdEmployees > 0 ? (
+                        <span className={cn(
+                          "ml-0",
+                          (c.rdEmployees / c.employees) >= 0.1 ? "text-emerald-600" : "text-amber-500"
+                        )}>
+                          {c.rdEmployees}
+                          <span className="ml-0.5 text-[11px]">({Math.round(c.rdEmployees / c.employees * 100)}%)</span>
+                        </span>
+                      ) : (
+                        <span className="text-[#cbd5e1]">0</span>
                       )}
                     </td>
-                    <td className="px-3 py-3 tabular-nums text-[#475569]">{c.employees}</td>
                     <td className="px-3 py-3 tabular-nums text-[#475569] text-xs">{c.registeredCapital}万</td>
                     <td className="px-3 py-3">
                       <span className={cn(

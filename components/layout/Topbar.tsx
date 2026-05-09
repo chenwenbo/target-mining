@@ -4,16 +4,27 @@ import { useRouter } from "next/navigation";
 import { ChevronDown, LogOut, UserCircle } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
-  REGION_ADMIN_SEED,
   logoutPCUser,
   useCurrentPCUser,
 } from "@/lib/account-mock";
+import { getTenantById } from "@/lib/ops-mock";
 
 export default function Topbar() {
   const { user, mounted } = useCurrentPCUser();
   const [open, setOpen] = useState(false);
+  const [tenantName, setTenantName] = useState("");
   const wrapRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!mounted) return;
+    if (user.tenantId) {
+      const tenant = getTenantById(user.tenantId);
+      setTenantName(tenant?.name ?? "");
+    } else {
+      setTenantName("");
+    }
+  }, [mounted, user.tenantId]);
 
   useEffect(() => {
     if (!open) return;
@@ -31,7 +42,7 @@ export default function Topbar() {
     };
   }, [open]);
 
-  const display = mounted ? user : REGION_ADMIN_SEED;
+  const display = mounted ? user : { role: "region_admin" as const, street: null, displayName: "", dept: "", username: null };
   const initial = display.displayName.slice(0, 1);
   const isRegion = display.role === "region_admin";
 
@@ -49,12 +60,13 @@ export default function Topbar() {
   return (
     <header className="h-14 flex-shrink-0 bg-white border-b border-[#e5e7eb] px-6 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f7f8fa] border border-[#e5e7eb] rounded-md text-sm text-[#475569] hover:bg-[#f1f5f9] transition-colors">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-          武汉市 · 东西湖区
-          <ChevronDown size={12} />
-        </button>
-        <span className="text-[12px] text-[#94a3b8]">数据更新于 14:28</span>
+        {tenantName && (
+          <button className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f7f8fa] border border-[#e5e7eb] rounded-md text-sm text-[#475569] hover:bg-[#f1f5f9] transition-colors whitespace-nowrap">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            {tenantName}
+            <ChevronDown size={12} />
+          </button>
+        )}
       </div>
 
       {/* 用户头像入口 */}

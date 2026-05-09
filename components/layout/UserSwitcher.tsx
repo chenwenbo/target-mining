@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, LogOut } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
-  REGION_ADMIN_SEED,
   buildSurveyAdminUser,
+  getRegionAdminUser,
   getSurveyAccounts,
   logoutPCUser,
   setCurrentPCUser,
@@ -21,11 +21,13 @@ export default function UserSwitcher({ collapsed }: Props) {
   const { user, mounted } = useCurrentPCUser();
   const [open, setOpen] = useState(false);
   const [accounts, setAccounts] = useState<SurveyAccount[]>([]);
+  const [regionAdmin, setRegionAdmin] = useState<CurrentPCUser | null>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!open) return;
     setAccounts(getSurveyAccounts());
+    setRegionAdmin(getRegionAdminUser());
     function onClick(e: MouseEvent) {
       if (!wrapRef.current?.contains(e.target as Node)) setOpen(false);
     }
@@ -53,7 +55,7 @@ export default function UserSwitcher({ collapsed }: Props) {
     window.location.href = "/login";
   }
 
-  const display = mounted ? user : REGION_ADMIN_SEED;
+  const display = mounted ? user : { role: "region_admin" as const, street: null, displayName: "", dept: "", username: null };
   const initial = display.displayName.slice(0, 1);
   const usableStreetAccounts = accounts.filter((a) => a.enabled);
   const isCurrent = (target: CurrentPCUser) =>
@@ -111,24 +113,26 @@ export default function UserSwitcher({ collapsed }: Props) {
           </div>
 
           {/* 区域管理员 */}
-          <button
-            onClick={() => switchTo(REGION_ADMIN_SEED)}
-            className={cn(
-              "w-full flex items-center gap-2.5 px-3 py-2.5 text-left hover:bg-[#f7f8fa] transition-colors",
-              isCurrent(REGION_ADMIN_SEED) && "bg-blue-50/50"
-            )}
-          >
-            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center text-white text-[11px] font-semibold flex-shrink-0">
-              {REGION_ADMIN_SEED.displayName.slice(0, 1)}
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-xs font-medium text-[#0f172a] truncate">
-                {REGION_ADMIN_SEED.displayName}
+          {regionAdmin && (
+            <button
+              onClick={() => switchTo(regionAdmin)}
+              className={cn(
+                "w-full flex items-center gap-2.5 px-3 py-2.5 text-left hover:bg-[#f7f8fa] transition-colors",
+                isCurrent(regionAdmin) && "bg-blue-50/50"
+              )}
+            >
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center text-white text-[11px] font-semibold flex-shrink-0">
+                {regionAdmin.displayName.slice(0, 1)}
               </div>
-              <div className="text-[11px] text-[#94a3b8] truncate">区域管理员 · {REGION_ADMIN_SEED.dept}</div>
-            </div>
-            {isCurrent(REGION_ADMIN_SEED) && <Check size={13} className="text-blue-600 flex-shrink-0" />}
-          </button>
+              <div className="flex-1 min-w-0">
+                <div className="text-xs font-medium text-[#0f172a] truncate">
+                  {regionAdmin.displayName}
+                </div>
+                <div className="text-[11px] text-[#94a3b8] truncate">区域管理员 · {regionAdmin.dept}</div>
+              </div>
+              {isCurrent(regionAdmin) && <Check size={13} className="text-blue-600 flex-shrink-0" />}
+            </button>
+          )}
 
           {/* 摸排账号列表 */}
           {usableStreetAccounts.length > 0 ? (

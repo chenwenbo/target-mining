@@ -17,7 +17,7 @@ const CHIPS: Chip[] = [
   },
   {
     icon: Search,
-    label: "企业尽调",
+    label: "企业分析",
     prompt: "请对标的池中的重点企业进行尽职调查分析，包括技术实力、合规状况和申报准备情况。",
   },
   {
