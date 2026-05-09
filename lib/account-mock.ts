@@ -153,12 +153,22 @@ export function authenticateRegionAdmin(username: string, password: string): Cur
   };
 }
 
-export function getRegionAdminDemoCredentials(): { username: string; password: string; displayName: string } | null {
-  const demo = getTenants().find(
-    (t) => t.enabled && (t.status === "active" || t.status === "trial"),
-  );
-  if (!demo) return null;
-  return { username: demo.adminUsername, password: demo.adminPassword, displayName: demo.adminDisplayName };
+export interface RegionAdminDemo {
+  username: string;
+  password: string;
+  displayName: string;
+  tenantName: string;
+}
+
+export function getRegionAdminDemoList(): RegionAdminDemo[] {
+  return getTenants()
+    .filter((t) => t.enabled && (t.status === "active" || t.status === "trial"))
+    .map((t) => ({
+      username: t.adminUsername,
+      password: t.adminPassword,
+      displayName: t.adminDisplayName,
+      tenantName: t.name,
+    }));
 }
 
 // ─── 身份转换 ────────────────────────────────────────────────

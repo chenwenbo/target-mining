@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 import { cn } from "@/lib/cn";
+import { useLayoutStore } from "@/lib/layout-store";
 import {
   LayoutDashboard,
   Target,
@@ -47,7 +47,8 @@ function navForRole(role: RoleType): NavItem[] {
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
+  const collapsed = useLayoutStore((s) => s.sidebarCollapsed);
+  const toggleSidebar = useLayoutStore((s) => s.toggleSidebar);
   const { user, mounted } = useCurrentPCUser();
   // 首屏 SSR 渲染区域管理员菜单，挂载后才切到真实角色，避免 hydration mismatch
   const items = navForRole(mounted ? user.role : "region_admin");
@@ -71,7 +72,7 @@ export default function Sidebar() {
           </div>
         )}
         <button
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={toggleSidebar}
           className={cn(
             "absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white border border-[#e5e7eb] flex items-center justify-center text-[#94a3b8] hover:text-[#475569] hover:border-[#cbd5e1] transition-colors shadow-sm z-10"
           )}

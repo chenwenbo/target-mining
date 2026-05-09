@@ -1,17 +1,20 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, LogOut, UserCircle } from "lucide-react";
+import { ChevronDown, LogOut, Sparkles, UserCircle } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
   logoutPCUser,
   useCurrentPCUser,
 } from "@/lib/account-mock";
 import { getTenantById } from "@/lib/ops-mock";
+import { useLayoutStore } from "@/lib/layout-store";
 
 export default function Topbar() {
   const { user, mounted } = useCurrentPCUser();
   const [open, setOpen] = useState(false);
+  const toggleAgentPanel = useLayoutStore((s) => s.toggleAgentPanel);
+  const agentPanelOpen = useLayoutStore((s) => s.agentPanelOpen);
   const [tenantName, setTenantName] = useState("");
   const wrapRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -69,8 +72,25 @@ export default function Topbar() {
         )}
       </div>
 
-      {/* 用户头像入口 */}
-      <div ref={wrapRef} className="relative">
+      {/* 右侧操作区 */}
+      <div className="flex items-center gap-1">
+        {/* 智能体触发按钮 */}
+        <button
+          type="button"
+          onClick={toggleAgentPanel}
+          title={agentPanelOpen ? "关闭智能体" : "打开智能体"}
+          className={cn(
+            "w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
+            agentPanelOpen
+              ? "bg-blue-50 text-blue-600 hover:bg-blue-100"
+              : "text-[#94a3b8] hover:bg-[#f7f8fa] hover:text-[#475569]"
+          )}
+        >
+          <Sparkles size={16} />
+        </button>
+
+        {/* 用户头像入口 */}
+        <div ref={wrapRef} className="relative">
         <button
           onClick={() => setOpen((v) => !v)}
           className="flex items-center gap-2 px-2 py-1.5 rounded-lg hover:bg-[#f7f8fa] transition-colors"
@@ -135,6 +155,7 @@ export default function Topbar() {
             </button>
           </div>
         )}
+        </div>
       </div>
     </header>
   );
