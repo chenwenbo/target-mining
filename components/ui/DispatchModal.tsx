@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Send, X, CheckCircle2, Users } from "lucide-react";
-import { getSurveyAccounts, surveyAccountToVisitor, type SurveyAccount } from "@/lib/account-mock";
+import { getScopedSurveyAccounts, surveyAccountToVisitor, type SurveyAccount } from "@/lib/account-mock";
 import type { Visitor } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
@@ -25,7 +25,7 @@ export default function DispatchModal({ targets, onClose, onConfirm }: Props) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
-    setAccounts(getSurveyAccounts());
+    setAccounts(getScopedSurveyAccounts());
   }, []);
 
   const candidates = useMemo(() => accounts.filter((a) => a.enabled), [accounts]);
