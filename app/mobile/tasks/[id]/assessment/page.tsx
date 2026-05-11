@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 import { getAllTasks, getCompanyById } from "@/lib/mock-data";
-import { getCurrentVisitor, getDispatchedTasks } from "@/lib/mobile-mock";
+import { getCurrentVisitor, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import {
   saveAssessmentDraft,
   getAssessmentDraft,
@@ -41,7 +41,7 @@ export default function MobileAssessmentPage() {
     if (draft) setAnswers(draft);
   }, [id, router]);
 
-  const task = [...getAllTasks(), ...getDispatchedTasks()].find((t) => t.id === id);
+  const task = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()].find((t) => t.id === id);
   const company = task ? getCompanyById(task.companyId) : null;
 
   if (!task || !company) return null;

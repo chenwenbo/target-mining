@@ -11,7 +11,7 @@ import {
   RotateCw,
 } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
-import { getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords } from "@/lib/mobile-mock";
+import { getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Company, Street, Task, TaskStatus, VisitRecord } from "@/lib/types";
 import {
   computeKPI,
@@ -35,14 +35,21 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
   const [version, setVersion] = useState(0);
   const [records, setRecords] = useState<VisitRecord[]>([]);
   const [taskStatusOverrides, setTaskStatusOverrides] = useState<Record<string, TaskStatus>>({});
+  const [allTasks, setAllTasks] = useState<Task[]>(tasks);
   const lockedStreet: Street | null = null;
 
   useEffect(() => {
     initSeedVisitRecords();
     setRecords(getVisitRecords());
     setTaskStatusOverrides(getTaskStatusOverrides());
+    // 合并服务端静态种子 + 客户端真实派发任务（去重）
+    const dispatched = getDispatchedTasks();
+    const custom = getCustomTasks();
+    const byId = new Map<string, Task>();
+    for (const t of [...tasks, ...dispatched, ...custom]) byId.set(t.id, t);
+    setAllTasks(Array.from(byId.values()));
     setMounted(true);
-  }, [version]);
+  }, [version, tasks]);
 
   // 按街道范围裁剪原始输入；街道管理员只看本街道企业、任务、记录
   const scopedCompanies = useMemo(
@@ -50,8 +57,8 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
     [companies, lockedStreet],
   );
   const scopedTasks = useMemo(
-    () => (lockedStreet ? tasks.filter((t) => t.street === lockedStreet) : tasks),
-    [tasks, lockedStreet],
+    () => (lockedStreet ? allTasks.filter((t) => t.street === lockedStreet) : allTasks),
+    [allTasks, lockedStreet],
   );
   const scopedRecords = useMemo(() => {
     if (!lockedStreet) return records;

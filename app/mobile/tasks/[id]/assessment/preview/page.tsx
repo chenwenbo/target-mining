@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { getAllTasks } from "@/lib/mock-data";
-import { getDispatchedTasks } from "@/lib/mobile-mock";
+import { getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import {
   generateToken,
   saveAssessmentRecord,
@@ -39,7 +39,7 @@ export default function AssessmentPreviewPage() {
     setVisitorName(parsed.visitorName);
   }, [id, router]);
 
-  const task = [...getAllTasks(), ...getDispatchedTasks()].find((t) => t.id === id);
+  const task = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()].find((t) => t.id === id);
   if (!task) return null;
 
   function handleSubmit() {

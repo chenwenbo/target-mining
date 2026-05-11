@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { getAllTasks } from "@/lib/mock-data";
-import { saveVisitRecord, setTaskStatus, getDispatchedTasks } from "@/lib/mobile-mock";
+import { saveVisitRecord, setTaskStatus, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { VisitRecord } from "@/lib/types";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
 import {
@@ -28,7 +28,7 @@ export default function VisitPreviewPage() {
 
   if (!data) return null;
   const { form, visitorName, visitorId } = data;
-  const task = [...getAllTasks(), ...getDispatchedTasks()].find((t) => t.id === id);
+  const task = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()].find((t) => t.id === id);
   if (!task) return null;
 
   const w = WILLINGNESS_META[form.willingness as keyof typeof WILLINGNESS_META] ?? { label: "未填写", badge: "text-gray-400 bg-gray-50" };

@@ -6,6 +6,7 @@
 
 import { getAllCompanies, getPotentialTargets, getDashboardKPI, getAllTasks } from "./mock-data";
 import { getCertifiedCompanies } from "./renewal-data";
+import { getDispatchedTasks, getCustomTasks } from "./mobile-mock";
 import type { Company } from "./types";
 
 // ─── Public types ────────────────────────────────────────────────────────────
@@ -117,7 +118,9 @@ export async function askAgent(question: string, questionId?: string): Promise<A
   const companies = getAllCompanies();
   const targets = getPotentialTargets();
   const certified = getCertifiedCompanies();
-  const tasks = getAllTasks();
+  const allTasksById = new Map<string, ReturnType<typeof getAllTasks>[0]>();
+  for (const t of [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()]) allTasksById.set(t.id, t);
+  const tasks = Array.from(allTasksById.values());
   const kpi = getDashboardKPI();
 
   const qid = questionId ?? "default";

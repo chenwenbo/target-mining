@@ -1,4 +1,5 @@
 import { getPotentialTargets, getAllTasks, getDashboardKPI } from "../mock-data";
+import { getDispatchedTasks, getCustomTasks } from "../mobile-mock";
 
 export type ReportKey = "weekly_discovery" | "task_execution";
 
@@ -78,7 +79,9 @@ ${streetRows}
 }
 
 function buildTaskExecutionReport(): AgentReport {
-  const tasks = getAllTasks();
+  const taskById = new Map<string, ReturnType<typeof getAllTasks>[0]>();
+  for (const t of [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()]) taskById.set(t.id, t);
+  const tasks = Array.from(taskById.values());
   const done = tasks.filter((t) => t.status === "done").length;
   const inProgress = tasks.filter((t) => t.status === "in_progress").length;
   const pending = tasks.filter((t) => t.status === "pending").length;

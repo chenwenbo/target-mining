@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCurrentVisitor, clearCurrentVisitor, getVisitRecords, getTaskStatusOverrides, getDispatchedTasks } from "@/lib/mobile-mock";
+import { getCurrentVisitor, clearCurrentVisitor, getVisitRecords, getTaskStatusOverrides, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import { getAllTasks } from "@/lib/mock-data";
 import type { Visitor, TaskStatus } from "@/lib/types";
 import { MapPin, Building2, LogOut, ChevronRight, ClipboardList } from "lucide-react";
@@ -20,7 +20,7 @@ export default function ProfilePage() {
   if (!visitor) return null;
 
   const overrides = getTaskStatusOverrides();
-  const myTasks = [...getAllTasks(), ...getDispatchedTasks()]
+  const myTasks = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()]
     .filter((t) => (visitor.street ? t.street === visitor.street : t.assignee === visitor.name))
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
   const myRecords = getVisitRecords().filter((r) => r.visitorId === visitor.id);

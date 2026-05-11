@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle2, ChevronRight, ArrowLeft } from "lucide-react";
 import { getAllTasks } from "@/lib/mock-data";
-import { getDispatchedTasks } from "@/lib/mobile-mock";
+import { getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import { getAssessmentRecords } from "@/lib/assessment-store";
 import { DIMENSION_LABELS } from "@/lib/assessment";
 import type { AssessmentRecord, AssessmentDimension } from "@/lib/types";
@@ -30,7 +30,7 @@ export default function AssessmentSuccessPage() {
   const [record, setRecord] = useState<AssessmentRecord | null>(null);
 
   useEffect(() => {
-    const task = [...getAllTasks(), ...getDispatchedTasks()].find((t) => t.id === id);
+    const task = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()].find((t) => t.id === id);
     if (!task) return;
     const records = getAssessmentRecords().filter(
       (r) => r.companyId === task.companyId && r.status === "completed",
@@ -45,7 +45,7 @@ export default function AssessmentSuccessPage() {
     }
   }, [id]);
 
-  const allTasks = [...getAllTasks(), ...getDispatchedTasks()];
+  const allTasks = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()];
   const task = allTasks.find((t) => t.id === id);
   const allTasksByAssignee = task
     ? allTasks.filter((t) => t.assignee === task.assignee && t.id !== id)

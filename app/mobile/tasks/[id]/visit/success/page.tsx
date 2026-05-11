@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { getAllTasks } from "@/lib/mock-data";
-import { getVisitRecordsByTask, getDispatchedTasks } from "@/lib/mobile-mock";
+import { getVisitRecordsByTask, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { VisitRecord } from "@/lib/types";
 import { CheckCircle2, ChevronRight, ArrowLeft } from "lucide-react";
 
@@ -28,7 +28,7 @@ export default function VisitSuccessPage() {
     }
   }, [id]);
 
-  const allTasks = [...getAllTasks(), ...getDispatchedTasks()];
+  const allTasks = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()];
   const task = allTasks.find((t) => t.id === id);
   if (!task) return null;
 
