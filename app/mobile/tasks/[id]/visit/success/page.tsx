@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { getAllTasks } from "@/lib/mock-data";
-import { getVisitRecordsByTask } from "@/lib/mobile-mock";
+import { getVisitRecordsByTask, getDispatchedTasks } from "@/lib/mobile-mock";
 import type { VisitRecord } from "@/lib/types";
 import { CheckCircle2, ChevronRight, ArrowLeft } from "lucide-react";
 
@@ -28,13 +28,14 @@ export default function VisitSuccessPage() {
     }
   }, [id]);
 
-  const task = getAllTasks().find((t) => t.id === id);
+  const allTasks = [...getAllTasks(), ...getDispatchedTasks()];
+  const task = allTasks.find((t) => t.id === id);
   if (!task) return null;
 
   const w = record ? (WILLINGNESS_MAP[record.willingness] ?? { label: "-", color: "text-gray-400 bg-gray-50 border-gray-200" }) : null;
 
   // 下一条待走访任务（用于快捷跳转）
-  const allTasksByAssignee = getAllTasks().filter((t) => t.assignee === task.assignee && t.id !== id);
+  const allTasksByAssignee = allTasks.filter((t) => t.assignee === task.assignee && t.id !== id);
   const nextTask = allTasksByAssignee.find((t) => t.status === "pending");
 
   return (

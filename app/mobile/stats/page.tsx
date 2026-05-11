@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getAllTasks } from "@/lib/mock-data";
-import { getCurrentVisitor, getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords } from "@/lib/mobile-mock";
+import { getCurrentVisitor, getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords, getDispatchedTasks } from "@/lib/mobile-mock";
 import type { Visitor, TaskStatus, VisitRecord } from "@/lib/types";
 import { BarChart2, Users, CheckCircle2, TrendingUp, Clock } from "lucide-react";
 
@@ -30,7 +30,7 @@ interface StatsState {
 
 function computeStats(visitorId: string, visitorName: string): StatsState {
   const overrides = getTaskStatusOverrides();
-  const myTasks = getAllTasks()
+  const myTasks = [...getAllTasks(), ...getDispatchedTasks()]
     .filter((t) => t.assignee === visitorName)
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
   const allRecords = getVisitRecords().filter((r) => r.visitorId === visitorId);
