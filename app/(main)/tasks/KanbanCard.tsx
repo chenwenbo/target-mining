@@ -10,16 +10,26 @@ type Props = {
   task: Task;
   company?: Company;
   latestRecord?: VisitRecord;
+  onDragStart?: (taskId: string) => void;
+  onDragEnd?: () => void;
 };
 
-export default function KanbanCard({ stage, task, company, latestRecord }: Props) {
+export default function KanbanCard({ stage, task, company, latestRecord, onDragStart, onDragEnd }: Props) {
   const wMeta = stage === "done" && latestRecord ? WILLINGNESS_META[latestRecord.willingness] : null;
   const href =
     stage === "done"
       ? `/targets/${task.companyId}?tab=企业摸排`
       : `/targets/${task.companyId}`;
 
+  const draggable = stage === "dispatched" && !!onDragStart;
+
   return (
+    <div
+      draggable={draggable}
+      onDragStart={draggable ? (e) => { e.dataTransfer.effectAllowed = "move"; onDragStart!(task.id); } : undefined}
+      onDragEnd={draggable ? onDragEnd : undefined}
+      className={draggable ? "cursor-grab active:cursor-grabbing active:opacity-60" : ""}
+    >
     <Link
       href={href}
       className="block bg-white rounded-lg border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] hover:shadow-[0_2px_8px_0_rgba(15,23,42,0.08)] hover:border-[#cbd5e1] transition-all p-3 space-y-2"
@@ -59,5 +69,6 @@ export default function KanbanCard({ stage, task, company, latestRecord }: Props
         </span>
       )}
     </Link>
+    </div>
   );
 }

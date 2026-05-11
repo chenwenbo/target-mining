@@ -8,6 +8,8 @@ import {
   getTaskStatusOverrides,
   getCustomTasks,
   addCustomTask,
+  removeDispatchedTask,
+  removeCustomTask,
   getDraft,
   MOCK_VISITORS,
 } from "@/lib/mobile-mock";
@@ -37,10 +39,12 @@ export default function TasksPage() {
   const [streetFilter, setStreetFilter] = useState<string>("all");
   const [assigneeFilter, setAssigneeFilter] = useState<string>("all");
   const [willingnessFilter, setWillingnessFilter] = useState<WillingnessLevel | "all">("all");
-  // 拖拽派发
+  // 拖拽派发（标的池 → 已派发）
   const [draggingCompanyId, setDraggingCompanyId] = useState<string | null>(null);
   const [pendingCompanyId, setPendingCompanyId] = useState<string | null>(null);
   const [selectedAssignee, setSelectedAssignee] = useState<string>("");
+  // 拖拽移回标的池（已派发 → 标的池）
+  const [draggingTaskId, setDraggingTaskId] = useState<string | null>(null);
 
   useEffect(() => {
     if (lockedStreet && streetFilter !== lockedStreet) setStreetFilter(lockedStreet);
@@ -133,6 +137,14 @@ export default function TasksPage() {
     setSelectedAssignee(MOCK_VISITORS[0]?.name ?? "");
     setPendingCompanyId(draggingCompanyId);
     setDraggingCompanyId(null);
+  }
+
+  function handleDropToPool() {
+    if (!draggingTaskId) return;
+    removeDispatchedTask(draggingTaskId);
+    removeCustomTask(draggingTaskId);
+    setDraggingTaskId(null);
+    setVersion((v) => v + 1);
   }
 
   function confirmDispatch() {
@@ -259,6 +271,8 @@ export default function TasksPage() {
           companies={allCompanies}
           onDragStart={setDraggingCompanyId}
           onDragEnd={() => setDraggingCompanyId(null)}
+          isDraggingTask={!!draggingTaskId}
+          onTaskDrop={handleDropToPool}
         />
 
         {/* 已派发待摸排（dispatched + investigating） */}
@@ -270,6 +284,8 @@ export default function TasksPage() {
           isDropTarget
           isDragging={!!draggingCompanyId}
           onDrop={handleDropToDispatched}
+          onCardDragStart={setDraggingTaskId}
+          onCardDragEnd={() => setDraggingTaskId(null)}
         />
 
         {/* 已完成 */}

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { Company } from "@/lib/types";
+import { cn } from "@/lib/cn";
 
 const PAGE_SIZE = 20;
 
@@ -10,15 +11,35 @@ type Props = {
   companies: Company[];
   onDragStart: (companyId: string) => void;
   onDragEnd: () => void;
+  isDraggingTask?: boolean;
+  onTaskDrop?: () => void;
 };
 
-export default function KanbanPoolColumn({ companies, onDragStart, onDragEnd }: Props) {
+export default function KanbanPoolColumn({ companies, onDragStart, onDragEnd, isDraggingTask, onTaskDrop }: Props) {
   const [limit, setLimit] = useState(PAGE_SIZE);
+  const [isDragOver, setIsDragOver] = useState(false);
   const visible = companies.slice(0, limit);
   const hasMore = limit < companies.length;
 
   return (
-    <div className="flex flex-col bg-[#f1f5f9] rounded-xl border border-[#e5e7eb] flex-1 min-w-[260px] overflow-hidden">
+    <div
+      onDragOver={(e) => {
+        if (!isDraggingTask) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+        setIsDragOver(true);
+      }}
+      onDragLeave={() => setIsDragOver(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setIsDragOver(false);
+        if (isDraggingTask) onTaskDrop?.();
+      }}
+      className={cn(
+        "flex flex-col rounded-xl border flex-1 min-w-[260px] overflow-hidden transition-colors",
+        isDragOver ? "bg-slate-100 border-slate-400 ring-2 ring-slate-300" : "bg-[#f1f5f9] border-[#e5e7eb]",
+      )}
+    >
       {/* 列头 */}
       <div className="shrink-0 px-4 py-3 border-b border-[#e5e7eb] bg-white rounded-t-xl">
         <div className="flex items-center justify-between">
@@ -34,6 +55,11 @@ export default function KanbanPoolColumn({ companies, onDragStart, onDragEnd }: 
 
       {/* 卡片列表 */}
       <div className="flex-1 overflow-y-auto p-3 space-y-2">
+        {isDragOver && (
+          <div className="h-14 rounded-lg border-2 border-dashed border-slate-400 flex items-center justify-center text-xs text-slate-500 mb-1">
+            松开移回标的池
+          </div>
+        )}
         {visible.map((c) => (
           <div
             key={c.id}

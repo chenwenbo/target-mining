@@ -22,6 +22,8 @@ type Props = {
   isDropTarget?: boolean;
   isDragging?: boolean;
   onDrop?: () => void;
+  onCardDragStart?: (taskId: string) => void;
+  onCardDragEnd?: () => void;
 };
 
 export default function KanbanColumn({
@@ -32,6 +34,8 @@ export default function KanbanColumn({
   isDropTarget,
   isDragging,
   onDrop,
+  onCardDragStart,
+  onCardDragEnd,
 }: Props) {
   const meta = LIFECYCLE_META[stage];
   const displayLabel = label ?? meta.label;
@@ -90,6 +94,8 @@ export default function KanbanColumn({
               task={item.task}
               company={item.company}
               latestRecord={item.latest}
+              onDragStart={onCardDragStart}
+              onDragEnd={onCardDragEnd}
             />
           ))
         )}

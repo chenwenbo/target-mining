@@ -304,3 +304,13 @@ export function saveDispatchedTask(task: Task): void {
   tasks.push(task);
   localStorage.setItem(DISPATCHED_TASKS_KEY, JSON.stringify(tasks));
 }
+
+export function removeDispatchedTask(taskId: string): void {
+  const tasks = getDispatchedTasks().filter((t) => t.id !== taskId);
+  localStorage.setItem(DISPATCHED_TASKS_KEY, JSON.stringify(tasks));
+}
+
+export function removeCustomTask(taskId: string): void {
+  const tasks = getCustomTasks().filter((t) => t.id !== taskId);
+  localStorage.setItem(CUSTOM_TASKS_KEY, JSON.stringify(tasks));
+}
