@@ -95,7 +95,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
   {
     id: "t-whjkq",
     name: "武汉市·武汉经开区",
-    district: "武汉经济技术开发区",
+    district: "武汉经开区",
     province: "湖北省",
     city: "武汉市",
     enabled: true,
@@ -149,7 +149,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
   {
     id: "t-ycgxq",
     name: "宜昌市·高新区",
-    district: "宜昌高新技术产业开发区",
+    district: "宜昌高新区",
     province: "湖北省",
     city: "宜昌市",
     enabled: true,
@@ -176,7 +176,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
   {
     id: "t-xygxq",
     name: "襄阳市·高新区",
-    district: "襄阳高新技术产业开发区",
+    district: "高新区",
     province: "湖北省",
     city: "襄阳市",
     enabled: true,

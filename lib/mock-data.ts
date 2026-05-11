@@ -11,26 +11,67 @@ const rawCompanies: Company[] = require("../mock/companies.json");
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const rawTasks: Task[] = require("../mock/tasks.json");
 
+// ─── 数据权限过滤 ────────────────────────────────────────────
+// 注意：account-mock.ts 是 "use client"，不能直接 import 到本文件（部分调用方是 server component）。
+// 因此这里 inline 读取 localStorage，仅在浏览器环境生效；SSR 阶段返回全量（首屏后客户端会 re-render 收窄）。
+
+const CURRENT_USER_KEY = "pc_current_user";
+
+interface ScopeFromUser {
+  city: string;
+  district: string;
+}
+
+function readCurrentScope(): ScopeFromUser | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(CURRENT_USER_KEY);
+    if (!raw) return null;
+    const u = JSON.parse(raw) as { city?: string; district?: string };
+    if (u.city && u.district) return { city: u.city, district: u.district };
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function applyScope(list: Company[]): Company[] {
+  const scope = readCurrentScope();
+  if (!scope) return list;
+  return list.filter((c) => c.city === scope.city && c.district === scope.district);
+}
+
 // ─── Public accessors ───────────────────────────────────────────
 
 export function getAllCompanies(): Company[] {
-  return rawCompanies;
+  return applyScope(rawCompanies);
 }
 
 export function getPotentialTargets(): Company[] {
-  return rawCompanies.filter((c) => !c.alreadyCertified);
+  return applyScope(rawCompanies.filter((c) => !c.alreadyCertified));
 }
 
 export function getCertifiedBenchmarks(): Company[] {
-  return rawCompanies.filter((c) => c.alreadyCertified);
+  return applyScope(rawCompanies.filter((c) => c.alreadyCertified));
 }
 
 export function getCompanyById(id: string): Company | undefined {
-  return rawCompanies.find((c) => c.id === id);
+  // 单条详情查询：先匹配 id，再校验数据权限边界
+  const c = rawCompanies.find((c) => c.id === id);
+  if (!c) return undefined;
+  const scope = readCurrentScope();
+  if (scope && (c.city !== scope.city || c.district !== scope.district)) return undefined;
+  return c;
 }
 
 export function getAllTasks(): Task[] {
   return rawTasks;
+}
+
+// ─── 给 server-side（无窗口环境）使用的非过滤版本 ─────────────────
+// 仅供 SSR 初始化骨架使用，业务页面应使用上面的过滤版本
+export function getAllCompaniesUnscoped(): Company[] {
+  return rawCompanies;
 }
 
 // ─── KPI helpers ────────────────────────────────────────────────

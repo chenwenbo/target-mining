@@ -15,7 +15,6 @@ import {
   authenticateRegionAdmin,
   getRegionAdminDemoList,
   getStoredPCUser,
-  REGION_LABEL,
   setCurrentPCUser,
   setRegionAdminUser,
   type RegionAdminDemo,
@@ -121,7 +120,7 @@ export default function PCLoginPage() {
           </div>
         </div>
 
-        <div className="text-[11px] text-blue-200/70">{REGION_LABEL}</div>
+        <div className="text-[11px] text-blue-200/70">湖北省 · 多区县协同平台</div>
       </div>
 
       {/* 右侧表单区 */}

@@ -16,6 +16,9 @@ export interface SurveyAccount {
   password: string;     // 随机生成，可重置
   enabled: boolean;
   createdAt: string;    // ISO timestamp
+  tenantId?: string;    // 创建该账号的租户 id（数据权限继承）
+  city?: string;        // 数据权限·城市（继承自租户）
+  district?: string;    // 数据权限·区县（继承自租户）
 }
 
 export interface CurrentPCUser {
@@ -25,9 +28,29 @@ export interface CurrentPCUser {
   dept: string;
   username: string | null;
   tenantId?: string;      // 仅 region_admin 登录后携带
+  city?: string;          // 数据权限·城市，region_admin 登录后携带
+  district?: string;      // 数据权限·区县，region_admin 登录后携带
 }
 
+export interface DataScope {
+  city: string;
+  district: string;
+}
+
+// 注意：REGION_LABEL 已废弃，请用 getRegionLabel()
 export const REGION_LABEL = "武汉市·东西湖区";
+
+export function getRegionLabel(user?: CurrentPCUser | null): string {
+  const u = user ?? getStoredPCUser();
+  if (u?.city && u?.district) return `${u.city}·${u.district}`;
+  return "未授权区域";
+}
+
+export function getCurrentDataScope(): DataScope | null {
+  const u = getStoredPCUser();
+  if (u?.city && u?.district) return { city: u.city, district: u.district };
+  return null;
+}
 
 // ─── LocalStorage keys ───────────────────────────────────────
 const ACCOUNTS_KEY = "pc_survey_accounts";
@@ -83,8 +106,23 @@ export function saveSurveyAccounts(list: SurveyAccount[]): void {
   localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(list));
 }
 
+// 按当前登录租户的数据权限过滤摸排账号
+// region_admin / street_admin 都仅能看到所属租户的账号
+// 老数据（无 tenantId）兜底归属东西湖区租户，保证不丢失
+export function getScopedSurveyAccounts(): SurveyAccount[] {
+  const all = getSurveyAccounts();
+  const user = getStoredPCUser();
+  if (!user?.tenantId) return all; // 未登录或 ops 视角，返回全部
+  return all.filter((a) => {
+    if (a.tenantId) return a.tenantId === user.tenantId;
+    // 历史数据兜底：无 tenantId 视为属于东西湖区租户
+    return user.tenantId === "t-whdxh";
+  });
+}
+
 export function createSurveyAccount(displayName: string, orgUnit: string): SurveyAccount {
   const list = getSurveyAccounts();
+  const creator = getStoredPCUser();
   const account: SurveyAccount = {
     id: generateId(),
     displayName: displayName.trim(),
@@ -93,6 +131,9 @@ export function createSurveyAccount(displayName: string, orgUnit: string): Surve
     password: generatePassword(),
     enabled: true,
     createdAt: new Date().toISOString(),
+    tenantId: creator?.tenantId,
+    city: creator?.city,
+    district: creator?.district,
   };
   list.push(account);
   saveSurveyAccounts(list);
@@ -150,6 +191,8 @@ export function authenticateRegionAdmin(username: string, password: string): Cur
     dept: tenant.adminDept,
     username: tenant.adminUsername,
     tenantId: tenant.id,
+    city: tenant.city,
+    district: tenant.district,
   };
 }
 
@@ -179,6 +222,9 @@ export function buildSurveyAdminUser(account: SurveyAccount): CurrentPCUser {
     displayName: account.displayName,
     dept: account.orgUnit || account.displayName,
     username: account.username,
+    tenantId: account.tenantId,
+    city: account.city,
+    district: account.district,
   };
 }
 

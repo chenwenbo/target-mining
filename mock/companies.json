@@ -48,7 +48,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0002",
@@ -99,7 +101,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0003",
@@ -150,7 +154,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0004",
@@ -201,7 +207,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0005",
@@ -252,7 +260,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0006",
@@ -303,7 +313,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0007",
@@ -354,7 +366,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0008",
@@ -405,7 +419,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0009",
@@ -456,7 +472,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0010",
@@ -507,7 +525,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0011",
@@ -558,7 +578,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0012",
@@ -609,7 +631,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0013",
@@ -660,7 +684,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0014",
@@ -711,7 +737,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0015",
@@ -762,7 +790,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0016",
@@ -813,7 +843,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0017",
@@ -864,7 +896,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0018",
@@ -915,7 +949,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0019",
@@ -966,7 +1002,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0020",
@@ -1017,7 +1055,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0021",
@@ -1068,7 +1108,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0022",
@@ -1119,7 +1161,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0023",
@@ -1170,7 +1214,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0024",
@@ -1221,7 +1267,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0025",
@@ -1272,7 +1320,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0026",
@@ -1323,7 +1373,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0027",
@@ -1374,7 +1426,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0028",
@@ -1425,7 +1479,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0029",
@@ -1476,7 +1532,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0030",
@@ -1527,7 +1585,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0031",
@@ -1578,7 +1638,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0032",
@@ -1629,7 +1691,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0033",
@@ -1680,7 +1744,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0034",
@@ -1731,7 +1797,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0035",
@@ -1782,7 +1850,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0036",
@@ -1833,7 +1903,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0037",
@@ -1884,7 +1956,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0038",
@@ -1935,7 +2009,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0039",
@@ -1986,7 +2062,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0040",
@@ -2037,7 +2115,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0041",
@@ -2088,7 +2168,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0042",
@@ -2139,7 +2221,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0043",
@@ -2190,7 +2274,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0044",
@@ -2241,7 +2327,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0045",
@@ -2292,7 +2380,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0046",
@@ -2343,7 +2433,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0047",
@@ -2394,7 +2486,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0048",
@@ -2445,7 +2539,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0049",
@@ -2496,7 +2592,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0050",
@@ -2547,7 +2645,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0051",
@@ -2598,7 +2698,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0052",
@@ -2649,7 +2751,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0053",
@@ -2700,7 +2804,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0054",
@@ -2751,7 +2857,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0055",
@@ -2802,7 +2910,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0056",
@@ -2853,7 +2963,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0057",
@@ -2904,7 +3016,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0058",
@@ -2955,7 +3069,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0059",
@@ -3006,7 +3122,9 @@
       "annualAuditPassedY3": false,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0060",
@@ -3057,7 +3175,9 @@
       "annualAuditPassedY3": true,
       "complianceClean": true
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0061",
@@ -3087,7 +3207,9 @@
       "phone": "15100002914",
       "email": "胡277@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0062",
@@ -3117,7 +3239,9 @@
       "phone": "18600006739",
       "email": "孙157@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0063",
@@ -3147,7 +3271,9 @@
       "phone": "15000009005",
       "email": "何473@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0064",
@@ -3177,7 +3303,9 @@
       "phone": "15800003393",
       "email": "陈493@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0065",
@@ -3207,7 +3335,9 @@
       "phone": "15800001425",
       "email": "李934@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0066",
@@ -3237,7 +3367,9 @@
       "phone": "15000002681",
       "email": "赵822@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0067",
@@ -3267,7 +3399,9 @@
       "phone": "18200005565",
       "email": "徐748@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0068",
@@ -3297,7 +3431,9 @@
       "phone": "15100003021",
       "email": "周318@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0069",
@@ -3327,7 +3463,9 @@
       "phone": "13900005387",
       "email": "刘967@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0070",
@@ -3357,7 +3495,9 @@
       "phone": "15000005034",
       "email": "林173@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0071",
@@ -3387,7 +3527,9 @@
       "phone": "13800002406",
       "email": "胡216@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0072",
@@ -3417,7 +3559,9 @@
       "phone": "15800009013",
       "email": "周888@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0073",
@@ -3447,7 +3591,9 @@
       "phone": "15100002864",
       "email": "杨527@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0074",
@@ -3477,7 +3623,9 @@
       "phone": "15100005733",
       "email": "罗553@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0075",
@@ -3507,7 +3655,9 @@
       "phone": "15000008747",
       "email": "朱496@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0076",
@@ -3537,7 +3687,9 @@
       "phone": "15000005285",
       "email": "胡703@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0077",
@@ -3567,7 +3719,9 @@
       "phone": "15000003568",
       "email": "刘889@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0078",
@@ -3597,7 +3751,9 @@
       "phone": "15800003772",
       "email": "黄224@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0079",
@@ -3627,7 +3783,9 @@
       "phone": "18200009682",
       "email": "孙673@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0080",
@@ -3657,7 +3815,9 @@
       "phone": "15000007517",
       "email": "罗781@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0081",
@@ -3687,7 +3847,9 @@
       "phone": "15100007530",
       "email": "胡108@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0082",
@@ -3717,7 +3879,9 @@
       "phone": "15800001003",
       "email": "王688@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0083",
@@ -3747,7 +3911,9 @@
       "phone": "13800008257",
       "email": "刘274@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0084",
@@ -3777,7 +3943,9 @@
       "phone": "15100007306",
       "email": "孙295@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0085",
@@ -3807,7 +3975,9 @@
       "phone": "18200001896",
       "email": "黄864@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0086",
@@ -3837,7 +4007,9 @@
       "phone": "13900009690",
       "email": "孙380@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0087",
@@ -3867,7 +4039,9 @@
       "phone": "18200001930",
       "email": "罗514@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0088",
@@ -3897,7 +4071,9 @@
       "phone": "15800007429",
       "email": "郭301@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0089",
@@ -3927,7 +4103,9 @@
       "phone": "15100005605",
       "email": "郭956@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0090",
@@ -3957,7 +4135,9 @@
       "phone": "13800008803",
       "email": "吴316@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0091",
@@ -3987,7 +4167,9 @@
       "phone": "18600001685",
       "email": "徐602@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0092",
@@ -4017,7 +4199,9 @@
       "phone": "15800007445",
       "email": "朱689@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0093",
@@ -4047,7 +4231,9 @@
       "phone": "13800002655",
       "email": "吴174@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0094",
@@ -4077,7 +4263,9 @@
       "phone": "15800009587",
       "email": "杨376@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0095",
@@ -4107,7 +4295,9 @@
       "phone": "15100008659",
       "email": "黄456@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0096",
@@ -4137,7 +4327,9 @@
       "phone": "15000002105",
       "email": "刘729@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0097",
@@ -4167,7 +4359,9 @@
       "phone": "18600003809",
       "email": "陈901@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0098",
@@ -4197,7 +4391,9 @@
       "phone": "13800005341",
       "email": "吴300@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0099",
@@ -4227,7 +4423,9 @@
       "phone": "18600004937",
       "email": "王696@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0100",
@@ -4257,7 +4455,9 @@
       "phone": "15100001427",
       "email": "马330@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0101",
@@ -4287,7 +4487,9 @@
       "phone": "13900006534",
       "email": "刘156@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0102",
@@ -4317,7 +4519,9 @@
       "phone": "18600008874",
       "email": "马830@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0103",
@@ -4347,7 +4551,9 @@
       "phone": "18200007418",
       "email": "陈561@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0104",
@@ -4377,7 +4583,9 @@
       "phone": "15800001892",
       "email": "孙975@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0105",
@@ -4407,7 +4615,9 @@
       "phone": "18200007742",
       "email": "杨104@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0106",
@@ -4437,7 +4647,9 @@
       "phone": "15800002421",
       "email": "胡759@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0107",
@@ -4467,7 +4679,9 @@
       "phone": "15100003380",
       "email": "刘476@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0108",
@@ -4497,7 +4711,9 @@
       "phone": "15100004447",
       "email": "罗520@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0109",
@@ -4527,7 +4743,9 @@
       "phone": "15000003466",
       "email": "张582@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0110",
@@ -4557,7 +4775,9 @@
       "phone": "15800007070",
       "email": "王723@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0111",
@@ -4587,7 +4807,9 @@
       "phone": "15800004750",
       "email": "杨491@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0112",
@@ -4617,7 +4839,9 @@
       "phone": "13900002177",
       "email": "李668@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0113",
@@ -4647,7 +4871,9 @@
       "phone": "15000007904",
       "email": "吴521@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0114",
@@ -4677,7 +4903,9 @@
       "phone": "13900009411",
       "email": "朱425@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0115",
@@ -4707,7 +4935,9 @@
       "phone": "15100001984",
       "email": "刘729@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0116",
@@ -4737,7 +4967,9 @@
       "phone": "18200006628",
       "email": "陈644@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0117",
@@ -4767,7 +4999,9 @@
       "phone": "13800003662",
       "email": "郭419@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0118",
@@ -4797,7 +5031,9 @@
       "phone": "15800002499",
       "email": "朱158@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0119",
@@ -4827,7 +5063,9 @@
       "phone": "18200007717",
       "email": "吴616@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0120",
@@ -4857,7 +5095,9 @@
       "phone": "15800006740",
       "email": "朱484@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0121",
@@ -4887,7 +5127,9 @@
       "phone": "15000005850",
       "email": "张291@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0122",
@@ -4917,7 +5159,9 @@
       "phone": "18600008457",
       "email": "胡628@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0123",
@@ -4947,7 +5191,9 @@
       "phone": "15800007168",
       "email": "刘281@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0124",
@@ -4977,7 +5223,9 @@
       "phone": "15800005080",
       "email": "高259@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0125",
@@ -5007,7 +5255,9 @@
       "phone": "18600009304",
       "email": "胡662@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0126",
@@ -5037,7 +5287,9 @@
       "phone": "13900003118",
       "email": "吴634@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0127",
@@ -5067,7 +5319,9 @@
       "phone": "15000003692",
       "email": "陈324@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0128",
@@ -5097,7 +5351,9 @@
       "phone": "18200009801",
       "email": "林554@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0129",
@@ -5127,7 +5383,9 @@
       "phone": "15800009508",
       "email": "吴674@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0130",
@@ -5157,7 +5415,9 @@
       "phone": "18600002144",
       "email": "吴400@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0131",
@@ -5187,7 +5447,9 @@
       "phone": "18200006848",
       "email": "张114@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0132",
@@ -5217,7 +5479,9 @@
       "phone": "13800003508",
       "email": "朱450@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0133",
@@ -5247,7 +5511,9 @@
       "phone": "15800008673",
       "email": "朱230@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0134",
@@ -5277,7 +5543,9 @@
       "phone": "15000009794",
       "email": "陈513@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0135",
@@ -5307,7 +5575,9 @@
       "phone": "18600002117",
       "email": "郭695@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0136",
@@ -5337,7 +5607,9 @@
       "phone": "15100006727",
       "email": "张550@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0137",
@@ -5367,7 +5639,9 @@
       "phone": "15000002206",
       "email": "郭993@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0138",
@@ -5397,7 +5671,9 @@
       "phone": "15000007854",
       "email": "何125@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0139",
@@ -5427,7 +5703,9 @@
       "phone": "13900002252",
       "email": "黄816@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0140",
@@ -5457,7 +5735,9 @@
       "phone": "15100002612",
       "email": "何311@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0141",
@@ -5487,7 +5767,9 @@
       "phone": "13900007258",
       "email": "周225@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0142",
@@ -5517,7 +5799,9 @@
       "phone": "18600005506",
       "email": "刘174@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0143",
@@ -5547,7 +5831,9 @@
       "phone": "15000007087",
       "email": "黄170@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0144",
@@ -5577,7 +5863,9 @@
       "phone": "13800008878",
       "email": "马898@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0145",
@@ -5607,7 +5895,9 @@
       "phone": "13900004110",
       "email": "张441@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0146",
@@ -5637,7 +5927,9 @@
       "phone": "15100001223",
       "email": "陈662@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0147",
@@ -5667,7 +5959,9 @@
       "phone": "13800002949",
       "email": "孙567@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0148",
@@ -5697,7 +5991,9 @@
       "phone": "13800009346",
       "email": "刘602@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0149",
@@ -5727,7 +6023,9 @@
       "phone": "15000003974",
       "email": "孙272@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0150",
@@ -5757,7 +6055,9 @@
       "phone": "15000002209",
       "email": "孙317@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0151",
@@ -5787,7 +6087,9 @@
       "phone": "13800004887",
       "email": "徐227@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0152",
@@ -5817,7 +6119,9 @@
       "phone": "13900004262",
       "email": "吴698@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0153",
@@ -5847,7 +6151,9 @@
       "phone": "15800002233",
       "email": "何358@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0154",
@@ -5877,7 +6183,9 @@
       "phone": "13900004918",
       "email": "王948@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0155",
@@ -5907,7 +6215,9 @@
       "phone": "15000008484",
       "email": "何557@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0156",
@@ -5937,7 +6247,9 @@
       "phone": "18600003080",
       "email": "朱133@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0157",
@@ -5967,7 +6279,9 @@
       "phone": "18200006641",
       "email": "王239@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0158",
@@ -5997,7 +6311,9 @@
       "phone": "13900003409",
       "email": "孙651@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0159",
@@ -6027,7 +6343,9 @@
       "phone": "13800003527",
       "email": "马126@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0160",
@@ -6057,7 +6375,9 @@
       "phone": "18600005297",
       "email": "李875@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0161",
@@ -6087,7 +6407,9 @@
       "phone": "15100009665",
       "email": "吴772@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0162",
@@ -6117,7 +6439,9 @@
       "phone": "15000009396",
       "email": "孙587@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0163",
@@ -6147,7 +6471,9 @@
       "phone": "15100004870",
       "email": "徐884@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0164",
@@ -6177,7 +6503,9 @@
       "phone": "18200002464",
       "email": "马618@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0165",
@@ -6207,7 +6535,9 @@
       "phone": "15100009182",
       "email": "马516@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0166",
@@ -6237,7 +6567,9 @@
       "phone": "13800007168",
       "email": "郭220@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0167",
@@ -6267,7 +6599,9 @@
       "phone": "15000004906",
       "email": "徐308@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0168",
@@ -6297,7 +6631,9 @@
       "phone": "18200006139",
       "email": "胡572@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0169",
@@ -6327,7 +6663,9 @@
       "phone": "18200002361",
       "email": "罗498@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0170",
@@ -6357,7 +6695,9 @@
       "phone": "13900006390",
       "email": "杨506@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0171",
@@ -6387,7 +6727,9 @@
       "phone": "15100006454",
       "email": "朱766@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0172",
@@ -6417,7 +6759,9 @@
       "phone": "18200007915",
       "email": "王566@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0173",
@@ -6447,7 +6791,9 @@
       "phone": "18200007717",
       "email": "陈264@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0174",
@@ -6477,7 +6823,9 @@
       "phone": "13800004565",
       "email": "杨295@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0175",
@@ -6507,7 +6855,9 @@
       "phone": "15800003578",
       "email": "何998@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0176",
@@ -6537,7 +6887,9 @@
       "phone": "15800001557",
       "email": "周943@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0177",
@@ -6567,7 +6919,9 @@
       "phone": "13900003512",
       "email": "何107@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0178",
@@ -6597,7 +6951,9 @@
       "phone": "18600005812",
       "email": "高873@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0179",
@@ -6627,7 +6983,9 @@
       "phone": "15000007001",
       "email": "高312@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0180",
@@ -6657,7 +7015,9 @@
       "phone": "13900004074",
       "email": "朱486@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0181",
@@ -6687,7 +7047,9 @@
       "phone": "13900003419",
       "email": "何110@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0182",
@@ -6717,7 +7079,9 @@
       "phone": "15800004738",
       "email": "高656@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0183",
@@ -6747,7 +7111,9 @@
       "phone": "15100009511",
       "email": "徐983@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0184",
@@ -6777,7 +7143,9 @@
       "phone": "18200007106",
       "email": "朱274@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0185",
@@ -6807,7 +7175,9 @@
       "phone": "15100009515",
       "email": "孙491@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0186",
@@ -6837,7 +7207,9 @@
       "phone": "18600006018",
       "email": "马540@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0187",
@@ -6867,7 +7239,9 @@
       "phone": "13800001212",
       "email": "李431@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0188",
@@ -6897,7 +7271,9 @@
       "phone": "13800008441",
       "email": "郭915@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0189",
@@ -6927,7 +7303,9 @@
       "phone": "18200006368",
       "email": "黄252@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0190",
@@ -6957,7 +7335,9 @@
       "phone": "13800009315",
       "email": "杨631@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0191",
@@ -6987,7 +7367,9 @@
       "phone": "13800004157",
       "email": "李945@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0192",
@@ -7017,7 +7399,9 @@
       "phone": "18200009113",
       "email": "刘277@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0193",
@@ -7047,7 +7431,9 @@
       "phone": "13800004569",
       "email": "何867@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0194",
@@ -7077,7 +7463,9 @@
       "phone": "18600003360",
       "email": "马428@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0195",
@@ -7107,7 +7495,9 @@
       "phone": "15800002298",
       "email": "马292@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0196",
@@ -7137,7 +7527,9 @@
       "phone": "15000005356",
       "email": "罗454@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0197",
@@ -7167,7 +7559,9 @@
       "phone": "15800006219",
       "email": "徐751@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0198",
@@ -7197,7 +7591,9 @@
       "phone": "18200004752",
       "email": "吴408@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0199",
@@ -7227,7 +7623,9 @@
       "phone": "15800009675",
       "email": "吴418@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0200",
@@ -7257,7 +7655,9 @@
       "phone": "13900009075",
       "email": "张494@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0201",
@@ -7287,7 +7687,9 @@
       "phone": "13900001607",
       "email": "周474@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0202",
@@ -7317,7 +7719,9 @@
       "phone": "15000007345",
       "email": "周927@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0203",
@@ -7347,7 +7751,9 @@
       "phone": "15000008477",
       "email": "杨211@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0204",
@@ -7377,7 +7783,9 @@
       "phone": "13900006492",
       "email": "赵274@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0205",
@@ -7407,7 +7815,9 @@
       "phone": "18600004057",
       "email": "陈916@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0206",
@@ -7437,7 +7847,9 @@
       "phone": "13900005057",
       "email": "杨192@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0207",
@@ -7467,7 +7879,9 @@
       "phone": "13900005513",
       "email": "徐356@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0208",
@@ -7497,7 +7911,9 @@
       "phone": "15000006649",
       "email": "李132@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0209",
@@ -7527,7 +7943,9 @@
       "phone": "13800002045",
       "email": "李370@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0210",
@@ -7557,7 +7975,9 @@
       "phone": "18200009827",
       "email": "刘287@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0211",
@@ -7587,7 +8007,9 @@
       "phone": "13800009643",
       "email": "罗989@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0212",
@@ -7617,7 +8039,9 @@
       "phone": "18600002832",
       "email": "周850@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0213",
@@ -7647,7 +8071,9 @@
       "phone": "15100003168",
       "email": "吴281@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0214",
@@ -7677,7 +8103,9 @@
       "phone": "13800001643",
       "email": "王765@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0215",
@@ -7707,7 +8135,9 @@
       "phone": "18200009593",
       "email": "朱536@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0216",
@@ -7737,7 +8167,9 @@
       "phone": "15000008649",
       "email": "朱955@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0217",
@@ -7767,7 +8199,9 @@
       "phone": "18200008846",
       "email": "郭877@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0218",
@@ -7797,7 +8231,9 @@
       "phone": "18600004962",
       "email": "林572@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0219",
@@ -7827,7 +8263,9 @@
       "phone": "13900009943",
       "email": "何633@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0220",
@@ -7857,7 +8295,9 @@
       "phone": "15000008888",
       "email": "郭218@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0221",
@@ -7887,7 +8327,9 @@
       "phone": "15000006929",
       "email": "罗282@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0222",
@@ -7917,7 +8359,9 @@
       "phone": "13800006144",
       "email": "高961@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0223",
@@ -7947,7 +8391,9 @@
       "phone": "18600004950",
       "email": "何846@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0224",
@@ -7977,7 +8423,9 @@
       "phone": "13900003993",
       "email": "吴717@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0225",
@@ -8007,7 +8455,9 @@
       "phone": "13800001109",
       "email": "周581@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0226",
@@ -8037,7 +8487,9 @@
       "phone": "15000004413",
       "email": "郭512@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0227",
@@ -8067,7 +8519,9 @@
       "phone": "13800009997",
       "email": "黄834@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0228",
@@ -8097,7 +8551,9 @@
       "phone": "15100003624",
       "email": "杨580@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0229",
@@ -8127,7 +8583,9 @@
       "phone": "13800009197",
       "email": "周443@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0230",
@@ -8157,7 +8615,9 @@
       "phone": "18200007734",
       "email": "何718@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0231",
@@ -8187,7 +8647,9 @@
       "phone": "15100007787",
       "email": "胡244@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0232",
@@ -8217,7 +8679,9 @@
       "phone": "15000002231",
       "email": "郭404@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0233",
@@ -8247,7 +8711,9 @@
       "phone": "18200001347",
       "email": "刘681@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0234",
@@ -8277,7 +8743,9 @@
       "phone": "15800001229",
       "email": "吴766@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0235",
@@ -8307,7 +8775,9 @@
       "phone": "18200006861",
       "email": "胡789@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0236",
@@ -8337,7 +8807,9 @@
       "phone": "15100003290",
       "email": "马835@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0237",
@@ -8367,7 +8839,9 @@
       "phone": "15100001200",
       "email": "罗624@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0238",
@@ -8397,7 +8871,9 @@
       "phone": "15100007155",
       "email": "郭973@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0239",
@@ -8427,7 +8903,9 @@
       "phone": "13800006675",
       "email": "杨323@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0240",
@@ -8457,7 +8935,9 @@
       "phone": "13800003135",
       "email": "罗436@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0241",
@@ -8487,7 +8967,9 @@
       "phone": "13900006210",
       "email": "何440@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0242",
@@ -8517,7 +8999,9 @@
       "phone": "15000002816",
       "email": "李797@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0243",
@@ -8547,7 +9031,9 @@
       "phone": "15100002715",
       "email": "罗431@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0244",
@@ -8577,7 +9063,9 @@
       "phone": "13900009414",
       "email": "郭617@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0245",
@@ -8607,7 +9095,9 @@
       "phone": "13800003810",
       "email": "刘895@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0246",
@@ -8637,7 +9127,9 @@
       "phone": "18200008276",
       "email": "杨577@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0247",
@@ -8667,7 +9159,9 @@
       "phone": "18200005213",
       "email": "刘179@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0248",
@@ -8697,7 +9191,9 @@
       "phone": "18200007400",
       "email": "徐293@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0249",
@@ -8727,7 +9223,9 @@
       "phone": "13800002424",
       "email": "吴620@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0250",
@@ -8757,7 +9255,9 @@
       "phone": "13900006126",
       "email": "高801@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0251",
@@ -8787,7 +9287,9 @@
       "phone": "18600003890",
       "email": "胡768@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0252",
@@ -8817,7 +9319,9 @@
       "phone": "15800004325",
       "email": "林940@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0253",
@@ -8847,7 +9351,9 @@
       "phone": "18600006536",
       "email": "王259@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0254",
@@ -8877,7 +9383,9 @@
       "phone": "18600003232",
       "email": "林730@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0255",
@@ -8907,7 +9415,9 @@
       "phone": "13800006790",
       "email": "杨205@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0256",
@@ -8937,7 +9447,9 @@
       "phone": "15800002804",
       "email": "孙457@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0257",
@@ -8967,7 +9479,9 @@
       "phone": "18600002337",
       "email": "徐319@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0258",
@@ -8997,7 +9511,9 @@
       "phone": "18600003871",
       "email": "林568@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0259",
@@ -9027,7 +9543,9 @@
       "phone": "15100009588",
       "email": "郭525@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0260",
@@ -9057,7 +9575,9 @@
       "phone": "18600009704",
       "email": "张878@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0261",
@@ -9087,7 +9607,9 @@
       "phone": "13900001697",
       "email": "孙854@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0262",
@@ -9117,7 +9639,9 @@
       "phone": "15800007461",
       "email": "高575@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0263",
@@ -9147,7 +9671,9 @@
       "phone": "15100001075",
       "email": "郭933@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0264",
@@ -9177,7 +9703,9 @@
       "phone": "18200006465",
       "email": "罗995@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0265",
@@ -9207,7 +9735,9 @@
       "phone": "15100002837",
       "email": "吴241@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0266",
@@ -9237,7 +9767,9 @@
       "phone": "18600001182",
       "email": "朱292@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0267",
@@ -9267,7 +9799,9 @@
       "phone": "18600005801",
       "email": "马544@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0268",
@@ -9297,7 +9831,9 @@
       "phone": "18200008823",
       "email": "李867@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0269",
@@ -9327,7 +9863,9 @@
       "phone": "15800007397",
       "email": "吴869@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0270",
@@ -9357,7 +9895,9 @@
       "phone": "13900002928",
       "email": "朱884@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0271",
@@ -9387,7 +9927,9 @@
       "phone": "13900002297",
       "email": "张266@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0272",
@@ -9417,7 +9959,9 @@
       "phone": "13900004543",
       "email": "吴100@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0273",
@@ -9447,7 +9991,9 @@
       "phone": "15800006947",
       "email": "杨269@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0274",
@@ -9477,7 +10023,9 @@
       "phone": "15800009117",
       "email": "孙626@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0275",
@@ -9507,7 +10055,9 @@
       "phone": "13900003171",
       "email": "徐222@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0276",
@@ -9537,7 +10087,9 @@
       "phone": "15000006768",
       "email": "吴544@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0277",
@@ -9567,7 +10119,9 @@
       "phone": "13900008458",
       "email": "王316@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0278",
@@ -9597,7 +10151,9 @@
       "phone": "18200001789",
       "email": "张263@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0279",
@@ -9627,7 +10183,9 @@
       "phone": "13900004501",
       "email": "孙788@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0280",
@@ -9657,7 +10215,9 @@
       "phone": "18200003361",
       "email": "朱388@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0281",
@@ -9687,7 +10247,9 @@
       "phone": "15800005865",
       "email": "罗464@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0282",
@@ -9717,7 +10279,9 @@
       "phone": "15000007190",
       "email": "黄114@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0283",
@@ -9747,7 +10311,9 @@
       "phone": "18200007990",
       "email": "徐572@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0284",
@@ -9777,7 +10343,9 @@
       "phone": "18200007214",
       "email": "马783@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0285",
@@ -9807,7 +10375,9 @@
       "phone": "13800003447",
       "email": "郭371@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0286",
@@ -9837,7 +10407,9 @@
       "phone": "15100007467",
       "email": "马595@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0287",
@@ -9867,7 +10439,9 @@
       "phone": "18600008566",
       "email": "刘791@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0288",
@@ -9897,7 +10471,9 @@
       "phone": "15000002640",
       "email": "马891@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0289",
@@ -9927,7 +10503,9 @@
       "phone": "15000009419",
       "email": "周877@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0290",
@@ -9957,7 +10535,9 @@
       "phone": "15100004979",
       "email": "赵519@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0291",
@@ -9987,7 +10567,9 @@
       "phone": "15000007251",
       "email": "黄267@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0292",
@@ -10017,7 +10599,9 @@
       "phone": "15000006116",
       "email": "赵867@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0293",
@@ -10047,7 +10631,9 @@
       "phone": "15100006606",
       "email": "高990@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0294",
@@ -10077,7 +10663,9 @@
       "phone": "13900009604",
       "email": "王523@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0295",
@@ -10107,7 +10695,9 @@
       "phone": "15800004256",
       "email": "赵353@example.com"
     },
-    "declarationWillingness": "refused"
+    "declarationWillingness": "refused",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0296",
@@ -10137,7 +10727,9 @@
       "phone": "18600007775",
       "email": "黄224@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0297",
@@ -10167,7 +10759,9 @@
       "phone": "15800005988",
       "email": "李307@example.com"
     },
-    "declarationWillingness": "moderate"
+    "declarationWillingness": "moderate",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0298",
@@ -10197,7 +10791,9 @@
       "phone": "13800002147",
       "email": "林919@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0299",
@@ -10227,7 +10823,9 @@
       "phone": "18200008875",
       "email": "王749@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0300",
@@ -10257,7 +10855,9 @@
       "phone": "15000008740",
       "email": "刘999@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0301",
@@ -10287,7 +10887,9 @@
       "phone": "15100004303",
       "email": "陈528@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0302",
@@ -10317,7 +10919,9 @@
       "phone": "18200009011",
       "email": "何940@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0303",
@@ -10347,7 +10951,9 @@
       "phone": "13900005936",
       "email": "黄454@example.com"
     },
-    "declarationWillingness": "unknown"
+    "declarationWillingness": "unknown",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0304",
@@ -10377,7 +10983,9 @@
       "phone": "13800002060",
       "email": "李177@example.com"
     },
-    "declarationWillingness": "hesitant"
+    "declarationWillingness": "hesitant",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0305",
@@ -10407,7 +11015,9 @@
       "phone": "13900007874",
       "email": "林153@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   },
   {
     "id": "c0306",
@@ -10437,6 +11047,8 @@
       "phone": "18200002369",
       "email": "张391@example.com"
     },
-    "declarationWillingness": "strong"
+    "declarationWillingness": "strong",
+    "city": "武汉市",
+    "district": "东西湖区"
   }
 ]

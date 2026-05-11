@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Target, Users, AlertTriangle, Pencil, Check, X } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import type { getDashboardKPI } from "@/lib/mock-data";
-import { useRoleGuard } from "@/lib/account-mock";
+import { getRegionLabel, useCurrentPCUser, useRoleGuard } from "@/lib/account-mock";
 
 type KPI = ReturnType<typeof getDashboardKPI>;
 
@@ -483,8 +483,19 @@ function AgeBar({ kpi }: { kpi: KPI }) {
 }
 
 // ─── 主组件 ───────────────────────────────────────────────────
-export default function DashboardClient({ kpi }: { kpi: KPI }) {
+export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
   const allowed = useRoleGuard("region_admin");
+  const { user, mounted } = useCurrentPCUser();
+  const [kpi, setKpi] = useState<KPI>(initialKpi);
+  // 登录用户的 city/district 在客户端才能拿到，因此 mount 后按权限重新计算
+  useEffect(() => {
+    if (!mounted) return;
+    let cancelled = false;
+    import("@/lib/mock-data").then(({ getDashboardKPI }) => {
+      if (!cancelled) setKpi(getDashboardKPI());
+    });
+    return () => { cancelled = true; };
+  }, [mounted, user.tenantId]);
   if (!allowed) {
     return (
       <div className="flex items-center justify-center py-32 text-sm text-[#94a3b8]">
@@ -498,7 +509,7 @@ export default function DashboardClient({ kpi }: { kpi: KPI }) {
       <div className="flex items-end justify-between mb-6">
         <div>
           <h1 className="text-xl font-semibold text-[#0f172a]">2026 年高企申报 · 全景概览</h1>
-          <p className="text-sm text-[#94a3b8] mt-1">东西湖区 · 数据来源：工商 · 专利 · 招聘 · 税务</p>
+          <p className="text-sm text-[#94a3b8] mt-1">{getRegionLabel(user)} · 数据来源：工商 · 专利 · 招聘 · 税务</p>
         </div>
       </div>
 

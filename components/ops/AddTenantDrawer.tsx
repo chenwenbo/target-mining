@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { addTenant, generateTenantPassword } from "@/lib/ops-mock";
+import { HUBEI_REGIONS } from "@/lib/types";
 
 interface Props {
   onClose: () => void;
@@ -35,8 +36,12 @@ export default function AddTenantDrawer({ onClose, onSaved }: Props) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
+  const cities = Object.keys(HUBEI_REGIONS);
+  const districts = form.city ? HUBEI_REGIONS[form.city] ?? [] : [];
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form.city || !form.district) return;
     addTenant({
       ...form,
       enabled: true,
@@ -100,31 +105,42 @@ export default function AddTenantDrawer({ onClose, onSaved }: Props) {
                   <span className={labelCls}>省份</span>
                   <input
                     value={form.province}
-                    onChange={(e) => set("province", e.target.value)}
-                    placeholder="湖北省"
-                    className={inputCls}
+                    readOnly
+                    className={`${inputCls} bg-[#f7f8fa] text-[#94a3b8]`}
                   />
                 </label>
                 <label className="block">
-                  <span className={labelCls}>城市 *</span>
-                  <input
+                  <span className={labelCls}>数据权限·城市 *</span>
+                  <select
                     required
                     value={form.city}
-                    onChange={(e) => set("city", e.target.value)}
-                    placeholder="武汉市"
+                    onChange={(e) => { set("city", e.target.value); set("district", ""); }}
                     className={inputCls}
-                  />
+                  >
+                    <option value="">-- 请选择城市 --</option>
+                    {cities.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </label>
               </div>
               <label className="block">
-                <span className={labelCls}>行政区 *</span>
-                <input
+                <span className={labelCls}>数据权限·区县 *</span>
+                <select
                   required
                   value={form.district}
                   onChange={(e) => set("district", e.target.value)}
-                  placeholder="洪山区"
-                  className={inputCls}
-                />
+                  disabled={!form.city}
+                  className={`${inputCls} disabled:bg-[#f7f8fa] disabled:text-[#cbd5e1]`}
+                >
+                  <option value="">-- 请选择区县 --</option>
+                  {districts.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+                <p className="text-[11px] text-[#94a3b8] mt-1">
+                  该租户登录后仅能看到此区县范围内的企业、任务、走访等数据
+                </p>
               </label>
               <label className="block">
                 <span className={labelCls}>到期日 *</span>

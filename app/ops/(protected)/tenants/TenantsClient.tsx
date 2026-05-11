@@ -182,7 +182,7 @@ export default function TenantsClient() {
                   >
                     <td className="px-5 py-3">
                       <div className="font-medium text-[#0f172a]">{t.name}</div>
-                      <div className="text-[11px] text-[#94a3b8] mt-0.5">{t.district}</div>
+                      <div className="text-[11px] text-[#94a3b8] mt-0.5">数据权限：{t.city}·{t.district}</div>
                     </td>
                     <td className="px-3 py-3">
                       <TenantStatusBadge status={t.status} />

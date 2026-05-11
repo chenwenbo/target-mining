@@ -17,10 +17,11 @@ import {
   deleteSurveyAccount,
   exportAccountsCSV,
   formatAllAccountsForClipboard,
-  getSurveyAccounts,
-  REGION_LABEL,
+  getScopedSurveyAccounts,
+  getRegionLabel,
   resetSurveyAccountPassword,
   updateSurveyAccount,
+  useCurrentPCUser,
   useRoleGuard,
   type SurveyAccount,
 } from "@/lib/account-mock";
@@ -29,6 +30,7 @@ type ConfirmAction = { type: "reset" | "delete"; id: string };
 
 export default function AccountManagePage() {
   const allowed = useRoleGuard("region_admin");
+  const { user } = useCurrentPCUser();
   const [accounts, setAccounts] = useState<SurveyAccount[]>([]);
   const [mounted, setMounted] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
@@ -45,12 +47,12 @@ export default function AccountManagePage() {
   const [editOrgUnit, setEditOrgUnit] = useState("");
 
   useEffect(() => {
-    setAccounts(getSurveyAccounts());
+    setAccounts(getScopedSurveyAccounts());
     setMounted(true);
   }, []);
 
   function refresh() {
-    setAccounts(getSurveyAccounts());
+    setAccounts(getScopedSurveyAccounts());
   }
 
   function flashCopied(key: string) {
@@ -143,7 +145,7 @@ export default function AccountManagePage() {
         <div>
           <h1 className="text-xl font-semibold text-[#0f172a]">摸排账号管理</h1>
           <p className="text-sm text-[#94a3b8] mt-1">
-            {REGION_LABEL} · 共 {accounts.length} 个账号 · 已启用 {enabledCount}
+            {getRegionLabel(user)} · 共 {accounts.length} 个账号 · 已启用 {enabledCount}
           </p>
         </div>
         <div className="flex items-center gap-2">

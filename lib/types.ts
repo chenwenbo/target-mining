@@ -36,7 +36,7 @@ export const HUBEI_REGIONS: Record<string, string[]> = {
     "洪山区", "蔡甸区", "江夏区", "黄陂区", "新洲区",
   ],
   "宜昌市": [
-    "西陵区", "伍家岗区", "点军区", "猇亭区", "夷陵区",
+    "西陵区", "伍家岗区", "点军区", "猇亭区", "夷陵区", "宜昌高新区",
     "宜都市", "当阳市", "枝江市",
     "远安县", "兴山县", "秭归县", "长阳土家族自治县", "五峰土家族自治县",
   ],
@@ -106,6 +106,8 @@ export interface Company {
   id: string;
   name: string;
   creditCode: string;
+  city: string;
+  district: string;
   street: Street;
   industry: string;
   techField: TechField | null;
