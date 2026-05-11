@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
-import type { Company, Street, Task, TaskStatus, VisitRecord } from "@/lib/types";
+import type { Company, Task, TaskStatus, VisitRecord } from "@/lib/types";
 import {
   computeKPI,
   computeWillingnessDist,
@@ -36,7 +36,7 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
   const [records, setRecords] = useState<VisitRecord[]>([]);
   const [taskStatusOverrides, setTaskStatusOverrides] = useState<Record<string, TaskStatus>>({});
   const [allTasks, setAllTasks] = useState<Task[]>(tasks);
-  const lockedStreet: Street | null = null;
+  const lockedStreet: string | null = null;
 
   useEffect(() => {
     initSeedVisitRecords();

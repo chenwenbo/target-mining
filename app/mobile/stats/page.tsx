@@ -28,10 +28,10 @@ interface StatsState {
   inProgressCount: number;
 }
 
-function computeStats(visitorId: string, visitorName: string): StatsState {
+function computeStats(visitorId: string, visitorName: string, visitorStreet?: string): StatsState {
   const overrides = getTaskStatusOverrides();
   const myTasks = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()]
-    .filter((t) => visitor.street ? t.street === visitor.street : t.assignee === visitorName)
+    .filter((t) => visitorStreet ? t.street === visitorStreet : t.assignee === visitorName)
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
   const allRecords = getVisitRecords().filter((r) => r.visitorId === visitorId);
   const visitedCompanies = new Set(allRecords.map((r) => r.companyId)).size;
@@ -70,7 +70,7 @@ export default function StatsPage() {
     if (!v) { router.replace("/mobile/login"); return; }
     initSeedVisitRecords();
     setVisitor(v);
-    setStats(computeStats(v.id, v.name));
+    setStats(computeStats(v.id, v.name, v.street ?? undefined));
   }, [router]);
 
   if (!visitor || !stats) return null;

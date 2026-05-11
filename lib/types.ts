@@ -108,7 +108,7 @@ export interface Company {
   creditCode: string;
   city: string;
   district: string;
-  street: Street;
+  street: string;
   industry: string;
   techField: TechField | null;
   establishedAt: string; // ISO date string
@@ -340,7 +340,7 @@ export interface RenewalTask {
   certNo: string;
   expiryYear: number;
   assignee: string;
-  street: Street;
+  street: string;
   status: RenewalTaskStatus;
   createdAt: string;
   deadline: string;

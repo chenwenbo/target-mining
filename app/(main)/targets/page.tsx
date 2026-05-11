@@ -7,8 +7,8 @@ import { getPotentialTargets } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
 import { saveDispatchedTask } from "@/lib/mobile-mock";
-import type { Street, TechField, Company, DeclarationWillingness, Visitor } from "@/lib/types";
-import { STREETS, TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
+import type { TechField, Company, DeclarationWillingness, Visitor } from "@/lib/types";
+import { TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 // ─── Filter state ────────────────────────────────────────────
@@ -62,10 +62,12 @@ function FilterPanel({
   filters,
   onChange,
   lockedStreet,
+  streetOptions,
 }: {
   filters: Filters;
   onChange: (f: Filters) => void;
   lockedStreet?: string | null;
+  streetOptions: string[];
 }) {
   function pill(label: string, active: boolean, onClick: () => void) {
     return (
@@ -149,7 +151,7 @@ function FilterPanel({
 
       {!lockedStreet && section("所在街道 / 园区", "border-l-slate-400", (
         <div className="space-y-1">
-          {STREETS.map((s) => (
+          {streetOptions.map((s) => (
             <label key={s} className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer hover:text-[#0f172a]">
               <input
                 type="checkbox"
@@ -216,6 +218,10 @@ function TargetsPageContent() {
   const [dispatchTargets, setDispatchTargets] = useState<{ id: string; name: string; street: string }[] | null>(null);
 
   const allCompanies = useMemo(() => getPotentialTargets(), []);
+  const streetOptions = useMemo(
+    () => Array.from(new Set(allCompanies.map((c) => c.street))).filter(Boolean).sort(),
+    [allCompanies],
+  );
 
   // Apply filters
   const filtered = useMemo(() => {
@@ -307,7 +313,7 @@ function TargetsPageContent() {
   return (
     <>
     <div className="-m-6 lg:-m-8 flex h-full" style={{ minHeight: "calc(100vh - 56px)" }}>
-      <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} />
+      <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} streetOptions={streetOptions} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Pool tier quick-filter bar */}
