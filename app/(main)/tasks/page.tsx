@@ -11,8 +11,8 @@ import {
   removeDispatchedTask,
   removeCustomTask,
   getDraft,
-  MOCK_VISITORS,
 } from "@/lib/mobile-mock";
+import { getScopedSurveyAccounts, surveyAccountToVisitor, type SurveyAccount } from "@/lib/account-mock";
 import { type Task, type VisitRecord, type WillingnessLevel } from "@/lib/types";
 import {
   getTaskLifecycleStage,
@@ -42,7 +42,8 @@ export default function TasksPage() {
   // 拖拽派发（标的池 → 已派发）
   const [draggingCompanyId, setDraggingCompanyId] = useState<string | null>(null);
   const [pendingCompanyId, setPendingCompanyId] = useState<string | null>(null);
-  const [selectedAssignee, setSelectedAssignee] = useState<string>("");
+  const [selectedAccount, setSelectedAccount] = useState<SurveyAccount | null>(null);
+  const [surveyAccounts, setSurveyAccounts] = useState<SurveyAccount[]>([]);
   // 拖拽移回标的池（已派发 → 标的池）
   const [draggingTaskId, setDraggingTaskId] = useState<string | null>(null);
 
@@ -61,6 +62,7 @@ export default function TasksPage() {
     setStatusOverrides(getTaskStatusOverrides());
     setDispatched(getDispatchedTasks());
     setCustomTasks(getCustomTasks());
+    setSurveyAccounts(getScopedSurveyAccounts().filter((a) => a.enabled));
   }, [version]);
 
   const allCompanies = useMemo(() => getAllCompanies(), []);
@@ -89,7 +91,7 @@ export default function TasksPage() {
   }, [allRecords, statusOverrides, dispatched, customTasks]);
 
   const assigneeOptions = useMemo(() => {
-    const set = new Set<string>(MOCK_VISITORS.map((v) => v.name));
+    const set = new Set<string>();
     for (const e of enriched) set.add(e.task.assignee);
     return Array.from(set).sort();
   }, [enriched]);
@@ -134,7 +136,7 @@ export default function TasksPage() {
 
   function handleDropToDispatched() {
     if (!draggingCompanyId) return;
-    setSelectedAssignee(MOCK_VISITORS[0]?.name ?? "");
+    setSelectedAccount(null);
     setPendingCompanyId(draggingCompanyId);
     setDraggingCompanyId(null);
   }
@@ -148,9 +150,10 @@ export default function TasksPage() {
   }
 
   function confirmDispatch() {
-    if (!pendingCompanyId || !selectedAssignee) return;
+    if (!pendingCompanyId || !selectedAccount) return;
     const company = allCompanies.find((c) => c.id === pendingCompanyId);
     if (!company) return;
+    const visitor = surveyAccountToVisitor(selectedAccount);
     const today = new Date();
     const deadline = new Date(today.setMonth(today.getMonth() + 3))
       .toISOString()
@@ -159,8 +162,8 @@ export default function TasksPage() {
       id: `custom_${Date.now()}`,
       companyId: company.id,
       companyName: company.name,
-      assignee: selectedAssignee,
-      street: company.street,
+      assignee: visitor.name,
+      street: visitor.street ?? company.street,
       status: "pending",
       createdAt: new Date().toISOString().slice(0, 10),
       deadline,
@@ -306,20 +309,25 @@ export default function TasksPage() {
               <h3 className="text-base font-semibold text-[#0f172a] mb-0.5">派发企业</h3>
               <p className="text-xs text-[#94a3b8] mb-4 truncate">{company?.name}</p>
 
-              <p className="text-xs text-[#475569] font-medium mb-2">选择跟进经办人</p>
-              <div className="space-y-2 mb-5">
-                {MOCK_VISITORS.map((v) => (
+              <p className="text-xs text-[#475569] font-medium mb-2">选择摸排账号</p>
+              <div className="space-y-2 mb-5 max-h-48 overflow-y-auto">
+                {surveyAccounts.length === 0 ? (
+                  <p className="text-xs text-[#94a3b8] px-1">暂无可用摸排账号，请先在「摸排账号管理」创建</p>
+                ) : surveyAccounts.map((a) => (
                   <button
-                    key={v.id}
-                    onClick={() => setSelectedAssignee(v.name)}
+                    key={a.id}
+                    onClick={() => setSelectedAccount(a)}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg border text-sm transition-colors ${
-                      selectedAssignee === v.name
+                      selectedAccount?.id === a.id
                         ? "border-blue-500 bg-blue-50 text-blue-700"
                         : "border-[#e5e7eb] text-[#0f172a] hover:border-[#cbd5e1]"
                     }`}
                   >
-                    <span className="font-medium">{v.name}</span>
-                    {selectedAssignee === v.name && <Check size={14} className="text-blue-600" />}
+                    <div className="text-left">
+                      <div className="font-medium">{a.displayName}</div>
+                      {a.orgUnit && <div className="text-[11px] text-[#94a3b8] mt-0.5">{a.orgUnit}</div>}
+                    </div>
+                    {selectedAccount?.id === a.id && <Check size={14} className="text-blue-600 shrink-0" />}
                   </button>
                 ))}
               </div>
@@ -333,7 +341,7 @@ export default function TasksPage() {
                 </button>
                 <button
                   onClick={confirmDispatch}
-                  disabled={!selectedAssignee}
+                  disabled={!selectedAccount}
                   className="flex-1 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-medium"
                 >
                   确认派发
