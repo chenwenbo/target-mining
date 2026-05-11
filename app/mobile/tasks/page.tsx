@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { getAllTasks } from "@/lib/mock-data";
-import { getCurrentVisitor, getVisitRecordsByTask, getTaskStatusOverrides } from "@/lib/mobile-mock";
+import { getCurrentVisitor, getVisitRecordsByTask, getTaskStatusOverrides, getDispatchedTasks } from "@/lib/mobile-mock";
 import type { Task, Visitor, TaskStatus } from "@/lib/types";
 import { Search, ChevronRight, AlertCircle, CheckCircle2, Clock } from "lucide-react";
 
@@ -47,7 +47,7 @@ export default function TasksPage() {
   const overrides = getTaskStatusOverrides();
   // 街道管理员视角：以街道为隔离边界，凡本街道任务都可见
   // （历史 mock 任务的 assignee 仍是中文姓名，街道字段才是稳定标识）
-  const allTasks = getAllTasks()
+  const allTasks = [...getAllTasks(), ...getDispatchedTasks()]
     .filter((t) => (visitor.street ? t.street === visitor.street : t.assignee === visitor.name))
     .map((t) => ({ ...t, status: (overrides[t.id] ?? t.status) as TaskStatus }));
 
