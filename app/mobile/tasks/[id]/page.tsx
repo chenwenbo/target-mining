@@ -8,6 +8,7 @@ import {
   getCurrentVisitor,
   getVisitRecordsByTask,
   getTaskStatusOverrides,
+  getDispatchedTasks,
 } from "@/lib/mobile-mock";
 import {
   generateToken,
@@ -94,7 +95,7 @@ export default function TaskDetailPage() {
   }, [router]);
 
   const overrides = getTaskStatusOverrides();
-  const task = getAllTasks().find((t) => t.id === id);
+  const task = [...getAllTasks(), ...getDispatchedTasks()].find((t) => t.id === id);
   if (!task) return <div className="p-6 text-gray-400 text-sm">任务不存在</div>;
 
   const status = (overrides[id] ?? task.status) as TaskStatus;
