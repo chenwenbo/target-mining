@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { Building2, Search, X, Check } from "lucide-react";
-import { getAllTasks, getCompanyById, getAllCompanies } from "@/lib/mock-data";
+import { getCompanyById, getAllCompanies } from "@/lib/mock-data";
 import {
   getDispatchedTasks,
   getVisitRecords,
@@ -62,7 +62,7 @@ export default function TasksPage() {
   const allCompanies = useMemo(() => getAllCompanies(), []);
 
   const enriched: TaskWithStage[] = useMemo(() => {
-    const merged = [...getAllTasks(), ...dispatched, ...customTasks];
+    const merged = [...dispatched, ...customTasks];
     const byId = new Map<string, Task>();
     for (const t of merged) byId.set(t.id, t);
 
