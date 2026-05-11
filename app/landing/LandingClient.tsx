@@ -14,7 +14,12 @@ import {
   X,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { getStreetStats, getStreets, type StreetStats } from "@/lib/landing-data";
+import {
+  getDistrictStats,
+  getDistrictsForCity,
+  getHubeiCities,
+  type DistrictStats,
+} from "@/lib/landing-data";
 
 interface Props {
   from: string;
@@ -29,9 +34,11 @@ interface LeadForm {
 const BLURRED_ROWS = 4;
 
 export default function LandingClient({ from }: Props) {
-  const streets = getStreets();
-  const [selectedStreet, setSelectedStreet] = useState("");
-  const [stats, setStats] = useState<StreetStats | null>(null);
+  const cities = getHubeiCities();
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const districts = selectedCity ? getDistrictsForCity(selectedCity) : [];
+  const [stats, setStats] = useState<DistrictStats | null>(null);
   const [analyzed, setAnalyzed] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
@@ -42,8 +49,8 @@ export default function LandingClient({ from }: Props) {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   function handleAnalyze() {
-    if (!selectedStreet) return;
-    setStats(getStreetStats(selectedStreet));
+    if (!selectedCity || !selectedDistrict) return;
+    setStats(getDistrictStats(selectedCity, selectedDistrict));
     setAnalyzed(true);
     setUnlocked(false);
   }
@@ -55,7 +62,7 @@ export default function LandingClient({ from }: Props) {
   function handleLeadSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!lead.name || !lead.phone) return;
-    const record = { ...lead, street: selectedStreet, from, submittedAt: new Date().toISOString() };
+    const record = { ...lead, city: selectedCity, district: selectedDistrict, from, submittedAt: new Date().toISOString() };
     const stored = JSON.parse(localStorage.getItem("landing_leads") ?? "[]");
     stored.push(record);
     localStorage.setItem("landing_leads", JSON.stringify(stored));
@@ -123,24 +130,38 @@ export default function LandingClient({ from }: Props) {
 
           {/* 数据钩子卡 */}
           <div className="bg-white rounded-2xl shadow-[0_4px_24px_0_rgba(15,23,42,0.08)] border border-[#e5e7eb] p-6 text-left">
-            <p className="text-sm font-semibold text-[#0f172a] mb-3">选择你的辖区街道 / 园区</p>
+            <p className="text-sm font-semibold text-[#0f172a] mb-3">选择你的辖区城市和区县</p>
             <div className="flex gap-2 mb-5">
-              <div className="relative flex-1">
+              <div className="relative">
                 <select
-                  value={selectedStreet}
-                  onChange={(e) => { setSelectedStreet(e.target.value); setAnalyzed(false); setStats(null); setUnlocked(false); }}
+                  value={selectedCity}
+                  onChange={(e) => { setSelectedCity(e.target.value); setSelectedDistrict(""); setAnalyzed(false); setStats(null); setUnlocked(false); }}
                   className="w-full appearance-none px-3.5 py-2.5 pr-9 text-sm bg-white border border-[#e5e7eb] rounded-lg outline-none focus:border-blue-500 text-[#0f172a]"
                 >
-                  <option value="">-- 请选择街道 / 园区 --</option>
-                  {streets.map((s) => (
-                    <option key={s} value={s}>{s}</option>
+                  <option value="">-- 请选择城市 --</option>
+                  {cities.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+                <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] pointer-events-none" />
+              </div>
+              <div className="relative flex-1">
+                <select
+                  value={selectedDistrict}
+                  onChange={(e) => { setSelectedDistrict(e.target.value); setAnalyzed(false); setStats(null); setUnlocked(false); }}
+                  disabled={!selectedCity}
+                  className="w-full appearance-none px-3.5 py-2.5 pr-9 text-sm bg-white border border-[#e5e7eb] rounded-lg outline-none focus:border-blue-500 text-[#0f172a] disabled:bg-[#f7f8fa] disabled:text-[#cbd5e1]"
+                >
+                  <option value="">-- 请选择区县 --</option>
+                  {districts.map((d) => (
+                    <option key={d} value={d}>{d}</option>
                   ))}
                 </select>
                 <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#94a3b8] pointer-events-none" />
               </div>
               <button
                 onClick={handleAnalyze}
-                disabled={!selectedStreet}
+                disabled={!selectedCity || !selectedDistrict}
                 className="px-5 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
               >
                 <Search size={14} />
@@ -154,7 +175,7 @@ export default function LandingClient({ from }: Props) {
                 {/* 统计概览 */}
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm font-semibold text-[#0f172a]">
-                    {selectedStreet} · 潜在高企分析
+                    {selectedCity} {selectedDistrict} · 潜在高企分析
                   </p>
                   <span className="text-xs text-[#94a3b8]">共 {stats.total} 家</span>
                 </div>
@@ -333,7 +354,7 @@ export default function LandingClient({ from }: Props) {
               />
               <FormField
                 label="所在单位"
-                placeholder="例如：东西湖区科技创新局"
+                placeholder="例如：洪山区科技创新局"
                 value={finalLead.unit}
                 onChange={(v) => setFinalLead((f) => ({ ...f, unit: v }))}
               />
@@ -359,7 +380,7 @@ export default function LandingClient({ from }: Props) {
 
       {/* ── 页脚 ── */}
       <footer className="py-6 px-4 border-t border-[#f1f5f9] text-center text-xs text-[#cbd5e1]">
-        标的挖掘平台 · 武汉演示版本
+        标的挖掘平台 · 湖北省版本
       </footer>
 
       {/* ── 留资 Modal ── */}
@@ -381,7 +402,7 @@ export default function LandingClient({ from }: Props) {
               </div>
             ) : (
               <>
-                <h3 className="text-base font-bold mb-1">解锁 {selectedStreet} 完整名单</h3>
+                <h3 className="text-base font-bold mb-1">解锁 {selectedDistrict} 完整名单</h3>
                 <p className="text-xs text-[#94a3b8] mb-5">
                   高潜力企业共 <span className="font-semibold text-[#475569]">{stats?.highPotential}</span> 家，留下联系方式即可获取完整名单
                 </p>
@@ -394,7 +415,7 @@ export default function LandingClient({ from }: Props) {
                   />
                   <FormField
                     label="所在单位"
-                    placeholder="例如：东西湖区科技创新局"
+                    placeholder="例如：洪山区科技创新局"
                     value={lead.unit}
                     onChange={(v) => setLead((f) => ({ ...f, unit: v }))}
                   />
