@@ -15,13 +15,12 @@ interface DispatchTarget {
 interface Props {
   targets: DispatchTarget[];
   onClose: () => void;
-  onConfirm: (assignee: Visitor, notes: string) => void;
+  onConfirm: (assignee: Visitor) => void;
 }
 
 export default function DispatchModal({ targets, onClose, onConfirm }: Props) {
   const [accounts, setAccounts] = useState<SurveyAccount[]>([]);
   const [selected, setSelected] = useState<Visitor | null>(null);
-  const [notes, setNotes] = useState("");
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function DispatchModal({ targets, onClose, onConfirm }: Props) {
 
   function handleConfirm() {
     if (!selected) return;
-    onConfirm(selected, notes);
+    onConfirm(selected);
     setDone(true);
   }
 
@@ -125,19 +124,6 @@ export default function DispatchModal({ targets, onClose, onConfirm }: Props) {
                 </div>
               )}
             </div>
-
-            {/* Notes */}
-            <div>
-              <p className="text-xs text-[#94a3b8] mb-2">备注（选填）</p>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="如：请优先联系法人，准备研发费用台账…"
-                rows={3}
-                className="w-full px-3 py-2 text-xs border border-[#e5e7eb] rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-blue-400 text-[#0f172a] placeholder:text-[#cbd5e1]"
-              />
-            </div>
-
             {/* Actions */}
             <div className="flex justify-end gap-2 pt-1">
               <button

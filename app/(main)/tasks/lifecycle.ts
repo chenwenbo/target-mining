@@ -1,6 +1,6 @@
 import type { Task, VisitRecord, WillingnessLevel } from "@/lib/types";
 
-export type LifecycleStage = "pool" | "dispatched" | "investigating" | "done";
+export type LifecycleStage = "pool" | "dispatched" | "done";
 
 export const LIFECYCLE_META: Record<
   LifecycleStage,
@@ -15,23 +15,15 @@ export const LIFECYCLE_META: Record<
     ring: "ring-slate-300",
   },
   dispatched: {
-    label: "已派发 · 待摸排",
+    label: "待摸排",
     dot: "bg-blue-500",
     ribbon: "from-blue-400 to-blue-500",
     bg: "bg-blue-50",
     text: "text-blue-700",
     ring: "ring-blue-400",
   },
-  investigating: {
-    label: "摸排中",
-    dot: "bg-purple-500",
-    ribbon: "from-purple-400 to-purple-500",
-    bg: "bg-purple-50",
-    text: "text-purple-700",
-    ring: "ring-purple-400",
-  },
   done: {
-    label: "已完成",
+    label: "摸排完成",
     dot: "bg-emerald-500",
     ribbon: "from-emerald-400 to-emerald-500",
     bg: "bg-emerald-50",
@@ -40,7 +32,7 @@ export const LIFECYCLE_META: Record<
   },
 };
 
-export const LIFECYCLE_ORDER: LifecycleStage[] = ["pool", "dispatched", "investigating", "done"];
+export const LIFECYCLE_ORDER: LifecycleStage[] = ["pool", "dispatched", "done"];
 
 export function latestVisitRecord(records: VisitRecord[]): VisitRecord | undefined {
   if (records.length === 0) return undefined;
@@ -52,11 +44,7 @@ export function getTaskLifecycleStage(
   records: VisitRecord[],
   hasDraft: boolean,
 ): Exclude<LifecycleStage, "pool"> {
-  if (records.length > 0) {
-    if (task.status === "in_progress") return "investigating";
-    return "done";
-  }
-  if (task.status === "in_progress" || hasDraft) return "investigating";
+  if (records.length > 0 || task.status === "done") return "done";
   return "dispatched";
 }
 

@@ -5,7 +5,7 @@ export function exportToCSV(companies: Company[], filename = "高企潜在标的
   const rows = companies.map((c) => ({
     企业名称: c.name,
     统一社会信用代码: c.creditCode,
-    所在街道园区: c.street,
+    所在街道乡镇: c.street,
     所属领域: c.techField ?? "未分类",
     细分行业: c.industry,
     注册资本万元: c.registeredCapital,

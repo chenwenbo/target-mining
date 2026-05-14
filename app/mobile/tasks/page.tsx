@@ -6,24 +6,21 @@ import Link from "next/link";
 import { getAllTasks } from "@/lib/mock-data";
 import { getCurrentVisitor, getVisitRecordsByTask, getTaskStatusOverrides, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Task, Visitor, TaskStatus } from "@/lib/types";
-import { Search, ChevronRight, AlertCircle, CheckCircle2, Clock } from "lucide-react";
+import { Search, ChevronRight, CheckCircle2 } from "lucide-react";
 
 const STATUS_TABS: { label: string; value: TaskStatus | "all" }[] = [
   { label: "全部", value: "all" },
-  { label: "待走访", value: "pending" },
-  { label: "进行中", value: "in_progress" },
-  { label: "已完成", value: "done" },
+  { label: "待摸排", value: "pending" },
+  { label: "摸排完成", value: "done" },
 ];
 
 const STATUS_LABELS: Record<TaskStatus, string> = {
-  pending: "待走访",
-  in_progress: "进行中",
-  done: "已完成",
+  pending: "待摸排",
+  done: "摸排完成",
 };
 
 const STATUS_STYLES: Record<TaskStatus, string> = {
   pending: "bg-gray-100 text-gray-500",
-  in_progress: "bg-blue-100 text-blue-600",
   done: "bg-emerald-100 text-emerald-600",
 };
 
@@ -58,9 +55,6 @@ export default function TasksPage() {
   });
 
   const pendingCount = allTasks.filter((t) => t.status === "pending").length;
-  const overdueCount = allTasks.filter(
-    (t) => t.status !== "done" && new Date(t.deadline) < new Date()
-  ).length;
 
   return (
     <div className="flex flex-col h-screen">
@@ -72,14 +66,8 @@ export default function TasksPage() {
             <p className="text-blue-200 text-xs mt-0.5">{visitor.name} · {visitor.dept}</p>
           </div>
           <div className="flex items-center gap-2">
-            {overdueCount > 0 && (
-              <span className="flex items-center gap-1 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-medium">
-                <AlertCircle size={10} />
-                超期 {overdueCount}
-              </span>
-            )}
             <span className="bg-blue-500 text-white text-[10px] px-2 py-0.5 rounded-full font-medium">
-              待走访 {pendingCount}
+              待摸排 {pendingCount}
             </span>
           </div>
         </div>
@@ -133,7 +121,6 @@ export default function TasksPage() {
 function TaskCard({ task }: { task: Task & { status: TaskStatus } }) {
   const records = getVisitRecordsByTask(task.id);
   const lastRecord = records.sort((a, b) => b.submittedAt.localeCompare(a.submittedAt))[0];
-  const isOverdue = task.status !== "done" && new Date(task.deadline) < new Date();
 
   return (
     <Link href={`/mobile/tasks/${task.id}`}>
@@ -150,20 +137,13 @@ function TaskCard({ task }: { task: Task & { status: TaskStatus } }) {
         <h3 className="font-semibold text-gray-800 text-sm leading-snug mb-1">{task.companyName}</h3>
         <p className="text-xs text-gray-400 mb-2">{task.street} · 走访次数 {records.length}</p>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <Clock size={11} className={isOverdue ? "text-red-400" : "text-gray-300"} />
-            <span className={`text-[11px] ${isOverdue ? "text-red-500 font-medium" : "text-gray-400"}`}>
-              {isOverdue ? "已超期 · " : "截止 "}
-              {task.deadline}
-            </span>
-          </div>
-          {lastRecord && (
+        {lastRecord && (
+          <div className="flex justify-end">
             <span className="text-[10px] text-gray-400">
               上次走访 {lastRecord.visitedAt.slice(5, 10).replace("-", "月") + "日"}
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </Link>
   );

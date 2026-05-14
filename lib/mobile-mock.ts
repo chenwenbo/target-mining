@@ -1,8 +1,8 @@
-import type { Visitor, VisitRecord, TaskStatus } from "./types";
+import type { Task, Visitor, VisitRecord, TaskStatus } from "./types";
 
 // ─── Mock 走访人员（与 tasks.json 的 assignee 字段对应）──────────
 export const MOCK_VISITORS: Visitor[] = [
-  { id: "v1", name: "王科员", street: "国家网安基地", dept: "国家网安基地管委会" },
+  { id: "v1", name: "王科员", street: "柏泉街道", dept: "柏泉街道办事处" },
   { id: "v2", name: "李科员", street: null,          dept: "科创局·高新处" },
   { id: "v3", name: "张科员", street: "金银湖街道",   dept: "金银湖街道办事处" },
   { id: "v4", name: "赵科员", street: "将军路街道",   dept: "将军路街道办事处" },
@@ -206,12 +206,25 @@ export function getVisitRecordsByTask(taskId: string): VisitRecord[] {
 const TASK_STATUS_KEY = "task_status_overrides";
 
 type StatusOverrides = Record<string, TaskStatus>;
+type LegacyTaskStatus = TaskStatus | "in_progress";
+
+function normalizeTaskStatus(status: LegacyTaskStatus): TaskStatus {
+  return status === "in_progress" ? "done" : status;
+}
+
+function normalizeTask(task: Task & { status: LegacyTaskStatus }): Task {
+  return { ...task, status: normalizeTaskStatus(task.status) };
+}
 
 export function getTaskStatusOverrides(): StatusOverrides {
   if (typeof window === "undefined") return {};
   try {
     const raw = localStorage.getItem(TASK_STATUS_KEY);
-    return raw ? (JSON.parse(raw) as StatusOverrides) : {};
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as Record<string, LegacyTaskStatus>;
+    return Object.fromEntries(
+      Object.entries(parsed).map(([taskId, status]) => [taskId, normalizeTaskStatus(status)]),
+    ) as StatusOverrides;
   } catch {
     return {};
   }
@@ -251,7 +264,7 @@ export function getCustomTasks(): Task[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(CUSTOM_TASKS_KEY);
-    return raw ? (JSON.parse(raw) as Task[]) : [];
+    return raw ? (JSON.parse(raw) as Array<Task & { status: LegacyTaskStatus }>).map(normalizeTask) : [];
   } catch {
     return [];
   }
@@ -284,16 +297,13 @@ export function clearDraft(taskId: string): void {
   localStorage.removeItem(DRAFT_KEY_PREFIX + taskId);
 }
 
-// ─── LocalStorage：手动派发的任务 ────────────────────────────────
-import type { Task } from "./types";
-
 const DISPATCHED_TASKS_KEY = "dispatched_tasks";
 
 export function getDispatchedTasks(): Task[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(DISPATCHED_TASKS_KEY);
-    return raw ? (JSON.parse(raw) as Task[]) : [];
+    return raw ? (JSON.parse(raw) as Array<Task & { status: LegacyTaskStatus }>).map(normalizeTask) : [];
   } catch {
     return [];
   }

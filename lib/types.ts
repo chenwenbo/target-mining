@@ -12,19 +12,23 @@ export const TECH_FIELDS = [
 
 export type TechField = (typeof TECH_FIELDS)[number];
 
-// ─── 街道/园区 ──────────────────────────────────────────────────
-export const STREETS = [
-  "国家网安基地",
-  "临空港经开区",
-  "吴家山街道",
-  "将军路街道",
-  "径河街道",
-  "金银湖街道",
-  "慈惠街道",
-  "走马岭街道",
-  "新沟镇街道",
-  "东山街道",
-] as const;
+// ─── 街道/乡镇 ──────────────────────────────────────────────────
+export type AdministrativeUnitType = "street" | "town";
+
+export const ADMINISTRATIVE_UNITS = [
+  { name: "柏泉街道", type: "street" },
+  { name: "辛安渡街道", type: "street" },
+  { name: "吴家山街道", type: "street" },
+  { name: "将军路街道", type: "street" },
+  { name: "径河街道", type: "street" },
+  { name: "金银湖街道", type: "street" },
+  { name: "慈惠街道", type: "street" },
+  { name: "走马岭街道", type: "street" },
+  { name: "新沟镇", type: "town" },
+  { name: "东山街道", type: "street" },
+] as const satisfies readonly { name: string; type: AdministrativeUnitType }[];
+
+export const STREETS = ADMINISTRATIVE_UNITS.map((unit) => unit.name);
 
 export type Street = (typeof STREETS)[number];
 
@@ -147,7 +151,7 @@ export interface IPItem {
 }
 
 // ─── 任务 ───────────────────────────────────────────────────────
-export type TaskStatus = "pending" | "in_progress" | "done";
+export type TaskStatus = "pending" | "done";
 
 export interface Task {
   id: string;
@@ -157,8 +161,6 @@ export interface Task {
   street: string;
   status: TaskStatus;
   createdAt: string;
-  deadline: string;
-  notes: string;
 }
 
 // ─── 复审状态 ────────────────────────────────────────────────────

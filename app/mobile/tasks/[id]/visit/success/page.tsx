@@ -46,7 +46,7 @@ export default function VisitSuccessPage() {
           <CheckCircle2 size={44} className="text-white" strokeWidth={1.5} />
         </div>
         <h1 className="text-2xl font-bold text-white mb-1">走访记录已提交</h1>
-        <p className="text-blue-200 text-sm">任务状态已更新为「进行中」</p>
+        <p className="text-blue-200 text-sm">任务状态已更新为「摸排完成」</p>
       </div>
 
       {/* 走访摘要卡片 */}

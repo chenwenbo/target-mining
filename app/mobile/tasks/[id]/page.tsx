@@ -32,7 +32,6 @@ import {
   ArrowLeft,
   Phone,
   MapPin,
-  Calendar,
   Users,
   Award,
   Shield,
@@ -106,15 +105,13 @@ export default function TaskDetailPage() {
     b.submittedAt.localeCompare(a.submittedAt)
   );
 
-  const isOverdue = status !== "done" && new Date(task.deadline) < new Date();
 
   const STATUS_STYLES: Record<TaskStatus, string> = {
     pending:     "bg-gray-100 text-gray-500",
-    in_progress: "bg-blue-100 text-blue-600",
     done:        "bg-emerald-100 text-emerald-600",
   };
   const STATUS_LABELS: Record<TaskStatus, string> = {
-    pending: "待走访", in_progress: "进行中", done: "已完成",
+    pending: "待摸排", done: "摸排完成",
   };
 
   const TAB_LABELS = {
@@ -140,12 +137,11 @@ export default function TaskDetailPage() {
         {/* 快捷信息横向滑动 */}
         <div className="flex gap-3 overflow-x-auto no-scrollbar pb-3 -mx-1 px-1">
           {[
-            { icon: MapPin,     text: company.street },
-            { icon: Calendar,  text: isOverdue ? `超期 ${task.deadline}` : `截止 ${task.deadline}`, red: isOverdue },
+            { icon: MapPin,    text: company.street },
             { icon: FileText,  text: `走访 ${records.length} 次` },
             { icon: Users,     text: `${company.employees} 人` },
-          ].map(({ icon: Icon, text, red }, i) => (
-            <div key={i} className={`flex items-center gap-1.5 shrink-0 bg-gray-50 rounded-lg px-3 py-2 text-xs ${red ? "text-red-500" : "text-gray-500"}`}>
+          ].map(({ icon: Icon, text }, i) => (
+            <div key={i} className="flex items-center gap-1.5 shrink-0 bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-500">
               <Icon size={12} />
               <span>{text}</span>
             </div>
@@ -189,7 +185,7 @@ export default function TaskDetailPage() {
           ) : (
             <div className="flex items-center justify-center gap-2 text-emerald-600 text-sm font-medium py-2">
               <CheckCircle size={16} />
-              <span>任务已完成</span>
+              <span>摸排已完成</span>
             </div>
           )}
         </div>

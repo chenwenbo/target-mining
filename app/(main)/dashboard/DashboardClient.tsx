@@ -365,13 +365,13 @@ function PanelCard({
   );
 }
 
-// ─── 街道园区分布 ────────────────────────────────────────────
+// ─── 街道乡镇分布 ────────────────────────────────────────────
 function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) {
   const sorted = Object.entries(byStreet).sort((a, b) => b[1] - a[1]).slice(0, 10);
   const max = sorted[0]?.[1] ?? 1;
   return (
     <PanelCard
-      title="街道 / 园区分布"
+      title="街道 / 乡镇分布"
       subtitle="按潜在标的数量排序"
       action={<Link href="/targets" className="text-xs text-blue-600 hover:underline">全部 ▸</Link>}
     >
@@ -516,7 +516,7 @@ export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
       {/* 第一行：3 张 KPI 卡横排 */}
       <TopKPI kpi={kpi} />
 
-      {/* 第二行：企业漏斗 + 园区街道分布 */}
+      {/* 第二行：企业漏斗 + 街道乡镇分布 */}
       <div className="grid grid-cols-2 gap-4 mb-4">
         <EnterpriseFunnel kpi={kpi} />
         <StreetDistribution byStreet={kpi.byStreet} />

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { getAllTasks } from "@/lib/mock-data";
 import { getCurrentVisitor, getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Visitor, TaskStatus, VisitRecord } from "@/lib/types";
-import { BarChart2, Users, CheckCircle2, TrendingUp, Clock } from "lucide-react";
+import { BarChart2, Users, CheckCircle2, TrendingUp } from "lucide-react";
 
 const WILLINGNESS_MAP: Record<string, { label: string; color: string; bar: string }> = {
   strong:      { label: "意愿强烈",   color: "text-emerald-600", bar: "bg-emerald-500" },
@@ -21,11 +21,9 @@ interface StatsState {
   doneCount: number;
   completionRate: number;
   willingCount: number;
-  avgDuration: number;
   willingnessCount: Record<string, number>;
   maxWilling: number;
   pendingCount: number;
-  inProgressCount: number;
 }
 
 function computeStats(visitorId: string, visitorName: string, visitorStreet?: string): StatsState {
@@ -38,10 +36,6 @@ function computeStats(visitorId: string, visitorName: string, visitorStreet?: st
   const doneCount = myTasks.filter((t) => t.status === "done").length;
   const completionRate = myTasks.length > 0 ? Math.round((doneCount / myTasks.length) * 100) : 0;
   const willingCount = allRecords.filter((r) => r.willingness === "strong" || r.willingness === "moderate").length;
-  const withDuration = allRecords.filter((r) => r.visitDurationMinutes);
-  const avgDuration = withDuration.length > 0
-    ? Math.round(withDuration.reduce((s, r) => s + (r.visitDurationMinutes ?? 0), 0) / withDuration.length)
-    : 0;
   const willingnessCount: Record<string, number> = {};
   for (const r of allRecords) {
     willingnessCount[r.willingness] = (willingnessCount[r.willingness] ?? 0) + 1;
@@ -52,11 +46,9 @@ function computeStats(visitorId: string, visitorName: string, visitorStreet?: st
     doneCount,
     completionRate,
     willingCount,
-    avgDuration,
     willingnessCount,
     maxWilling: Math.max(1, ...Object.values(willingnessCount)),
     pendingCount: myTasks.filter((t) => t.status === "pending").length,
-    inProgressCount: myTasks.filter((t) => t.status === "in_progress").length,
   };
 }
 
@@ -75,7 +67,7 @@ export default function StatsPage() {
 
   if (!visitor || !stats) return null;
 
-  const { allRecords, visitedCompanies, doneCount, completionRate, willingCount, avgDuration, willingnessCount, maxWilling, pendingCount, inProgressCount } = stats;
+  const { allRecords, visitedCompanies, doneCount, completionRate, willingCount, willingnessCount, maxWilling, pendingCount } = stats;
 
 
   return (
@@ -88,22 +80,21 @@ export default function StatsPage() {
 
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {/* KPI 卡片 */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-2">
           {[
             { icon: Users,        label: "已走访企业",  value: visitedCompanies, unit: "家",  color: "text-blue-600",    bg: "bg-blue-50" },
             { icon: CheckCircle2, label: "任务完成率",  value: completionRate,   unit: "%",  color: "text-emerald-600", bg: "bg-emerald-50" },
             { icon: TrendingUp,   label: "有申报意愿",  value: willingCount,     unit: "家",  color: "text-purple-600",  bg: "bg-purple-50" },
-            { icon: Clock,        label: "平均走访时长", value: avgDuration || "-", unit: avgDuration ? "分钟" : "", color: "text-amber-600", bg: "bg-amber-50" },
           ].map(({ icon: Icon, label, value, unit, color, bg }) => (
-            <div key={label} className="bg-white rounded-xl p-4">
-              <div className={`w-8 h-8 rounded-lg ${bg} flex items-center justify-center mb-2`}>
-                <Icon size={16} className={color} />
+            <div key={label} className="bg-white rounded-xl p-3">
+              <div className={`w-7 h-7 rounded-lg ${bg} flex items-center justify-center mb-2`}>
+                <Icon size={15} className={color} />
               </div>
               <div className="flex items-end gap-1">
-                <span className={`text-2xl font-bold ${color}`}>{value}</span>
+                <span className={`text-xl font-bold ${color}`}>{value}</span>
                 <span className="text-xs text-gray-400 mb-0.5">{unit}</span>
               </div>
-              <p className="text-xs text-gray-400 mt-0.5">{label}</p>
+              <p className="text-[11px] text-gray-400 mt-0.5 whitespace-nowrap">{label}</p>
             </div>
           ))}
         </div>
@@ -140,11 +131,10 @@ export default function StatsPage() {
         {/* 任务总览 */}
         <div className="bg-white rounded-xl p-4">
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">任务总览</h3>
-          <div className="grid grid-cols-3 gap-3 text-center">
+          <div className="grid grid-cols-2 gap-3 text-center">
             {[
-              { label: "待走访", count: pendingCount, color: "text-gray-600" },
-              { label: "进行中", count: inProgressCount, color: "text-blue-600" },
-              { label: "已完成", count: doneCount, color: "text-emerald-600" },
+              { label: "待摸排", count: pendingCount, color: "text-gray-600" },
+              { label: "摸排完成", count: doneCount, color: "text-emerald-600" },
             ].map(({ label, count, color }) => (
               <div key={label} className="bg-gray-50 rounded-lg py-3">
                 <div className={`text-2xl font-bold ${color}`}>{count}</div>

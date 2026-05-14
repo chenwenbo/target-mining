@@ -149,7 +149,7 @@ function FilterPanel({
         </div>
       ))}
 
-      {!lockedStreet && section("所在街道 / 园区", "border-l-slate-400", (
+      {!lockedStreet && section("所在街道 / 乡镇", "border-l-slate-400", (
         <div className="space-y-1">
           {streetOptions.map((s) => (
             <label key={s} className="flex items-center gap-2 text-xs text-[#475569] cursor-pointer hover:text-[#0f172a]">
@@ -278,10 +278,9 @@ function TargetsPageContent() {
     })));
   }
 
-  function handleDispatchConfirm(assignee: Visitor, notes: string) {
+  function handleDispatchConfirm(assignee: Visitor) {
     if (!dispatchTargets) return;
     const today = new Date().toISOString().slice(0, 10);
-    const deadline = new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
     dispatchTargets.forEach((t, i) => {
       saveDispatchedTask({
         id: `dispatch_${Date.now()}_${i}`,
@@ -291,8 +290,6 @@ function TargetsPageContent() {
         street: assignee.street ?? t.street,
         status: "pending",
         createdAt: today,
-        deadline,
-        notes,
       });
     });
   }
@@ -417,7 +414,7 @@ function TargetsPageContent() {
                 </th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">企业名称</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">领域</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 园区</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 乡镇</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">成立年限</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-36">知识产权</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-28">参保/研发</th>
@@ -550,8 +547,8 @@ function TargetsPageContent() {
       <DispatchModal
         targets={dispatchTargets}
         onClose={() => setDispatchTargets(null)}
-        onConfirm={(assignee, notes) => {
-          handleDispatchConfirm(assignee, notes);
+        onConfirm={(assignee) => {
+          handleDispatchConfirm(assignee);
         }}
       />
     )}

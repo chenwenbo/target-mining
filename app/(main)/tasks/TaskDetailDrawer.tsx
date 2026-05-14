@@ -105,8 +105,6 @@ export default function TaskDetailDrawer({ open, onClose, task, company, records
             <Row label="行业" value={company?.industry ?? "-"} />
             <Row label="经办人" value={task.assignee} />
             <Row label="派发时间" value={task.createdAt} />
-            <Row label="截止时间" value={task.deadline} />
-            {task.notes && <Row label="派发备注" value={task.notes} />}
           </Section>
 
           {/* 多记录切换 */}

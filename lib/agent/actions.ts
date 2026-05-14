@@ -8,14 +8,8 @@ export interface AgentAction {
   id: string;
   label: string;
   kind: AgentActionKind;
-  payload: { companyIds: string[]; assignee?: string; deadline?: string };
+  payload: { companyIds: string[]; assignee?: string };
   confirm: { title: string; affected: string[]; warning?: string };
-}
-
-function todayPlus(days: number): string {
-  const d = new Date();
-  d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
 }
 
 export interface ActionResult {
@@ -39,8 +33,6 @@ export async function executeAction(action: AgentAction): Promise<ActionResult> 
         street: c.street,
         status: "pending",
         createdAt: new Date().toISOString().slice(0, 10),
-        deadline: action.payload.deadline ?? todayPlus(14),
-        notes: "智能体推荐 · 走访摸排",
       };
       addCustomTask(task);
       count += 1;

@@ -4,22 +4,20 @@
     "companyId": "c0061",
     "companyName": "武汉磐石网络安全科技有限公司",
     "assignee": "王科员",
-    "street": "国家网安基地",
-    "status": "in_progress",
+    "street": "柏泉街道",
+    "status": "done",
     "createdAt": "2026-04-10",
-    "deadline": "2026-06-30",
-    "notes": "已联系法人，材料准备中，缺研发费用台账"
+    "deadline": "2026-06-30"
   },
   {
     "id": "t002",
     "companyId": "c0062",
     "companyName": "武汉鼎盛智能装备股份有限公司",
     "assignee": "李科员",
-    "street": "临空港经开区",
+    "street": "辛安渡街道",
     "status": "pending",
     "createdAt": "2026-04-12",
-    "deadline": "2026-06-30",
-    "notes": "等待企业回复"
+    "deadline": "2026-06-30"
   },
   {
     "id": "t003",
@@ -29,8 +27,7 @@
     "street": "吴家山街道",
     "status": "done",
     "createdAt": "2026-03-28",
-    "deadline": "2026-05-31",
-    "notes": "已完成初审，材料齐全，已提交区局审核"
+    "deadline": "2026-05-31"
   },
   {
     "id": "t004",
@@ -40,19 +37,17 @@
     "street": "金银湖街道",
     "status": "pending",
     "createdAt": "2026-04-13",
-    "deadline": "2026-07-15",
-    "notes": "研发费用占比需补材料"
+    "deadline": "2026-07-15"
   },
   {
     "id": "t005",
     "companyId": "c0065",
     "companyName": "武汉星纬量子通信有限公司",
     "assignee": "李科员",
-    "street": "国家网安基地",
-    "status": "in_progress",
+    "street": "柏泉街道",
+    "status": "done",
     "createdAt": "2026-04-08",
-    "deadline": "2026-06-30",
-    "notes": "已送达通知，企业在准备专利清单"
+    "deadline": "2026-06-30"
   },
   {
     "id": "t006",
@@ -62,8 +57,7 @@
     "street": "将军路街道",
     "status": "pending",
     "createdAt": "2026-04-14",
-    "deadline": "2026-08-31",
-    "notes": "先做意愿摸底"
+    "deadline": "2026-08-31"
   },
   {
     "id": "t007",
@@ -73,8 +67,7 @@
     "street": "径河街道",
     "status": "done",
     "createdAt": "2026-03-20",
-    "deadline": "2026-05-31",
-    "notes": "已指导补充发明专利申请，预计 3 个月内可达标"
+    "deadline": "2026-05-31"
   },
   {
     "id": "t008",
@@ -82,10 +75,9 @@
     "companyName": "武汉青鸟新能源科技有限公司",
     "assignee": "张科员",
     "street": "走马岭街道",
-    "status": "in_progress",
+    "status": "done",
     "createdAt": "2026-04-05",
-    "deadline": "2026-07-31",
-    "notes": "研发人员占比 8%，需提升至 10%"
+    "deadline": "2026-07-31"
   },
   {
     "id": "t009",
@@ -95,73 +87,66 @@
     "street": "慈惠街道",
     "status": "pending",
     "createdAt": "2026-04-15",
-    "deadline": "2026-08-31",
-    "notes": "待约谈法人"
+    "deadline": "2026-08-31"
   },
   {
     "id": "t010",
     "companyId": "c0117",
     "companyName": "武汉远航航空配件有限公司",
     "assignee": "李科员",
-    "street": "临空港经开区",
+    "street": "辛安渡街道",
     "status": "pending",
     "createdAt": "2026-04-15",
-    "deadline": "2026-09-30",
-    "notes": "新增派发，等待初接触"
+    "deadline": "2026-09-30"
   },
   {
     "id": "t011",
     "companyId": "c0011",
     "companyName": "东湖深蓝科技有限公司",
     "assignee": "王科员",
-    "street": "国家网安基地",
+    "street": "柏泉街道",
     "status": "pending",
     "createdAt": "2026-04-20",
-    "deadline": "2026-07-31",
-    "notes": ""
+    "deadline": "2026-07-31"
   },
   {
     "id": "t012",
     "companyId": "c0017",
     "companyName": "荆楚数盾技术股份有限公司",
     "assignee": "赵科员",
-    "street": "国家网安基地",
+    "street": "柏泉街道",
     "status": "pending",
     "createdAt": "2026-04-21",
-    "deadline": "2026-07-31",
-    "notes": ""
+    "deadline": "2026-07-31"
   },
   {
     "id": "t013",
     "companyId": "c0021",
     "companyName": "荆楚远航技术有限公司",
     "assignee": "李科员",
-    "street": "临空港经开区",
+    "street": "辛安渡街道",
     "status": "pending",
     "createdAt": "2026-04-22",
-    "deadline": "2026-08-15",
-    "notes": ""
+    "deadline": "2026-08-15"
   },
   {
     "id": "t014",
     "companyId": "c0023",
     "companyName": "楚天镀膜科技股份有限公司",
     "assignee": "张科员",
-    "street": "临空港经开区",
+    "street": "辛安渡街道",
     "status": "pending",
     "createdAt": "2026-04-22",
-    "deadline": "2026-08-15",
-    "notes": ""
+    "deadline": "2026-08-15"
   },
   {
     "id": "t015",
     "companyId": "c0019",
     "companyName": "荆楚启航科技股份有限公司",
     "assignee": "王科员",
-    "street": "国家网安基地",
+    "street": "柏泉街道",
     "status": "pending",
     "createdAt": "2026-04-23",
-    "deadline": "2026-09-30",
-    "notes": ""
+    "deadline": "2026-09-30"
   }
 ]

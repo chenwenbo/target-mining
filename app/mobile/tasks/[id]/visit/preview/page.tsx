@@ -69,7 +69,7 @@ export default function VisitPreviewPage() {
     };
 
     saveVisitRecord(record);
-    setTaskStatus(id, "in_progress");
+    setTaskStatus(id, "done");
     sessionStorage.removeItem(`visit_form_${id}`);
     router.replace(`/mobile/tasks/${id}/visit/success`);
   }
@@ -154,7 +154,7 @@ export default function VisitPreviewPage() {
         </PreviewSection>
 
         <p className="text-center text-xs text-gray-400 pb-2">
-          提交后将同步更新任务状态为「进行中」
+          提交后将同步更新任务状态为「摸排完成」
         </p>
       </div>
 

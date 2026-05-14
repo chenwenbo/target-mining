@@ -117,13 +117,12 @@ export default function TasksPage() {
           return false;
         return true;
       })
-      .sort((a, b) => a.task.deadline.localeCompare(b.task.deadline))
+      .sort((a, b) => a.task.createdAt.localeCompare(b.task.createdAt))
       .map((e) => ({ ...e, company: getCompanyById(e.task.companyId) }));
   }
 
-  // 已派发待摸排 = dispatched + investigating 合并
   const activeItems = useMemo(
-    () => makeColumnItems((s) => s === "dispatched" || s === "investigating"),
+    () => makeColumnItems((s) => s === "dispatched"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [enriched, q, streetFilter, assigneeFilter, willingnessFilter],
   );
@@ -154,10 +153,6 @@ export default function TasksPage() {
     const company = allCompanies.find((c) => c.id === pendingCompanyId);
     if (!company) return;
     const visitor = surveyAccountToVisitor(selectedAccount);
-    const today = new Date();
-    const deadline = new Date(today.setMonth(today.getMonth() + 3))
-      .toISOString()
-      .slice(0, 10);
     const newTask: Task = {
       id: `custom_${Date.now()}`,
       companyId: company.id,
@@ -166,8 +161,6 @@ export default function TasksPage() {
       street: visitor.street ?? company.street,
       status: "pending",
       createdAt: new Date().toISOString().slice(0, 10),
-      deadline,
-      notes: "",
     };
     addCustomTask(newTask);
     setPendingCompanyId(null);
@@ -278,10 +271,10 @@ export default function TasksPage() {
           onTaskDrop={handleDropToPool}
         />
 
-        {/* 已派发待摸排（dispatched + investigating） */}
+        {/* 待摸排 */}
         <KanbanColumn
           stage="dispatched"
-          label="已派发待摸排"
+          label="待摸排"
           items={activeItems}
           filtersActive={filtersActive}
           isDropTarget
@@ -291,10 +284,10 @@ export default function TasksPage() {
           onCardDragEnd={() => setDraggingTaskId(null)}
         />
 
-        {/* 已完成 */}
+        {/* 摸排完成 */}
         <KanbanColumn
           stage="done"
-          label="已完成"
+          label="摸排完成"
           items={doneItems}
           filtersActive={filtersActive}
         />

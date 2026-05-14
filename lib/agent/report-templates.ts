@@ -52,7 +52,7 @@ function buildWeeklyDiscoveryReport(): AgentReport {
 
 ${fieldRows}
 
-## 三、街道 / 园区 TOP 5
+## 三、街道 / 乡镇 TOP 5
 
 ${streetRows}
 
@@ -83,10 +83,7 @@ function buildTaskExecutionReport(): AgentReport {
   for (const t of [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()]) taskById.set(t.id, t);
   const tasks = Array.from(taskById.values());
   const done = tasks.filter((t) => t.status === "done").length;
-  const inProgress = tasks.filter((t) => t.status === "in_progress").length;
   const pending = tasks.filter((t) => t.status === "pending").length;
-  const today = new Date().toISOString().slice(0, 10);
-  const overdue = tasks.filter((t) => t.status !== "done" && t.deadline < today);
 
   const byAssignee = new Map<string, { total: number; done: number }>();
   for (const t of tasks) {
@@ -103,37 +100,22 @@ function buildTaskExecutionReport(): AgentReport {
     )
     .join("\n");
 
-  const overdueRows = overdue
-    .slice(0, 10)
-    .map(
-      (t, i) =>
-        `${i + 1}. ${t.companyName} · ${t.assignee} · 截止 ${t.deadline} · ${t.notes || "—"}`,
-    )
-    .join("\n");
-
   const markdown = `# 任务执行简报 — ${todayLabel()}
 
 ## 一、整体进度
 
 - 任务总数：**${tasks.length}** 条
-- ✅ 已完成：**${done}** 条（${Math.round((done / tasks.length) * 100)}%）
-- 🔄 进行中：**${inProgress}** 条
-- ⏳ 待启动：**${pending}** 条
-- 🔴 已超期：**${overdue.length}** 条
+- ✅ 摸排完成：**${done}** 条（${Math.round((done / tasks.length) * 100)}%）
+- ⏳ 待摸排：**${pending}** 条
 
 ## 二、各负责人产出
 
 ${assigneeRows || "暂无数据"}
 
-## 三、超期任务清单（最多 10 条）
+## 三、建议
 
-${overdueRows || "无超期任务"}
-
-## 四、建议
-
-1. 优先解决 **已超期** 任务，避免影响整体进度
-2. 关注产出最低负责人的资源支持
-3. 周内确保至少完成 **${Math.max(0, Math.ceil(tasks.length * 0.7) - done)}** 条任务以达到 70% 完成率
+1. 关注产出最低负责人的资源支持
+2. 周内确保至少完成 **${Math.max(0, Math.ceil(tasks.length * 0.7) - done)}** 条任务以达到 70% 完成率
 `;
 
   return {

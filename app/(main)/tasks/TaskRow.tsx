@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { CalendarDays, User, FileText, ChevronRight, AlertTriangle, Save, Repeat } from "lucide-react";
+import { CalendarDays, User, ChevronRight, Save, Repeat } from "lucide-react";
 import type { Task, VisitRecord, Company } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import {
@@ -10,8 +10,6 @@ import {
   type LifecycleStage,
 } from "./lifecycle";
 
-const TODAY = "2026-04-28";
-
 type Props = {
   stage: Exclude<LifecycleStage, "pool">;
   task: Task;
@@ -20,7 +18,6 @@ type Props = {
   recordCount: number;
   hasDraft: boolean;
   onOpen: () => void;
-  onAdvance?: () => void;
 };
 
 export default function TaskRow({
@@ -31,10 +28,7 @@ export default function TaskRow({
   recordCount,
   hasDraft,
   onOpen,
-  onAdvance,
 }: Props) {
-  const isOverdue = task.deadline < TODAY && stage !== "done";
-
   return (
     <div
       onClick={onOpen}
@@ -52,11 +46,6 @@ export default function TaskRow({
             >
               {task.companyName}
             </Link>
-            {isOverdue && (
-              <span className="shrink-0 inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded bg-red-50 text-red-600 border border-red-100">
-                <AlertTriangle size={10} /> 已超期
-              </span>
-            )}
           </div>
           <div className="flex items-center gap-2 text-[11px] text-[#64748b]">
             <span className="px-1.5 py-0.5 rounded bg-[#f1f5f9] text-[#475569] truncate max-w-[120px]" title={task.street}>
@@ -72,8 +61,8 @@ export default function TaskRow({
 
         {/* 中：阶段特化信息 */}
         <div className="col-span-6 min-w-0">
-          {(stage === "dispatched" || stage === "investigating") && (
-            <DispatchedMiddle task={task} stage={stage} hasDraft={hasDraft} recordCount={recordCount} />
+          {stage === "dispatched" && (
+            <DispatchedMiddle task={task} hasDraft={hasDraft} recordCount={recordCount} />
           )}
           {stage === "done" && latestRecord && (
             <DoneMiddle task={task} record={latestRecord} recordCount={recordCount} />
@@ -82,37 +71,22 @@ export default function TaskRow({
 
         {/* 右：操作 */}
         <div className="col-span-2 flex items-center justify-end gap-2">
-          {stage === "dispatched" && onAdvance && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                onAdvance();
-              }}
-              className="text-xs px-3 py-1.5 rounded-md bg-blue-50 text-blue-700 border border-blue-100 hover:bg-blue-100 transition-colors font-medium"
-            >
-              标记摸排中
-            </button>
-          )}
-          {stage !== "dispatched" && (
-            <span className="text-xs text-[#94a3b8] flex items-center gap-0.5 group-hover:text-blue-600 transition-colors">
-              查看详情 <ChevronRight size={13} />
-            </span>
-          )}
+          <span className="text-xs text-[#94a3b8] flex items-center gap-0.5 group-hover:text-blue-600 transition-colors">
+            查看详情 <ChevronRight size={13} />
+          </span>
         </div>
       </div>
     </div>
   );
 }
 
-// ─── 中段：派发中 / 摸排中 ────────────────────────────────────
+// ─── 中段：待摸排 ────────────────────────────────────────────
 function DispatchedMiddle({
   task,
-  stage,
   hasDraft,
   recordCount,
 }: {
   task: Task;
-  stage: "dispatched" | "investigating";
   hasDraft: boolean;
   recordCount: number;
 }) {
@@ -127,26 +101,17 @@ function DispatchedMiddle({
           <CalendarDays size={11} className="text-[#94a3b8]" />
           派发于 {task.createdAt}
         </span>
-        <span className="flex items-center gap-1">
-          截止 <span className="font-medium tabular-nums">{task.deadline}</span>
-        </span>
-        {stage === "investigating" && hasDraft && (
+        {hasDraft && (
           <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full bg-fuchsia-50 text-fuchsia-700 border border-fuchsia-100">
             <Save size={10} /> 草稿已保存
           </span>
         )}
-        {stage === "investigating" && recordCount > 0 && (
+        {recordCount > 0 && (
           <span className="inline-flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-100">
             <Repeat size={10} /> 走访 {recordCount} 次
           </span>
         )}
       </div>
-      {task.notes && (
-        <div className="flex items-start gap-1 text-[11px] text-[#94a3b8] line-clamp-1">
-          <FileText size={11} className="text-[#cbd5e1] shrink-0 mt-0.5" />
-          <span className="truncate">{task.notes}</span>
-        </div>
-      )}
     </div>
   );
 }

@@ -79,11 +79,11 @@ export const QUESTION_CATEGORIES: QuestionCategory[] = [
 
 const FOLLOW_UPS: Record<string, string[]> = {
   q1:  ["各技术领域潜在标的各有多少？", "申报意愿强烈的企业集中在哪些街道？", "标的池中有多少企业已进入科技型中小企业库？"],
-  q2:  ["临空港经开区的企业以哪些技术领域为主？", "哪些街道拥有最多发明专利的企业？", "各街道企业的平均成立年限如何？"],
+  q2:  ["重点街道/乡镇的企业以哪些技术领域为主？", "哪些街道拥有最多发明专利的企业？", "各街道企业的平均成立年限如何？"],
   q3:  ["距年度目标还差多少家？", "上半年完成率与去年同期对比？", "哪些街道今年申报成功率最高？"],
   q4:  ["这些紧迫企业的复审准备度评分如何？", "已逾期未完成复审的企业有几家？", "6个月内到期的企业主要集中在哪些领域？"],
   q5:  ["研发投入比不达标的企业有哪些？", "知识产权增长不足的企业如何补救？", "针对这些企业有哪些辅导建议？"],
-  q6:  ["未完成任务中哪些已超出截止日期？", "哪位走访员完成率最高？", "任务积压最多的是哪个街道？"],
+  q6:  ["未完成任务中哪位走访员积压最多？", "哪位走访员完成率最高？", "任务积压最多的是哪个街道？"],
   q7:  ["生物与新医药领域的研发投入如何对比？", "电子信息企业平均研发人员占比是多少？", "研发投入最高的前五家电子信息企业？"],
   q8:  ["增速最快的技术领域是？", "各领域企业平均成立年龄对比？", "知识产权最密集的是哪个领域？"],
   q9:  ["这些风险企业是否已被纳入走访任务？", "有处罚记录的企业还能申报高企吗？", "经营异常的企业数量近年趋势？"],
@@ -161,11 +161,11 @@ export async function askAgent(question: string, questionId?: string): Promise<A
       role: "assistant",
       content: `**各街道高潜力企业分布**
 
-标的池中企业分布最集中的三个园区/街道为：${top3Streets}，合计占全部潜在标的的 ${Math.round(sorted.slice(0, 3).reduce((s, [, n]) => s + n, 0) / targets.length * 100)}%。
+标的池中企业分布最集中的三个街道/乡镇为：${top3Streets}，合计占全部潜在标的的 ${Math.round(sorted.slice(0, 3).reduce((s, [, n]) => s + n, 0) / targets.length * 100)}%。
 
-**${topStreetName}** 以 ${sorted[0]?.[1]} 家高居首位，该园区以电子信息和高技术服务为主，企业整体研发密度较高，是今年申报攻坚的核心区域。
+**${topStreetName}** 以 ${sorted[0]?.[1]} 家高居首位，该行政单元以电子信息和高技术服务为主，企业整体研发密度较高，是今年申报攻坚的核心区域。
 
-以下是该园区综合得分最高的代表性企业：`,
+以下是该行政单元综合得分最高的代表性企业：`,
       sources: topStreetCompanies.map((c) => companyToSource(c, topStreetName ?? "重点街道", "purple")),
       followUps,
     };
@@ -273,33 +273,28 @@ export async function askAgent(question: string, questionId?: string): Promise<A
   // ─── q6 任务进度 ─────────────────────────────────────────────────
   if (qid === "q6" || question.includes("任务") || question.includes("走访")) {
     const done = tasks.filter((t) => t.status === "done").length;
-    const inProgress = tasks.filter((t) => t.status === "in_progress").length;
     const pending = tasks.filter((t) => t.status === "pending").length;
-    const overdue = tasks.filter((t) => t.status !== "done" && new Date(t.deadline) < new Date("2026-04-28")).length;
     return {
       role: "assistant",
       content: `**本期任务完成情况**
 
 | 状态 | 数量 | 占比 |
 |------|------|------|
-| ✅ 已完成 | ${done} | ${Math.round(done / tasks.length * 100)}% |
-| 🔄 进行中 | ${inProgress} | ${Math.round(inProgress / tasks.length * 100)}% |
-| ⏳ 待启动 | ${pending} | ${Math.round(pending / tasks.length * 100)}% |
-| 🔴 已超期 | ${overdue} | — |
+| ✅ 摸排完成 | ${done} | ${Math.round(done / tasks.length * 100)}% |
+| ⏳ 待摸排 | ${pending} | ${Math.round(pending / tasks.length * 100)}% |
 
-整体完成率 **${Math.round(done / tasks.length * 100)}%**，当前有 **${overdue}** 条任务已超出截止日期，建议立即跟进。
-
-进行中的任务主要分布在：${[...new Set(tasks.filter((t) => t.status === "in_progress").map((t) => t.street))].join("、") || "各街道均有分布"}。`,
+整体完成率 **${Math.round(done / tasks.length * 100)}%**。
+`,
       sources: tasks
-        .filter((t) => t.status !== "done" && new Date(t.deadline) < new Date("2026-04-28"))
+        .filter((t) => t.status !== "done")
         .slice(0, 3)
         .map((t) => ({
           id: t.id,
           title: t.companyName,
           subtitle: `${t.street} · 负责人：${t.assignee}`,
-          tag: "已超期",
-          tagColor: "red" as const,
-          snippet: `截止日期 ${t.deadline}，${t.notes || "暂无备注"}`,
+          tag: "待摸排",
+          tagColor: "blue" as const,
+          snippet: `派发于 ${t.createdAt}`,
         })),
       followUps,
     };
@@ -314,7 +309,7 @@ export async function askAgent(question: string, questionId?: string): Promise<A
       role: "assistant",
       content: `**电子信息领域企业研发投入分析**
 
-标的池中电子信息领域共有 **${eiCompanies.length}** 家潜在标的企业，主要分布于国家网安基地和临空港经开区。
+标的池中电子信息领域共有 **${eiCompanies.length}** 家潜在标的企业，主要分布于重点街道/乡镇。
 
 **研发人员结构：**
 - 研发人员占比均值：**${(avgRdRatio * 100).toFixed(1)}%**（高企要求 ≥10%）
