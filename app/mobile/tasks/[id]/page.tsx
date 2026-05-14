@@ -49,6 +49,8 @@ import {
   RefreshCcw,
   QrCode,
   X,
+  Clock,
+  XCircle,
 } from "lucide-react";
 
 const WILLINGNESS_LABELS: Record<string, { label: string; color: string }> = {
@@ -62,6 +64,25 @@ const WILLINGNESS_LABELS: Record<string, { label: string; color: string }> = {
 const METHOD_LABELS: Record<string, string> = {
   in_person: "上门拜访",
   online:    "线上沟通",
+};
+
+const REVENUE_LABELS: Record<string, string> = {
+  under_500w:   "500万以下",
+  "500w_2000w": "500万–2000万",
+  "2000w_1yi":  "2000万–1亿",
+  above_1yi:    "1亿以上",
+};
+const RD_RATIO_LABELS: Record<string, string> = {
+  under_3pct:  "3%以下",
+  "3_5pct":    "3%–5%",
+  "5_10pct":   "5%–10%",
+  above_10pct: "10%以上",
+};
+const RD_SOURCE_LABELS: Record<string, string> = {
+  self_invested:    "自投",
+  government_grant: "政府资助",
+  both:             "自投+政府资助",
+  none:             "无",
 };
 
 const GRADE_META: Record<
@@ -101,9 +122,9 @@ export default function TaskDetailPage() {
   const status = (overrides[id] ?? task.status) as TaskStatus;
   const company = getCompanyById(task.companyId);
   if (!company) return <div className="p-6 text-gray-400 text-sm">企业数据不存在</div>;
-  const records = getVisitRecordsByTask(id).sort((a, b) =>
-    b.submittedAt.localeCompare(a.submittedAt)
-  );
+  const records = getVisitRecords()
+    .filter((r) => r.companyId === company.id)
+    .sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
 
 
   const STATUS_STYLES: Record<TaskStatus, string> = {

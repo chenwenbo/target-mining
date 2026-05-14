@@ -331,21 +331,3 @@ export interface AssessmentRecord {
   score?: AssessmentScore;
   taskId?: string;
 }
-
-// ─── 复审任务 ────────────────────────────────────────────────────
-export type RenewalTaskStatus = "pending" | "in_progress" | "submitted" | "approved" | "rejected";
-
-export interface RenewalTask {
-  id: string;
-  companyId: string;
-  companyName: string;
-  certNo: string;
-  expiryYear: number;
-  assignee: string;
-  street: string;
-  status: RenewalTaskStatus;
-  createdAt: string;
-  deadline: string;
-  notes: string;
-  urgency: RenewalStatus;
-}

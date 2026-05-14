@@ -1,5 +1,5 @@
 "use client";
-import { CheckCircle2, XCircle, AlertTriangle, RefreshCcw } from "lucide-react";
+import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { scoreRenewalReadiness, getRenewalStatus, monthsUntilExpiry } from "@/lib/renewal";
 import type { CertifiedCompany, RenewalStatus } from "@/lib/types";
@@ -273,9 +273,6 @@ export default function TabRenewalAnalysis({ company }: { company: CertifiedComp
       <div className="bg-[#f7f8fa] rounded-lg p-4 border border-[#e5e7eb]">
         <h3 className="text-sm font-semibold text-[#0f172a] mb-3">操作</h3>
         <div className="flex flex-wrap gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors font-medium">
-            <RefreshCcw size={13} /> 新建复审任务
-          </button>
           <button className="px-4 py-2 border border-[#e5e7eb] bg-white text-sm rounded-lg text-[#475569] hover:bg-white/80 transition-colors">
             导出复审分析报告 PDF
           </button>

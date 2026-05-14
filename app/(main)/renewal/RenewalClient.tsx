@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { AlertTriangle, Clock, Calendar, ShieldCheck, ChevronRight, RefreshCcw } from "lucide-react";
+import { AlertTriangle, Clock, Calendar, ShieldCheck, ChevronRight } from "lucide-react";
 import KPICard from "@/components/ui/KPICard";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import type { RenewalKPI } from "@/lib/renewal";
@@ -142,10 +142,6 @@ export default function RenewalClient({ kpi }: { kpi: KPI }) {
             {kpi.total} 家已认定高企 · 共 {kpi.overdue + kpi.critical} 家需立即启动复审
           </p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
-          <RefreshCcw className="w-4 h-4" />
-          新建复审任务
-        </button>
       </div>
 
       {/* KPI Cards */}
