@@ -13,7 +13,7 @@ import {
   getDraft,
 } from "@/lib/mobile-mock";
 import { getScopedSurveyAccounts, surveyAccountToVisitor, type SurveyAccount } from "@/lib/account-mock";
-import { type Task, type VisitRecord, type WillingnessLevel } from "@/lib/types";
+import { type Task, type VisitRecord, type WillingnessLevel, type Company } from "@/lib/types";
 import {
   getTaskLifecycleStage,
   latestVisitRecord,
@@ -38,6 +38,7 @@ export default function TasksPage() {
   const [q, setQ] = useState("");
   const [assigneeFilter, setAssigneeFilter] = useState<string>("all");
   const [willingnessFilter, setWillingnessFilter] = useState<WillingnessLevel | "all">("all");
+  const [companyCategory, setCompanyCategory] = useState<"all" | "tech" | "potential">("all");
   // 拖拽派发（标的池 → 已派发）
   const [draggingCompanyId, setDraggingCompanyId] = useState<string | null>(null);
   const [pendingCompanyId, setPendingCompanyId] = useState<string | null>(null);
@@ -64,6 +65,26 @@ export default function TasksPage() {
   }, [version]);
 
   const allCompanies = useMemo(() => getAllCompanies(), []);
+
+  function matchesCategory(c: Company): boolean {
+    if (companyCategory === "all") return true;
+    if (c.techField === null) return false;
+    if (companyCategory === "tech") return true;
+    const totalPatents = c.patents.invention + c.patents.utility + c.patents.design + c.software;
+    return totalPatents > 0 || c.employees >= 30 || c.rdEmployees >= 10;
+  }
+
+  const companyMap = useMemo(() => {
+    const m = new Map<string, Company>();
+    for (const c of allCompanies) m.set(c.id, c);
+    return m;
+  }, [allCompanies]);
+
+  const poolCompanies = useMemo(
+    () => allCompanies.filter(matchesCategory),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [allCompanies, companyCategory],
+  );
 
   const enriched: TaskWithStage[] = useMemo(() => {
     const merged = [...dispatched, ...customTasks];
@@ -97,7 +118,8 @@ export default function TasksPage() {
   const filtersActive = !!(
     q ||
     assigneeFilter !== "all" ||
-    willingnessFilter !== "all"
+    willingnessFilter !== "all" ||
+    companyCategory !== "all"
   );
 
   function makeColumnItems(stagePredicate: (s: Exclude<LifecycleStage, "pool">) => boolean) {
@@ -111,6 +133,10 @@ export default function TasksPage() {
           (!e.latest || e.latest.willingness !== willingnessFilter)
         )
           return false;
+        if (companyCategory !== "all") {
+          const c = companyMap.get(e.task.companyId);
+          if (!c || !matchesCategory(c)) return false;
+        }
         return true;
       })
       .sort((a, b) => a.task.createdAt.localeCompare(b.task.createdAt))
@@ -120,13 +146,13 @@ export default function TasksPage() {
   const activeItems = useMemo(
     () => makeColumnItems((s) => s === "dispatched"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [enriched, q, assigneeFilter, willingnessFilter],
+    [enriched, q, assigneeFilter, willingnessFilter, companyCategory, companyMap],
   );
 
   const doneItems = useMemo(
     () => makeColumnItems((s) => s === "done"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [enriched, q, assigneeFilter, willingnessFilter],
+    [enriched, q, assigneeFilter, willingnessFilter, companyCategory, companyMap],
   );
 
   function handleDropToDispatched() {
@@ -167,6 +193,7 @@ export default function TasksPage() {
     setQ("");
     setAssigneeFilter("all");
     setWillingnessFilter("all");
+    setCompanyCategory("all");
   }
 
   return (
@@ -227,6 +254,17 @@ export default function TasksPage() {
           ]}
         />
 
+        <Selector
+          label="企业分类"
+          value={companyCategory}
+          onChange={(v) => setCompanyCategory(v as "all" | "tech" | "potential")}
+          options={[
+            { value: "all",       label: "全部企业" },
+            { value: "tech",      label: "泛科技企业" },
+            { value: "potential", label: "潜在标的企业" },
+          ]}
+        />
+
         {filtersActive && (
           <button
             onClick={clearFilters}
@@ -242,9 +280,9 @@ export default function TasksPage() {
         className="flex gap-3 flex-1 min-h-0 overflow-x-auto pb-1"
         onDragEnd={() => setDraggingCompanyId(null)}
       >
-        {/* 标的池（所有企业） */}
+        {/* 标的池（按分类过滤） */}
         <KanbanPoolColumn
-          companies={allCompanies}
+          companies={poolCompanies}
           onDragStart={setDraggingCompanyId}
           onDragEnd={() => setDraggingCompanyId(null)}
           isDraggingTask={!!draggingTaskId}

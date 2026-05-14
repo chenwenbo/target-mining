@@ -6,7 +6,7 @@ import Link from "next/link";
 import { getAllTasks, getCompanyById, getIPItems } from "@/lib/mock-data";
 import {
   getCurrentVisitor,
-  getVisitRecordsByTask,
+  getVisitRecords,
   getTaskStatusOverrides,
   getDispatchedTasks,
   getCustomTasks,
@@ -134,19 +134,23 @@ export default function TaskDetailPage() {
           </span>
         </div>
 
-        {/* 快捷信息横向滑动 */}
-        <div className="flex gap-3 overflow-x-auto no-scrollbar pb-3 -mx-1 px-1">
-          {[
-            { icon: MapPin,    text: company.street },
-            { icon: FileText,  text: `走访 ${records.length} 次` },
-            { icon: Users,     text: `${company.employees} 人` },
-          ].map(({ icon: Icon, text }, i) => (
-            <div key={i} className="flex items-center gap-1.5 shrink-0 bg-gray-50 rounded-lg px-3 py-2 text-xs text-gray-500">
-              <Icon size={12} />
-              <span>{text}</span>
-            </div>
-          ))}
-        </div>
+        {/* 荣誉资质 */}
+        {(company.alreadyCertified || company.inSMEDatabase) && (
+          <div className="flex gap-2 flex-wrap pb-3">
+            {company.alreadyCertified && (
+              <span className="flex items-center gap-1 bg-amber-50 border border-amber-200 rounded-full px-2.5 py-1 text-xs font-medium text-amber-700">
+                <AlertTriangle size={10} />
+                已认定高企（复审池）
+              </span>
+            )}
+            {company.inSMEDatabase && (
+              <span className="flex items-center gap-1 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-1 text-xs font-medium text-blue-600">
+                <CheckCircle size={10} />
+                科技型中小企业
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Tab 栏 */}
         <div className="flex -mx-4 px-4 border-t border-gray-100">
@@ -578,18 +582,16 @@ function OverviewTab({ company }: { company: Company }) {
           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">合规与状态</h3>
           <div className="space-y-2">
             {[
-              { label: "经营异常",      bad: company.risk.abnormal,      badText: "存在异常",        goodText: "无异常" },
-              { label: "行政处罚",      bad: company.risk.penalty,       badText: "存在处罚",        goodText: "无处罚" },
-              { label: "已认定高企",    bad: company.alreadyCertified,   badText: "已认定（复审池）", goodText: "未认定（潜在标的）", invert: true },
-              { label: "科技型中小企业", bad: !company.inSMEDatabase,    badText: "未入库",          goodText: "已入库",             invert: true },
-            ].map(({ label, bad, badText, goodText, invert }) => {
-              const isGood = invert ? bad : !bad;
+              { label: "经营异常", bad: company.risk.abnormal, badText: "存在异常", goodText: "无异常" },
+              { label: "行政处罚", bad: company.risk.penalty,  badText: "存在处罚", goodText: "无处罚" },
+            ].map(({ label, bad, badText, goodText }) => {
+              const isGood = !bad;
               return (
                 <div key={label} className="flex items-center justify-between">
                   <span className="text-xs text-gray-500">{label}</span>
                   <span className={`text-xs font-medium flex items-center gap-1 ${isGood ? "text-emerald-600" : "text-red-500"}`}>
                     {isGood ? <CheckCircle size={11} /> : <AlertTriangle size={11} />}
-                    {bad ? (invert ? goodText : badText) : (invert ? badText : goodText)}
+                    {bad ? badText : goodText}
                   </span>
                 </div>
               );

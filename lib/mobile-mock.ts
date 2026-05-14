@@ -206,25 +206,12 @@ export function getVisitRecordsByTask(taskId: string): VisitRecord[] {
 const TASK_STATUS_KEY = "task_status_overrides";
 
 type StatusOverrides = Record<string, TaskStatus>;
-type LegacyTaskStatus = TaskStatus | "in_progress";
-
-function normalizeTaskStatus(status: LegacyTaskStatus): TaskStatus {
-  return status === "in_progress" ? "done" : status;
-}
-
-function normalizeTask(task: Task & { status: LegacyTaskStatus }): Task {
-  return { ...task, status: normalizeTaskStatus(task.status) };
-}
 
 export function getTaskStatusOverrides(): StatusOverrides {
   if (typeof window === "undefined") return {};
   try {
     const raw = localStorage.getItem(TASK_STATUS_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw) as Record<string, LegacyTaskStatus>;
-    return Object.fromEntries(
-      Object.entries(parsed).map(([taskId, status]) => [taskId, normalizeTaskStatus(status)]),
-    ) as StatusOverrides;
+    return raw ? (JSON.parse(raw) as StatusOverrides) : {};
   } catch {
     return {};
   }
@@ -264,7 +251,7 @@ export function getCustomTasks(): Task[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(CUSTOM_TASKS_KEY);
-    return raw ? (JSON.parse(raw) as Array<Task & { status: LegacyTaskStatus }>).map(normalizeTask) : [];
+    return raw ? (JSON.parse(raw) as Task[]) : [];
   } catch {
     return [];
   }
@@ -303,7 +290,7 @@ export function getDispatchedTasks(): Task[] {
   if (typeof window === "undefined") return [];
   try {
     const raw = localStorage.getItem(DISPATCHED_TASKS_KEY);
-    return raw ? (JSON.parse(raw) as Array<Task & { status: LegacyTaskStatus }>).map(normalizeTask) : [];
+    return raw ? (JSON.parse(raw) as Task[]) : [];
   } catch {
     return [];
   }
