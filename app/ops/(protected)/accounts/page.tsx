@@ -1,5 +1,5 @@
-import AccountsClient from "./AccountsClient";
+import { redirect } from "next/navigation";
 
 export default function OpsAccountsPage() {
-  return <AccountsClient />;
+  redirect("/ops/tenants");
 }

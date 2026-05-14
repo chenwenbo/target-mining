@@ -5,9 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 import {
-  LayoutDashboard,
   Building2,
-  KeyRound,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -20,9 +18,7 @@ interface NavItem {
 }
 
 const OPS_NAV: NavItem[] = [
-  { href: "/ops/dashboard", label: "概览", icon: LayoutDashboard },
   { href: "/ops/tenants", label: "租户管理", icon: Building2 },
-  { href: "/ops/accounts", label: "账号开通", icon: KeyRound },
 ];
 
 export default function OpsSidebar() {

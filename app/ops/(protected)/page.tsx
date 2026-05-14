@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function OpsRoot() {
-  redirect("/ops/dashboard");
+  redirect("/ops/tenants");
 }

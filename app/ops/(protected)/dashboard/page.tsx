@@ -1,5 +1,5 @@
-import OpsDashboardClient from "./OpsDashboardClient";
+import { redirect } from "next/navigation";
 
 export default function OpsDashboardPage() {
-  return <OpsDashboardClient />;
+  redirect("/ops/tenants");
 }

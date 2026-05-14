@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Search, Eye, Pencil, PowerOff, Power } from "lucide-react";
+import { Check, Copy, Download, Eye, EyeOff, Pencil, Plus, Power, PowerOff, Search } from "lucide-react";
+import Papa from "papaparse";
 import { cn } from "@/lib/cn";
 import {
   getTenants,
@@ -39,6 +40,70 @@ function formatRelativeTime(isoStr: string | null): string {
   return `${Math.floor(days / 30)}个月前`;
 }
 
+function useCopyButton(text: string, duration = 1800) {
+  const [copied, setCopied] = useState(false);
+
+  function copy() {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), duration);
+    });
+  }
+
+  return { copied, copy };
+}
+
+function PasswordCell({ password }: { password: string }) {
+  const [show, setShow] = useState(false);
+  const { copied, copy } = useCopyButton(password);
+
+  return (
+    <div className="flex items-center gap-1.5">
+      <span className={cn("font-mono text-xs", !show && "tracking-widest text-[#94a3b8]")}>
+        {show ? password : "••••••••"}
+      </span>
+      <button
+        type="button"
+        onClick={() => setShow((v) => !v)}
+        className="w-6 h-6 rounded-md flex items-center justify-center text-[#94a3b8] hover:bg-[#f1f5f9] hover:text-[#475569] transition-colors"
+        title={show ? "隐藏密码" : "显示密码"}
+      >
+        {show ? <EyeOff size={12} /> : <Eye size={12} />}
+      </button>
+      <button
+        type="button"
+        onClick={copy}
+        className="w-6 h-6 rounded-md flex items-center justify-center text-[#94a3b8] hover:bg-amber-50 hover:text-amber-600 transition-colors"
+        title="复制密码"
+      >
+        {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
+      </button>
+    </div>
+  );
+}
+
+function CopyCredentialsButton({ tenant }: { tenant: Tenant }) {
+  const text = `${tenant.adminUsername}\t${tenant.adminPassword}`;
+  const { copied, copy } = useCopyButton(text);
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className={cn(
+        "h-7 px-2 rounded-md flex items-center gap-1 text-xs border transition-colors",
+        copied
+          ? "text-emerald-600 bg-emerald-50 border-emerald-200"
+          : "text-[#64748b] border-[#e5e7eb] hover:bg-[#f7f8fa] hover:text-[#0f172a]"
+      )}
+      title="复制账号凭证（用户名 + 密码）"
+    >
+      {copied ? <Check size={11} /> : <Copy size={11} />}
+      {copied ? "已复制" : "复制凭证"}
+    </button>
+  );
+}
+
 export default function TenantsClient() {
   const [tenants, setTenants] = useState<Tenant[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -47,6 +112,7 @@ export default function TenantsClient() {
   const [page, setPage] = useState(1);
   const [showAdd, setShowAdd] = useState(false);
   const [editTarget, setEditTarget] = useState<Tenant | null>(null);
+  const [bulkCopied, setBulkCopied] = useState(false);
 
   function reload() {
     setTenants(getTenants());
@@ -95,6 +161,35 @@ export default function TenantsClient() {
     setPage(1);
   }
 
+  function handleBulkCopy() {
+    const rows = filtered.map((t) => `${t.name}\t${t.adminUsername}\t${t.adminPassword}`);
+    const text = ["租户名\t用户名\t密码", ...rows].join("\n");
+    navigator.clipboard.writeText(text).then(() => {
+      setBulkCopied(true);
+      setTimeout(() => setBulkCopied(false), 2000);
+    });
+  }
+
+  function handleExportCSV() {
+    const rows = filtered.map((t) => ({
+      租户名: t.name,
+      行政区: t.district,
+      状态: t.status,
+      用户名: t.adminUsername,
+      密码: t.adminPassword,
+      到期日: t.expiresAt,
+    }));
+    const csv = Papa.unparse(rows, { header: true });
+    const bom = "﻿";
+    const blob = new Blob([bom + csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `运营后台-租户账号列表-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <div className="space-y-5">
       {/* 页头 */}
@@ -124,7 +219,29 @@ export default function TenantsClient() {
             className="w-full pl-8 pr-3 py-2 text-sm border border-[#e5e7eb] rounded-lg outline-none focus:border-amber-400 bg-[#f7f8fa] placeholder:text-[#cbd5e1]"
           />
         </div>
-
+        <button
+          type="button"
+          onClick={handleBulkCopy}
+          disabled={filtered.length === 0}
+          className={cn(
+            "flex items-center gap-1.5 px-3 py-2 text-xs rounded-lg border transition-colors disabled:opacity-40 disabled:cursor-not-allowed",
+            bulkCopied
+              ? "text-emerald-600 bg-emerald-50 border-emerald-200"
+              : "text-[#64748b] border-[#e5e7eb] hover:bg-[#f7f8fa]"
+          )}
+        >
+          {bulkCopied ? <Check size={12} /> : <Copy size={12} />}
+          {bulkCopied ? "已复制全部" : "全部复制"}
+        </button>
+        <button
+          type="button"
+          onClick={handleExportCSV}
+          disabled={filtered.length === 0}
+          className="flex items-center gap-1.5 px-3 py-2 text-xs rounded-lg border border-[#e5e7eb] text-[#64748b] hover:bg-[#f7f8fa] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          <Download size={12} />
+          导出 CSV
+        </button>
       </div>
 
       {/* 状态 Tab */}
@@ -155,13 +272,14 @@ export default function TenantsClient() {
       {/* 表格 */}
       <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[1080px] text-sm">
             <thead>
               <tr className="border-b border-[#f1f5f9] bg-[#fafafa]">
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-5 py-3">租户名称</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">状态</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">到期日</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">管理员账号</th>
+                <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">密码</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-3 py-3">企业数</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-3 py-3">最近登录</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-5 py-3">操作</th>
@@ -170,7 +288,7 @@ export default function TenantsClient() {
             <tbody>
               {paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="text-center py-12 text-[#94a3b8] text-sm">
+                  <td colSpan={8} className="text-center py-12 text-[#94a3b8] text-sm">
                     暂无符合条件的租户
                   </td>
                 </tr>
@@ -193,6 +311,9 @@ export default function TenantsClient() {
                     <td className="px-3 py-3 font-mono text-xs text-[#475569]">
                       {t.adminUsername}
                     </td>
+                    <td className="px-3 py-3">
+                      <PasswordCell password={t.adminPassword} />
+                    </td>
                     <td className="px-3 py-3 text-right tabular-nums text-[#475569]">
                       {t.stats.companyCount.toLocaleString()}
                     </td>
@@ -201,6 +322,7 @@ export default function TenantsClient() {
                     </td>
                     <td className="px-5 py-3">
                       <div className="flex items-center justify-end gap-1">
+                        <CopyCredentialsButton tenant={t} />
                         <Link
                           href={`/ops/tenants/${t.id}`}
                           className="w-7 h-7 rounded-md flex items-center justify-center text-[#94a3b8] hover:bg-[#f1f5f9] hover:text-[#475569] transition-colors"

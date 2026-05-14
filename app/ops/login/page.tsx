@@ -21,7 +21,7 @@ export default function OpsLoginPage() {
     setMounted(true);
     const stored = getStoredOpsUser();
     if (stored) {
-      window.location.href = "/ops/dashboard";
+      window.location.href = "/ops/tenants";
     }
   }, []);
 
@@ -31,7 +31,7 @@ export default function OpsLoginPage() {
     const user = authenticateOps(username, password);
     if (user) {
       setOpsUser(user);
-      window.location.href = "/ops/dashboard";
+      window.location.href = "/ops/tenants";
       return;
     }
     setError("账号或密码错误");
