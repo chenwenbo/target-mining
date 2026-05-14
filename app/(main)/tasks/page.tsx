@@ -36,7 +36,6 @@ export default function TasksPage() {
 
   const [version, setVersion] = useState(0);
   const [q, setQ] = useState("");
-  const [streetFilter, setStreetFilter] = useState<string>("all");
   const [assigneeFilter, setAssigneeFilter] = useState<string>("all");
   const [willingnessFilter, setWillingnessFilter] = useState<WillingnessLevel | "all">("all");
   // 拖拽派发（标的池 → 已派发）
@@ -48,9 +47,8 @@ export default function TasksPage() {
   const [draggingTaskId, setDraggingTaskId] = useState<string | null>(null);
 
   useEffect(() => {
-    if (lockedStreet && streetFilter !== lockedStreet) setStreetFilter(lockedStreet);
     if (lockedStreet && assigneeFilter !== "all") setAssigneeFilter("all");
-  }, [lockedStreet, streetFilter, assigneeFilter]);
+  }, [lockedStreet, assigneeFilter]);
 
   const [allRecords, setAllRecords] = useState<VisitRecord[]>([]);
   const [statusOverrides, setStatusOverrides] = useState<Record<string, Task["status"]>>({});
@@ -98,7 +96,6 @@ export default function TasksPage() {
 
   const filtersActive = !!(
     q ||
-    streetFilter !== "all" ||
     assigneeFilter !== "all" ||
     willingnessFilter !== "all"
   );
@@ -108,7 +105,6 @@ export default function TasksPage() {
       .filter((e) => {
         if (!stagePredicate(e.stage)) return false;
         if (q && !e.task.companyName.includes(q)) return false;
-        if (streetFilter !== "all" && e.task.street !== streetFilter) return false;
         if (assigneeFilter !== "all" && e.task.assignee !== assigneeFilter) return false;
         if (
           willingnessFilter !== "all" &&
@@ -124,13 +120,13 @@ export default function TasksPage() {
   const activeItems = useMemo(
     () => makeColumnItems((s) => s === "dispatched"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [enriched, q, streetFilter, assigneeFilter, willingnessFilter],
+    [enriched, q, assigneeFilter, willingnessFilter],
   );
 
   const doneItems = useMemo(
     () => makeColumnItems((s) => s === "done"),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [enriched, q, streetFilter, assigneeFilter, willingnessFilter],
+    [enriched, q, assigneeFilter, willingnessFilter],
   );
 
   function handleDropToDispatched() {
@@ -169,7 +165,6 @@ export default function TasksPage() {
 
   function clearFilters() {
     setQ("");
-    setStreetFilter(lockedStreet ?? "all");
     setAssigneeFilter("all");
     setWillingnessFilter("all");
   }
@@ -204,21 +199,6 @@ export default function TasksPage() {
             className="w-full pl-8 pr-3 py-1.5 text-sm border border-[#e5e7eb] rounded-md focus:outline-none focus:border-blue-400"
           />
         </div>
-
-        {!lockedStreet && (() => {
-          const streetOptions = Array.from(new Set(enriched.map((e) => e.task.street))).filter(Boolean).sort();
-          return (
-            <Selector
-              label="经办单位"
-              value={streetFilter}
-              onChange={setStreetFilter}
-              options={[
-                { value: "all", label: "全部" },
-                ...streetOptions.map((s) => ({ value: s, label: s })),
-              ]}
-            />
-          );
-        })()}
 
         {!lockedStreet && (
           <Selector

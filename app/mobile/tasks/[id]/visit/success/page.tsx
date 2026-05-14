@@ -34,7 +34,7 @@ export default function VisitSuccessPage() {
 
   const w = record ? (WILLINGNESS_MAP[record.willingness] ?? { label: "-", color: "text-gray-400 bg-gray-50 border-gray-200" }) : null;
 
-  // 下一条待走访任务（用于快捷跳转）
+  // 下一条待摸排任务（用于快捷跳转）
   const allTasksByAssignee = allTasks.filter((t) => t.assignee === task.assignee && t.id !== id);
   const nextTask = allTasksByAssignee.find((t) => t.status === "pending");
 

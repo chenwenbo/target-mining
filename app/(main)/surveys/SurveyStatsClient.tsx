@@ -221,7 +221,7 @@ function KPIGrid({
       unit: "%",
       iconColor: "text-emerald-600",
       iconBg: "bg-emerald-50",
-      sub: `${kpi.doneTasks} / ${kpi.totalTasks} 已完成`,
+      sub: `${kpi.doneTasks} / ${kpi.totalTasks} 摸排完成`,
     },
     {
       icon: TrendingUp,

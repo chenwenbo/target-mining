@@ -116,7 +116,7 @@ function DispatchedMiddle({
   );
 }
 
-// ─── 中段：已完成（含意愿与摸排结果摘要）─────────────────────
+// ─── 中段：摸排完成（含意愿与摸排结果摘要）───────────────────
 function DoneMiddle({
   task,
   record,

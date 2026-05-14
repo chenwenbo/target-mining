@@ -69,7 +69,7 @@ export default function ProfilePage() {
         <div className="grid grid-cols-3 gap-3 text-center">
           {[
             { label: "分配任务", value: myTasks.length },
-            { label: "已完成",  value: doneCount },
+            { label: "摸排完成",  value: doneCount },
             { label: "走访记录", value: myRecords.length },
           ].map(({ label, value }) => (
             <div key={label}>
