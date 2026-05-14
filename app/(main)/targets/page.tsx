@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SlidersHorizontal, Download, Send, Search, X, Building2 } from "lucide-react";
-import { getPotentialTargets } from "@/lib/mock-data";
+import { getAllCompanies } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
 import { saveDispatchedTask } from "@/lib/mobile-mock";
@@ -217,7 +217,7 @@ function TargetsPageContent() {
   const [sortBy, setSortBy] = useState<"name" | "employees">("name");
   const [dispatchTargets, setDispatchTargets] = useState<{ id: string; name: string; street: string }[] | null>(null);
 
-  const allCompanies = useMemo(() => getPotentialTargets(), []);
+  const allCompanies = useMemo(() => getAllCompanies(), []);
   const streetOptions = useMemo(
     () => Array.from(new Set(allCompanies.map((c) => c.street))).filter(Boolean).sort(),
     [allCompanies],
