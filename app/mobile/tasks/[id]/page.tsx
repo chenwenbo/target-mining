@@ -663,13 +663,18 @@ function HistoryTab({ records }: { records: VisitRecord[] }) {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
+                <div className="flex items-center gap-2 mb-0.5 flex-wrap">
                   <span className="text-xs font-medium text-gray-700">
                     {r.visitedAt.slice(0, 10)}
                   </span>
                   <span className="text-[10px] text-gray-400">
                     {METHOD_LABELS[r.visitMethod]}
                   </span>
+                  {r.visitDurationMinutes && (
+                    <span className="text-[10px] text-gray-400 flex items-center gap-0.5">
+                      <Clock size={9} />{r.visitDurationMinutes}分钟
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-gray-400">{r.visitorName}</span>
@@ -682,45 +687,113 @@ function HistoryTab({ records }: { records: VisitRecord[] }) {
             </button>
 
             {isExpanded && (
-              <div className="px-4 pb-4 border-t border-gray-100 pt-3 space-y-2">
-                {r.willingnessNotes && (
-                  <div>
-                    <span className="text-[10px] text-gray-400">意愿备注：</span>
-                    <p className="text-xs text-gray-700 mt-0.5">{r.willingnessNotes}</p>
+              <div className="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3">
+
+                {/* 联系情况 */}
+                <div className="space-y-1.5">
+                  <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">联系情况</p>
+                  <div className="flex items-center gap-1.5 text-xs">
+                    {r.contactReached
+                      ? <CheckCircle size={12} className="text-emerald-500" />
+                      : <XCircle size={12} className="text-red-400" />}
+                    <span className={r.contactReached ? "text-emerald-600" : "text-red-500"}>
+                      {r.contactReached ? "已联系到" : "未联系上"}
+                    </span>
                   </div>
-                )}
-                {r.fieldVerified.mainProductDesc && (
-                  <div>
-                    <span className="text-[10px] text-gray-400">主营业务：</span>
-                    <p className="text-xs text-gray-700 mt-0.5">{r.fieldVerified.mainProductDesc}</p>
-                  </div>
-                )}
-                {r.acknowledgedGaps.length > 0 && (
-                  <div>
-                    <span className="text-[10px] text-gray-400">认可障碍：</span>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {r.acknowledgedGaps.map((g, i) => (
-                        <span key={i} className="text-[10px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded">{g}</span>
+                  {r.contactReached && r.actualContactName && (
+                    <div className="text-xs text-gray-600 ml-4">
+                      <span className="font-medium text-gray-800">{r.actualContactName}</span>
+                      {r.actualContactTitle && <span className="text-gray-400"> · {r.actualContactTitle}</span>}
+                      {r.actualContactPhone && (
+                        <a href={`tel:${r.actualContactPhone}`} className="flex items-center gap-1 text-blue-500 mt-0.5">
+                          <Phone size={10} />{r.actualContactPhone}
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* 现场核实数据 */}
+                {(() => {
+                  const fv = r.fieldVerified;
+                  const rows = [
+                    fv.mainProductDesc && { label: "主营业务", value: fv.mainProductDesc },
+                    fv.employeeCount != null && { label: "员工总数", value: `${fv.employeeCount}人` },
+                    fv.rdEmployeeCount != null && { label: "研发人员", value: `${fv.rdEmployeeCount}人` },
+                    fv.annualRevenue && { label: "年收入", value: REVENUE_LABELS[fv.annualRevenue] ?? fv.annualRevenue },
+                    fv.rdExpenseRatio && { label: "研发费用占比", value: RD_RATIO_LABELS[fv.rdExpenseRatio] ?? fv.rdExpenseRatio },
+                    fv.rdExpenseSource && { label: "研发费用来源", value: RD_SOURCE_LABELS[fv.rdExpenseSource] ?? fv.rdExpenseSource },
+                    fv.hasTechDept != null && { label: "独立研发部门", value: fv.hasTechDept ? "有" : "无" },
+                    fv.hasAccountingFirm != null && { label: "会计师事务所", value: fv.hasAccountingFirm ? "是" : "否" },
+                  ].filter(Boolean) as { label: string; value: string }[];
+                  return rows.length > 0 ? (
+                    <div className="space-y-1.5">
+                      <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">现场核实数据</p>
+                      {rows.map(({ label, value }) => (
+                        <div key={label} className="flex items-start justify-between text-xs gap-2">
+                          <span className="text-gray-400 shrink-0">{label}</span>
+                          <span className="text-gray-700 font-medium text-right">{value}</span>
+                        </div>
                       ))}
                     </div>
-                  </div>
-                )}
-                {r.nextSteps.length > 0 && (
-                  <div>
-                    <span className="text-[10px] text-gray-400">企业需求：</span>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {r.nextSteps.map((s, i) => (
-                        <span key={i} className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded">{s}</span>
-                      ))}
+                  ) : null;
+                })()}
+
+                {/* 意愿与跟进 */}
+                <div className="space-y-1.5">
+                  <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">意愿与跟进</p>
+                  {r.willingnessNotes && (
+                    <div>
+                      <span className="text-[10px] text-gray-400">意愿备注：</span>
+                      <p className="text-xs text-gray-700 mt-0.5">{r.willingnessNotes}</p>
                     </div>
-                  </div>
-                )}
-                {r.notes && (
-                  <div>
-                    <span className="text-[10px] text-gray-400">内部备注：</span>
-                    <p className="text-xs text-gray-600 mt-0.5">{r.notes}</p>
-                  </div>
-                )}
+                  )}
+                  {r.acknowledgedGaps.length > 0 && (
+                    <div>
+                      <span className="text-[10px] text-gray-400">认可障碍：</span>
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {r.acknowledgedGaps.map((g, i) => (
+                          <span key={i} className="text-[10px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded">{g}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {r.keyObstacles && (
+                    <div>
+                      <span className="text-[10px] text-gray-400">关键障碍：</span>
+                      <p className="text-xs text-gray-700 mt-0.5">{r.keyObstacles}</p>
+                    </div>
+                  )}
+                  {r.nextSteps.length > 0 && (
+                    <div>
+                      <span className="text-[10px] text-gray-400">企业需求：</span>
+                      <div className="flex flex-wrap gap-1 mt-1">
+                        {r.nextSteps.map((s, i) => (
+                          <span key={i} className="text-[10px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded">{s}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {r.companyCommitments && (
+                    <div>
+                      <span className="text-[10px] text-gray-400">企业承诺：</span>
+                      <p className="text-xs text-gray-700 mt-0.5">{r.companyCommitments}</p>
+                    </div>
+                  )}
+                  {r.followUpDate && (
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-400">下次联系日期</span>
+                      <span className="text-blue-600 font-medium">{r.followUpDate}</span>
+                    </div>
+                  )}
+                  {r.notes && (
+                    <div>
+                      <span className="text-[10px] text-gray-400">内部备注：</span>
+                      <p className="text-xs text-gray-400 italic mt-0.5">{r.notes}</p>
+                    </div>
+                  )}
+                </div>
+
               </div>
             )}
           </div>
