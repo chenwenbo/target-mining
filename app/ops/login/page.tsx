@@ -5,10 +5,11 @@ import { AlertCircle, ChevronDown, KeyRound, ServerCog } from "lucide-react";
 import { cn } from "@/lib/cn";
 import {
   authenticateOps,
+  getOpsAdminPassword,
   getStoredOpsUser,
   setOpsUser,
 } from "@/lib/ops-auth";
-import { OPS_ADMIN_PASSWORD, OPS_ADMIN_USERNAME } from "@/lib/ops-mock";
+import { OPS_ADMIN_USERNAME } from "@/lib/ops-mock";
 
 export default function OpsLoginPage() {
   const [username, setUsername] = useState("");
@@ -174,14 +175,14 @@ export default function OpsLoginPage() {
                   type="button"
                   onClick={() => {
                     setUsername(OPS_ADMIN_USERNAME);
-                    setPassword(OPS_ADMIN_PASSWORD);
+                    setPassword(getOpsAdminPassword());
                     setError("");
                   }}
                   className="w-full text-left px-2.5 py-2 rounded-md hover:bg-[#f7f8fa] transition-colors"
                 >
                   <div className="text-xs font-medium text-[#0f172a]">平台超管</div>
                   <div className="text-[10px] text-[#94a3b8] font-mono mt-0.5">
-                    {OPS_ADMIN_USERNAME} / {OPS_ADMIN_PASSWORD}
+                    {OPS_ADMIN_USERNAME} / {getOpsAdminPassword()}
                   </div>
                 </button>
               </div>

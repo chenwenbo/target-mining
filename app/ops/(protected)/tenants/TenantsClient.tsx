@@ -2,7 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Check, Copy, Download, Eye, EyeOff, Pencil, Plus, Power, PowerOff, Search } from "lucide-react";
+import {
+  Check,
+  Copy,
+  Download,
+  Eye,
+  EyeOff,
+  Pencil,
+  Plus,
+  Power,
+  PowerOff,
+  Search,
+} from "lucide-react";
 import Papa from "papaparse";
 import { cn } from "@/lib/cn";
 import {
@@ -180,7 +191,7 @@ export default function TenantsClient() {
       到期日: t.expiresAt,
     }));
     const csv = Papa.unparse(rows, { header: true });
-    const bom = "﻿";
+    const bom = "\uFEFF";
     const blob = new Blob([bom + csv], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");

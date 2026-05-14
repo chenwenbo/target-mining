@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, LogOut } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ChevronDown, LogOut, UserCircle } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { logoutOpsUser, useOpsUser } from "@/lib/ops-auth";
 
@@ -9,6 +10,7 @@ export default function OpsTopbar() {
   const { user, mounted } = useOpsUser();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!open) return;
@@ -33,6 +35,11 @@ export default function OpsTopbar() {
     logoutOpsUser();
     setOpen(false);
     window.location.href = "/ops/login";
+  }
+
+  function handleProfile() {
+    setOpen(false);
+    router.push("/ops/profile");
   }
 
   return (
@@ -76,8 +83,15 @@ export default function OpsTopbar() {
               </div>
             </div>
             <button
-              onClick={handleLogout}
+              onClick={handleProfile}
               className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-[#475569] hover:bg-[#f7f8fa] transition-colors"
+            >
+              <UserCircle size={13} />
+              个人中心
+            </button>
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-2 px-3 py-2.5 text-xs text-[#475569] hover:bg-[#f7f8fa] transition-colors border-t border-[#f1f5f9]"
             >
               <LogOut size={13} />
               退出登录
