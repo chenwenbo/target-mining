@@ -10,6 +10,14 @@ import {
 } from "./ops-mock";
 
 const CURRENT_OPS_USER_KEY = "ops_current_user";
+const OPS_ADMIN_PASSWORD_KEY = "ops_admin_password";
+
+export type ChangeOpsPasswordResult = "ok" | "wrong_old" | "same" | "error";
+
+export function getOpsAdminPassword(): string {
+  if (typeof window === "undefined") return OPS_ADMIN_PASSWORD;
+  return localStorage.getItem(OPS_ADMIN_PASSWORD_KEY) ?? OPS_ADMIN_PASSWORD;
+}
 
 export function getStoredOpsUser(): OpsUser | null {
   if (typeof window === "undefined") return null;
@@ -30,10 +38,23 @@ export function logoutOpsUser(): void {
 }
 
 export function authenticateOps(username: string, password: string): OpsUser | null {
-  if (username.trim() === OPS_ADMIN_USERNAME && password.trim() === OPS_ADMIN_PASSWORD) {
+  if (username.trim() === OPS_ADMIN_USERNAME && password.trim() === getOpsAdminPassword()) {
     return OPS_ADMIN_SEED;
   }
   return null;
+}
+
+export function changeOpsAdminPassword(
+  oldPwd: string,
+  newPwd: string,
+): ChangeOpsPasswordResult {
+  if (typeof window === "undefined") return "error";
+  const oldValue = oldPwd.trim();
+  const newValue = newPwd.trim();
+  if (getOpsAdminPassword() !== oldValue) return "wrong_old";
+  if (newValue === oldValue) return "same";
+  localStorage.setItem(OPS_ADMIN_PASSWORD_KEY, newValue);
+  return "ok";
 }
 
 export function useOpsUser(): { user: OpsUser | null; mounted: boolean } {
