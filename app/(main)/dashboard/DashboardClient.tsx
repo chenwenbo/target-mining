@@ -176,7 +176,7 @@ function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
   ];
 
   const VW = 660;
-  const VH = 360;
+  const VH = 300;
   const CENTER = 230;
   const W_TOP = 380;
   const W_BOT = 110;
@@ -373,7 +373,7 @@ function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) 
       subtitle="按潜在标的数量排序"
       action={<Link href="/targets" className="text-xs text-blue-600 hover:underline">全部 ▸</Link>}
     >
-      <div className="space-y-3 flex-1">
+      <div className="flex flex-col justify-between flex-1">
         {sorted.map(([street, count]) => (
           <div key={street} className="grid items-center gap-3" style={{ gridTemplateColumns: "100px 1fr 32px" }}>
             <span className="text-sm text-[#0f172a] font-medium truncate">{street}</span>
