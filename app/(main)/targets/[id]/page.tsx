@@ -49,15 +49,6 @@ function TabCompanyProfile({ company }: { company: NonNullable<ReturnType<typeof
         ["其他年份授权数", 0],
       ],
     },
-    {
-      title: "特殊类专利",
-      rows: [
-        ["前三年授权数", 0],
-        ["当年授权数", 0],
-        ["申请中", 0],
-        ["其他年份授权数", 0],
-      ],
-    },
   ];
 
   const patentRows = Array.from({ length: Math.min(totalPatents, 5) }, (_, i) => ({
@@ -80,23 +71,6 @@ function TabCompanyProfile({ company }: { company: NonNullable<ReturnType<typeof
     status: i < trademarkCount - 1 ? "已注册" : "审中",
   }));
 
-  const domainBase = company.name.slice(0, 2).split("").map(c => c.charCodeAt(0).toString(16)).join("").slice(0, 6);
-  const websiteRows = [
-    {
-      seq: 1,
-      approveDate: `${parseInt(company.establishedAt.slice(0, 4)) + 1}-06-15`,
-      siteName: `${company.name}官方网站`,
-      homepage: `www.${domainBase}tech.com`,
-      icp: `鄂ICP备${company.creditCode.slice(2, 8)}号`,
-    },
-    {
-      seq: 2,
-      approveDate: `${parseInt(company.establishedAt.slice(0, 4)) + 2}-03-20`,
-      siteName: `${company.name.slice(0, 4)}产品服务平台`,
-      homepage: `app.${domainBase}tech.com`,
-      icp: `鄂ICP备${company.creditCode.slice(2, 8)}号-2`,
-    },
-  ];
 
   const copyrightRows = Array.from({ length: Math.min(software, 5) }, (_, i) => ({
     seq: i + 1,
@@ -140,7 +114,7 @@ function TabCompanyProfile({ company }: { company: NonNullable<ReturnType<typeof
         知识产权来源于第三方平台，会根据近年的专利或软著申请，结合国网申请书数据，过滤出当前状态有效的知产数据显示。
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {ipStats.map((stat) => (
           <div key={stat.title} className="border border-[#e5e7eb] rounded-lg overflow-hidden">
             <div className="bg-[#f7f8fa] px-4 py-2 border-b border-[#e5e7eb]">

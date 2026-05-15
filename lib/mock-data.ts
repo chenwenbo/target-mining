@@ -109,12 +109,11 @@ export function getDashboardKPI() {
   const funnelTech = rawCompanies.filter((c) => c.techField !== null).length;
   const funnelCertified = rawCompanies.filter((c) => c.alreadyCertified).length;
 
-  // ─── 企业漏斗（驾驶舱）─ 6 层从全区企业到认定成功
+  // ─── 企业漏斗（驾驶舱）─ 5 层从全区企业到认定成功
   const funnelEnterpriseTotal = 8520;
   const funnelEnterpriseTech = 2480;
   const funnelGrowthUnion = 1820;
   const funnelWilling = 412;
-  const funnelDeclared = 286;
   const funnelCertifiedFinal = 178;
 
   const renewalKPI = getRenewalKPI(getCertifiedCompanies());
@@ -148,7 +147,6 @@ export function getDashboardKPI() {
     funnelEnterpriseTech,
     funnelGrowthUnion,
     funnelWilling,
-    funnelDeclared,
     funnelCertifiedFinal,
     renewalCritical: renewalKPI.overdue + renewalKPI.critical,
     renewalApproaching: renewalKPI.approaching,

@@ -172,8 +172,7 @@ function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
     { type: "single", name: "泛科技企业总数", value: kpi.funnelEnterpriseTech, basis: kpi.funnelEnterpriseTotal },
     { type: "single", name: "潜在标的企业", value: kpi.funnelGrowthUnion, basis: kpi.funnelEnterpriseTech },
     { type: "single", name: "有意愿的企业", value: kpi.funnelWilling, basis: kpi.funnelGrowthUnion },
-    { type: "single", name: "已申报的企业", value: kpi.funnelDeclared, basis: kpi.funnelWilling },
-    { type: "single", name: "认定成功的企业", value: kpi.funnelCertifiedFinal, basis: kpi.funnelDeclared },
+    { type: "single", name: "认定成功的企业", value: kpi.funnelCertifiedFinal, basis: kpi.funnelWilling },
   ];
 
   const VW = 660;
@@ -194,8 +193,7 @@ function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
     { from: "#7dd3fc", to: "#38bdf8" },
     { from: "#38bdf8", to: "#0ea5e9" },
     { from: "#0ea5e9", to: "#0284c7" },
-    { from: "#0284c7", to: "#0369a1" },
-    { from: "#0369a1", to: "#075985" },
+    { from: "#0284c7", to: "#075985" },
   ];
 
   const fmtPct = (num: number, den: number) =>
@@ -207,7 +205,7 @@ function EnterpriseFunnel({ kpi }: { kpi: KPI }) {
     <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden flex flex-col">
       <div className="px-5 py-3.5 border-b border-[#e5e7eb]">
         <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗</h2>
-        <p className="text-xs text-[#94a3b8] mt-0.5">企业总数 → 泛科技 → 近三年增长 → 意愿 → 申报 → 认定</p>
+        <p className="text-xs text-[#94a3b8] mt-0.5">企业总数 → 泛科技 → 近三年增长 → 意愿 → 认定</p>
       </div>
       <div className="px-3 pt-3 pb-2 flex-1 min-h-0">
         <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-full" role="img" aria-label="企业漏斗">
