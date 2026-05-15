@@ -234,31 +234,6 @@ function TabCompanyProfile({ company }: { company: NonNullable<ReturnType<typeof
         </div>
       </div>
 
-      <div>
-        <h3 className="text-sm font-semibold text-[#0f172a] mb-3">网站备案（共{websiteRows.length}条）</h3>
-        <div className="border border-[#e5e7eb] rounded-lg overflow-hidden">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="bg-[#f7f8fa] border-b border-[#e5e7eb]">
-                {["序号", "审核日期", "网站名称", "网站首页", "网站备案/许可证号"].map((h) => (
-                  <th key={h} className="px-3 py-2.5 text-left text-[#64748b] font-medium whitespace-nowrap">{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#f1f5f9]">
-              {websiteRows.map((row) => (
-                <tr key={row.seq} className="hover:bg-[#f7f8fa]">
-                  <td className="px-3 py-2.5 text-[#94a3b8]">{row.seq}</td>
-                  <td className="px-3 py-2.5 text-[#475569]">{row.approveDate}</td>
-                  <td className="px-3 py-2.5 text-[#0f172a]">{row.siteName}</td>
-                  <td className="px-3 py-2.5 text-blue-600">{row.homepage}</td>
-                  <td className="px-3 py-2.5 text-[#475569] font-mono">{row.icp}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 }
