@@ -417,7 +417,7 @@ function TargetsPageContent() {
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8]">街道 / 乡镇</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">成立年限</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-36">知识产权</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-28">参保/研发</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-28">参保人数</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">注册资本</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">申报类型</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">申报意愿</th>
@@ -475,17 +475,7 @@ function TargetsPageContent() {
                       </div>
                     </td>
                     <td className="px-3 py-3 text-xs tabular-nums text-[#475569]">
-                      {c.employees}/{c.rdEmployees > 0 ? (
-                        <span className={cn(
-                          "ml-0",
-                          (c.rdEmployees / c.employees) >= 0.1 ? "text-emerald-600" : "text-amber-500"
-                        )}>
-                          {c.rdEmployees}
-                          <span className="ml-0.5 text-[11px]">({Math.round(c.rdEmployees / c.employees * 100)}%)</span>
-                        </span>
-                      ) : (
-                        <span className="text-[#cbd5e1]">0</span>
-                      )}
+                      {c.employees}
                     </td>
                     <td className="px-3 py-3 tabular-nums text-[#475569] text-xs">{c.registeredCapital}万</td>
                     <td className="px-3 py-3">
