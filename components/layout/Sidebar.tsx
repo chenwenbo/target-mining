@@ -1,8 +1,11 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/cn";
 import { useLayoutStore } from "@/lib/layout-store";
+import { useCurrentPCUser } from "@/lib/account-mock";
+import { getTenantById } from "@/lib/ops-mock";
 import {
   LayoutDashboard,
   Target,
@@ -36,6 +39,15 @@ export default function Sidebar() {
   const pathname = usePathname();
   const collapsed = useLayoutStore((s) => s.sidebarCollapsed);
   const toggleSidebar = useLayoutStore((s) => s.toggleSidebar);
+  const { user, mounted } = useCurrentPCUser();
+  const [tenantName, setTenantName] = useState("");
+
+  useEffect(() => {
+    if (!mounted) return;
+    const tenant = user.tenantId ? getTenantById(user.tenantId) : null;
+    setTenantName(tenant?.name ?? "");
+  }, [mounted, user.tenantId]);
+
   return (
     <aside
       className={cn(
@@ -51,7 +63,9 @@ export default function Sidebar() {
         {!collapsed && (
           <div className="overflow-hidden">
             <div className="text-sm font-semibold text-[#0f172a] leading-tight whitespace-nowrap">标的挖掘</div>
-            <div className="text-[11px] text-[#94a3b8] leading-tight mt-0.5 whitespace-nowrap">高企申报 · v0.1</div>
+            <div className="text-[11px] text-[#94a3b8] leading-tight mt-0.5 whitespace-nowrap truncate">
+              {tenantName || "标的挖掘平台"}
+            </div>
           </div>
         )}
         <button

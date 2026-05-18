@@ -62,14 +62,7 @@ export default function Topbar() {
 
   return (
     <header className="h-14 flex-shrink-0 bg-white border-b border-[#e5e7eb] px-6 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        {tenantName && (
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[#f7f8fa] border border-[#e5e7eb] rounded-md text-sm text-[#475569] whitespace-nowrap">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            {tenantName}
-          </div>
-        )}
-      </div>
+      <div className="flex items-center gap-3" />
 
       {/* 右侧操作区 */}
       <div className="flex items-center gap-1">
