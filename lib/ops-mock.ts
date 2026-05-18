@@ -1,5 +1,7 @@
 "use client";
 
+import type { QualificationType } from "./types";
+
 // ─── 类型 ────────────────────────────────────────────────────
 export type TenantStatus = "active" | "expired" | "disabled";
 
@@ -31,6 +33,7 @@ export interface Tenant {
   contactEmail: string;
   notes: string;
   stats: TenantStats;
+  modules: QualificationType[]; // 启用的标的挖掘模块
 }
 
 export interface OpsUser {
@@ -83,6 +86,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "027-83888001",
     contactEmail: "zhangju@dxh.gov.cn",
     notes: "参考租户，数据最为完整",
+    modules: ["high_tech"],
     stats: {
       companyCount: 1247,
       taskCount: 312,
@@ -110,6 +114,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "027-84888002",
     contactEmail: "liufuju@jkq.gov.cn",
     notes: "旗舰客户，汽车+先进制造业为主，企业基数大",
+    modules: ["high_tech"],
     stats: {
       companyCount: 2538,
       taskCount: 487,
@@ -137,6 +142,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "027-87888003",
     contactEmail: "chenke@hs.gov.cn",
     notes: "高校周边科技企业多，合同将于2026-06-20到期",
+    modules: ["high_tech"],
     stats: {
       companyCount: 634,
       taskCount: 68,
@@ -164,6 +170,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "0717-6388004",
     contactEmail: "zhouzhuren@ycgxq.gov.cn",
     notes: "外地扩张第一单，化工+新能源领域为主",
+    modules: ["high_tech"],
     stats: {
       companyCount: 389,
       taskCount: 94,
@@ -191,6 +198,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "0710-3588005",
     contactEmail: "zhaoke@xygxq.gov.cn",
     notes: "合同已于2025-12-01到期，待跟进续费",
+    modules: ["high_tech"],
     stats: {
       companyCount: 271,
       taskCount: 53,
@@ -218,6 +226,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "027-81888006",
     contactEmail: "sunzhuren@jx.gov.cn",
     notes: "因客户内部人员变动，账号临时停用，待对接新负责人后恢复",
+    modules: ["high_tech"],
     stats: {
       companyCount: 512,
       taskCount: 87,
@@ -230,7 +239,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
 ];
 
 // ─── LocalStorage key ────────────────────────────────────────
-const TENANTS_KEY = "ops_tenants_v2";
+const TENANTS_KEY = "ops_tenants_v3";
 
 // ─── CRUD ────────────────────────────────────────────────────
 export function getTenants(): Tenant[] {
@@ -242,7 +251,9 @@ export function getTenants(): Tenant[] {
       localStorage.setItem(TENANTS_KEY, JSON.stringify(seed));
       return seed;
     }
-    return JSON.parse(raw) as Tenant[];
+    // 迁移 shim：旧数据缺少 modules 字段时补默认值
+    const list = JSON.parse(raw) as Tenant[];
+    return list.map((t) => ({ ...t, modules: t.modules ?? (["high_tech"] as QualificationType[]) }));
   } catch {
     return [...MOCK_TENANTS_SEED];
   }

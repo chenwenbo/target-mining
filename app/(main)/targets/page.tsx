@@ -7,9 +7,12 @@ import { getAllCompanies } from "@/lib/mock-data";
 import DispatchModal from "@/components/ui/DispatchModal";
 import { exportToCSV } from "@/lib/export";
 import { saveDispatchedTask } from "@/lib/mobile-mock";
-import type { TechField, Company, DeclarationWillingness, Visitor } from "@/lib/types";
+import type { TechField, Company, DeclarationWillingness, Visitor, QualificationType } from "@/lib/types";
 import { TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
+import { useQualStore } from "@/lib/qual-store";
+import QualTabs from "@/components/ui/QualTabs";
+import { checkEligibility, getSMEPoolTiers } from "@/lib/sme-criteria";
 
 // ─── Filter state ────────────────────────────────────────────
 type PoolTier = "all_companies" | "all" | "potential_target" | "willing";
@@ -238,6 +241,7 @@ function FilterPanel({
 function TargetsPageContent() {
   const searchParams = useSearchParams();
   const lockedStreet: string | null = null;
+  const activeQual = useQualStore((s) => s.activeQual);
 
   const [filters, setFilters] = useState<Filters>({
     q: searchParams.get("q") ?? "",
@@ -269,6 +273,18 @@ function TargetsPageContent() {
     [allCompanies],
   );
 
+  // Active pool tiers depend on qual type
+  const activeTiers = useMemo(() => {
+    if (activeQual === "high_tech") return POOL_TIERS;
+    const smeTiers = getSMEPoolTiers(activeQual as Exclude<QualificationType, "high_tech">);
+    return smeTiers.map((t) => ({ id: t.id as PoolTier, label: t.label, desc: t.desc }));
+  }, [activeQual]);
+
+  // Reset poolTier when qual type changes to avoid stale tier id
+  useEffect(() => {
+    setFilters((f) => ({ ...f, poolTier: "all_companies" }));
+  }, [activeQual]);
+
   // Apply filters
   const filtered = useMemo(() => {
     return allCompanies
@@ -282,28 +298,41 @@ function TargetsPageContent() {
         if (filters.smeOnly && !c.inSMEDatabase) return false;
         if (filters.excludeRisk && (c.risk.abnormal || c.risk.penalty)) return false;
         if (filters.willingness.length > 0 && !filters.willingness.includes(c.declarationWillingness)) return false;
-        const dtype = c.alreadyCertified ? "复审" : "新申报";
-        if (filters.declarationType.length > 0 && !filters.declarationType.includes(dtype)) return false;
-        // Pool tier quick-filter
-        if (filters.poolTier === "all") {
-          if (!c.techField) return false;
+
+        if (activeQual === "high_tech") {
+          // High-tech pool tier quick-filter
+          const dtype = c.alreadyCertified ? "复审" : "新申报";
+          if (filters.declarationType.length > 0 && !filters.declarationType.includes(dtype)) return false;
+          if (filters.poolTier === "all") { if (!c.techField) return false; }
+          if (filters.poolTier === "potential_target") {
+            const totalPatents = c.patents.invention + c.patents.utility + c.patents.design + c.software;
+            const hasEmployeeGrowth = c.employees >= 30 || c.rdEmployees >= 10;
+            if (totalPatents === 0 && !hasEmployeeGrowth) return false;
+          }
+          if (filters.poolTier === "willing") {
+            if (!["strong", "moderate"].includes(c.declarationWillingness)) return false;
+          }
+        } else {
+          // SME pool tier quick-filter
+          const smeTiers = getSMEPoolTiers(activeQual as Exclude<QualificationType, "high_tech">);
+          const tier = smeTiers.find((t) => t.id === filters.poolTier);
+          if (tier && filters.poolTier !== "all_companies") {
+            if (!tier.filter(c)) return false;
+          }
         }
-        if (filters.poolTier === "potential_target") {
-          const totalPatents = c.patents.invention + c.patents.utility + c.patents.design + c.software;
-          const hasEmployeeGrowth = c.employees >= 30 || c.rdEmployees >= 10;
-          if (totalPatents === 0 && !hasEmployeeGrowth) return false;
-        }
-        if (filters.poolTier === "willing") {
-          if (!["strong", "moderate"].includes(c.declarationWillingness)) return false;
-        }
+
         return true;
       })
       .sort((a, b) => {
         if (sortBy === "name") return a.name.localeCompare(b.name);
         if (sortBy === "employees") return b.employees - a.employees;
+        if (activeQual !== "high_tech") {
+          // For SME types, also allow sorting by eligibility score
+          return checkEligibility(b, activeQual).score - checkEligibility(a, activeQual).score;
+        }
         return 0;
       });
-  }, [allCompanies, filters, sortBy]);
+  }, [allCompanies, filters, sortBy, activeQual]);
 
   function toggleSelect(id: string) {
     setSelected((prev) => {
@@ -341,6 +370,7 @@ function TargetsPageContent() {
         street: assignee.street ?? t.street,
         status: "pending",
         createdAt: today,
+        qualType: activeQual,
       });
     });
   }
@@ -361,6 +391,7 @@ function TargetsPageContent() {
 
   return (
     <>
+    <QualTabs className="-mx-6 lg:-mx-8 px-6 lg:px-8 mb-0 border-b border-[#e5e7eb]" />
     <div className="-m-6 lg:-m-8 flex h-full" style={{ minHeight: "calc(100vh - 56px)" }}>
       <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} streetOptions={streetOptions} />
 
@@ -368,7 +399,7 @@ function TargetsPageContent() {
         {/* Pool tier quick-filter bar */}
         <div className="bg-[#f0f6ff] border-b border-[#d1e3fa] px-5 py-2.5 flex items-center gap-2 flex-shrink-0 overflow-x-auto">
           <span className="text-[11px] font-semibold text-[#64748b] whitespace-nowrap mr-1">标的池</span>
-          {POOL_TIERS.map((tier, idx) => {
+          {activeTiers.map((tier, idx) => {
             const isActive = filters.poolTier === tier.id;
             return (
               <button
@@ -471,7 +502,9 @@ function TargetsPageContent() {
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-36">知识产权</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-28">参保人数</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">注册资本</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">申报类型</th>
+                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">
+                  {activeQual === "high_tech" ? "申报类型" : "资质缺口(估算)"}
+                </th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">申报意愿</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">操作</th>
               </tr>
@@ -531,14 +564,27 @@ function TargetsPageContent() {
                     </td>
                     <td className="px-3 py-3 tabular-nums text-[#475569] text-xs">{c.registeredCapital}万</td>
                     <td className="px-3 py-3">
-                      <span className={cn(
-                        "inline-block px-2 py-0.5 text-xs rounded-full font-medium",
-                        c.alreadyCertified
-                          ? "bg-purple-50 text-purple-700 border border-purple-200"
-                          : "bg-blue-50 text-blue-700 border border-blue-200"
-                      )}>
-                        {c.alreadyCertified ? "复审" : "新申报"}
-                      </span>
+                      {activeQual === "high_tech" ? (
+                        <span className={cn(
+                          "inline-block px-2 py-0.5 text-xs rounded-full font-medium",
+                          c.alreadyCertified
+                            ? "bg-purple-50 text-purple-700 border border-purple-200"
+                            : "bg-blue-50 text-blue-700 border border-blue-200"
+                        )}>
+                          {c.alreadyCertified ? "复审" : "新申报"}
+                        </span>
+                      ) : (() => {
+                        const elig = checkEligibility(c, activeQual);
+                        return elig.eligible ? (
+                          <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+                            条件达标
+                          </span>
+                        ) : (
+                          <span className="text-[11px] text-[#94a3b8] leading-tight block max-w-[120px] truncate" title={elig.gaps[0]}>
+                            {elig.gaps[0] ?? "—"}
+                          </span>
+                        );
+                      })()}
                     </td>
                     <td className="px-3 py-3">
                       {(() => {

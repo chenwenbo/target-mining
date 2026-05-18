@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import { updateTenant, type Tenant } from "@/lib/ops-mock";
-import { HUBEI_REGIONS } from "@/lib/types";
+import { HUBEI_REGIONS, QUAL_TYPE_META, QUAL_TYPES, type QualificationType } from "@/lib/types";
 
 interface Props {
   tenant: Tenant;
@@ -24,10 +24,19 @@ export default function EditTenantDrawer({ tenant, onClose, onSaved }: Props) {
     contactPhone: tenant.contactPhone,
     contactEmail: tenant.contactEmail,
     notes: tenant.notes,
+    modules: (tenant.modules ?? ["high_tech"]) as QualificationType[],
   });
 
   function set(key: string, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function toggleModule(m: QualificationType) {
+    setForm((prev) => {
+      const has = prev.modules.includes(m);
+      const next = has ? prev.modules.filter((x) => x !== m) : [...prev.modules, m];
+      return { ...prev, modules: next };
+    });
   }
 
   const cities = Object.keys(HUBEI_REGIONS);
@@ -36,6 +45,7 @@ export default function EditTenantDrawer({ tenant, onClose, onSaved }: Props) {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!form.city || !form.district) return;
+    if (form.modules.length === 0) return;
     updateTenant(tenant.id, form);
     onSaved();
     onClose();
@@ -135,6 +145,40 @@ export default function EditTenantDrawer({ tenant, onClose, onSaved }: Props) {
                 />
               </label>
             </div>
+          </section>
+
+          {/* 启用模块 */}
+          <section>
+            <h3 className="text-xs font-semibold text-[#94a3b8] uppercase tracking-wider mb-3">
+              启用模块
+            </h3>
+            <div className="space-y-2">
+              {QUAL_TYPES.map((m) => {
+                const meta = QUAL_TYPE_META[m];
+                const checked = form.modules.includes(m);
+                return (
+                  <label key={m} className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={() => toggleModule(m)}
+                      className="mt-0.5 accent-amber-600"
+                    />
+                    <div>
+                      <div className="text-sm text-[#0f172a] group-hover:text-amber-700 transition-colors">
+                        {meta.label}
+                      </div>
+                      <div className="text-[11px] text-[#94a3b8]">
+                        {meta.ministry} · {m === "high_tech" ? "科技部认定" : m === "innovative_sme" ? "省级入库" : m === "specialized_sme" ? "省级认定" : "国家级认定"}
+                      </div>
+                    </div>
+                  </label>
+                );
+              })}
+            </div>
+            {form.modules.length === 0 && (
+              <p className="text-[11px] text-red-500 mt-2">至少选择一个模块</p>
+            )}
           </section>
 
           {/* 管理员信息（账号名和密码在详情页管理）*/}

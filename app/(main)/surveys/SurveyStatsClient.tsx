@@ -13,6 +13,8 @@ import {
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Company, Task, TaskStatus, VisitRecord } from "@/lib/types";
+import { useQualStore } from "@/lib/qual-store";
+import QualTabs from "@/components/ui/QualTabs";
 import {
   computeKPI,
   computeWillingnessDist,
@@ -23,6 +25,7 @@ import {
   computeVisitorRanking,
   WILLINGNESS_META,
   WILLINGNESS_ORDER,
+  SURVEY_NEEDS_OPTS,
 } from "./aggregations";
 
 interface Props {
@@ -37,6 +40,7 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
   const [taskStatusOverrides, setTaskStatusOverrides] = useState<Record<string, TaskStatus>>({});
   const [allTasks, setAllTasks] = useState<Task[]>(tasks);
   const lockedStreet: string | null = null;
+  const activeQual = useQualStore((s) => s.activeQual);
 
   useEffect(() => {
     initSeedVisitRecords();
@@ -69,46 +73,45 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
     );
   }, [records, scopedCompanies, scopedTasks, lockedStreet]);
 
+  const qualFilteredTasks = useMemo(
+    () => scopedTasks.filter((t) => (t.qualType ?? "high_tech") === activeQual),
+    [scopedTasks, activeQual],
+  );
+
+  const qualFilteredRecords = useMemo(() => {
+    const taskIds = new Set(qualFilteredTasks.map((t) => t.id));
+    return scopedRecords.filter((r) => !r.taskId || taskIds.has(r.taskId));
+  }, [scopedRecords, qualFilteredTasks]);
+
   const inputs = useMemo(
     () => ({
-      records: scopedRecords,
+      records: qualFilteredRecords,
       companies: scopedCompanies,
-      tasks: scopedTasks,
+      tasks: qualFilteredTasks,
       taskStatusOverrides,
     }),
-    [scopedRecords, scopedCompanies, scopedTasks, taskStatusOverrides],
+    [qualFilteredRecords, scopedCompanies, qualFilteredTasks, taskStatusOverrides],
   );
 
   const kpi = useMemo(() => computeKPI(inputs), [inputs]);
-  const willingness = useMemo(() => computeWillingnessDist(scopedRecords), [scopedRecords]);
-  const methods = useMemo(() => computeMethodDist(scopedRecords), [scopedRecords]);
+  const willingness = useMemo(() => computeWillingnessDist(qualFilteredRecords), [qualFilteredRecords]);
+  const methods = useMemo(() => computeMethodDist(qualFilteredRecords), [qualFilteredRecords]);
   const streetBreakdown = useMemo(() => computeStreetBreakdown(inputs), [inputs]);
-  const fieldDist = useMemo(() => computeFieldVerifiedDist(scopedRecords), [scopedRecords]);
+  const fieldDist = useMemo(() => computeFieldVerifiedDist(qualFilteredRecords), [qualFilteredRecords]);
   const obstacleKeywords = useMemo(
-    () => computeKeywordTop(scopedRecords, "keyObstacles", 12),
-    [scopedRecords]
+    () => computeKeywordTop(qualFilteredRecords, "keyObstacles", 12),
+    [qualFilteredRecords],
   );
   const needsStats = useMemo(() => {
-    const OPTS = [
-      "高新政策详解与一对一辅导",
-      "申报材料清单与流程指导",
-      "知识产权培育（专利/软著）",
-      "研发费用归集与加计扣除辅导",
-      "财务规范化（事务所/审计对接）",
-      "科技项目与专项资金申报",
-      "高层次人才引进政策对接",
-      "产学研合作（高校院所对接）",
-      "科技金融（贷款/担保/投融资）",
-      "暂无明确需求",
-    ];
+    const OPTS = SURVEY_NEEDS_OPTS[activeQual];
     const counts: Record<string, number> = Object.fromEntries(OPTS.map((o) => [o, 0]));
-    for (const r of scopedRecords) {
+    for (const r of qualFilteredRecords) {
       for (const s of r.nextSteps ?? []) {
         if (s in counts) counts[s]++;
       }
     }
     return OPTS.map((o) => ({ label: o, count: counts[o] })).sort((a, b) => b.count - a.count);
-  }, [scopedRecords]);
+  }, [qualFilteredRecords, activeQual]);
 
   if (!mounted) {
     return (
@@ -118,10 +121,11 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
     );
   }
 
-  const isEmpty = scopedRecords.length === 0;
+  const isEmpty = qualFilteredRecords.length === 0;
 
   return (
     <div>
+      <QualTabs />
       {/* 头部 */}
       <div className="flex items-end justify-between mb-5">
         <div>
@@ -136,7 +140,7 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
             )}
           </h1>
           <p className="text-sm text-[#94a3b8] mt-1">
-            走访摸排表数据汇总 · 共 {scopedRecords.length} 条记录
+            走访摸排表数据汇总 · 共 {qualFilteredRecords.length} 条记录
             {!lockedStreet && kpi.coveredStreets > 0 && ` · 覆盖 ${kpi.coveredStreets} 个街道`}
           </p>
         </div>

@@ -13,7 +13,10 @@ import {
   getDraft,
 } from "@/lib/mobile-mock";
 import { getScopedSurveyAccounts, surveyAccountToVisitor, type SurveyAccount } from "@/lib/account-mock";
-import { type Task, type VisitRecord, type WillingnessLevel, type Company } from "@/lib/types";
+import { type Task, type VisitRecord, type WillingnessLevel, type Company, type QualificationType, QUAL_TYPE_META } from "@/lib/types";
+import { useQualStore } from "@/lib/qual-store";
+import QualTabs from "@/components/ui/QualTabs";
+import { checkEligibility } from "@/lib/sme-criteria";
 import {
   getTaskLifecycleStage,
   latestVisitRecord,
@@ -33,6 +36,7 @@ type TaskWithStage = {
 
 export default function TasksPage() {
   const lockedStreet: string | null = null;
+  const activeQual = useQualStore((s) => s.activeQual);
 
   const [version, setVersion] = useState(0);
   const [q, setQ] = useState("");
@@ -81,9 +85,15 @@ export default function TasksPage() {
   }, [allCompanies]);
 
   const poolCompanies = useMemo(
-    () => allCompanies.filter(matchesCategory),
+    () => allCompanies.filter((c) => {
+      if (!matchesCategory(c)) return false;
+      if (activeQual !== "high_tech") {
+        return checkEligibility(c, activeQual).score > 0;
+      }
+      return true;
+    }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [allCompanies, companyCategory],
+    [allCompanies, companyCategory, activeQual],
   );
 
   const enriched: TaskWithStage[] = useMemo(() => {
@@ -93,6 +103,10 @@ export default function TasksPage() {
 
     const out: TaskWithStage[] = [];
     for (const baseTask of byId.values()) {
+      // Filter by active qual type (treat missing qualType as "high_tech")
+      const taskQual = (baseTask.qualType ?? "high_tech") as QualificationType;
+      if (taskQual !== activeQual) continue;
+
       const overriddenStatus = statusOverrides[baseTask.id] ?? baseTask.status;
       const task: Task = { ...baseTask, status: overriddenStatus };
       const records = allRecords.filter((r) => r.taskId === task.id);
@@ -107,7 +121,7 @@ export default function TasksPage() {
       });
     }
     return out;
-  }, [allRecords, statusOverrides, dispatched, customTasks]);
+  }, [allRecords, statusOverrides, dispatched, customTasks, activeQual]);
 
   const assigneeOptions = useMemo(() => {
     const set = new Set<string>();
@@ -183,6 +197,7 @@ export default function TasksPage() {
       street: visitor.street ?? company.street,
       status: "pending",
       createdAt: new Date().toISOString().slice(0, 10),
+      qualType: activeQual,
     };
     addCustomTask(newTask);
     setPendingCompanyId(null);
@@ -196,12 +211,19 @@ export default function TasksPage() {
     setCompanyCategory("all");
   }
 
+  const qualMeta = QUAL_TYPE_META[activeQual];
+
   return (
     <div className="flex flex-col min-h-full">
+      {/* 资质模块 Tabs */}
+      <QualTabs className="mb-4" />
+
       {/* 标题行 */}
       <div className="flex items-end justify-between mb-4">
         <div>
-          <h1 className="text-xl font-semibold text-[#0f172a]">任务管理</h1>
+          <h1 className="text-xl font-semibold text-[#0f172a]">任务管理
+            <span className="ml-2 text-sm font-normal text-[#94a3b8]">· {qualMeta.label}</span>
+          </h1>
           <p className="text-sm text-[#94a3b8] mt-1 flex items-center gap-2">
             从标的池到摸排闭环的全流程跟踪
             {lockedStreet && (

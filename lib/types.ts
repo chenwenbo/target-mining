@@ -1,3 +1,23 @@
+// ─── 资质类型（四模块）──────────────────────────────────────────
+export const QUAL_TYPES = [
+  "high_tech",
+  "innovative_sme",
+  "specialized_sme",
+  "little_giant",
+] as const;
+
+export type QualificationType = (typeof QUAL_TYPES)[number];
+
+export const QUAL_TYPE_META: Record<
+  QualificationType,
+  { label: string; shortLabel: string; ministry: "MOST" | "MIIT"; color: string }
+> = {
+  high_tech:       { label: "高企认定",         shortLabel: "高企",   ministry: "MOST", color: "blue"   },
+  innovative_sme:  { label: "创新型中小企业",   shortLabel: "创新",   ministry: "MIIT", color: "violet" },
+  specialized_sme: { label: "专精特新中小企业", shortLabel: "专精",   ministry: "MIIT", color: "amber"  },
+  little_giant:    { label: '专精特新"小巨人"', shortLabel: "小巨人", ministry: "MIIT", color: "rose"   },
+};
+
 // ─── 八大领域 ───────────────────────────────────────────────────
 export const TECH_FIELDS = [
   "电子信息",
@@ -137,6 +157,12 @@ export interface Company {
     email: string;
   };
   declarationWillingness: DeclarationWillingness;
+
+  // ─── MIIT 三类资质扩展字段（可选，不破坏现有数据）──────────────
+  annualRevenue?: number;       // 万元，年主营业务收入
+  mainBizRevenueRatio?: number; // 主营收入占比 %
+  rdExpenseRatio?: number;      // 研发费用占主营收入比 %
+  marketRank?: number | null;   // 细分市场排名（null=未知）
 }
 
 // ─── 知识产权明细条目 ────────────────────────────────────────────
@@ -161,6 +187,7 @@ export interface Task {
   street: string;
   status: TaskStatus;
   createdAt: string;
+  qualType?: QualificationType; // 缺省视为 "high_tech"，兼容现有数据
 }
 
 // ─── 复审状态 ────────────────────────────────────────────────────

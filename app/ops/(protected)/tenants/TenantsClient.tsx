@@ -11,6 +11,7 @@ import {
   type Tenant,
   type TenantStatus,
 } from "@/lib/ops-mock";
+import { QUAL_TYPE_META } from "@/lib/types";
 import TenantStatusBadge from "@/components/ops/TenantStatusBadge";
 import AddTenantDrawer from "@/components/ops/AddTenantDrawer";
 import EditTenantDrawer from "@/components/ops/EditTenantDrawer";
@@ -271,12 +272,13 @@ export default function TenantsClient() {
       {/* 表格 */}
       <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[1080px] text-sm">
+          <table className="w-full min-w-[1200px] text-sm">
             <thead>
               <tr className="border-b border-[#f1f5f9] bg-[#fafafa]">
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-5 py-3">租户名称</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">状态</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">到期日</th>
+                <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">启用模块</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">管理员账号</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">密码</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-3 py-3">企业数</th>
@@ -287,7 +289,7 @@ export default function TenantsClient() {
             <tbody>
               {paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="text-center py-12 text-[#94a3b8] text-sm">
+                  <td colSpan={9} className="text-center py-12 text-[#94a3b8] text-sm">
                     暂无符合条件的租户
                   </td>
                 </tr>
@@ -306,6 +308,18 @@ export default function TenantsClient() {
                     </td>
                     <td className="px-3 py-3 text-[#475569] tabular-nums text-xs">
                       {formatDate(t.expiresAt)}
+                    </td>
+                    <td className="px-3 py-3">
+                      <div className="flex flex-wrap gap-1">
+                        {(t.modules ?? ["high_tech"]).map((m) => (
+                          <span
+                            key={m}
+                            className="px-1.5 py-0.5 bg-[#f1f5f9] text-[#475569] text-[10px] rounded font-medium"
+                          >
+                            {QUAL_TYPE_META[m]?.shortLabel ?? m}
+                          </span>
+                        ))}
+                      </div>
                     </td>
                     <td className="px-3 py-3 font-mono text-xs text-[#475569]">
                       {t.adminUsername}

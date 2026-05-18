@@ -1,4 +1,5 @@
-import type { Company, Task, IPItem, IPType } from "./types";
+import type { Company, Task, IPItem, IPType, QualificationType } from "./types";
+import { deriveSMEFields, checkEligibility } from "./sme-criteria";
 import { getRenewalKPI } from "./renewal";
 import { getCertifiedCompanies } from "./renewal-data";
 
@@ -156,6 +157,77 @@ export function getDashboardKPI() {
     churnByReason,
   };
 }
+
+// ─── SME 模块 KPI ────────────────────────────────────────────────
+
+export function getSMEDashboardKPI(qualType: Exclude<QualificationType, "high_tech">) {
+  const all = getAllCompanies();
+
+  // 各阶段筛选
+  const potential = all.filter((c) => {
+    const d = deriveSMEFields(c);
+    if (qualType === "innovative_sme") return d.totalIPCount >= 3 || c.techField !== null;
+    if (qualType === "specialized_sme") return c.patents.invention >= 2 && c.techField !== null;
+    return c.patents.invention >= 5 && c.techField !== null;
+  });
+
+  const criteriaMet = all.filter((c) => checkEligibility(c, qualType).eligible);
+  const willing = all.filter(
+    (c) =>
+      (c.declarationWillingness === "strong" || c.declarationWillingness === "moderate") &&
+      checkEligibility(c, qualType).score > 20
+  );
+
+  const byStreet: Record<string, number> = {};
+  for (const c of potential) byStreet[c.street] = (byStreet[c.street] || 0) + 1;
+
+  const byField: Record<string, number> = {};
+  for (const c of potential) {
+    if (c.techField) byField[c.techField] = (byField[c.techField] || 0) + 1;
+  }
+
+  const byAge: Record<string, number> = { "1-3 年": 0, "3-5 年": 0, "5-8 年": 0, "8-15 年": 0, "15 年+": 0 };
+  const now = new Date("2026-01-01").getTime();
+  for (const c of potential) {
+    const years = (now - new Date(c.establishedAt).getTime()) / (1000 * 60 * 60 * 24 * 365);
+    if (years < 3) byAge["1-3 年"]++;
+    else if (years < 5) byAge["3-5 年"]++;
+    else if (years < 8) byAge["5-8 年"]++;
+    else if (years < 15) byAge["8-15 年"]++;
+    else byAge["15 年+"]++;
+  }
+
+  const goalMap: Record<string, number> = {
+    innovative_sme: 80,
+    specialized_sme: 40,
+    little_giant: 15,
+  };
+  const certifiedMap: Record<string, number> = {
+    innovative_sme: 32,
+    specialized_sme: 14,
+    little_giant: 4,
+  };
+
+  return {
+    yearGoal: goalMap[qualType] ?? 50,
+    certified: certifiedMap[qualType] ?? 10,
+    total: all.length,
+    potentialCount: potential.length,
+    criteriaMetCount: criteriaMet.length,
+    willingCount: willing.length,
+    byStreet,
+    byField,
+    byAge,
+    // 漏斗层级
+    funnelEnterpriseTotal: all.length,
+    funnelSME: Math.round(all.length * 0.78),      // 中小企业
+    funnelPotential: potential.length,
+    funnelCriteriaMet: criteriaMet.length,
+    funnelWilling: willing.length,
+  };
+}
+
+export type SMEDashboardKPI = ReturnType<typeof getSMEDashboardKPI>;
 
 // ─── 知识产权明细（确定性生成）─────────────────────────────────
 
