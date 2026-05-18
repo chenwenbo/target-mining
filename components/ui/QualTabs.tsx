@@ -1,7 +1,7 @@
 "use client";
 
 import { useQualStore } from "@/lib/qual-store";
-import { QUAL_TYPE_META, type QualificationType } from "@/lib/types";
+import { QUAL_TYPES, QUAL_TYPE_META, type QualificationType } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 const COLOR_MAP: Record<
@@ -21,13 +21,14 @@ interface Props {
 
 export default function QualTabs({ className, variant = "page" }: Props) {
   const { activeQual, enabledModules, setActiveQual } = useQualStore();
+  const sortedModules = QUAL_TYPES.filter((q) => enabledModules.includes(q));
 
   if (enabledModules.length <= 1) return null;
 
   if (variant === "topbar") {
     return (
       <div className={cn("flex items-stretch h-full", className)}>
-        {enabledModules.map((q: QualificationType) => {
+        {sortedModules.map((q: QualificationType) => {
           const meta = QUAL_TYPE_META[q];
           const colors = COLOR_MAP[meta.color] ?? COLOR_MAP.blue;
           const isActive = q === activeQual;
@@ -54,7 +55,7 @@ export default function QualTabs({ className, variant = "page" }: Props) {
 
   return (
     <div className={cn("flex gap-0 border-b border-[#e5e7eb] mb-5", className)}>
-      {enabledModules.map((q: QualificationType) => {
+      {sortedModules.map((q: QualificationType) => {
         const meta = QUAL_TYPE_META[q];
         const colors = COLOR_MAP[meta.color] ?? COLOR_MAP.blue;
         const isActive = q === activeQual;
