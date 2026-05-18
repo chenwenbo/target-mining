@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import { Target, Users, AlertTriangle, Pencil, Check, X } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import type { getDashboardKPI } from "@/lib/mock-data";
@@ -371,7 +370,6 @@ function StreetDistribution({ byStreet }: { byStreet: Record<string, number> }) 
     <PanelCard
       title="街道 / 乡镇分布"
       subtitle="按潜在标的数量排序"
-      action={<Link href="/targets" className="text-xs text-blue-600 hover:underline">全部 ▸</Link>}
     >
       <div className="flex flex-col justify-between flex-1">
         {sorted.map(([street, count]) => (
