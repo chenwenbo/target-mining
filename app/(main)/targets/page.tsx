@@ -26,6 +26,8 @@ interface Filters {
   streets: string[];
   fields: TechField[];
   ageRange: string[];
+  ipRange: string[];
+  employeeRange: string[];
   smeOnly: boolean;
   excludeRisk: boolean;
   willingness: DeclarationWillingness[];
@@ -34,6 +36,8 @@ interface Filters {
 }
 
 const ALL_AGE_RANGES = ["1-3 年", "3-5 年", "5-8 年", "8-15 年", "15 年+"];
+const ALL_IP_RANGES = ["1-5件", "6-20件", "20件+"];
+const ALL_EMPLOYEE_RANGES = ["<30人", "30-100人", "100-300人", "300人+"];
 
 function getAgeRange(est: string): string {
   const years = (new Date("2026-01-01").getTime() - new Date(est).getTime()) / (1000 * 60 * 60 * 24 * 365);
@@ -42,6 +46,24 @@ function getAgeRange(est: string): string {
   if (years < 8) return "5-8 年";
   if (years < 15) return "8-15 年";
   return "15 年+";
+}
+
+function getTotalIP(c: { patents: { invention: number; utility: number; design: number }; software: number }): number {
+  return c.patents.invention + c.patents.utility + c.patents.design + c.software;
+}
+
+function getIPRange(total: number): string {
+  if (total <= 0) return "0件";
+  if (total <= 5) return "1-5件";
+  if (total <= 20) return "6-20件";
+  return "20件+";
+}
+
+function getEmployeeRange(n: number): string {
+  if (n < 30) return "<30人";
+  if (n < 100) return "30-100人";
+  if (n < 300) return "100-300人";
+  return "300人+";
 }
 
 function toggle<T>(arr: T[], val: T): T[] {
@@ -120,6 +142,7 @@ function FilterPanel({
         <button
           onClick={() => onChange({
             q: "", streets: lockedStreet ? [lockedStreet] : [], fields: [], ageRange: [],
+            ipRange: [], employeeRange: [],
             smeOnly: false, excludeRisk: true,
             willingness: [], declarationType: [], poolTier: "all_companies",
           })}
@@ -167,6 +190,26 @@ function FilterPanel({
       ))}
 
 
+      {section("知识产权", "border-l-violet-400", (
+        <div className="flex flex-wrap gap-1.5">
+          {ALL_IP_RANGES.map((r) =>
+            pill(r, filters.ipRange.includes(r), () =>
+              onChange({ ...filters, ipRange: toggle(filters.ipRange, r) })
+            )
+          )}
+        </div>
+      ))}
+
+      {section("参保人数", "border-l-rose-400", (
+        <div className="flex flex-wrap gap-1.5">
+          {ALL_EMPLOYEE_RANGES.map((r) =>
+            pill(r, filters.employeeRange.includes(r), () =>
+              onChange({ ...filters, employeeRange: toggle(filters.employeeRange, r) })
+            )
+          )}
+        </div>
+      ))}
+
       {section("申报类型", "border-l-teal-400", (
         <div className="flex flex-wrap gap-1.5">
           {(["新申报", "复审"] as const).map((t) =>
@@ -201,6 +244,8 @@ function TargetsPageContent() {
     streets: [],
     fields: [],
     ageRange: [],
+    ipRange: [],
+    employeeRange: [],
     smeOnly: false,
     excludeRisk: true,
     willingness: [],
@@ -232,6 +277,8 @@ function TargetsPageContent() {
         if (filters.streets.length > 0 && !filters.streets.includes(c.street)) return false;
         if (filters.fields.length > 0 && (!c.techField || !filters.fields.includes(c.techField))) return false;
         if (filters.ageRange.length > 0 && !filters.ageRange.includes(getAgeRange(c.establishedAt))) return false;
+        if (filters.ipRange.length > 0 && !filters.ipRange.includes(getIPRange(getTotalIP(c)))) return false;
+        if (filters.employeeRange.length > 0 && !filters.employeeRange.includes(getEmployeeRange(c.employees))) return false;
         if (filters.smeOnly && !c.inSMEDatabase) return false;
         if (filters.excludeRisk && (c.risk.abnormal || c.risk.penalty)) return false;
         if (filters.willingness.length > 0 && !filters.willingness.includes(c.declarationWillingness)) return false;
@@ -307,7 +354,8 @@ function TargetsPageContent() {
 
   const activeFilterCount = [
     filters.streets.length, filters.fields.length,
-    filters.ageRange.length, filters.smeOnly ? 1 : 0,
+    filters.ageRange.length, filters.ipRange.length, filters.employeeRange.length,
+    filters.smeOnly ? 1 : 0,
     filters.willingness.length, filters.declarationType.length,
   ].reduce((a, b) => a + b, 0);
 
