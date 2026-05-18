@@ -230,7 +230,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
 ];
 
 // ─── LocalStorage key ────────────────────────────────────────
-const TENANTS_KEY = "ops_tenants";
+const TENANTS_KEY = "ops_tenants_v2";
 
 // ─── CRUD ────────────────────────────────────────────────────
 export function getTenants(): Tenant[] {
