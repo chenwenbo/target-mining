@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>数据模型图 - 申报目标挖掘系统</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 28px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #374151;
+    }
+    .legend-dot {
+      width: 12px; height: 12px;
+      border-radius: 3px;
+    }
+
+    .tables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .table-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05);
+      overflow: hidden;
+    }
+    .table-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .table-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .table-title { font-size: 14px; font-weight: 700; }
+    .table-comment { font-size: 11px; color: #9ca3af; margin-top: 1px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    thead tr { background: #f9fafb; }
+    thead th {
+      text-align: left;
+      padding: 8px 18px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    tbody tr { border-bottom: 1px solid #f9fafb; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 8px 18px; color: #374151; vertical-align: top; }
+
+    .badge {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-pk  { background: #fef3c7; color: #92400e; }
+    .badge-fk  { background: #dbeafe; color: #1e40af; }
+    .badge-idx { background: #ede9fe; color: #5b21b6; }
+    .badge-audit { background: #f3f4f6; color: #6b7280; }
+
+    .type-tag {
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    /* ER 关系图 */
+    .er-section {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05);
+      padding: 24px;
+    }
+    .er-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 16px;
+    }
+    .mermaid { display: flex; justify-content: center; }
+
+    /* color themes per table */
+    .color-blue   { background: #eff6ff; }
+    .color-green  { background: #f0fdf4; }
+    .color-purple { background: #faf5ff; }
+    .color-orange { background: #fff7ed; }
+
+    .icon-blue   { background: #dbeafe; }
+    .icon-green  { background: #dcfce7; }
+    .icon-purple { background: #ede9fe; }
+    .icon-orange { background: #ffedd5; }
+
+    .title-blue   { color: #1e40af; }
+    .title-green  { color: #166534; }
+    .title-purple { color: #5b21b6; }
+    .title-orange { color: #9a3412; }
+  </style>
+</head>
+<body>
+
+<h1>数据模型图</h1>
+<p class="subtitle">申报目标挖掘系统 · 4 张核心表</p>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#92400e;opacity:.6"></div>PK — 主键</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#1e40af;opacity:.6"></div>FK — 外键</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#5b21b6;opacity:.6"></div>IDX — 业务索引字段</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6b7280;opacity:.4"></div>AUDIT — 通用审计字段</div>
+</div>
+
+<div class="tables-grid">
+
+  <!-- declaration_target -->
+  <div class="table-card">
+    <div class="table-header color-blue">
+      <div class="table-icon icon-blue">🎯</div>
+      <div>
+        <div class="table-title title-blue">declaration_target</div>
+        <div class="table-comment">本年度申报目标表</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>字段</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><strong>id</strong></td><td class="type-tag">bigint</td><td>主键ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td>tenant_id</td><td class="type-tag">varchar(32)</td><td>租户ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>target_count</td><td class="type-tag">int</td><td>本年度申报目标数量</td><td></td></tr>
+        <tr><td>create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- enterprise_evaluation -->
+  <div class="table-card">
+    <div class="table-header color-green">
+      <div class="table-icon icon-green">🏢</div>
+      <div>
+        <div class="table-title title-green">enterprise_evaluation</div>
+        <div class="table-comment">企业测评表</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>字段</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><strong>id</strong></td><td class="type-tag">bigint</td><td>主键ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td>tenant_id</td><td class="type-tag">varchar(32)</td><td>租户ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>enterprise_code</td><td class="type-tag">varchar(64)</td><td>企业编码 (UUID)</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>enterprise_name</td><td class="type-tag">varchar(255)</td><td>企业名称</td><td></td></tr>
+        <tr><td>rd_expense_avg_ratio_3y</td><td class="type-tag">decimal(8,4)</td><td>近三年研发费用占营收平均比例(%)</td><td></td></tr>
+        <tr><td>has_rd_expense_separate_account</td><td class="type-tag">tinyint(1)</td><td>是否建立研发费用独立核算账目</td><td></td></tr>
+        <tr><td>rd_employee_ratio</td><td class="type-tag">decimal(8,4)</td><td>研发人员占总员工比例(%)</td><td></td></tr>
+        <tr><td>has_independent_rd_dept</td><td class="type-tag">tinyint(1)</td><td>是否设有独立研发部门/中心</td><td></td></tr>
+        <tr><td>valid_invention_patent_count</td><td class="type-tag">int</td><td>有效发明专利数量</td><td></td></tr>
+        <tr><td>valid_utility_patent_count</td><td class="type-tag">int</td><td>有效实用新型专利数量</td><td></td></tr>
+        <tr><td>software_copyright_count</td><td class="type-tag">int</td><td>软件著作权数量</td><td></td></tr>
+        <tr><td>hi_tech_revenue_ratio_1y</td><td class="type-tag">decimal(8,4)</td><td>近一年高新技术产品收入占比(%)</td><td></td></tr>
+        <tr><td>has_external_accounting_firm</td><td class="type-tag">tinyint(1)</td><td>是否委托会计师事务所</td><td></td></tr>
+        <tr><td>has_annual_audit_3y</td><td class="type-tag">tinyint(1)</td><td>近三年是否均完成年度财务审计</td><td></td></tr>
+        <tr><td>has_violation_record_3y</td><td class="type-tag">tinyint(1)</td><td>近三年是否有重大违规记录</td><td></td></tr>
+        <tr><td>create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- survey_task -->
+  <div class="table-card">
+    <div class="table-header color-purple">
+      <div class="table-icon icon-purple">📋</div>
+      <div>
+        <div class="table-title title-purple">survey_task</div>
+        <div class="table-comment">摸排任务表</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>字段</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><strong>id</strong></td><td class="type-tag">bigint</td><td>主键ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td>tenant_id</td><td class="type-tag">varchar(32)</td><td>租户ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>enterprise_code</td><td class="type-tag">varchar(64)</td><td>企业编码 (UUID)，关联企业测评</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>enterprise_name</td><td class="type-tag">varchar(255)</td><td>企业名称</td><td></td></tr>
+        <tr><td>assignee_id</td><td class="type-tag">varchar(32)</td><td>任务人ID</td><td></td></tr>
+        <tr><td>assignee_name</td><td class="type-tag">varchar(64)</td><td>任务人名称</td><td></td></tr>
+        <tr><td>visit_count</td><td class="type-tag">int</td><td>走访次数（累计）</td><td></td></tr>
+        <tr><td>survey_status</td><td class="type-tag">varchar(32)</td><td>摸排状态 pending/in_progress/done</td><td></td></tr>
+        <tr><td>create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- survey_task_record -->
+  <div class="table-card">
+    <div class="table-header color-orange">
+      <div class="table-icon icon-orange">📝</div>
+      <div>
+        <div class="table-title title-orange">survey_task_record</div>
+        <div class="table-comment">摸排任务记录表</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>字段</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><strong>id</strong></td><td class="type-tag">bigint</td><td>主键ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td>task_id</td><td class="type-tag">bigint</td><td>关联 survey_task.id</td><td><span class="badge badge-fk">FK</span></td></tr>
+        <tr><td>tenant_id</td><td class="type-tag">varchar(32)</td><td>租户ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>enterprise_code</td><td class="type-tag">varchar(64)</td><td>企业编码</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td>enterprise_name</td><td class="type-tag">varchar(255)</td><td>企业名称</td><td></td></tr>
+        <tr><td>visit_duration</td><td class="type-tag">int</td><td>走访时长（分钟）</td><td></td></tr>
+        <tr><td>contact_name</td><td class="type-tag">varchar(64)</td><td>企业联系人</td><td></td></tr>
+        <tr><td>contact_phone</td><td class="type-tag">varchar(32)</td><td>企业联系电话</td><td></td></tr>
+        <tr><td>actual_employee_count</td><td class="type-tag">int</td><td>实际在职员工数</td><td></td></tr>
+        <tr><td>rd_employee_count</td><td class="type-tag">int</td><td>其中研发人员数</td><td></td></tr>
+        <tr><td>annual_revenue_scale</td><td class="type-tag">varchar(64)</td><td>年营收规模</td><td></td></tr>
+        <tr><td>rd_expense_ratio</td><td class="type-tag">decimal(8,4)</td><td>研发费用占比(%)</td><td></td></tr>
+        <tr><td>rd_expense_source</td><td class="type-tag">varchar(255)</td><td>研发费用来源</td><td></td></tr>
+        <tr><td>has_independent_rd_dept</td><td class="type-tag">tinyint(1)</td><td>是否有独立研发部门</td><td></td></tr>
+        <tr><td>compliance_and_finance</td><td class="type-tag">varchar(1000)</td><td>合规与财务情况</td><td></td></tr>
+        <tr><td>main_product_desc</td><td class="type-tag">varchar(1000)</td><td>主要产品/服务描述</td><td></td></tr>
+        <tr><td>main_service_scenario</td><td class="type-tag">varchar(1000)</td><td>产品/服务应用场景</td><td></td></tr>
+        <tr><td>declaration_intention</td><td class="type-tag">varchar(32)</td><td>申报意愿 strong/medium/weak/none</td><td></td></tr>
+        <tr><td>intention_remark</td><td class="type-tag">varchar(1000)</td><td>意愿补充说明</td><td></td></tr>
+        <tr><td>main_obstacles</td><td class="type-tag">varchar(1000)</td><td>企业认可的主要障碍</td><td></td></tr>
+        <tr><td>follow_up_plan</td><td class="type-tag">varchar(1000)</td><td>后续跟进安排</td><td></td></tr>
+        <tr><td>next_contact_date</td><td class="type-tag">date</td><td>约定下次联系日期</td><td></td></tr>
+        <tr><td>enterprise_demand</td><td class="type-tag">varchar(1000)</td><td>企业需求</td><td></td></tr>
+        <tr><td>internal_remark</td><td class="type-tag">varchar(1000)</td><td>工作人员内部备注</td><td></td></tr>
+        <tr><td>create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td>del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ER 关系图 -->
+<div class="er-section">
+  <div class="er-title">实体关系图 (ER Diagram)</div>
+  <div class="mermaid">
+erDiagram
+    declaration_target {
+        bigint id PK
+        varchar32 tenant_id
+        int target_count
+    }
+
+    enterprise_evaluation {
+        bigint id PK
+        varchar32 tenant_id
+        varchar64 enterprise_code
+        varchar255 enterprise_name
+        decimal rd_expense_avg_ratio_3y
+        tinyint has_rd_expense_separate_account
+        decimal rd_employee_ratio
+        tinyint has_independent_rd_dept
+        int valid_invention_patent_count
+        int valid_utility_patent_count
+        int software_copyright_count
+        decimal hi_tech_revenue_ratio_1y
+        tinyint has_external_accounting_firm
+        tinyint has_annual_audit_3y
+        tinyint has_violation_record_3y
+    }
+
+    survey_task {
+        bigint id PK
+        varchar32 tenant_id
+        varchar64 enterprise_code
+        varchar255 enterprise_name
+        varchar32 assignee_id
+        varchar64 assignee_name
+        int visit_count
+        varchar32 survey_status
+    }
+
+    survey_task_record {
+        bigint id PK
+        bigint task_id FK
+        varchar32 tenant_id
+        varchar64 enterprise_code
+        varchar255 enterprise_name
+        int visit_duration
+        varchar64 contact_name
+        varchar32 contact_phone
+        int actual_employee_count
+        int rd_employee_count
+        varchar64 annual_revenue_scale
+        decimal rd_expense_ratio
+        tinyint has_independent_rd_dept
+        varchar32 declaration_intention
+        date next_contact_date
+    }
+
+    enterprise_evaluation ||--o{ survey_task : "enterprise_code (业务关联)"
+    survey_task ||--o{ survey_task_record : "id → task_id"
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'neutral',
+    er: { diagramPadding: 40, layoutDirection: 'LR', minEntityWidth: 100 },
+    themeVariables: {
+      primaryColor: '#eff6ff',
+      primaryBorderColor: '#93c5fd',
+      lineColor: '#6b7280',
+      fontSize: '13px'
+    }
+  });
+</script>
+</body>
+</html>
