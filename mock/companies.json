@@ -11185,7 +11185,7 @@
       "rdExpenseRatioY1": 3.6,
       "rdExpenseRatioY2": 6.6,
       "rdExpenseRatioY3": 6.6,
-      "hiTechRevenueRatioY1": 63.0,
+      "hiTechRevenueRatioY1": 63,
       "hiTechRevenueRatioY2": 62.9,
       "hiTechRevenueRatioY3": 72.7,
       "rdStaffRatioY1": 16.7,
@@ -11395,7 +11395,7 @@
     "certNo": "GR20224201000316",
     "expiryYear": 2025,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 4.0,
+      "rdExpenseRatioY1": 4,
       "rdExpenseRatioY2": 4.4,
       "rdExpenseRatioY3": 7.7,
       "hiTechRevenueRatioY1": 59.2,
@@ -11452,7 +11452,7 @@
       "rdExpenseRatioY2": 8.4,
       "rdExpenseRatioY3": 7.2,
       "hiTechRevenueRatioY1": 63.3,
-      "hiTechRevenueRatioY2": 80.0,
+      "hiTechRevenueRatioY2": 80,
       "hiTechRevenueRatioY3": 69.2,
       "rdStaffRatioY1": 15.8,
       "rdStaffRatioY2": 18.9,
@@ -12102,7 +12102,7 @@
       "rdExpenseRatioY2": 7.9,
       "rdExpenseRatioY3": 5.5,
       "hiTechRevenueRatioY1": 54.3,
-      "hiTechRevenueRatioY2": 63.0,
+      "hiTechRevenueRatioY2": 63,
       "hiTechRevenueRatioY3": 74.3,
       "rdStaffRatioY1": 21.2,
       "rdStaffRatioY2": 12.1,
@@ -12215,10 +12215,10 @@
     "certNo": "GR20244201000339",
     "expiryYear": 2027,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 5.0,
+      "rdExpenseRatioY1": 5,
       "rdExpenseRatioY2": 6.7,
       "rdExpenseRatioY3": 7.1,
-      "hiTechRevenueRatioY1": 64.0,
+      "hiTechRevenueRatioY1": 64,
       "hiTechRevenueRatioY2": 64.9,
       "hiTechRevenueRatioY3": 70.6,
       "rdStaffRatioY1": 15.1,
@@ -12483,10 +12483,10 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 5.5,
       "rdExpenseRatioY2": 6.9,
-      "rdExpenseRatioY3": 5.0,
+      "rdExpenseRatioY3": 5,
       "hiTechRevenueRatioY1": 53.6,
       "hiTechRevenueRatioY2": 78.4,
-      "hiTechRevenueRatioY3": 67.0,
+      "hiTechRevenueRatioY3": 67,
       "rdStaffRatioY1": 19.3,
       "rdStaffRatioY2": 16.8,
       "rdStaffRatioY3": 21.9,
@@ -12832,7 +12832,7 @@
     "certNo": "GR20184201000355",
     "expiryYear": 2021,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 5.0,
+      "rdExpenseRatioY1": 5,
       "rdExpenseRatioY2": 5.2,
       "rdExpenseRatioY3": 7.3,
       "hiTechRevenueRatioY1": 58.9,
@@ -12840,7 +12840,7 @@
       "hiTechRevenueRatioY3": 75.3,
       "rdStaffRatioY1": 21.3,
       "rdStaffRatioY2": 17.1,
-      "rdStaffRatioY3": 20.0,
+      "rdStaffRatioY3": 20,
       "newPatentsY1": 2,
       "newPatentsY2": 2,
       "newPatentsY3": 6,
@@ -12953,7 +12953,7 @@
       "rdExpenseRatioY2": 6.6,
       "rdExpenseRatioY3": 6.4,
       "hiTechRevenueRatioY1": 62.6,
-      "hiTechRevenueRatioY2": 58.0,
+      "hiTechRevenueRatioY2": 58,
       "hiTechRevenueRatioY3": 79.6,
       "rdStaffRatioY1": 16.7,
       "rdStaffRatioY2": 15.7,
@@ -13034,7 +13034,7 @@
     "certNo": "GR20184201000360",
     "expiryYear": 2021,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 7.0,
+      "rdExpenseRatioY1": 7,
       "rdExpenseRatioY2": 5.7,
       "rdExpenseRatioY3": 5.1,
       "hiTechRevenueRatioY1": 62.1,
@@ -13121,13 +13121,13 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 4.2,
       "rdExpenseRatioY2": 4.2,
-      "rdExpenseRatioY3": 7.0,
+      "rdExpenseRatioY3": 7,
       "hiTechRevenueRatioY1": 68.4,
       "hiTechRevenueRatioY2": 59.6,
       "hiTechRevenueRatioY3": 59.3,
       "rdStaffRatioY1": 16.4,
       "rdStaffRatioY2": 19.9,
-      "rdStaffRatioY3": 22.0,
+      "rdStaffRatioY3": 22,
       "newPatentsY1": 1,
       "newPatentsY2": 5,
       "newPatentsY3": 6,
@@ -13239,12 +13239,12 @@
       "rdExpenseRatioY1": 4.5,
       "rdExpenseRatioY2": 6.1,
       "rdExpenseRatioY3": 4.4,
-      "hiTechRevenueRatioY1": 55.0,
+      "hiTechRevenueRatioY1": 55,
       "hiTechRevenueRatioY2": 55.7,
       "hiTechRevenueRatioY3": 60.7,
       "rdStaffRatioY1": 15.6,
       "rdStaffRatioY2": 21.8,
-      "rdStaffRatioY3": 24.0,
+      "rdStaffRatioY3": 24,
       "newPatentsY1": 4,
       "newPatentsY2": 4,
       "newPatentsY3": 5,
@@ -13323,7 +13323,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 5.4,
       "rdExpenseRatioY2": 7.7,
-      "rdExpenseRatioY3": 5.0,
+      "rdExpenseRatioY3": 5,
       "hiTechRevenueRatioY1": 55.4,
       "hiTechRevenueRatioY2": 65.1,
       "hiTechRevenueRatioY3": 56.2,
@@ -13431,10 +13431,10 @@
       "rdExpenseRatioY2": 7.9,
       "rdExpenseRatioY3": 4.4,
       "hiTechRevenueRatioY1": 64.2,
-      "hiTechRevenueRatioY2": 78.0,
+      "hiTechRevenueRatioY2": 78,
       "hiTechRevenueRatioY3": 60.2,
       "rdStaffRatioY1": 17.9,
-      "rdStaffRatioY2": 13.0,
+      "rdStaffRatioY2": 13,
       "rdStaffRatioY3": 21.2,
       "newPatentsY1": 1,
       "newPatentsY2": 2,
@@ -13567,8 +13567,8 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 3.9,
       "rdExpenseRatioY2": 6.6,
-      "rdExpenseRatioY3": 8.0,
-      "hiTechRevenueRatioY1": 60.0,
+      "rdExpenseRatioY3": 8,
+      "hiTechRevenueRatioY1": 60,
       "hiTechRevenueRatioY2": 66.7,
       "hiTechRevenueRatioY3": 74.7,
       "rdStaffRatioY1": 20.8,
@@ -13710,7 +13710,7 @@
       "hiTechRevenueRatioY2": 77.5,
       "hiTechRevenueRatioY3": 80.6,
       "rdStaffRatioY1": 15.3,
-      "rdStaffRatioY2": 12.0,
+      "rdStaffRatioY2": 12,
       "rdStaffRatioY3": 15.7,
       "newPatentsY1": 3,
       "newPatentsY2": 5,
@@ -13874,14 +13874,14 @@
     "expiryYear": 2024,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 6.4,
-      "rdExpenseRatioY2": 4.0,
+      "rdExpenseRatioY2": 4,
       "rdExpenseRatioY3": 5.1,
       "hiTechRevenueRatioY1": 55.9,
       "hiTechRevenueRatioY2": 54.2,
       "hiTechRevenueRatioY3": 61.7,
       "rdStaffRatioY1": 10.5,
       "rdStaffRatioY2": 19.5,
-      "rdStaffRatioY3": 16.0,
+      "rdStaffRatioY3": 16,
       "newPatentsY1": 4,
       "newPatentsY2": 5,
       "newPatentsY3": 1,
@@ -14111,7 +14111,7 @@
       "rdExpenseRatioY2": 5.8,
       "rdExpenseRatioY3": 4.7,
       "hiTechRevenueRatioY1": 60.2,
-      "hiTechRevenueRatioY2": 58.0,
+      "hiTechRevenueRatioY2": 58,
       "hiTechRevenueRatioY3": 64.6,
       "rdStaffRatioY1": 14.1,
       "rdStaffRatioY2": 16.6,
@@ -14193,9 +14193,9 @@
     "expiryYear": 2021,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 6.5,
-      "rdExpenseRatioY2": 6.0,
+      "rdExpenseRatioY2": 6,
       "rdExpenseRatioY3": 6.4,
-      "hiTechRevenueRatioY1": 62.0,
+      "hiTechRevenueRatioY1": 62,
       "hiTechRevenueRatioY2": 63.7,
       "hiTechRevenueRatioY3": 70.9,
       "rdStaffRatioY1": 10.8,
@@ -14246,11 +14246,11 @@
     "expiryYear": 2021,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.3,
-      "rdExpenseRatioY2": 5.0,
-      "rdExpenseRatioY3": 7.0,
-      "hiTechRevenueRatioY1": 67.0,
+      "rdExpenseRatioY2": 5,
+      "rdExpenseRatioY3": 7,
+      "hiTechRevenueRatioY1": 67,
       "hiTechRevenueRatioY2": 58.7,
-      "hiTechRevenueRatioY3": 74.0,
+      "hiTechRevenueRatioY3": 74,
       "rdStaffRatioY1": 21.9,
       "rdStaffRatioY2": 13.8,
       "rdStaffRatioY3": 15.4,
@@ -14331,7 +14331,7 @@
     "expiryYear": 2025,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 6.6,
-      "rdExpenseRatioY2": 4.0,
+      "rdExpenseRatioY2": 4,
       "rdExpenseRatioY3": 7.6,
       "hiTechRevenueRatioY1": 52.3,
       "hiTechRevenueRatioY2": 78.3,
@@ -14824,7 +14824,7 @@
       "rdExpenseRatioY2": 7.7,
       "rdExpenseRatioY3": 7.2,
       "hiTechRevenueRatioY1": 75.3,
-      "hiTechRevenueRatioY2": 56.0,
+      "hiTechRevenueRatioY2": 56,
       "hiTechRevenueRatioY3": 72.6,
       "rdStaffRatioY1": 10.9,
       "rdStaffRatioY2": 11.1,
@@ -15291,7 +15291,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 5.3,
       "rdExpenseRatioY2": 3.9,
-      "rdExpenseRatioY3": 4.0,
+      "rdExpenseRatioY3": 4,
       "hiTechRevenueRatioY1": 67.1,
       "hiTechRevenueRatioY2": 72.2,
       "hiTechRevenueRatioY3": 75.7,
@@ -15380,7 +15380,7 @@
       "hiTechRevenueRatioY1": 71.5,
       "hiTechRevenueRatioY2": 53.5,
       "hiTechRevenueRatioY3": 79.9,
-      "rdStaffRatioY1": 19.0,
+      "rdStaffRatioY1": 19,
       "rdStaffRatioY2": 11.6,
       "rdStaffRatioY3": 18.5,
       "newPatentsY1": 2,
@@ -15461,7 +15461,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 3.9,
       "rdExpenseRatioY2": 4.1,
-      "rdExpenseRatioY3": 6.0,
+      "rdExpenseRatioY3": 6,
       "hiTechRevenueRatioY1": 56.8,
       "hiTechRevenueRatioY2": 65.4,
       "hiTechRevenueRatioY3": 77.4,
@@ -15727,7 +15727,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 6.1,
       "rdExpenseRatioY2": 6.1,
-      "rdExpenseRatioY3": 8.0,
+      "rdExpenseRatioY3": 8,
       "hiTechRevenueRatioY1": 60.4,
       "hiTechRevenueRatioY2": 58.4,
       "hiTechRevenueRatioY3": 61.7,
@@ -15877,9 +15877,9 @@
       "rdExpenseRatioY1": 6.6,
       "rdExpenseRatioY2": 7.6,
       "rdExpenseRatioY3": 4.7,
-      "hiTechRevenueRatioY1": 58.0,
+      "hiTechRevenueRatioY1": 58,
       "hiTechRevenueRatioY2": 56.8,
-      "hiTechRevenueRatioY3": 64.0,
+      "hiTechRevenueRatioY3": 64,
       "rdStaffRatioY1": 21.1,
       "rdStaffRatioY2": 18.9,
       "rdStaffRatioY3": 16.8,
@@ -15984,7 +15984,7 @@
       "rdExpenseRatioY2": 4.1,
       "rdExpenseRatioY3": 4.8,
       "hiTechRevenueRatioY1": 57.4,
-      "hiTechRevenueRatioY2": 78.0,
+      "hiTechRevenueRatioY2": 78,
       "hiTechRevenueRatioY3": 65.8,
       "rdStaffRatioY1": 10.2,
       "rdStaffRatioY2": 16.6,
@@ -16066,7 +16066,7 @@
     "expiryYear": 2022,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 6.5,
-      "rdExpenseRatioY2": 6.0,
+      "rdExpenseRatioY2": 6,
       "rdExpenseRatioY3": 5.2,
       "hiTechRevenueRatioY1": 55.6,
       "hiTechRevenueRatioY2": 64.2,
@@ -16208,7 +16208,7 @@
       "rdExpenseRatioY3": 5.1,
       "hiTechRevenueRatioY1": 54.4,
       "hiTechRevenueRatioY2": 75.3,
-      "hiTechRevenueRatioY3": 82.0,
+      "hiTechRevenueRatioY3": 82,
       "rdStaffRatioY1": 10.1,
       "rdStaffRatioY2": 19.7,
       "rdStaffRatioY3": 16.3,
@@ -16515,7 +16515,7 @@
       "rdExpenseRatioY1": 6.1,
       "rdExpenseRatioY2": 7.7,
       "rdExpenseRatioY3": 5.4,
-      "hiTechRevenueRatioY1": 53.0,
+      "hiTechRevenueRatioY1": 53,
       "hiTechRevenueRatioY2": 58.2,
       "hiTechRevenueRatioY3": 71.3,
       "rdStaffRatioY1": 14.6,
@@ -16683,9 +16683,9 @@
     "expiryYear": 2025,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 4.1,
-      "rdExpenseRatioY2": 6.0,
+      "rdExpenseRatioY2": 6,
       "rdExpenseRatioY3": 7.2,
-      "hiTechRevenueRatioY1": 73.0,
+      "hiTechRevenueRatioY1": 73,
       "hiTechRevenueRatioY2": 69.2,
       "hiTechRevenueRatioY3": 63.9,
       "rdStaffRatioY1": 19.5,
@@ -16863,12 +16863,12 @@
     "certNo": "GR20214201000458",
     "expiryYear": 2024,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 7.0,
+      "rdExpenseRatioY1": 7,
       "rdExpenseRatioY2": 4.2,
       "rdExpenseRatioY3": 6.5,
       "hiTechRevenueRatioY1": 57.7,
       "hiTechRevenueRatioY2": 61.4,
-      "hiTechRevenueRatioY3": 66.0,
+      "hiTechRevenueRatioY3": 66,
       "rdStaffRatioY1": 10.7,
       "rdStaffRatioY2": 22.5,
       "rdStaffRatioY3": 22.4,
@@ -16950,12 +16950,12 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.5,
       "rdExpenseRatioY2": 4.9,
-      "rdExpenseRatioY3": 9.0,
+      "rdExpenseRatioY3": 9,
       "hiTechRevenueRatioY1": 58.4,
       "hiTechRevenueRatioY2": 77.9,
       "hiTechRevenueRatioY3": 68.7,
       "rdStaffRatioY1": 15.3,
-      "rdStaffRatioY2": 16.0,
+      "rdStaffRatioY2": 16,
       "rdStaffRatioY3": 21.2,
       "newPatentsY1": 3,
       "newPatentsY2": 1,
@@ -17066,13 +17066,13 @@
     "expiryYear": 2024,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.7,
-      "rdExpenseRatioY2": 5.0,
+      "rdExpenseRatioY2": 5,
       "rdExpenseRatioY3": 5.5,
       "hiTechRevenueRatioY1": 64.6,
       "hiTechRevenueRatioY2": 60.6,
       "hiTechRevenueRatioY3": 66.2,
       "rdStaffRatioY1": 15.9,
-      "rdStaffRatioY2": 17.0,
+      "rdStaffRatioY2": 17,
       "rdStaffRatioY3": 17.6,
       "newPatentsY1": 2,
       "newPatentsY2": 4,
@@ -17153,7 +17153,7 @@
       "rdExpenseRatioY1": 5.3,
       "rdExpenseRatioY2": 5.2,
       "rdExpenseRatioY3": 6.1,
-      "hiTechRevenueRatioY1": 62.0,
+      "hiTechRevenueRatioY1": 62,
       "hiTechRevenueRatioY2": 58.6,
       "hiTechRevenueRatioY3": 73.2,
       "rdStaffRatioY1": 21.9,
@@ -17338,7 +17338,7 @@
       "hiTechRevenueRatioY2": 70.4,
       "hiTechRevenueRatioY3": 61.9,
       "rdStaffRatioY1": 18.6,
-      "rdStaffRatioY2": 11.0,
+      "rdStaffRatioY2": 11,
       "rdStaffRatioY3": 18.4,
       "newPatentsY1": 4,
       "newPatentsY2": 1,
@@ -17513,13 +17513,13 @@
     "expiryYear": 2024,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.4,
-      "rdExpenseRatioY2": 5.0,
+      "rdExpenseRatioY2": 5,
       "rdExpenseRatioY3": 4.9,
       "hiTechRevenueRatioY1": 74.6,
       "hiTechRevenueRatioY2": 73.9,
       "hiTechRevenueRatioY3": 71.7,
       "rdStaffRatioY1": 13.7,
-      "rdStaffRatioY2": 17.0,
+      "rdStaffRatioY2": 17,
       "rdStaffRatioY3": 23.4,
       "newPatentsY1": 3,
       "newPatentsY2": 4,
@@ -17730,10 +17730,10 @@
       "rdExpenseRatioY3": 6.5,
       "hiTechRevenueRatioY1": 59.7,
       "hiTechRevenueRatioY2": 59.8,
-      "hiTechRevenueRatioY3": 71.0,
+      "hiTechRevenueRatioY3": 71,
       "rdStaffRatioY1": 10.7,
       "rdStaffRatioY2": 11.6,
-      "rdStaffRatioY3": 14.0,
+      "rdStaffRatioY3": 14,
       "newPatentsY1": 1,
       "newPatentsY2": 5,
       "newPatentsY3": 2,
@@ -17811,9 +17811,9 @@
     "expiryYear": 2027,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 4.9,
-      "rdExpenseRatioY2": 8.0,
+      "rdExpenseRatioY2": 8,
       "rdExpenseRatioY3": 4.2,
-      "hiTechRevenueRatioY1": 53.0,
+      "hiTechRevenueRatioY1": 53,
       "hiTechRevenueRatioY2": 54.5,
       "hiTechRevenueRatioY3": 55.5,
       "rdStaffRatioY1": 11.3,
@@ -17867,8 +17867,8 @@
       "rdExpenseRatioY2": 7.3,
       "rdExpenseRatioY3": 5.5,
       "hiTechRevenueRatioY1": 76.2,
-      "hiTechRevenueRatioY2": 71.0,
-      "hiTechRevenueRatioY3": 69.0,
+      "hiTechRevenueRatioY2": 71,
+      "hiTechRevenueRatioY3": 69,
       "rdStaffRatioY1": 13.2,
       "rdStaffRatioY2": 16.8,
       "rdStaffRatioY3": 17.7,
@@ -18012,7 +18012,7 @@
     "certNo": "GR20244201000488",
     "expiryYear": 2027,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 6.0,
+      "rdExpenseRatioY1": 6,
       "rdExpenseRatioY2": 8.3,
       "rdExpenseRatioY3": 5.1,
       "hiTechRevenueRatioY1": 57.8,
@@ -18069,8 +18069,8 @@
       "rdExpenseRatioY2": 8.4,
       "rdExpenseRatioY3": 6.2,
       "hiTechRevenueRatioY1": 52.5,
-      "hiTechRevenueRatioY2": 55.0,
-      "hiTechRevenueRatioY3": 61.0,
+      "hiTechRevenueRatioY2": 55,
+      "hiTechRevenueRatioY3": 61,
       "rdStaffRatioY1": 11.3,
       "rdStaffRatioY2": 22.3,
       "rdStaffRatioY3": 12.9,
@@ -18389,7 +18389,7 @@
       "rdExpenseRatioY3": 7.3,
       "hiTechRevenueRatioY1": 67.6,
       "hiTechRevenueRatioY2": 61.8,
-      "hiTechRevenueRatioY3": 65.0,
+      "hiTechRevenueRatioY3": 65,
       "rdStaffRatioY1": 16.1,
       "rdStaffRatioY2": 18.8,
       "rdStaffRatioY3": 14.1,
@@ -19429,12 +19429,12 @@
     "expiryYear": 2022,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.9,
-      "rdExpenseRatioY2": 8.0,
+      "rdExpenseRatioY2": 8,
       "rdExpenseRatioY3": 7.8,
-      "hiTechRevenueRatioY1": 58.0,
+      "hiTechRevenueRatioY1": 58,
       "hiTechRevenueRatioY2": 70.5,
       "hiTechRevenueRatioY3": 58.5,
-      "rdStaffRatioY1": 18.0,
+      "rdStaffRatioY1": 18,
       "rdStaffRatioY2": 11.6,
       "rdStaffRatioY3": 21.9,
       "newPatentsY1": 4,
@@ -19762,7 +19762,7 @@
       "rdExpenseRatioY2": 5.9,
       "rdExpenseRatioY3": 7.8,
       "hiTechRevenueRatioY1": 65.6,
-      "hiTechRevenueRatioY2": 76.0,
+      "hiTechRevenueRatioY2": 76,
       "hiTechRevenueRatioY3": 76.7,
       "rdStaffRatioY1": 16.7,
       "rdStaffRatioY2": 15.2,
@@ -19882,7 +19882,7 @@
       "hiTechRevenueRatioY2": 55.3,
       "hiTechRevenueRatioY3": 76.4,
       "rdStaffRatioY1": 10.7,
-      "rdStaffRatioY2": 19.0,
+      "rdStaffRatioY2": 19,
       "rdStaffRatioY3": 16.5,
       "newPatentsY1": 2,
       "newPatentsY2": 5,
@@ -19984,7 +19984,7 @@
       "rdExpenseRatioY1": 6.1,
       "rdExpenseRatioY2": 8.3,
       "rdExpenseRatioY3": 8.8,
-      "hiTechRevenueRatioY1": 74.0,
+      "hiTechRevenueRatioY1": 74,
       "hiTechRevenueRatioY2": 62.4,
       "hiTechRevenueRatioY3": 79.1,
       "rdStaffRatioY1": 18.7,
@@ -20037,8 +20037,8 @@
       "rdExpenseRatioY1": 3.5,
       "rdExpenseRatioY2": 6.1,
       "rdExpenseRatioY3": 6.9,
-      "hiTechRevenueRatioY1": 52.0,
-      "hiTechRevenueRatioY2": 63.0,
+      "hiTechRevenueRatioY1": 52,
+      "hiTechRevenueRatioY2": 63,
       "hiTechRevenueRatioY3": 78.2,
       "rdStaffRatioY1": 20.4,
       "rdStaffRatioY2": 17.1,
@@ -20468,7 +20468,7 @@
       "hiTechRevenueRatioY3": 75.7,
       "rdStaffRatioY1": 20.3,
       "rdStaffRatioY2": 21.6,
-      "rdStaffRatioY3": 17.0,
+      "rdStaffRatioY3": 17,
       "newPatentsY1": 0,
       "newPatentsY2": 4,
       "newPatentsY3": 4,
@@ -21322,7 +21322,7 @@
     "certNo": "GR20224201000577",
     "expiryYear": 2025,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 7.0,
+      "rdExpenseRatioY1": 7,
       "rdExpenseRatioY2": 3.9,
       "rdExpenseRatioY3": 7.3,
       "hiTechRevenueRatioY1": 56.5,
@@ -21439,15 +21439,15 @@
     "certNo": "GR20204201000580",
     "expiryYear": 2023,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 7.0,
-      "rdExpenseRatioY2": 5.0,
+      "rdExpenseRatioY1": 7,
+      "rdExpenseRatioY2": 5,
       "rdExpenseRatioY3": 4.6,
       "hiTechRevenueRatioY1": 73.9,
       "hiTechRevenueRatioY2": 67.5,
       "hiTechRevenueRatioY3": 59.6,
       "rdStaffRatioY1": 15.5,
       "rdStaffRatioY2": 12.2,
-      "rdStaffRatioY3": 21.0,
+      "rdStaffRatioY3": 21,
       "newPatentsY1": 0,
       "newPatentsY2": 1,
       "newPatentsY3": 1,
@@ -22112,7 +22112,7 @@
       "rdExpenseRatioY1": 4.5,
       "rdExpenseRatioY2": 5.8,
       "rdExpenseRatioY3": 6.8,
-      "hiTechRevenueRatioY1": 57.0,
+      "hiTechRevenueRatioY1": 57,
       "hiTechRevenueRatioY2": 55.1,
       "hiTechRevenueRatioY3": 58.1,
       "rdStaffRatioY1": 13.7,
@@ -22166,10 +22166,10 @@
       "rdExpenseRatioY2": 7.3,
       "rdExpenseRatioY3": 6.4,
       "hiTechRevenueRatioY1": 63.9,
-      "hiTechRevenueRatioY2": 64.0,
+      "hiTechRevenueRatioY2": 64,
       "hiTechRevenueRatioY3": 72.3,
       "rdStaffRatioY1": 18.2,
-      "rdStaffRatioY2": 12.0,
+      "rdStaffRatioY2": 12,
       "rdStaffRatioY3": 20.7,
       "newPatentsY1": 1,
       "newPatentsY2": 1,
@@ -22493,7 +22493,7 @@
     "expiryYear": 2027,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 6.7,
-      "rdExpenseRatioY2": 5.0,
+      "rdExpenseRatioY2": 5,
       "rdExpenseRatioY3": 6.7,
       "hiTechRevenueRatioY1": 69.9,
       "hiTechRevenueRatioY2": 72.7,
@@ -22793,7 +22793,7 @@
       "rdExpenseRatioY1": 5.1,
       "rdExpenseRatioY2": 6.4,
       "rdExpenseRatioY3": 5.3,
-      "hiTechRevenueRatioY1": 76.0,
+      "hiTechRevenueRatioY1": 76,
       "hiTechRevenueRatioY2": 59.8,
       "hiTechRevenueRatioY3": 66.8,
       "rdStaffRatioY1": 15.9,
@@ -22877,7 +22877,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 4.9,
       "rdExpenseRatioY2": 7.4,
-      "rdExpenseRatioY3": 8.0,
+      "rdExpenseRatioY3": 8,
       "hiTechRevenueRatioY1": 57.5,
       "hiTechRevenueRatioY2": 63.1,
       "hiTechRevenueRatioY3": 72.7,
@@ -23030,9 +23030,9 @@
       "hiTechRevenueRatioY1": 57.6,
       "hiTechRevenueRatioY2": 65.8,
       "hiTechRevenueRatioY3": 63.5,
-      "rdStaffRatioY1": 15.0,
+      "rdStaffRatioY1": 15,
       "rdStaffRatioY2": 16.5,
-      "rdStaffRatioY3": 15.0,
+      "rdStaffRatioY3": 15,
       "newPatentsY1": 2,
       "newPatentsY2": 3,
       "newPatentsY3": 6,
@@ -23510,7 +23510,7 @@
       "hiTechRevenueRatioY2": 61.3,
       "hiTechRevenueRatioY3": 74.9,
       "rdStaffRatioY1": 11.9,
-      "rdStaffRatioY2": 20.0,
+      "rdStaffRatioY2": 20,
       "rdStaffRatioY3": 23.6,
       "newPatentsY1": 4,
       "newPatentsY2": 3,
@@ -23558,7 +23558,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 5.5,
       "rdExpenseRatioY2": 6.4,
-      "rdExpenseRatioY3": 8.0,
+      "rdExpenseRatioY3": 8,
       "hiTechRevenueRatioY1": 63.3,
       "hiTechRevenueRatioY2": 73.1,
       "hiTechRevenueRatioY3": 78.2,
@@ -23976,9 +23976,9 @@
       "rdExpenseRatioY3": 4.3,
       "hiTechRevenueRatioY1": 58.1,
       "hiTechRevenueRatioY2": 74.5,
-      "hiTechRevenueRatioY3": 56.0,
+      "hiTechRevenueRatioY3": 56,
       "rdStaffRatioY1": 15.5,
-      "rdStaffRatioY2": 21.0,
+      "rdStaffRatioY2": 21,
       "rdStaffRatioY3": 20.7,
       "newPatentsY1": 3,
       "newPatentsY2": 4,
@@ -24027,10 +24027,10 @@
       "rdExpenseRatioY1": 6.3,
       "rdExpenseRatioY2": 7.7,
       "rdExpenseRatioY3": 8.8,
-      "hiTechRevenueRatioY1": 70.0,
+      "hiTechRevenueRatioY1": 70,
       "hiTechRevenueRatioY2": 74.2,
       "hiTechRevenueRatioY3": 65.3,
-      "rdStaffRatioY1": 20.0,
+      "rdStaffRatioY1": 20,
       "rdStaffRatioY2": 19.4,
       "rdStaffRatioY3": 20.1,
       "newPatentsY1": 3,
@@ -24116,7 +24116,7 @@
       "hiTechRevenueRatioY2": 61.8,
       "hiTechRevenueRatioY3": 57.8,
       "rdStaffRatioY1": 19.7,
-      "rdStaffRatioY2": 17.0,
+      "rdStaffRatioY2": 17,
       "rdStaffRatioY3": 19.2,
       "newPatentsY1": 0,
       "newPatentsY2": 2,
@@ -24450,14 +24450,14 @@
     "certNo": "GR20224201000659",
     "expiryYear": 2025,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 7.0,
+      "rdExpenseRatioY1": 7,
       "rdExpenseRatioY2": 5.7,
       "rdExpenseRatioY3": 4.5,
       "hiTechRevenueRatioY1": 70.9,
       "hiTechRevenueRatioY2": 54.5,
       "hiTechRevenueRatioY3": 61.8,
       "rdStaffRatioY1": 12.5,
-      "rdStaffRatioY2": 20.0,
+      "rdStaffRatioY2": 20,
       "rdStaffRatioY3": 13.3,
       "newPatentsY1": 1,
       "newPatentsY2": 1,
@@ -24666,7 +24666,7 @@
       "rdExpenseRatioY1": 5.4,
       "rdExpenseRatioY2": 7.8,
       "rdExpenseRatioY3": 7.4,
-      "hiTechRevenueRatioY1": 70.0,
+      "hiTechRevenueRatioY1": 70,
       "hiTechRevenueRatioY2": 78.5,
       "hiTechRevenueRatioY3": 69.6,
       "rdStaffRatioY1": 11.7,
@@ -25074,8 +25074,8 @@
       "hiTechRevenueRatioY2": 79.4,
       "hiTechRevenueRatioY3": 58.7,
       "rdStaffRatioY1": 16.7,
-      "rdStaffRatioY2": 11.0,
-      "rdStaffRatioY3": 18.0,
+      "rdStaffRatioY2": 11,
+      "rdStaffRatioY3": 18,
       "newPatentsY1": 0,
       "newPatentsY2": 2,
       "newPatentsY3": 1,
@@ -25152,9 +25152,9 @@
     "certNo": "GR20204201000677",
     "expiryYear": 2023,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 7.0,
+      "rdExpenseRatioY1": 7,
       "rdExpenseRatioY2": 5.6,
-      "rdExpenseRatioY3": 8.0,
+      "rdExpenseRatioY3": 8,
       "hiTechRevenueRatioY1": 74.4,
       "hiTechRevenueRatioY2": 70.8,
       "hiTechRevenueRatioY3": 74.2,
@@ -25302,7 +25302,7 @@
     "expiryYear": 2021,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 3.9,
-      "rdExpenseRatioY2": 6.0,
+      "rdExpenseRatioY2": 6,
       "rdExpenseRatioY3": 7.9,
       "hiTechRevenueRatioY1": 72.5,
       "hiTechRevenueRatioY2": 78.9,
@@ -25472,7 +25472,7 @@
     "expiryYear": 2027,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.5,
-      "rdExpenseRatioY2": 7.0,
+      "rdExpenseRatioY2": 7,
       "rdExpenseRatioY3": 4.7,
       "hiTechRevenueRatioY1": 58.1,
       "hiTechRevenueRatioY2": 60.3,
@@ -25529,7 +25529,7 @@
       "rdExpenseRatioY3": 6.7,
       "hiTechRevenueRatioY1": 54.9,
       "hiTechRevenueRatioY2": 53.6,
-      "hiTechRevenueRatioY3": 70.0,
+      "hiTechRevenueRatioY3": 70,
       "rdStaffRatioY1": 19.5,
       "rdStaffRatioY2": 20.2,
       "rdStaffRatioY3": 18.5,
@@ -25578,13 +25578,13 @@
     "expiryYear": 2027,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 3.5,
-      "rdExpenseRatioY2": 4.0,
+      "rdExpenseRatioY2": 4,
       "rdExpenseRatioY3": 4.7,
       "hiTechRevenueRatioY1": 58.4,
       "hiTechRevenueRatioY2": 70.5,
       "hiTechRevenueRatioY3": 80.9,
-      "rdStaffRatioY1": 21.0,
-      "rdStaffRatioY2": 12.0,
+      "rdStaffRatioY1": 21,
+      "rdStaffRatioY2": 12,
       "rdStaffRatioY3": 19.9,
       "newPatentsY1": 1,
       "newPatentsY2": 1,
@@ -25718,7 +25718,7 @@
       "rdExpenseRatioY1": 3.9,
       "rdExpenseRatioY2": 4.4,
       "rdExpenseRatioY3": 6.8,
-      "hiTechRevenueRatioY1": 73.0,
+      "hiTechRevenueRatioY1": 73,
       "hiTechRevenueRatioY2": 70.8,
       "hiTechRevenueRatioY3": 72.6,
       "rdStaffRatioY1": 13.1,
@@ -26116,7 +26116,7 @@
       "hiTechRevenueRatioY2": 56.3,
       "hiTechRevenueRatioY3": 79.6,
       "rdStaffRatioY1": 16.6,
-      "rdStaffRatioY2": 14.0,
+      "rdStaffRatioY2": 14,
       "rdStaffRatioY3": 15.3,
       "newPatentsY1": 4,
       "newPatentsY2": 2,
@@ -26167,7 +26167,7 @@
       "rdExpenseRatioY3": 5.5,
       "hiTechRevenueRatioY1": 57.2,
       "hiTechRevenueRatioY2": 71.1,
-      "hiTechRevenueRatioY3": 78.0,
+      "hiTechRevenueRatioY3": 78,
       "rdStaffRatioY1": 11.3,
       "rdStaffRatioY2": 17.6,
       "rdStaffRatioY3": 13.7,
@@ -26526,7 +26526,7 @@
     "threeYearMetrics": {
       "rdExpenseRatioY1": 7.1,
       "rdExpenseRatioY2": 4.2,
-      "rdExpenseRatioY3": 9.0,
+      "rdExpenseRatioY3": 9,
       "hiTechRevenueRatioY1": 67.5,
       "hiTechRevenueRatioY2": 67.6,
       "hiTechRevenueRatioY3": 63.3,
@@ -26616,7 +26616,7 @@
       "hiTechRevenueRatioY2": 79.3,
       "hiTechRevenueRatioY3": 70.4,
       "rdStaffRatioY1": 11.7,
-      "rdStaffRatioY2": 23.0,
+      "rdStaffRatioY2": 23,
       "rdStaffRatioY3": 12.5,
       "newPatentsY1": 1,
       "newPatentsY2": 3,
@@ -26763,7 +26763,7 @@
       "rdExpenseRatioY3": 4.1,
       "hiTechRevenueRatioY1": 52.4,
       "hiTechRevenueRatioY2": 70.5,
-      "hiTechRevenueRatioY3": 61.0,
+      "hiTechRevenueRatioY3": 61,
       "rdStaffRatioY1": 18.7,
       "rdStaffRatioY2": 22.2,
       "rdStaffRatioY3": 15.4,
@@ -26849,7 +26849,7 @@
       "hiTechRevenueRatioY1": 70.5,
       "hiTechRevenueRatioY2": 60.3,
       "hiTechRevenueRatioY3": 63.4,
-      "rdStaffRatioY1": 21.0,
+      "rdStaffRatioY1": 21,
       "rdStaffRatioY2": 21.8,
       "rdStaffRatioY3": 21.2,
       "newPatentsY1": 3,
@@ -27358,9 +27358,9 @@
       "rdExpenseRatioY2": 5.1,
       "rdExpenseRatioY3": 4.1,
       "hiTechRevenueRatioY1": 57.6,
-      "hiTechRevenueRatioY2": 60.0,
+      "hiTechRevenueRatioY2": 60,
       "hiTechRevenueRatioY3": 57.9,
-      "rdStaffRatioY1": 15.0,
+      "rdStaffRatioY1": 15,
       "rdStaffRatioY2": 11.2,
       "rdStaffRatioY3": 22.7,
       "newPatentsY1": 1,
@@ -27588,7 +27588,7 @@
     "certNo": "GR20214201000740",
     "expiryYear": 2024,
     "threeYearMetrics": {
-      "rdExpenseRatioY1": 8.0,
+      "rdExpenseRatioY1": 8,
       "rdExpenseRatioY2": 7.9,
       "rdExpenseRatioY3": 8.1,
       "hiTechRevenueRatioY1": 53.8,
@@ -27706,7 +27706,7 @@
     "expiryYear": 2025,
     "threeYearMetrics": {
       "rdExpenseRatioY1": 4.5,
-      "rdExpenseRatioY2": 8.0,
+      "rdExpenseRatioY2": 8,
       "rdExpenseRatioY3": 7.4,
       "hiTechRevenueRatioY1": 76.4,
       "hiTechRevenueRatioY2": 62.9,
@@ -27818,5 +27818,2927 @@
       "email": "赵@江夏.com"
     },
     "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0747",
+    "name": "孝感科技科技有限公司",
+    "creditCode": "914209793163520X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "软件开发",
+    "techField": "电子信息",
+    "establishedAt": "2014-12-22",
+    "registeredCapital": 4629,
+    "employees": 252,
+    "rdEmployees": 51,
+    "patents": {
+      "invention": 8,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "15245579368",
+      "email": "contact@c0747.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0748",
+    "name": "安陆生物股份有限公司",
+    "creditCode": "914209019742759X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "环境监测仪器",
+    "techField": "资源与环境",
+    "establishedAt": "2021-04-02",
+    "registeredCapital": 7871,
+    "employees": 210,
+    "rdEmployees": 53,
+    "patents": {
+      "invention": 8,
+      "utility": 22,
+      "design": 5
+    },
+    "software": 12,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "16988627596",
+      "email": "contact@c0748.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0749",
+    "name": "孝南科技股份有限公司",
+    "creditCode": "914209562022858X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "废气治理",
+    "techField": "资源与环境",
+    "establishedAt": "2015-12-12",
+    "registeredCapital": 6573,
+    "employees": 429,
+    "rdEmployees": 103,
+    "patents": {
+      "invention": 8,
+      "utility": 12,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈敏",
+      "phone": "16572156131",
+      "email": "contact@c0749.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0750",
+    "name": "大悟机电有限公司",
+    "creditCode": "914209381606100X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "通信设备制造",
+    "techField": "电子信息",
+    "establishedAt": "2013-10-24",
+    "registeredCapital": 6192,
+    "employees": 204,
+    "rdEmployees": 51,
+    "patents": {
+      "invention": 10,
+      "utility": 11,
+      "design": 2
+    },
+    "software": 9,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "13116241623",
+      "email": "contact@c0750.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0751",
+    "name": "孝昌科技科技有限公司",
+    "creditCode": "914209900947158X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "先进陶瓷制造",
+    "techField": "新材料",
+    "establishedAt": "2012-08-06",
+    "registeredCapital": 6893,
+    "employees": 218,
+    "rdEmployees": 42,
+    "patents": {
+      "invention": 6,
+      "utility": 18,
+      "design": 3
+    },
+    "software": 10,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "18103869248",
+      "email": "contact@c0751.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0752",
+    "name": "孝感新能源有限公司",
+    "creditCode": "914209860031043X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2010-08-25",
+    "registeredCapital": 5154,
+    "employees": 407,
+    "rdEmployees": 98,
+    "patents": {
+      "invention": 15,
+      "utility": 15,
+      "design": 1
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙丽",
+      "phone": "14274524779",
+      "email": "contact@c0752.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0753",
+    "name": "孝感数码股份有限公司",
+    "creditCode": "914209881397731X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "固废处理",
+    "techField": "资源与环境",
+    "establishedAt": "2012-04-11",
+    "registeredCapital": 6791,
+    "employees": 206,
+    "rdEmployees": 36,
+    "patents": {
+      "invention": 15,
+      "utility": 22,
+      "design": 3
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "19401225676",
+      "email": "contact@c0753.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0754",
+    "name": "孝感先进有限公司",
+    "creditCode": "914209317600213X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2017-04-12",
+    "registeredCapital": 6721,
+    "employees": 243,
+    "rdEmployees": 52,
+    "patents": {
+      "invention": 7,
+      "utility": 23,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "17845662068",
+      "email": "contact@c0754.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0755",
+    "name": "孝昌光电有限公司",
+    "creditCode": "914209537894000X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "体外诊断",
+    "techField": "生物与新医药",
+    "establishedAt": "2010-08-17",
+    "registeredCapital": 7566,
+    "employees": 184,
+    "rdEmployees": 46,
+    "patents": {
+      "invention": 6,
+      "utility": 10,
+      "design": 0
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙丽",
+      "phone": "14542259256",
+      "email": "contact@c0755.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0756",
+    "name": "孝南数码有限公司",
+    "creditCode": "914209070992019X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "风力发电配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-01-21",
+    "registeredCapital": 5071,
+    "employees": 405,
+    "rdEmployees": 98,
+    "patents": {
+      "invention": 13,
+      "utility": 16,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "17198782017",
+      "email": "contact@c0756.com"
+    },
+    "declarationWillingness": "refused",
+    "certifiedYear": 2021,
+    "certNo": "GR202142093603",
+    "expiryYear": 2024,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 5.4,
+      "rdExpenseRatioY2": 5,
+      "rdExpenseRatioY3": 6.5,
+      "hiTechRevenueRatioY1": 68.4,
+      "hiTechRevenueRatioY2": 63.2,
+      "hiTechRevenueRatioY3": 62.8,
+      "rdStaffRatioY1": 14.4,
+      "rdStaffRatioY2": 13.1,
+      "rdStaffRatioY3": 16.5,
+      "newPatentsY1": 3,
+      "newPatentsY2": 1,
+      "newPatentsY3": 3,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
+    }
+  },
+  {
+    "id": "c0757",
+    "name": "汉川生物科技有限公司",
+    "creditCode": "914209264675022X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "工程设计",
+    "techField": "高技术服务",
+    "establishedAt": "2022-04-21",
+    "registeredCapital": 7877,
+    "employees": 234,
+    "rdEmployees": 38,
+    "patents": {
+      "invention": 14,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 11,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "14138644572",
+      "email": "contact@c0757.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0758",
+    "name": "大悟高新科技有限公司",
+    "creditCode": "914209848542672X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "电子元器件制造",
+    "techField": "电子信息",
+    "establishedAt": "2016-02-19",
+    "registeredCapital": 6378,
+    "employees": 226,
+    "rdEmployees": 48,
+    "patents": {
+      "invention": 10,
+      "utility": 15,
+      "design": 2
+    },
+    "software": 7,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "18440143399",
+      "email": "contact@c0758.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0759",
+    "name": "孝南环保科技有限公司",
+    "creditCode": "914209041158320X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "激光装备制造",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2011-03-24",
+    "registeredCapital": 3618,
+    "employees": 233,
+    "rdEmployees": 21,
+    "patents": {
+      "invention": 7,
+      "utility": 7,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "18169786869",
+      "email": "contact@c0759.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0760",
+    "name": "云梦生物有限公司",
+    "creditCode": "914209921860327X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "通信设备制造",
+    "techField": "电子信息",
+    "establishedAt": "2019-10-24",
+    "registeredCapital": 6438,
+    "employees": 523,
+    "rdEmployees": 68,
+    "patents": {
+      "invention": 8,
+      "utility": 10,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈敏",
+      "phone": "17903020006",
+      "email": "contact@c0760.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0761",
+    "name": "云梦新能源股份有限公司",
+    "creditCode": "914209986682488X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "技术咨询",
+    "techField": "高技术服务",
+    "establishedAt": "2019-10-24",
+    "registeredCapital": 5110,
+    "employees": 365,
+    "rdEmployees": 52,
+    "patents": {
+      "invention": 8,
+      "utility": 17,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18622740543",
+      "email": "contact@c0761.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0762",
+    "name": "应城生物有限公司",
+    "creditCode": "914209502476617X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "充电桩制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2013-03-24",
+    "registeredCapital": 4556,
+    "employees": 467,
+    "rdEmployees": 71,
+    "patents": {
+      "invention": 9,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄燕",
+      "phone": "19257710172",
+      "email": "contact@c0762.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0763",
+    "name": "大悟创新股份有限公司",
+    "creditCode": "914209998177549X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "大数据服务",
+    "techField": "高技术服务",
+    "establishedAt": "2009-07-17",
+    "registeredCapital": 4462,
+    "employees": 293,
+    "rdEmployees": 30,
+    "patents": {
+      "invention": 10,
+      "utility": 14,
+      "design": 4
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "14854195430",
+      "email": "contact@c0763.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0764",
+    "name": "云梦生物有限公司",
+    "creditCode": "914209207918370X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "物联网应用",
+    "techField": "电子信息",
+    "establishedAt": "2010-08-10",
+    "registeredCapital": 4449,
+    "employees": 364,
+    "rdEmployees": 44,
+    "patents": {
+      "invention": 7,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "19473319793",
+      "email": "contact@c0764.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0765",
+    "name": "孝感生物科技有限公司",
+    "creditCode": "914209924817011X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "兽用生物制品",
+    "techField": "生物与新医药",
+    "establishedAt": "2020-08-20",
+    "registeredCapital": 5966,
+    "employees": 389,
+    "rdEmployees": 36,
+    "patents": {
+      "invention": 10,
+      "utility": 18,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴霞",
+      "phone": "13957325509",
+      "email": "contact@c0765.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0766",
+    "name": "大悟精工科技有限公司",
+    "creditCode": "914209712683747X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "工程设计",
+    "techField": "高技术服务",
+    "establishedAt": "2017-04-08",
+    "registeredCapital": 3660,
+    "employees": 497,
+    "rdEmployees": 45,
+    "patents": {
+      "invention": 5,
+      "utility": 9,
+      "design": 4
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "15174359133",
+      "email": "contact@c0766.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0767",
+    "name": "孝昌材料有限公司",
+    "creditCode": "914209681997000X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "工业自动化设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2011-01-24",
+    "registeredCapital": 4776,
+    "employees": 256,
+    "rdEmployees": 39,
+    "patents": {
+      "invention": 6,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "15704727713",
+      "email": "contact@c0767.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0768",
+    "name": "汉川数码科技有限公司",
+    "creditCode": "914209855504038X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "激光装备制造",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2010-08-17",
+    "registeredCapital": 3691,
+    "employees": 463,
+    "rdEmployees": 61,
+    "patents": {
+      "invention": 7,
+      "utility": 14,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴霞",
+      "phone": "19306493557",
+      "email": "contact@c0768.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0769",
+    "name": "大悟光电股份有限公司",
+    "creditCode": "914209348948479X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "功能膜材料",
+    "techField": "新材料",
+    "establishedAt": "2013-06-26",
+    "registeredCapital": 6401,
+    "employees": 570,
+    "rdEmployees": 46,
+    "patents": {
+      "invention": 8,
+      "utility": 16,
+      "design": 3
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "18997673721",
+      "email": "contact@c0769.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0770",
+    "name": "孝昌科技科技有限公司",
+    "creditCode": "914209629824088X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "集成电路设计",
+    "techField": "电子信息",
+    "establishedAt": "2020-09-25",
+    "registeredCapital": 6019,
+    "employees": 548,
+    "rdEmployees": 44,
+    "patents": {
+      "invention": 8,
+      "utility": 14,
+      "design": 1
+    },
+    "software": 8,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "16114916120",
+      "email": "contact@c0770.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0771",
+    "name": "孝昌先进科技有限公司",
+    "creditCode": "914209135583719X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "数控机床制造",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2011-02-22",
+    "registeredCapital": 4580,
+    "employees": 598,
+    "rdEmployees": 54,
+    "patents": {
+      "invention": 5,
+      "utility": 13,
+      "design": 4
+    },
+    "software": 2,
+    "alreadyCertified": true,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18564276240",
+      "email": "contact@c0771.com"
+    },
+    "declarationWillingness": "moderate",
+    "certifiedYear": 2021,
+    "certNo": "GR202142092083",
+    "expiryYear": 2024,
+    "threeYearMetrics": {
+      "rdExpenseRatioY1": 7.8,
+      "rdExpenseRatioY2": 7.7,
+      "rdExpenseRatioY3": 7.5,
+      "hiTechRevenueRatioY1": 62.4,
+      "hiTechRevenueRatioY2": 64.9,
+      "hiTechRevenueRatioY3": 60.9,
+      "rdStaffRatioY1": 12.3,
+      "rdStaffRatioY2": 13.3,
+      "rdStaffRatioY3": 14.8,
+      "newPatentsY1": 1,
+      "newPatentsY2": 4,
+      "newPatentsY3": 3,
+      "annualAuditPassedY1": true,
+      "annualAuditPassedY2": true,
+      "annualAuditPassedY3": true,
+      "complianceClean": true
+    }
+  },
+  {
+    "id": "c0772",
+    "name": "应城创新科技有限公司",
+    "creditCode": "914209173507188X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "工程设计",
+    "techField": "高技术服务",
+    "establishedAt": "2020-02-02",
+    "registeredCapital": 6459,
+    "employees": 320,
+    "rdEmployees": 29,
+    "patents": {
+      "invention": 6,
+      "utility": 17,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18346524431",
+      "email": "contact@c0772.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0773",
+    "name": "云梦创新有限公司",
+    "creditCode": "914209054761066X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "粉末冶金",
+    "techField": "新材料",
+    "establishedAt": "2015-03-21",
+    "registeredCapital": 6406,
+    "employees": 506,
+    "rdEmployees": 41,
+    "patents": {
+      "invention": 6,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "13720572330",
+      "email": "contact@c0773.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0774",
+    "name": "大悟科技有限公司",
+    "creditCode": "914209875715725X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "工业软件开发",
+    "techField": "高技术服务",
+    "establishedAt": "2022-02-24",
+    "registeredCapital": 3796,
+    "employees": 247,
+    "rdEmployees": 23,
+    "patents": {
+      "invention": 5,
+      "utility": 12,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "13023972010",
+      "email": "contact@c0774.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0775",
+    "name": "应城光电科技有限公司",
+    "creditCode": "914209158297418X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "技术咨询",
+    "techField": "高技术服务",
+    "establishedAt": "2012-03-15",
+    "registeredCapital": 5663,
+    "employees": 594,
+    "rdEmployees": 66,
+    "patents": {
+      "invention": 7,
+      "utility": 5,
+      "design": 4
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "吴霞",
+      "phone": "19268908951",
+      "email": "contact@c0775.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0776",
+    "name": "安陆环保科技有限公司",
+    "creditCode": "914209785589668X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "节能电机",
+    "techField": "新能源与节能",
+    "establishedAt": "2021-12-01",
+    "registeredCapital": 4209,
+    "employees": 320,
+    "rdEmployees": 45,
+    "patents": {
+      "invention": 7,
+      "utility": 15,
+      "design": 3
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "14563596371",
+      "email": "contact@c0776.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0777",
+    "name": "孝感智能科技有限公司",
+    "creditCode": "914209868554634X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "纳米材料应用",
+    "techField": "新材料",
+    "establishedAt": "2020-11-01",
+    "registeredCapital": 4118,
+    "employees": 598,
+    "rdEmployees": 66,
+    "patents": {
+      "invention": 10,
+      "utility": 13,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "17342927553",
+      "email": "contact@c0777.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0778",
+    "name": "应城生物有限公司",
+    "creditCode": "914209346383053X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "生物试剂",
+    "techField": "生物与新医药",
+    "establishedAt": "2009-03-26",
+    "registeredCapital": 5109,
+    "employees": 498,
+    "rdEmployees": 75,
+    "patents": {
+      "invention": 6,
+      "utility": 15,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "15464198801",
+      "email": "contact@c0778.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0779",
+    "name": "安陆环保科技有限公司",
+    "creditCode": "914209811642834X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "兽用生物制品",
+    "techField": "生物与新医药",
+    "establishedAt": "2021-07-25",
+    "registeredCapital": 677,
+    "employees": 84,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 1,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "19036033427",
+      "email": "contact@c0779.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0780",
+    "name": "孝昌光电有限公司",
+    "creditCode": "914209928682641X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "工程设计",
+    "techField": "高技术服务",
+    "establishedAt": "2017-02-01",
+    "registeredCapital": 2133,
+    "employees": 58,
+    "rdEmployees": 11,
+    "patents": {
+      "invention": 2,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "16666941275",
+      "email": "contact@c0780.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0781",
+    "name": "汉川生物有限公司",
+    "creditCode": "914209683554640X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-04-24",
+    "registeredCapital": 1742,
+    "employees": 161,
+    "rdEmployees": 17,
+    "patents": {
+      "invention": 3,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈敏",
+      "phone": "16332213856",
+      "email": "contact@c0781.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0782",
+    "name": "孝南机电科技有限公司",
+    "creditCode": "914209986778533X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "功能膜材料",
+    "techField": "新材料",
+    "establishedAt": "2015-09-23",
+    "registeredCapital": 2266,
+    "employees": 108,
+    "rdEmployees": 13,
+    "patents": {
+      "invention": 2,
+      "utility": 9,
+      "design": 1
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "赵磊",
+      "phone": "19332099573",
+      "email": "contact@c0782.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0783",
+    "name": "安陆精工科技有限公司",
+    "creditCode": "914209907631446X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "工业自动化设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2011-10-02",
+    "registeredCapital": 2280,
+    "employees": 174,
+    "rdEmployees": 27,
+    "patents": {
+      "invention": 2,
+      "utility": 10,
+      "design": 3
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "15483539916",
+      "email": "contact@c0783.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0784",
+    "name": "孝南生物有限公司",
+    "creditCode": "914209795000615X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "固废处理",
+    "techField": "资源与环境",
+    "establishedAt": "2011-05-04",
+    "registeredCapital": 2316,
+    "employees": 184,
+    "rdEmployees": 19,
+    "patents": {
+      "invention": 4,
+      "utility": 10,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "13443710797",
+      "email": "contact@c0784.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0785",
+    "name": "孝南数码科技有限公司",
+    "creditCode": "914209247428003X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "体外诊断",
+    "techField": "生物与新医药",
+    "establishedAt": "2009-04-06",
+    "registeredCapital": 771,
+    "employees": 159,
+    "rdEmployees": 18,
+    "patents": {
+      "invention": 4,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙丽",
+      "phone": "16739638045",
+      "email": "contact@c0785.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0786",
+    "name": "孝感新能源科技有限公司",
+    "creditCode": "914209924067065X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "废气治理",
+    "techField": "资源与环境",
+    "establishedAt": "2015-01-27",
+    "registeredCapital": 1789,
+    "employees": 166,
+    "rdEmployees": 22,
+    "patents": {
+      "invention": 3,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18271849604",
+      "email": "contact@c0786.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0787",
+    "name": "孝昌环保有限公司",
+    "creditCode": "914209136326146X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "体外诊断",
+    "techField": "生物与新医药",
+    "establishedAt": "2022-09-21",
+    "registeredCapital": 1013,
+    "employees": 89,
+    "rdEmployees": 15,
+    "patents": {
+      "invention": 2,
+      "utility": 7,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "14360136659",
+      "email": "contact@c0787.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0788",
+    "name": "大悟光电股份有限公司",
+    "creditCode": "914209477525141X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "集成电路设计",
+    "techField": "电子信息",
+    "establishedAt": "2012-11-05",
+    "registeredCapital": 726,
+    "employees": 186,
+    "rdEmployees": 25,
+    "patents": {
+      "invention": 2,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王芳",
+      "phone": "17932492721",
+      "email": "contact@c0788.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0789",
+    "name": "汉川精工科技有限公司",
+    "creditCode": "914209166121140X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "机器人系统集成",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2008-08-16",
+    "registeredCapital": 2118,
+    "employees": 119,
+    "rdEmployees": 14,
+    "patents": {
+      "invention": 2,
+      "utility": 8,
+      "design": 3
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "18435705857",
+      "email": "contact@c0789.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0790",
+    "name": "应城智能科技有限公司",
+    "creditCode": "914209021258650X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "通信设备制造",
+    "techField": "电子信息",
+    "establishedAt": "2012-01-01",
+    "registeredCapital": 2392,
+    "employees": 53,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 3,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "陈敏",
+      "phone": "13740781843",
+      "email": "contact@c0790.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0791",
+    "name": "孝南机电有限公司",
+    "creditCode": "914209421003354X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "精密零件加工",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-01-27",
+    "registeredCapital": 1645,
+    "employees": 143,
+    "rdEmployees": 25,
+    "patents": {
+      "invention": 2,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "15398261461",
+      "email": "contact@c0791.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0792",
+    "name": "孝昌创新股份有限公司",
+    "creditCode": "914209158249839X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "机器人系统集成",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2013-08-09",
+    "registeredCapital": 1491,
+    "employees": 108,
+    "rdEmployees": 18,
+    "patents": {
+      "invention": 1,
+      "utility": 8,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙丽",
+      "phone": "13493461337",
+      "email": "contact@c0792.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0793",
+    "name": "安陆生物科技有限公司",
+    "creditCode": "914209485383245X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2013-01-14",
+    "registeredCapital": 1911,
+    "employees": 145,
+    "rdEmployees": 18,
+    "patents": {
+      "invention": 3,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "16431879196",
+      "email": "contact@c0793.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0794",
+    "name": "云梦智能股份有限公司",
+    "creditCode": "914209958364153X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "兽用生物制品",
+    "techField": "生物与新医药",
+    "establishedAt": "2022-09-01",
+    "registeredCapital": 826,
+    "employees": 110,
+    "rdEmployees": 20,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 3
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "19606399168",
+      "email": "contact@c0794.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0795",
+    "name": "孝南生物有限公司",
+    "creditCode": "914209444736421X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "污水处理设备",
+    "techField": "资源与环境",
+    "establishedAt": "2009-09-19",
+    "registeredCapital": 1515,
+    "employees": 191,
+    "rdEmployees": 31,
+    "patents": {
+      "invention": 3,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "13842930345",
+      "email": "contact@c0795.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0796",
+    "name": "孝南数码科技有限公司",
+    "creditCode": "914209734733745X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "数控机床制造",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2008-10-19",
+    "registeredCapital": 651,
+    "employees": 48,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "19367609960",
+      "email": "contact@c0796.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0797",
+    "name": "孝昌光电科技有限公司",
+    "creditCode": "914209005034308X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "工程设计",
+    "techField": "高技术服务",
+    "establishedAt": "2012-02-05",
+    "registeredCapital": 2175,
+    "employees": 164,
+    "rdEmployees": 17,
+    "patents": {
+      "invention": 4,
+      "utility": 4,
+      "design": 3
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "19728885260",
+      "email": "contact@c0797.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0798",
+    "name": "安陆先进有限公司",
+    "creditCode": "914209244274582X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2014-08-25",
+    "registeredCapital": 1976,
+    "employees": 150,
+    "rdEmployees": 23,
+    "patents": {
+      "invention": 1,
+      "utility": 6,
+      "design": 3
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18302902124",
+      "email": "contact@c0798.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0799",
+    "name": "孝昌智能股份有限公司",
+    "creditCode": "914209167143041X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "数控机床制造",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2019-05-28",
+    "registeredCapital": 1756,
+    "employees": 95,
+    "rdEmployees": 17,
+    "patents": {
+      "invention": 1,
+      "utility": 6,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "13489624466",
+      "email": "contact@c0799.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0800",
+    "name": "云梦机电有限公司",
+    "creditCode": "914209791299191X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "检验检测",
+    "techField": "高技术服务",
+    "establishedAt": "2017-01-10",
+    "registeredCapital": 2740,
+    "employees": 51,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 3,
+      "utility": 6,
+      "design": 3
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "16103848425",
+      "email": "contact@c0800.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0801",
+    "name": "云梦先进有限公司",
+    "creditCode": "914209729686177X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "工业软件开发",
+    "techField": "高技术服务",
+    "establishedAt": "2008-07-26",
+    "registeredCapital": 1276,
+    "employees": 182,
+    "rdEmployees": 31,
+    "patents": {
+      "invention": 4,
+      "utility": 9,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王芳",
+      "phone": "16951543896",
+      "email": "contact@c0801.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0802",
+    "name": "大悟智能股份有限公司",
+    "creditCode": "914209108727908X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "大数据服务",
+    "techField": "高技术服务",
+    "establishedAt": "2017-05-06",
+    "registeredCapital": 1769,
+    "employees": 42,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 3,
+      "utility": 8,
+      "design": 1
+    },
+    "software": 5,
+    "alreadyCertified": false,
+    "inSMEDatabase": true,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄燕",
+      "phone": "17376989062",
+      "email": "contact@c0802.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0803",
+    "name": "孝南精工有限公司",
+    "creditCode": "914209892157845X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "集成电路设计",
+    "techField": "电子信息",
+    "establishedAt": "2014-09-14",
+    "registeredCapital": 1339,
+    "employees": 60,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 3,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 6,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王芳",
+      "phone": "16779420082",
+      "email": "contact@c0803.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0804",
+    "name": "孝昌环保有限公司",
+    "creditCode": "914209195031842X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "集成电路设计",
+    "techField": "电子信息",
+    "establishedAt": "2013-12-24",
+    "registeredCapital": 874,
+    "employees": 60,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 3,
+      "utility": 6,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "14980122778",
+      "email": "contact@c0804.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0805",
+    "name": "应城创新股份有限公司",
+    "creditCode": "914209188451225X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "机器人系统集成",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2022-11-11",
+    "registeredCapital": 1517,
+    "employees": 74,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 3,
+      "utility": 6,
+      "design": 0
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王芳",
+      "phone": "14599006128",
+      "email": "contact@c0805.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0806",
+    "name": "大悟环保科技有限公司",
+    "creditCode": "914209025816953X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "功能膜材料",
+    "techField": "新材料",
+    "establishedAt": "2020-05-08",
+    "registeredCapital": 1214,
+    "employees": 128,
+    "rdEmployees": 16,
+    "patents": {
+      "invention": 3,
+      "utility": 4,
+      "design": 3
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "19381416081",
+      "email": "contact@c0806.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0807",
+    "name": "安陆光电有限公司",
+    "creditCode": "914209034532738X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "技术咨询",
+    "techField": "高技术服务",
+    "establishedAt": "2016-02-23",
+    "registeredCapital": 773,
+    "employees": 113,
+    "rdEmployees": 11,
+    "patents": {
+      "invention": 3,
+      "utility": 7,
+      "design": 3
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "14990408571",
+      "email": "contact@c0807.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0808",
+    "name": "云梦先进科技有限公司",
+    "creditCode": "914209135612749X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "先进陶瓷制造",
+    "techField": "新材料",
+    "establishedAt": "2016-09-19",
+    "registeredCapital": 587,
+    "employees": 95,
+    "rdEmployees": 7,
+    "patents": {
+      "invention": 0,
+      "utility": 3,
+      "design": 3
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "15615117144",
+      "email": "contact@c0808.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0809",
+    "name": "孝昌生物科技有限公司",
+    "creditCode": "914209335698430X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "物联网应用",
+    "techField": "电子信息",
+    "establishedAt": "2011-06-12",
+    "registeredCapital": 500,
+    "employees": 56,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 3
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "王芳",
+      "phone": "14007048616",
+      "email": "contact@c0809.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0810",
+    "name": "应城智能有限公司",
+    "creditCode": "914209013419869X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "先进陶瓷制造",
+    "techField": "新材料",
+    "establishedAt": "2009-07-05",
+    "registeredCapital": 570,
+    "employees": 105,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 2,
+      "utility": 7,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "18921516392",
+      "email": "contact@c0810.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0811",
+    "name": "孝感光电科技有限公司",
+    "creditCode": "914209704711408X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2021-02-23",
+    "registeredCapital": 1089,
+    "employees": 71,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 2,
+      "utility": 8,
+      "design": 2
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "16989717193",
+      "email": "contact@c0811.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0812",
+    "name": "汉川光电股份有限公司",
+    "creditCode": "914209989278100X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "风力发电配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2018-11-18",
+    "registeredCapital": 1337,
+    "employees": 72,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 1,
+      "utility": 8,
+      "design": 3
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄燕",
+      "phone": "16296960179",
+      "email": "contact@c0812.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0813",
+    "name": "孝南先进科技有限公司",
+    "creditCode": "914209386500487X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "废气治理",
+    "techField": "资源与环境",
+    "establishedAt": "2008-03-04",
+    "registeredCapital": 1385,
+    "employees": 33,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "18910074152",
+      "email": "contact@c0813.com"
+    },
+    "declarationWillingness": "unreachable"
+  },
+  {
+    "id": "c0814",
+    "name": "应城科技股份有限公司",
+    "creditCode": "914209929603184X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "大数据服务",
+    "techField": "高技术服务",
+    "establishedAt": "2015-06-14",
+    "registeredCapital": 895,
+    "employees": 121,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 1,
+      "utility": 7,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄燕",
+      "phone": "17707590096",
+      "email": "contact@c0814.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0815",
+    "name": "云梦先进科技有限公司",
+    "creditCode": "914209867117133X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "数控机床制造",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2011-02-04",
+    "registeredCapital": 1202,
+    "employees": 79,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 3,
+      "utility": 6,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "孙丽",
+      "phone": "14615255578",
+      "email": "contact@c0815.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0816",
+    "name": "云梦新能源科技有限公司",
+    "creditCode": "914209114833177X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "纳米材料应用",
+    "techField": "新材料",
+    "establishedAt": "2019-03-09",
+    "registeredCapital": 753,
+    "employees": 101,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 3,
+      "utility": 3,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "17737016453",
+      "email": "contact@c0816.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0817",
+    "name": "大悟生物科技有限公司",
+    "creditCode": "914209479182877X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "纳米材料应用",
+    "techField": "新材料",
+    "establishedAt": "2010-09-25",
+    "registeredCapital": 1451,
+    "employees": 89,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "16314867268",
+      "email": "contact@c0817.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0818",
+    "name": "孝感环保有限公司",
+    "creditCode": "914209586598945X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "机器人系统集成",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-05-07",
+    "registeredCapital": 380,
+    "employees": 39,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 2,
+      "utility": 7,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "17614737518",
+      "email": "contact@c0818.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0819",
+    "name": "安陆生物股份有限公司",
+    "creditCode": "914209373516596X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "工业软件开发",
+    "techField": "高技术服务",
+    "establishedAt": "2021-04-18",
+    "registeredCapital": 721,
+    "employees": 63,
+    "rdEmployees": 7,
+    "patents": {
+      "invention": 3,
+      "utility": 1,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭晓",
+      "phone": "13878745139",
+      "email": "contact@c0819.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0820",
+    "name": "大悟新能源有限公司",
+    "creditCode": "914209612351515X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "技术咨询",
+    "techField": "高技术服务",
+    "establishedAt": "2022-11-01",
+    "registeredCapital": 1440,
+    "employees": 139,
+    "rdEmployees": 10,
+    "patents": {
+      "invention": 0,
+      "utility": 8,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄燕",
+      "phone": "16163995487",
+      "email": "contact@c0820.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0821",
+    "name": "应城创新有限公司",
+    "creditCode": "914209731495126X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "兽用生物制品",
+    "techField": "生物与新医药",
+    "establishedAt": "2015-11-04",
+    "registeredCapital": 1293,
+    "employees": 39,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 0,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "18001137645",
+      "email": "contact@c0821.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0822",
+    "name": "云梦光电股份有限公司",
+    "creditCode": "914209753699266X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "植物提取物",
+    "techField": "生物与新医药",
+    "establishedAt": "2017-10-24",
+    "registeredCapital": 1031,
+    "employees": 56,
+    "rdEmployees": 4,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 4,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "周强",
+      "phone": "15210524351",
+      "email": "contact@c0822.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0823",
+    "name": "孝昌环保科技有限公司",
+    "creditCode": "914209900216363X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "生物试剂",
+    "techField": "生物与新医药",
+    "establishedAt": "2014-01-14",
+    "registeredCapital": 1444,
+    "employees": 81,
+    "rdEmployees": 8,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "李娜",
+      "phone": "14526702820",
+      "email": "contact@c0823.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0824",
+    "name": "汉川智能科技有限公司",
+    "creditCode": "914209528438621X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "孝南街道",
+    "industry": "高性能复合材料",
+    "techField": "新材料",
+    "establishedAt": "2012-08-19",
+    "registeredCapital": 118,
+    "employees": 95,
+    "rdEmployees": 5,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "13651399005",
+      "email": "contact@c0824.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0825",
+    "name": "汉川智能股份有限公司",
+    "creditCode": "914209870622560X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "通用制造",
+    "techField": null,
+    "establishedAt": "2011-05-11",
+    "registeredCapital": 896,
+    "employees": 75,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "刘洋",
+      "phone": "15263859248",
+      "email": "contact@c0825.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0826",
+    "name": "汉川精工有限公司",
+    "creditCode": "914209973110396X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "通信设备制造",
+    "techField": "电子信息",
+    "establishedAt": "2022-08-19",
+    "registeredCapital": 236,
+    "employees": 20,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 0,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "黄燕",
+      "phone": "13637598258",
+      "email": "contact@c0826.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0827",
+    "name": "汉川新能源有限公司",
+    "creditCode": "914209425285408X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "光伏组件制造",
+    "techField": "新能源与节能",
+    "establishedAt": "2013-01-06",
+    "registeredCapital": 119,
+    "employees": 79,
+    "rdEmployees": 6,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "14864570757",
+      "email": "contact@c0827.com"
+    },
+    "declarationWillingness": "moderate"
+  },
+  {
+    "id": "c0828",
+    "name": "孝昌数码科技有限公司",
+    "creditCode": "914209897305833X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "功能膜材料",
+    "techField": "新材料",
+    "establishedAt": "2012-01-24",
+    "registeredCapital": 791,
+    "employees": 19,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "郭晓",
+      "phone": "17105135767",
+      "email": "contact@c0828.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0829",
+    "name": "云梦环保有限公司",
+    "creditCode": "914209020470091X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "检验检测",
+    "techField": "高技术服务",
+    "establishedAt": "2022-07-03",
+    "registeredCapital": 955,
+    "employees": 33,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "15309567287",
+      "email": "contact@c0829.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0830",
+    "name": "孝南环保股份有限公司",
+    "creditCode": "914209735370524X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "工业自动化设备",
+    "techField": "先进制造与自动化",
+    "establishedAt": "2015-01-27",
+    "registeredCapital": 325,
+    "employees": 60,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 0,
+      "utility": 3,
+      "design": 0
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "张伟",
+      "phone": "18692835399",
+      "email": "contact@c0830.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0831",
+    "name": "孝感数码科技有限公司",
+    "creditCode": "914209255938958X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "三汊镇",
+    "industry": "通用制造",
+    "techField": null,
+    "establishedAt": "2011-07-25",
+    "registeredCapital": 615,
+    "employees": 88,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 1,
+      "utility": 2,
+      "design": 2
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "林峰",
+      "phone": "13065555238",
+      "email": "contact@c0831.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0832",
+    "name": "云梦精工股份有限公司",
+    "creditCode": "914209613516072X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "毛陈镇",
+    "industry": "废气治理",
+    "techField": "资源与环境",
+    "establishedAt": "2010-09-16",
+    "registeredCapital": 154,
+    "employees": 55,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 2,
+      "utility": 4,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "17949708344",
+      "email": "contact@c0832.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0833",
+    "name": "应城生物科技有限公司",
+    "creditCode": "914209158508211X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "节能电机",
+    "techField": "新能源与节能",
+    "establishedAt": "2008-12-14",
+    "registeredCapital": 198,
+    "employees": 84,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 2,
+      "utility": 5,
+      "design": 0
+    },
+    "software": 3,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "朱军",
+      "phone": "16365291417",
+      "email": "contact@c0833.com"
+    },
+    "declarationWillingness": "hesitant"
+  },
+  {
+    "id": "c0834",
+    "name": "孝感新能源科技有限公司",
+    "creditCode": "914209058301606X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "风力发电配件",
+    "techField": "新能源与节能",
+    "establishedAt": "2020-06-05",
+    "registeredCapital": 350,
+    "employees": 58,
+    "rdEmployees": 3,
+    "patents": {
+      "invention": 0,
+      "utility": 0,
+      "design": 0
+    },
+    "software": 2,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "14201501521",
+      "email": "contact@c0834.com"
+    },
+    "declarationWillingness": "refused"
+  },
+  {
+    "id": "c0835",
+    "name": "安陆高新有限公司",
+    "creditCode": "914209432620844X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "杨店乡",
+    "industry": "高性能复合材料",
+    "techField": "新材料",
+    "establishedAt": "2016-07-02",
+    "registeredCapital": 920,
+    "employees": 36,
+    "rdEmployees": 1,
+    "patents": {
+      "invention": 1,
+      "utility": 5,
+      "design": 1
+    },
+    "software": 0,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "杨杰",
+      "phone": "18296355348",
+      "email": "contact@c0835.com"
+    },
+    "declarationWillingness": "strong"
+  },
+  {
+    "id": "c0836",
+    "name": "汉川创新科技有限公司",
+    "creditCode": "914209371263418X",
+    "city": "孝感市",
+    "district": "孝南区",
+    "street": "新铺镇",
+    "industry": "体外诊断",
+    "techField": "生物与新医药",
+    "establishedAt": "2010-05-26",
+    "registeredCapital": 845,
+    "employees": 22,
+    "rdEmployees": 2,
+    "patents": {
+      "invention": 1,
+      "utility": 4,
+      "design": 2
+    },
+    "software": 1,
+    "alreadyCertified": false,
+    "inSMEDatabase": false,
+    "risk": {
+      "abnormal": false,
+      "penalty": false
+    },
+    "contact": {
+      "name": "胡涛",
+      "phone": "17208799447",
+      "email": "contact@c0836.com"
+    },
+    "declarationWillingness": "unreachable"
   }
 ]
