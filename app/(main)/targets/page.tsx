@@ -12,9 +12,10 @@ import { TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 // ─── Filter state ────────────────────────────────────────────
-type PoolTier = "all" | "potential_target" | "willing";
+type PoolTier = "all_companies" | "all" | "potential_target" | "willing";
 
 const POOL_TIERS: { id: PoolTier; label: string; desc: string }[] = [
+  { id: "all_companies",    label: "全部企业",       desc: "全部企业（不限领域）" },
   { id: "all",              label: "泛科技企业",     desc: "全部泛科技企业" },
   { id: "potential_target", label: "潜在标的企业",   desc: "近三年专利或人数有增长的企业" },
   { id: "willing",          label: "有意愿的企业",   desc: "申报意愿强烈或基本有意愿的企业" },
@@ -120,7 +121,7 @@ function FilterPanel({
           onClick={() => onChange({
             q: "", streets: lockedStreet ? [lockedStreet] : [], fields: [], ageRange: [],
             smeOnly: false, excludeRisk: true,
-            willingness: [], declarationType: [], poolTier: "all",
+            willingness: [], declarationType: [], poolTier: "all_companies",
           })}
           className="text-xs text-[#94a3b8] hover:text-blue-600"
         >
@@ -204,7 +205,7 @@ function TargetsPageContent() {
     excludeRisk: true,
     willingness: [],
     declarationType: [],
-    poolTier: "all",
+    poolTier: "all_companies",
   });
 
   // 街道管理员视角：强制把街道筛选锁定为本街道
@@ -237,6 +238,9 @@ function TargetsPageContent() {
         const dtype = c.alreadyCertified ? "复审" : "新申报";
         if (filters.declarationType.length > 0 && !filters.declarationType.includes(dtype)) return false;
         // Pool tier quick-filter
+        if (filters.poolTier === "all") {
+          if (!c.techField) return false;
+        }
         if (filters.poolTier === "potential_target") {
           const totalPatents = c.patents.invention + c.patents.utility + c.patents.design + c.software;
           const hasEmployeeGrowth = c.employees >= 30 || c.rdEmployees >= 10;
