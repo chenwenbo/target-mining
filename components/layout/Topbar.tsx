@@ -9,6 +9,7 @@ import {
 } from "@/lib/account-mock";
 import { getTenantById } from "@/lib/ops-mock";
 import { useLayoutStore } from "@/lib/layout-store";
+import QualTabs from "@/components/ui/QualTabs";
 
 export default function Topbar() {
   const { user, mounted } = useCurrentPCUser();
@@ -61,8 +62,8 @@ export default function Topbar() {
   }
 
   return (
-    <header className="h-14 flex-shrink-0 bg-white border-b border-[#e5e7eb] px-6 flex items-center justify-between">
-      <div className="flex items-center gap-3" />
+    <header className="h-14 flex-shrink-0 bg-white border-b border-[#e5e7eb] pl-6 pr-4 flex items-center justify-between">
+      <QualTabs variant="topbar" />
 
       {/* 右侧操作区 */}
       <div className="flex items-center gap-1">

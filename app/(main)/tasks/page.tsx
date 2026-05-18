@@ -15,7 +15,6 @@ import {
 import { getScopedSurveyAccounts, surveyAccountToVisitor, type SurveyAccount } from "@/lib/account-mock";
 import { type Task, type VisitRecord, type WillingnessLevel, type Company, type QualificationType, QUAL_TYPE_META } from "@/lib/types";
 import { useQualStore } from "@/lib/qual-store";
-import QualTabs from "@/components/ui/QualTabs";
 import { checkEligibility } from "@/lib/sme-criteria";
 import {
   getTaskLifecycleStage,
@@ -215,9 +214,6 @@ export default function TasksPage() {
 
   return (
     <div className="flex flex-col min-h-full">
-      {/* 资质模块 Tabs */}
-      <QualTabs className="mb-4" />
-
       {/* 标题行 */}
       <div className="flex items-end justify-between mb-4">
         <div>

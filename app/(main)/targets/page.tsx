@@ -11,7 +11,6 @@ import type { TechField, Company, DeclarationWillingness, Visitor, Qualification
 import { TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { useQualStore } from "@/lib/qual-store";
-import QualTabs from "@/components/ui/QualTabs";
 import { checkEligibility, getSMEPoolTiers } from "@/lib/sme-criteria";
 
 // ─── Filter state ────────────────────────────────────────────
@@ -391,7 +390,6 @@ function TargetsPageContent() {
 
   return (
     <>
-    <QualTabs className="-mx-6 lg:-mx-8 px-6 lg:px-8 mb-0 border-b border-[#e5e7eb]" />
     <div className="-m-6 lg:-m-8 flex h-full" style={{ minHeight: "calc(100vh - 56px)" }}>
       <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} streetOptions={streetOptions} />
 

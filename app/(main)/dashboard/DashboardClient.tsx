@@ -6,7 +6,6 @@ import type { getDashboardKPI, SMEDashboardKPI } from "@/lib/mock-data";
 import { getRegionLabel, useCurrentPCUser, useRoleGuard } from "@/lib/account-mock";
 import { useQualStore } from "@/lib/qual-store";
 import { QUAL_TYPE_META, type QualificationType } from "@/lib/types";
-import QualTabs from "@/components/ui/QualTabs";
 
 type KPI = ReturnType<typeof getDashboardKPI>;
 
@@ -738,9 +737,6 @@ export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
 
   return (
     <div>
-      {/* 资质模块 Tabs */}
-      <QualTabs className="mb-5" />
-
       {/* Header */}
       <div className="flex items-end justify-between mb-6">
         <div>

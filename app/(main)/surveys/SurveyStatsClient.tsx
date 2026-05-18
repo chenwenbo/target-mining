@@ -14,7 +14,6 @@ import EChartsWrapper from "@/components/charts/EChartsWrapper";
 import { getVisitRecords, getTaskStatusOverrides, initSeedVisitRecords, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Company, Task, TaskStatus, VisitRecord } from "@/lib/types";
 import { useQualStore } from "@/lib/qual-store";
-import QualTabs from "@/components/ui/QualTabs";
 import {
   computeKPI,
   computeWillingnessDist,
@@ -125,7 +124,6 @@ export default function SurveyStatsClient({ companies, tasks }: Props) {
 
   return (
     <div>
-      <QualTabs />
       {/* 头部 */}
       <div className="flex items-end justify-between mb-5">
         <div>
