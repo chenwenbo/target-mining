@@ -20,7 +20,6 @@ type StatusFilter = "all" | TenantStatus;
 const STATUS_TABS: { key: StatusFilter; label: string }[] = [
   { key: "all", label: "全部" },
   { key: "active", label: "活跃" },
-  { key: "trial", label: "试用中" },
   { key: "expired", label: "已到期" },
   { key: "disabled", label: "已禁用" },
 ];

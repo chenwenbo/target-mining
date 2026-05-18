@@ -1,7 +1,7 @@
 "use client";
 
 // ─── 类型 ────────────────────────────────────────────────────
-export type TenantStatus = "active" | "trial" | "expired" | "disabled";
+export type TenantStatus = "active" | "expired" | "disabled";
 
 export interface TenantStats {
   companyCount: number;
@@ -126,7 +126,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     province: "湖北省",
     city: "武汉市",
     enabled: true,
-    status: "trial",
+    status: "active",
     createdAt: "2026-03-20T08:00:00Z",
     expiresAt: "2026-06-20",
     adminUsername: "wh-hs-admin-01",
@@ -136,7 +136,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactName: "陈科长",
     contactPhone: "027-87888003",
     contactEmail: "chenke@hs.gov.cn",
-    notes: "试用客户，高校周边科技企业多，试用期将于2026-06-20到期",
+    notes: "高校周边科技企业多，合同将于2026-06-20到期",
     stats: {
       companyCount: 634,
       taskCount: 68,

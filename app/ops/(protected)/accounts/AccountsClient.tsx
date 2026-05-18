@@ -13,7 +13,6 @@ type StatusFilter = "all" | TenantStatus;
 const STATUS_TABS: { key: StatusFilter; label: string }[] = [
   { key: "all", label: "全部" },
   { key: "active", label: "活跃" },
-  { key: "trial", label: "试用中" },
   { key: "expired", label: "已到期" },
   { key: "disabled", label: "已禁用" },
 ];
@@ -100,7 +99,6 @@ export default function AccountsClient() {
       : tenants.filter((t) => t.status === statusFilter);
 
   const activeCount = tenants.filter((t) => t.status === "active").length;
-  const trialCount = tenants.filter((t) => t.status === "trial").length;
   const expiredCount = tenants.filter((t) => t.status === "expired").length;
 
   function handleBulkCopy() {
@@ -141,10 +139,9 @@ export default function AccountsClient() {
       </div>
 
       {/* 统计卡片行 */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {[
           { label: "活跃账号", value: activeCount, color: "text-emerald-600", bg: "bg-emerald-50" },
-          { label: "试用账号", value: trialCount, color: "text-blue-600", bg: "bg-blue-50" },
           { label: "已到期", value: expiredCount, color: "text-amber-600", bg: "bg-amber-50" },
         ].map((item) => (
           <div

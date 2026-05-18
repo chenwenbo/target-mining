@@ -102,7 +102,7 @@ export default function OpsDashboardClient() {
           iconColor="text-amber-600"
           subItems={[
             { label: "活跃", value: kpi.activeTenants },
-            { label: "试用", value: kpi.trialTenants },
+            { label: "到期", value: kpi.expiredTenants },
           ]}
         />
         <KPICard

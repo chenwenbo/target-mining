@@ -3,7 +3,6 @@ import type { Tenant } from "./ops-mock";
 export interface PlatformKPI {
   totalTenants: number;
   activeTenants: number;
-  trialTenants: number;
   expiredTenants: number;
   disabledTenants: number;
   totalCompanies: number;
@@ -18,7 +17,6 @@ export function getPlatformKPI(tenants: Tenant[]): PlatformKPI {
 
   // 统计各状态数量
   const activeTenants = tenants.filter((t) => t.status === "active").length;
-  const trialTenants = tenants.filter((t) => t.status === "trial").length;
   const expiredTenants = tenants.filter((t) => t.status === "expired").length;
   const disabledTenants = tenants.filter((t) => t.status === "disabled").length;
 
@@ -46,7 +44,6 @@ export function getPlatformKPI(tenants: Tenant[]): PlatformKPI {
   return {
     totalTenants: tenants.length,
     activeTenants,
-    trialTenants,
     expiredTenants,
     disabledTenants,
     totalCompanies,

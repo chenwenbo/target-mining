@@ -205,7 +205,7 @@ export interface RegionAdminDemo {
 
 export function getRegionAdminDemoList(): RegionAdminDemo[] {
   return getTenants()
-    .filter((t) => t.enabled && (t.status === "active" || t.status === "trial"))
+    .filter((t) => t.enabled && t.status === "active")
     .map((t) => ({
       username: t.adminUsername,
       password: t.adminPassword,
