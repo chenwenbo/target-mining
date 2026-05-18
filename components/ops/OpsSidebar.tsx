@@ -8,6 +8,7 @@ import {
   Building2,
   ChevronLeft,
   ChevronRight,
+  ClipboardList,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -19,6 +20,7 @@ interface NavItem {
 
 const OPS_NAV: NavItem[] = [
   { href: "/ops/tenants", label: "租户管理", icon: Building2 },
+  { href: "/ops/leads", label: "留资记录", icon: ClipboardList },
 ];
 
 export default function OpsSidebar() {
