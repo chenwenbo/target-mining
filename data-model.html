@@ -30,16 +30,31 @@
       box-shadow: 0 0 0 1px rgba(0,0,0,.06);
       width: fit-content;
     }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: #374151;
-    }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #374151; }
     .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
 
-    /* ── 表格卡片：两列布局 ── */
+    /* ── 分区标题 ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-label-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .section-label-line {
+      flex: 1;
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    /* ── 表格 Grid ── */
     .tables-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -55,7 +70,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .table-header {
       padding: 16px 20px;
       display: flex;
@@ -67,19 +81,12 @@
       width: 36px; height: 36px;
       border-radius: 9px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
+      font-size: 18px; flex-shrink: 0;
     }
     .table-title { font-size: 14px; font-weight: 700; font-family: "SF Mono", Consolas, monospace; }
     .table-comment { font-size: 12px; color: #9ca3af; margin-top: 2px; }
 
-    /* fixed-layout table with defined column widths */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      table-layout: fixed;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
     col.col-field { width: 36%; }
     col.col-type  { width: 22%; }
     col.col-desc  { width: 34%; }
@@ -89,72 +96,47 @@
     thead th {
       text-align: left;
       padding: 9px 16px;
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 11px; font-weight: 600;
       color: #9ca3af;
-      text-transform: uppercase;
-      letter-spacing: .5px;
+      text-transform: uppercase; letter-spacing: .5px;
       border-bottom: 1px solid #f0f0f0;
     }
     tbody tr { border-bottom: 1px solid #f9fafb; transition: background .1s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: #fafafa; }
     tbody td {
-      padding: 9px 16px;
-      color: #374151;
+      padding: 9px 16px; color: #374151;
       vertical-align: middle;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    /* field name cell: monospace, allow wrap for long names */
     td.field-name {
       font-family: "SF Mono", Consolas, monospace;
-      font-size: 12px;
-      font-weight: 600;
-      color: #1e293b;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 12px; font-weight: 600; color: #1e293b;
     }
-    td.field-name.is-pk  { color: #92400e; }
-    td.field-name.is-fk  { color: #1e40af; }
+    td.field-name.is-pk    { color: #92400e; }
+    td.field-name.is-fk    { color: #1e40af; }
     td.field-name.is-audit { color: #9ca3af; font-weight: 400; }
-
-    .type-tag {
-      font-family: "SF Mono", Consolas, monospace;
-      font-size: 11.5px;
-      color: #64748b;
-      white-space: nowrap;
-    }
+    .type-tag { font-family: "SF Mono", Consolas, monospace; font-size: 11.5px; color: #64748b; white-space: nowrap; }
 
     .badge {
-      display: inline-block;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: 10px;
-      font-weight: 700;
-      white-space: nowrap;
-      letter-spacing: .3px;
+      display: inline-block; padding: 2px 6px; border-radius: 4px;
+      font-size: 10px; font-weight: 700; white-space: nowrap; letter-spacing: .3px;
     }
     .badge-pk    { background: #fef3c7; color: #92400e; }
     .badge-fk    { background: #dbeafe; color: #1e40af; }
     .badge-idx   { background: #ede9fe; color: #5b21b6; }
     .badge-audit { background: #f3f4f6; color: #9ca3af; }
 
-    /* color themes */
-    .color-blue   { background: #eff6ff; }
-    .color-green  { background: #f0fdf4; }
-    .color-purple { background: #faf5ff; }
-    .color-orange { background: #fff7ed; }
-    .icon-blue    { background: #dbeafe; }
-    .icon-green   { background: #dcfce7; }
-    .icon-purple  { background: #ede9fe; }
-    .icon-orange  { background: #ffedd5; }
-    .title-blue   { color: #1e40af; }
-    .title-green  { color: #166534; }
-    .title-purple { color: #5b21b6; }
-    .title-orange { color: #9a3412; }
+    /* ── 业务表配色 ── */
+    .color-blue   { background: #eff6ff; } .icon-blue   { background: #dbeafe; } .title-blue   { color: #1e40af; }
+    .color-green  { background: #f0fdf4; } .icon-green  { background: #dcfce7; } .title-green  { color: #166534; }
+    .color-purple { background: #faf5ff; } .icon-purple { background: #ede9fe; } .title-purple { color: #5b21b6; }
+    .color-orange { background: #fff7ed; } .icon-orange { background: #ffedd5; } .title-orange { color: #9a3412; }
+    /* ── 系统表配色 ── */
+    .color-teal   { background: #f0fdfa; } .icon-teal   { background: #ccfbf1; } .title-teal   { color: #0f766e; }
+    .color-indigo { background: #eef2ff; } .icon-indigo { background: #c7d2fe; } .title-indigo { color: #3730a3; }
+    .color-rose   { background: #fff1f2; } .icon-rose   { background: #fecdd3; } .title-rose   { color: #9f1239; }
+    .color-slate  { background: #f8fafc; } .icon-slate  { background: #e2e8f0; } .title-slate  { color: #475569; }
 
     /* ── ER Diagram ── */
     .er-section {
@@ -163,25 +145,26 @@
       box-shadow: 0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05);
       padding: 28px 32px;
     }
-    .er-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #374151;
-      margin-bottom: 20px;
-    }
+    .er-title { font-size: 15px; font-weight: 700; color: #374151; margin-bottom: 20px; }
     .mermaid { display: flex; justify-content: center; overflow-x: auto; }
   </style>
 </head>
 <body>
 
 <h1>数据模型图</h1>
-<p class="subtitle">申报目标挖掘系统 · 4 张核心表</p>
+<p class="subtitle">申报目标挖掘系统 · 8 张核心表</p>
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#92400e"></div>PK — 主键</div>
   <div class="legend-item"><div class="legend-dot" style="background:#1e40af"></div>FK — 外键</div>
   <div class="legend-item"><div class="legend-dot" style="background:#5b21b6"></div>IDX — 业务关联字段</div>
   <div class="legend-item"><div class="legend-dot" style="background:#d1d5db"></div>AUDIT — 审计字段</div>
+</div>
+
+<!-- ───── 业务核心表 ───── -->
+<div class="section-label">
+  <span class="section-label-text">业务核心表</span>
+  <div class="section-label-line"></div>
 </div>
 
 <div class="tables-grid">
@@ -200,7 +183,7 @@
       <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
       <tbody>
         <tr><td class="field-name is-pk">id</td><td class="type-tag">bigint</td><td>主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
-        <tr><td class="field-name">tenant_id</td><td class="type-tag">varchar(32)</td><td>租户 ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td class="field-name">tenant_id</td><td class="type-tag">varchar(32)</td><td>租户 ID（关联 sys_tenant）</td><td><span class="badge badge-idx">IDX</span></td></tr>
         <tr><td class="field-name">target_count</td><td class="type-tag">int</td><td>本年度申报目标数量</td><td></td></tr>
         <tr><td class="field-name is-audit">create_by</td><td class="type-tag">varchar(64)</td><td>创建人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
         <tr><td class="field-name is-audit">create_time</td><td class="type-tag">datetime</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
@@ -225,7 +208,7 @@
       <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
       <tbody>
         <tr><td class="field-name is-pk">id</td><td class="type-tag">bigint</td><td>主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
-        <tr><td class="field-name">tenant_id</td><td class="type-tag">varchar(32)</td><td>租户 ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td class="field-name">tenant_id</td><td class="type-tag">varchar(32)</td><td>租户 ID（关联 sys_tenant）</td><td><span class="badge badge-idx">IDX</span></td></tr>
         <tr><td class="field-name">enterprise_code</td><td class="type-tag">varchar(64)</td><td>企业编码 (UUID)</td><td><span class="badge badge-idx">IDX</span></td></tr>
         <tr><td class="field-name">enterprise_name</td><td class="type-tag">varchar(255)</td><td>企业名称</td><td></td></tr>
         <tr><td class="field-name">rd_expense_avg_ratio_3y</td><td class="type-tag">decimal(8,4)</td><td>近三年研发费用占营收均值(%)</td><td></td></tr>
@@ -239,10 +222,8 @@
         <tr><td class="field-name">has_external_accounting_firm</td><td class="type-tag">tinyint(1)</td><td>是否委托外部会计师事务所</td><td></td></tr>
         <tr><td class="field-name">has_annual_audit_3y</td><td class="type-tag">tinyint(1)</td><td>近三年是否均完成财务审计</td><td></td></tr>
         <tr><td class="field-name">has_violation_record_3y</td><td class="type-tag">tinyint(1)</td><td>近三年是否有重大违规记录</td><td></td></tr>
-        <tr><td class="field-name is-audit">create_by</td><td class="type-tag">varchar(64)</td><td>创建人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">create_time</td><td class="type-tag">datetime</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">update_by</td><td class="type-tag">varchar(64)</td><td>修改人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">update_time</td><td class="type-tag">datetime</td><td>修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
         <tr><td class="field-name is-audit">del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
       </tbody>
     </table>
@@ -262,17 +243,15 @@
       <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
       <tbody>
         <tr><td class="field-name is-pk">id</td><td class="type-tag">bigint</td><td>主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
-        <tr><td class="field-name">tenant_id</td><td class="type-tag">varchar(32)</td><td>租户 ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td class="field-name">tenant_id</td><td class="type-tag">varchar(32)</td><td>租户 ID（关联 sys_tenant）</td><td><span class="badge badge-idx">IDX</span></td></tr>
         <tr><td class="field-name">enterprise_code</td><td class="type-tag">varchar(64)</td><td>企业编码，关联企业测评</td><td><span class="badge badge-idx">IDX</span></td></tr>
         <tr><td class="field-name">enterprise_name</td><td class="type-tag">varchar(255)</td><td>企业名称</td><td></td></tr>
         <tr><td class="field-name">assignee_id</td><td class="type-tag">varchar(32)</td><td>任务人 ID</td><td></td></tr>
         <tr><td class="field-name">assignee_name</td><td class="type-tag">varchar(64)</td><td>任务人名称</td><td></td></tr>
         <tr><td class="field-name">visit_count</td><td class="type-tag">int</td><td>走访次数（累计）</td><td></td></tr>
         <tr><td class="field-name">survey_status</td><td class="type-tag">varchar(32)</td><td>摸排状态 pending/in_progress/done</td><td></td></tr>
-        <tr><td class="field-name is-audit">create_by</td><td class="type-tag">varchar(64)</td><td>创建人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">create_time</td><td class="type-tag">datetime</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">update_by</td><td class="type-tag">varchar(64)</td><td>修改人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">update_time</td><td class="type-tag">datetime</td><td>修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
         <tr><td class="field-name is-audit">del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
       </tbody>
     </table>
@@ -315,11 +294,144 @@
         <tr><td class="field-name">next_contact_date</td><td class="type-tag">date</td><td>约定下次联系日期</td><td></td></tr>
         <tr><td class="field-name">enterprise_demand</td><td class="type-tag">varchar(1000)</td><td>企业需求</td><td></td></tr>
         <tr><td class="field-name">internal_remark</td><td class="type-tag">varchar(1000)</td><td>工作人员内部备注</td><td></td></tr>
-        <tr><td class="field-name is-audit">create_by</td><td class="type-tag">varchar(64)</td><td>创建人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">create_time</td><td class="type-tag">datetime</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">update_by</td><td class="type-tag">varchar(64)</td><td>修改人</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
-        <tr><td class="field-name is-audit">update_time</td><td class="type-tag">datetime</td><td>修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">create_by / create_time</td><td class="type-tag">—</td><td>创建人 / 创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">update_by / update_time</td><td class="type-tag">—</td><td>修改人 / 修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
         <tr><td class="field-name is-audit">del_flag</td><td class="type-tag">tinyint(1)</td><td>逻辑删除 0未删 1已删</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ───── 系统基础表 ───── -->
+<div class="section-label">
+  <span class="section-label-text">系统基础表</span>
+  <div class="section-label-line"></div>
+</div>
+
+<div class="tables-grid">
+
+  <!-- sys_tenant -->
+  <div class="table-card">
+    <div class="table-header color-teal">
+      <div class="table-icon icon-teal">🏛️</div>
+      <div>
+        <div class="table-title title-teal">sys_tenant</div>
+        <div class="table-comment">租户表</div>
+      </div>
+    </div>
+    <table>
+      <colgroup><col class="col-field"><col class="col-type"><col class="col-desc"><col class="col-badge"></colgroup>
+      <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="field-name is-pk">id</td><td class="type-tag">int</td><td>租户主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td class="field-name">name</td><td class="type-tag">varchar(255)</td><td>租户名称</td><td></td></tr>
+        <tr><td class="field-name">code</td><td class="type-tag">varchar(64)</td><td>租户编号</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td class="field-name">start_time</td><td class="type-tag">timestamp</td><td>授权开始时间</td><td></td></tr>
+        <tr><td class="field-name">end_time</td><td class="type-tag">timestamp</td><td>授权结束时间</td><td></td></tr>
+        <tr><td class="field-name">status</td><td class="type-tag">int</td><td>状态 0正常 1冻结</td><td></td></tr>
+        <tr><td class="field-name">province_code / province_name</td><td class="type-tag">varchar</td><td>省份编码 / 名称</td><td></td></tr>
+        <tr><td class="field-name">city_code / city_name</td><td class="type-tag">varchar</td><td>城市编码 / 名称</td><td></td></tr>
+        <tr><td class="field-name">area_code / area_name</td><td class="type-tag">varchar</td><td>区域编码 / 名称</td><td></td></tr>
+        <tr><td class="field-name">park_code / park_name</td><td class="type-tag">varchar</td><td>园区编码 / 名称</td><td></td></tr>
+        <tr><td class="field-name">screen_data_scope_type</td><td class="type-tag">varchar(10)</td><td>大屏数据显示范围类型</td><td></td></tr>
+        <tr><td class="field-name">province_py</td><td class="type-tag">varchar(50)</td><td>省份拼音</td><td></td></tr>
+        <tr><td class="field-name">default_flag</td><td class="type-tag">char(1)</td><td>是否为默认租户 0否 1是</td><td></td></tr>
+        <tr><td class="field-name is-audit">create_time</td><td class="type-tag">timestamp</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">update_time</td><td class="type-tag">timestamp</td><td>更新时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">del_flag</td><td class="type-tag">char(1)</td><td>删除标记</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- sys_user -->
+  <div class="table-card">
+    <div class="table-header color-indigo">
+      <div class="table-icon icon-indigo">👤</div>
+      <div>
+        <div class="table-title title-indigo">sys_user</div>
+        <div class="table-comment">用户表</div>
+      </div>
+    </div>
+    <table>
+      <colgroup><col class="col-field"><col class="col-type"><col class="col-desc"><col class="col-badge"></colgroup>
+      <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="field-name is-pk">user_id</td><td class="type-tag">int</td><td>主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td class="field-name is-fk">tenant_id</td><td class="type-tag">int</td><td>租户 ID → sys_tenant.id</td><td><span class="badge badge-fk">FK</span></td></tr>
+        <tr><td class="field-name">username</td><td class="type-tag">varchar(64)</td><td>用户名（登录账号）</td><td></td></tr>
+        <tr><td class="field-name">password</td><td class="type-tag">varchar(64)</td><td>密码（加密存储）</td><td></td></tr>
+        <tr><td class="field-name">name</td><td class="type-tag">varchar(64)</td><td>用户真实名称</td><td></td></tr>
+        <tr><td class="field-name">dept_id</td><td class="type-tag">int</td><td>部门 ID</td><td><span class="badge badge-idx">IDX</span></td></tr>
+        <tr><td class="field-name">job_id</td><td class="type-tag">int</td><td>岗位 ID</td><td></td></tr>
+        <tr><td class="field-name">email</td><td class="type-tag">varchar(128)</td><td>邮箱</td><td></td></tr>
+        <tr><td class="field-name">phone</td><td class="type-tag">varchar(100)</td><td>手机号</td><td></td></tr>
+        <tr><td class="field-name">avatar</td><td class="type-tag">varchar(255)</td><td>头像地址</td><td></td></tr>
+        <tr><td class="field-name">lock_flag</td><td class="type-tag">char(1)</td><td>锁定状态 0正常 1锁定</td><td></td></tr>
+        <tr><td class="field-name">status</td><td class="type-tag">char(1)</td><td>启用状态 0启用 1未启用</td><td></td></tr>
+        <tr><td class="field-name">admin_flag</td><td class="type-tag">char(1)</td><td>是否管理员 0否 1是</td><td></td></tr>
+        <tr><td class="field-name">sys_flag</td><td class="type-tag">char(1)</td><td>0企业创建 1系统管理创建</td><td></td></tr>
+        <tr><td class="field-name">vip_flag</td><td class="type-tag">char(1)</td><td>会员标识 0是 1否</td><td></td></tr>
+        <tr><td class="field-name">vip_level</td><td class="type-tag">varchar(16)</td><td>VIP 级别</td><td></td></tr>
+        <tr><td class="field-name">parent_id</td><td class="type-tag">int</td><td>父账号 ID</td><td></td></tr>
+        <tr><td class="field-name">global_user_id</td><td class="type-tag">bigint</td><td>多系统整合用户 ID</td><td></td></tr>
+        <tr><td class="field-name">address</td><td class="type-tag">varchar(128)</td><td>联系地址</td><td></td></tr>
+        <tr><td class="field-name">company_name</td><td class="type-tag">varchar(128)</td><td>用户所属企业</td><td></td></tr>
+        <tr><td class="field-name">third_user_id</td><td class="type-tag">varchar(50)</td><td>第三方账号 ID</td><td></td></tr>
+        <tr><td class="field-name">person_id</td><td class="type-tag">varchar(128)</td><td>索引上人才 ID</td><td></td></tr>
+        <tr><td class="field-name">login_time</td><td class="type-tag">timestamp</td><td>最后登录时间</td><td></td></tr>
+        <tr><td class="field-name is-audit">create_time</td><td class="type-tag">timestamp</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">update_time</td><td class="type-tag">timestamp</td><td>修改时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">del_flag</td><td class="type-tag">char(1)</td><td>删除标记 0正常 1删除</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- sys_role -->
+  <div class="table-card">
+    <div class="table-header color-rose">
+      <div class="table-icon icon-rose">🔐</div>
+      <div>
+        <div class="table-title title-rose">sys_role</div>
+        <div class="table-comment">角色表</div>
+      </div>
+    </div>
+    <table>
+      <colgroup><col class="col-field"><col class="col-type"><col class="col-desc"><col class="col-badge"></colgroup>
+      <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="field-name is-pk">role_id</td><td class="type-tag">int</td><td>角色主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td class="field-name is-fk">tenant_id</td><td class="type-tag">int</td><td>租户 ID → sys_tenant.id</td><td><span class="badge badge-fk">FK</span></td></tr>
+        <tr><td class="field-name">role_name</td><td class="type-tag">varchar(64)</td><td>角色名称</td><td></td></tr>
+        <tr><td class="field-name">role_code</td><td class="type-tag">varchar(40)</td><td>角色标识</td><td></td></tr>
+        <tr><td class="field-name">role_desc</td><td class="type-tag">varchar(255)</td><td>角色描述</td><td></td></tr>
+        <tr><td class="field-name">ds_type</td><td class="type-tag">int</td><td>数据权限类型</td><td></td></tr>
+        <tr><td class="field-name">ds_scope</td><td class="type-tag">varchar(255)</td><td>数据权限范围（全部/本级/子级/自定义）</td><td></td></tr>
+        <tr><td class="field-name">company_id</td><td class="type-tag">varchar(128)</td><td>所属企业 ID</td><td></td></tr>
+        <tr><td class="field-name">sys_flag</td><td class="type-tag">char(1)</td><td>0企业创建 1系统管理创建</td><td></td></tr>
+        <tr><td class="field-name is-audit">create_time</td><td class="type-tag">timestamp</td><td>创建时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">update_time</td><td class="type-tag">timestamp</td><td>更新时间</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+        <tr><td class="field-name is-audit">del_flag</td><td class="type-tag">char(1)</td><td>删除标识 0正常 1删除</td><td><span class="badge badge-audit">AUDIT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- sys_user_role -->
+  <div class="table-card">
+    <div class="table-header color-slate">
+      <div class="table-icon icon-slate">🔗</div>
+      <div>
+        <div class="table-title title-slate">sys_user_role</div>
+        <div class="table-comment">用户角色关联表（中间表）</div>
+      </div>
+    </div>
+    <table>
+      <colgroup><col class="col-field"><col class="col-type"><col class="col-desc"><col class="col-badge"></colgroup>
+      <thead><tr><th>字段名</th><th>类型</th><th>说明</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="field-name is-pk">id</td><td class="type-tag">int</td><td>主键 ID</td><td><span class="badge badge-pk">PK</span></td></tr>
+        <tr><td class="field-name is-fk">user_id</td><td class="type-tag">int</td><td>用户 ID → sys_user.user_id</td><td><span class="badge badge-fk">FK</span></td></tr>
+        <tr><td class="field-name is-fk">role_id</td><td class="type-tag">int</td><td>角色 ID → sys_role.role_id</td><td><span class="badge badge-fk">FK</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -331,6 +443,47 @@
   <div class="er-title">实体关系图 (ER Diagram)</div>
   <div class="mermaid">
 erDiagram
+    sys_tenant {
+        int id PK "租户主键ID"
+        varchar64 code "租户编号"
+        varchar255 name "租户名称"
+        timestamp start_time "授权开始时间"
+        timestamp end_time "授权结束时间"
+        int status "状态 0正常 1冻结"
+        varchar20 province_code "省份编码"
+        varchar20 city_code "城市编码"
+        varchar20 area_code "区域编码"
+        varchar20 park_code "园区编码"
+    }
+
+    sys_user {
+        int user_id PK "主键ID"
+        int tenant_id FK "租户ID"
+        varchar64 username "用户名"
+        varchar64 name "用户名称"
+        int dept_id "部门ID"
+        char1 admin_flag "是否管理员"
+        char1 lock_flag "锁定状态"
+        char1 status "启用状态"
+        char1 sys_flag "创建来源"
+    }
+
+    sys_role {
+        int role_id PK "角色主键ID"
+        int tenant_id FK "租户ID"
+        varchar64 role_name "角色名称"
+        varchar40 role_code "角色标识"
+        int ds_type "数据权限类型"
+        varchar255 ds_scope "数据权限范围"
+        char1 sys_flag "创建来源"
+    }
+
+    sys_user_role {
+        int id PK "主键ID"
+        int user_id FK "用户ID"
+        int role_id FK "角色ID"
+    }
+
     declaration_target {
         bigint id PK "主键ID"
         varchar32 tenant_id "租户ID"
@@ -343,26 +496,16 @@ erDiagram
         varchar64 enterprise_code "企业编码"
         varchar255 enterprise_name "企业名称"
         decimal rd_expense_avg_ratio_3y "近三年研发费用占营收均值%"
-        tinyint has_rd_expense_sep_acct "是否建立研发费用独立账目"
-        decimal rd_employee_ratio "研发人员占总员工比例%"
-        tinyint has_independent_rd_dept "是否设有独立研发部门"
         int valid_invention_patent_count "有效发明专利数量"
-        int valid_utility_patent_count "有效实用新型专利数量"
-        int software_copyright_count "软件著作权数量"
-        decimal hi_tech_revenue_ratio_1y "近一年高新技术产品收入占比%"
-        tinyint has_external_accounting_firm "是否委托外部会计师事务所"
-        tinyint has_annual_audit_3y "近三年是否均完成财务审计"
-        tinyint has_violation_record_3y "近三年是否有重大违规记录"
+        decimal hi_tech_revenue_ratio_1y "近一年高新技术收入占比%"
     }
 
     survey_task {
         bigint id PK "主键ID"
         varchar32 tenant_id "租户ID"
         varchar64 enterprise_code "企业编码"
-        varchar255 enterprise_name "企业名称"
         varchar32 assignee_id "任务人ID"
-        varchar64 assignee_name "任务人名称"
-        int visit_count "走访次数（累计）"
+        int visit_count "走访次数"
         varchar32 survey_status "摸排状态"
     }
 
@@ -371,22 +514,15 @@ erDiagram
         bigint task_id FK "关联任务ID"
         varchar32 tenant_id "租户ID"
         varchar64 enterprise_code "企业编码"
-        varchar255 enterprise_name "企业名称"
-        int visit_duration "走访时长（分钟）"
-        varchar64 contact_name "企业联系人"
-        varchar32 contact_phone "联系电话"
-        int actual_employee_count "实际在职员工数"
-        int rd_employee_count "研发人员数"
-        varchar64 annual_revenue_scale "年营收规模"
-        decimal rd_expense_ratio "研发费用占比%"
-        tinyint has_independent_rd_dept "是否有独立研发部门"
+        int visit_duration "走访时长(分钟)"
         varchar32 declaration_intention "申报意愿"
         date next_contact_date "约定下次联系日期"
-        varchar1000 main_obstacles "企业认可的主要障碍"
-        varchar1000 follow_up_plan "后续跟进安排"
-        varchar1000 enterprise_demand "企业需求"
     }
 
+    sys_tenant ||--o{ sys_user : "id → tenant_id"
+    sys_tenant ||--o{ sys_role : "id → tenant_id"
+    sys_user   ||--o{ sys_user_role : "user_id → user_id"
+    sys_role   ||--o{ sys_user_role : "role_id → role_id"
     enterprise_evaluation ||--o{ survey_task : "enterprise_code 业务关联"
     survey_task ||--o{ survey_task_record : "id → task_id"
   </div>
