@@ -1,9 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
+import { Eye, EyeOff, RefreshCw, X } from "lucide-react";
 import { addTenant, generateTenantPassword } from "@/lib/ops-mock";
 import { HUBEI_REGIONS, QUAL_TYPE_META, QUAL_TYPES, type QualificationType } from "@/lib/types";
+
+const CITY_ABBR: Record<string, string> = {
+  武汉市: "wh", 黄石市: "hs", 十堰市: "sy", 宜昌市: "yc", 襄阳市: "xy",
+  鄂州市: "ez", 荆门市: "jm", 孝感市: "xg", 荆州市: "jz", 黄冈市: "hg",
+  咸宁市: "xn", 随州市: "sz", 恩施州: "es", 神农架: "snj",
+};
+
+function suggestUsername(city: string, district: string): string {
+  if (!city || !district) return "";
+  const cityAbbr = CITY_ABBR[city] ?? city.slice(0, 2);
+  const distAbbr = district.replace(/[市区县镇乡]/g, "").slice(0, 2).toLowerCase();
+  return `${cityAbbr}-${distAbbr}-admin`;
+}
 
 interface Props {
   onClose: () => void;
@@ -32,9 +45,35 @@ export default function AddTenantDrawer({ onClose, onSaved }: Props) {
     notes: "",
     modules: ["high_tech"] as QualificationType[],
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [usernameTouched, setUsernameTouched] = useState(false);
 
   function set(key: string, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function handleCityChange(city: string) {
+    setForm((prev) => {
+      const nextDistrict = "";
+      const nextUsername = usernameTouched ? prev.adminUsername : suggestUsername(city, nextDistrict);
+      return { ...prev, city, district: nextDistrict, adminUsername: nextUsername };
+    });
+  }
+
+  function handleDistrictChange(district: string) {
+    setForm((prev) => {
+      const nextUsername = usernameTouched ? prev.adminUsername : suggestUsername(prev.city, district);
+      return { ...prev, district, adminUsername: nextUsername };
+    });
+  }
+
+  function handleUsernameChange(value: string) {
+    setUsernameTouched(true);
+    set("adminUsername", value);
+  }
+
+  function regeneratePassword() {
+    set("adminPassword", generateTenantPassword());
   }
 
   const cities = Object.keys(HUBEI_REGIONS);
@@ -124,7 +163,7 @@ export default function AddTenantDrawer({ onClose, onSaved }: Props) {
                   <select
                     required
                     value={form.city}
-                    onChange={(e) => { set("city", e.target.value); set("district", ""); }}
+                    onChange={(e) => handleCityChange(e.target.value)}
                     className={inputCls}
                   >
                     <option value="">-- 请选择城市 --</option>
@@ -139,7 +178,7 @@ export default function AddTenantDrawer({ onClose, onSaved }: Props) {
                 <select
                   required
                   value={form.district}
-                  onChange={(e) => set("district", e.target.value)}
+                  onChange={(e) => handleDistrictChange(e.target.value)}
                   disabled={!form.city}
                   className={`${inputCls} disabled:bg-[#f7f8fa] disabled:text-[#cbd5e1]`}
                 >
@@ -206,25 +245,49 @@ export default function AddTenantDrawer({ onClose, onSaved }: Props) {
               管理员账号
             </h3>
             <div className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-3">
                 <label className="block">
                   <span className={labelCls}>用户名 *</span>
                   <input
                     required
                     value={form.adminUsername}
-                    onChange={(e) => set("adminUsername", e.target.value)}
-                    placeholder="wh-hs-admin-01"
+                    onChange={(e) => handleUsernameChange(e.target.value)}
+                    placeholder="选择区县后自动生成，可手动修改"
                     className={`${inputCls} font-mono`}
                   />
                 </label>
-                <label className="block">
-                  <span className={labelCls}>密码</span>
-                  <input
-                    value={form.adminPassword}
-                    onChange={(e) => set("adminPassword", e.target.value)}
-                    className={`${inputCls} font-mono`}
-                  />
-                </label>
+                <div className="block">
+                  <span className={labelCls}>登录密码</span>
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <input
+                        required
+                        type={showPassword ? "text" : "password"}
+                        value={form.adminPassword}
+                        onChange={(e) => set("adminPassword", e.target.value)}
+                        className={`${inputCls} font-mono pr-9`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#94a3b8] hover:text-[#475569] transition-colors"
+                        title={showPassword ? "隐藏密码" : "显示密码"}
+                      >
+                        {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={regeneratePassword}
+                      className="h-[38px] px-3 rounded-lg border border-[#e5e7eb] text-[#64748b] hover:bg-[#f7f8fa] hover:text-[#0f172a] transition-colors flex items-center gap-1.5 text-xs whitespace-nowrap"
+                      title="重新生成随机密码"
+                    >
+                      <RefreshCw size={12} />
+                      重新生成
+                    </button>
+                  </div>
+                  <p className="text-[11px] text-[#94a3b8] mt-1">密码已自动生成，可直接修改为自定义密码</p>
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <label className="block">

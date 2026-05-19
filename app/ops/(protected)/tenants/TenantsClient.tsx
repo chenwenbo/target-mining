@@ -40,41 +40,6 @@ function formatRelativeTime(isoStr: string | null): string {
   return `${Math.floor(days / 30)}个月前`;
 }
 
-function useCopyButton(text: string, duration = 1800) {
-  const [copied, setCopied] = useState(false);
-
-  function copy() {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), duration);
-    });
-  }
-
-  return { copied, copy };
-}
-
-function CopyCredentialsButton({ tenant }: { tenant: Tenant }) {
-  const text = `${tenant.adminUsername}\t${tenant.adminPassword}`;
-  const { copied, copy } = useCopyButton(text);
-
-  return (
-    <button
-      type="button"
-      onClick={copy}
-      className={cn(
-        "h-7 px-2 rounded-md flex items-center gap-1 text-xs border transition-colors",
-        copied
-          ? "text-emerald-600 bg-emerald-50 border-emerald-200"
-          : "text-[#64748b] border-[#e5e7eb] hover:bg-[#f7f8fa] hover:text-[#0f172a]"
-      )}
-      title="复制账号凭证（用户名 + 密码）"
-    >
-      {copied ? <Check size={11} /> : <Copy size={11} />}
-      {copied ? "已复制" : "复制凭证"}
-    </button>
-  );
-}
-
 export default function TenantsClient() {
   const [tenants, setTenants] = useState<Tenant[]>([]);
   const [mounted, setMounted] = useState(false);
@@ -302,7 +267,6 @@ export default function TenantsClient() {
                     </td>
                     <td className="px-5 py-3">
                       <div className="flex items-center justify-end gap-1">
-                        <CopyCredentialsButton tenant={t} />
                         <Link
                           href={`/ops/tenants/${t.id}`}
                           className="w-7 h-7 rounded-md flex items-center justify-center text-[#94a3b8] hover:bg-[#f1f5f9] hover:text-[#475569] transition-colors"

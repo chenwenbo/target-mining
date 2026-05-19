@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
-  Eye,
-  EyeOff,
   RefreshCw,
   Power,
   PowerOff,
@@ -35,7 +33,6 @@ function InfoRow({ label, value, mono }: { label: string; value: string; mono?: 
 export default function TenantDetailClient({ id }: { id: string }) {
   const [tenant, setTenant] = useState<Tenant | null>(null);
   const [mounted, setMounted] = useState(false);
-  const [showPwd, setShowPwd] = useState(false);
   const [newPwd, setNewPwd] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [notes, setNotes] = useState("");
@@ -74,7 +71,6 @@ export default function TenantDetailClient({ id }: { id: string }) {
     }
     const pwd = resetTenantAdminPassword(tenant.id);
     setNewPwd(pwd);
-    setShowPwd(true);
     setConfirmReset(false);
     reload();
   }
@@ -105,8 +101,6 @@ export default function TenantDetailClient({ id }: { id: string }) {
     ],
     grid: { top: 12, right: 12, bottom: 20, left: 36 },
   };
-
-  const displayPwd = newPwd ?? tenant.adminPassword;
 
   return (
     <div className="space-y-5 max-w-4xl">
@@ -165,22 +159,6 @@ export default function TenantDetailClient({ id }: { id: string }) {
           <InfoRow label="姓名" value={tenant.adminDisplayName} />
           <InfoRow label="部门" value={tenant.adminDept} />
           <InfoRow label="用户名" value={tenant.adminUsername} mono />
-
-          {/* 密码行 */}
-          <div className="flex items-center py-2.5 border-b border-[#f7f8fa]">
-            <span className="w-24 text-xs text-[#94a3b8] flex-shrink-0">密码</span>
-            <div className="flex items-center gap-2 flex-1">
-              <span className={cn("font-mono text-xs text-[#0f172a]", !showPwd && "tracking-widest text-[#94a3b8]")}>
-                {showPwd ? displayPwd : "••••••••"}
-              </span>
-              <button
-                onClick={() => setShowPwd((v) => !v)}
-                className="text-[#94a3b8] hover:text-[#475569] transition-colors"
-              >
-                {showPwd ? <EyeOff size={13} /> : <Eye size={13} />}
-              </button>
-            </div>
-          </div>
 
           {/* 重置密码 */}
           <div className="mt-4">
