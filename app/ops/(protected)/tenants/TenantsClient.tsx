@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Check, Copy, Download, Eye, EyeOff, Pencil, Plus, Power, PowerOff, Search } from "lucide-react";
+import { Check, Copy, Download, Eye, Pencil, Plus, Power, PowerOff, Search } from "lucide-react";
 import Papa from "papaparse";
 import { cn } from "@/lib/cn";
 import {
@@ -51,35 +51,6 @@ function useCopyButton(text: string, duration = 1800) {
   }
 
   return { copied, copy };
-}
-
-function PasswordCell({ password }: { password: string }) {
-  const [show, setShow] = useState(false);
-  const { copied, copy } = useCopyButton(password);
-
-  return (
-    <div className="flex items-center gap-1.5">
-      <span className={cn("font-mono text-xs", !show && "tracking-widest text-[#94a3b8]")}>
-        {show ? password : "••••••••"}
-      </span>
-      <button
-        type="button"
-        onClick={() => setShow((v) => !v)}
-        className="w-6 h-6 rounded-md flex items-center justify-center text-[#94a3b8] hover:bg-[#f1f5f9] hover:text-[#475569] transition-colors"
-        title={show ? "隐藏密码" : "显示密码"}
-      >
-        {show ? <EyeOff size={12} /> : <Eye size={12} />}
-      </button>
-      <button
-        type="button"
-        onClick={copy}
-        className="w-6 h-6 rounded-md flex items-center justify-center text-[#94a3b8] hover:bg-amber-50 hover:text-amber-600 transition-colors"
-        title="复制密码"
-      >
-        {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-      </button>
-    </div>
-  );
 }
 
 function CopyCredentialsButton({ tenant }: { tenant: Tenant }) {
@@ -280,7 +251,6 @@ export default function TenantsClient() {
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">到期日</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">启用模块</th>
                 <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">管理员账号</th>
-                <th className="text-left text-xs text-[#94a3b8] font-medium px-3 py-3">密码</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-3 py-3">企业数</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-3 py-3">最近登录</th>
                 <th className="text-right text-xs text-[#94a3b8] font-medium px-5 py-3">操作</th>
@@ -289,7 +259,7 @@ export default function TenantsClient() {
             <tbody>
               {paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="text-center py-12 text-[#94a3b8] text-sm">
+                  <td colSpan={8} className="text-center py-12 text-[#94a3b8] text-sm">
                     暂无符合条件的租户
                   </td>
                 </tr>
@@ -323,9 +293,6 @@ export default function TenantsClient() {
                     </td>
                     <td className="px-3 py-3 font-mono text-xs text-[#475569]">
                       {t.adminUsername}
-                    </td>
-                    <td className="px-3 py-3">
-                      <PasswordCell password={t.adminPassword} />
                     </td>
                     <td className="px-3 py-3 text-right tabular-nums text-[#475569]">
                       {t.stats.companyCount.toLocaleString()}
