@@ -67,3 +67,5 @@ No Context API. No server-side state.
 ### Qualification-Aware Rendering
 
 Components that vary by qualification type should read `useQualStore().activeQual` and use `QUAL_TYPE_META` from `lib/types.ts` for consistent labels and colors.
+
+
