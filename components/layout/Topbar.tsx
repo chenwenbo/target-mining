@@ -66,7 +66,7 @@ export default function Topbar() {
       <QualTabs variant="topbar" />
 
       {/* 右侧操作区 */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 ml-auto">
         {/* 智能体触发按钮 */}
         <button
           type="button"
