@@ -139,7 +139,7 @@ export default function PCLoginPage() {
 
           <h2 className="text-xl font-semibold text-[#0f172a] mb-1.5">登录</h2>
           <p className="text-sm text-[#64748b] mb-6">
-            输入账号密码，系统自动识别角色与权限
+            账号与角色绑定，登录后自动进入专属工作台
           </p>
 
           {/* 表单 */}
