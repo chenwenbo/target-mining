@@ -230,3 +230,46 @@ export function getSMEPoolTiers(q: Exclude<QualificationType, "high_tech">): Poo
       ];
   }
 }
+
+// ─── 已认定小巨人（mock 派生：仅最强候选）──────────────────────────
+export function isLittleGiantCertified(c: Company): boolean {
+  const e = checkEligibility(c, "little_giant");
+  return e.eligible && c.declarationWillingness === "strong" && c.patents.invention >= 8;
+}
+
+// ─── 小巨人标的池分层（与驾驶舱五层漏斗保持一致）──────────────────
+// 高新技术企业 → 创新型中小企业 → 专精特新中小企业 → 潜在标的 → 认定成功
+export function getLittleGiantPoolTiers(): PoolTierDef[] {
+  return [
+    {
+      id: "lg_high_tech",
+      label: "高新技术企业",
+      desc: "已认定高新技术企业",
+      filter: (c) => c.alreadyCertified,
+    },
+    {
+      id: "lg_innovative",
+      label: "创新型中小企业",
+      desc: "已入库或达到创新型中小企业条件",
+      filter: (c) => c.inSMEDatabase || checkEligibility(c, "innovative_sme").eligible,
+    },
+    {
+      id: "lg_specialized",
+      label: "专精特新中小企业",
+      desc: "达到专精特新中小企业认定条件",
+      filter: (c) => checkEligibility(c, "specialized_sme").eligible,
+    },
+    {
+      id: "lg_potential",
+      label: "潜在标的",
+      desc: "发明专利≥5件且有技术领域的小巨人候选",
+      filter: (c) => c.patents.invention >= 5 && c.techField !== null,
+    },
+    {
+      id: "lg_certified",
+      label: "认定成功",
+      desc: "已获批专精特新小巨人",
+      filter: (c) => isLittleGiantCertified(c),
+    },
+  ];
+}

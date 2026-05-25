@@ -11,10 +11,12 @@ import type { TechField, Company, DeclarationWillingness, Visitor, Qualification
 import { TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { useQualStore } from "@/lib/qual-store";
-import { checkEligibility, getSMEPoolTiers } from "@/lib/sme-criteria";
+import { checkEligibility, getSMEPoolTiers, getLittleGiantPoolTiers } from "@/lib/sme-criteria";
+import { INDUSTRIAL_SIX_CATEGORIES, deriveIndustrialSix } from "@/lib/industrial-six";
 
 // ─── Filter state ────────────────────────────────────────────
-type PoolTier = "all_companies" | "all" | "potential_target" | "willing";
+// 高企用固定四档；SME / 小巨人的档位 id 由各自 tier 定义动态决定，故放宽为 string。
+type PoolTier = string;
 
 const POOL_TIERS: { id: PoolTier; label: string; desc: string }[] = [
   { id: "all_companies",    label: "全部企业",       desc: "全部企业（不限领域）" },
@@ -27,6 +29,7 @@ interface Filters {
   q: string;
   streets: string[];
   fields: TechField[];
+  bases: string[]; // 工业六基第一层分类（小巨人模块）
   ageRange: string[];
   ipRange: string[];
   employeeRange: string[];
@@ -88,11 +91,13 @@ function FilterPanel({
   onChange,
   lockedStreet,
   streetOptions,
+  baseMode,
 }: {
   filters: Filters;
   onChange: (f: Filters) => void;
   lockedStreet?: string | null;
   streetOptions: string[];
+  baseMode: boolean; // true=工业六基分类筛选（小巨人），false=八大领域
 }) {
   function pill(label: string, active: boolean, onClick: () => void) {
     return (
@@ -143,7 +148,7 @@ function FilterPanel({
         </span>
         <button
           onClick={() => onChange({
-            q: "", streets: lockedStreet ? [lockedStreet] : [], fields: [], ageRange: [],
+            q: "", streets: lockedStreet ? [lockedStreet] : [], fields: [], bases: [], ageRange: [],
             ipRange: [], employeeRange: [],
             smeOnly: false, excludeRisk: true,
             willingness: [], declarationType: [], poolTier: "all_companies",
@@ -165,13 +170,19 @@ function FilterPanel({
         </div>
       )}
 
-      {section("所属领域", "border-l-blue-400", (
+      {section(baseMode ? "工业六基" : "所属领域", "border-l-blue-400", (
         <div className="flex flex-wrap gap-1.5">
-          {TECH_FIELDS.map((f) =>
-            pill(f.length > 6 ? f.slice(0, 6) + "…" : f, filters.fields.includes(f), () =>
-              onChange({ ...filters, fields: toggle(filters.fields, f) })
-            )
-          )}
+          {baseMode
+            ? INDUSTRIAL_SIX_CATEGORIES.map((cat) =>
+                pill(cat, filters.bases.includes(cat), () =>
+                  onChange({ ...filters, bases: toggle(filters.bases, cat) })
+                )
+              )
+            : TECH_FIELDS.map((f) =>
+                pill(f.length > 6 ? f.slice(0, 6) + "…" : f, filters.fields.includes(f), () =>
+                  onChange({ ...filters, fields: toggle(filters.fields, f) })
+                )
+              )}
         </div>
       ))}
 
@@ -246,6 +257,7 @@ function TargetsPageContent() {
     q: searchParams.get("q") ?? "",
     streets: [],
     fields: [],
+    bases: [],
     ageRange: [],
     ipRange: [],
     employeeRange: [],
@@ -275,13 +287,17 @@ function TargetsPageContent() {
   // Active pool tiers depend on qual type
   const activeTiers = useMemo(() => {
     if (activeQual === "high_tech") return POOL_TIERS;
+    // 小巨人：标签与驾驶舱五层漏斗保持一致
+    if (activeQual === "little_giant") {
+      return getLittleGiantPoolTiers().map((t) => ({ id: t.id, label: t.label, desc: t.desc }));
+    }
     const smeTiers = getSMEPoolTiers(activeQual as Exclude<QualificationType, "high_tech">);
-    return smeTiers.map((t) => ({ id: t.id as PoolTier, label: t.label, desc: t.desc }));
+    return smeTiers.map((t) => ({ id: t.id, label: t.label, desc: t.desc }));
   }, [activeQual]);
 
-  // Reset poolTier when qual type changes to avoid stale tier id
+  // Reset pool tier / 六基筛选 when qual type changes to avoid stale state
   useEffect(() => {
-    setFilters((f) => ({ ...f, poolTier: "all_companies" }));
+    setFilters((f) => ({ ...f, poolTier: "all_companies", bases: [] }));
   }, [activeQual]);
 
   // Apply filters
@@ -291,6 +307,7 @@ function TargetsPageContent() {
         if (filters.q && !c.name.includes(filters.q) && !c.creditCode.includes(filters.q)) return false;
         if (filters.streets.length > 0 && !filters.streets.includes(c.street)) return false;
         if (filters.fields.length > 0 && (!c.techField || !filters.fields.includes(c.techField))) return false;
+        if (activeQual === "little_giant" && filters.bases.length > 0 && !filters.bases.includes(deriveIndustrialSix(c).category)) return false;
         if (filters.ageRange.length > 0 && !filters.ageRange.includes(getAgeRange(c.establishedAt))) return false;
         if (filters.ipRange.length > 0 && !filters.ipRange.includes(getIPRange(getTotalIP(c)))) return false;
         if (filters.employeeRange.length > 0 && !filters.employeeRange.includes(getEmployeeRange(c.employees))) return false;
@@ -311,6 +328,10 @@ function TargetsPageContent() {
           if (filters.poolTier === "willing") {
             if (!["strong", "moderate"].includes(c.declarationWillingness)) return false;
           }
+        } else if (activeQual === "little_giant") {
+          // 小巨人五层档位 quick-filter
+          const tier = getLittleGiantPoolTiers().find((t) => t.id === filters.poolTier);
+          if (tier && !tier.filter(c)) return false;
         } else {
           // SME pool tier quick-filter
           const smeTiers = getSMEPoolTiers(activeQual as Exclude<QualificationType, "high_tech">);
@@ -382,7 +403,7 @@ function TargetsPageContent() {
   }
 
   const activeFilterCount = [
-    filters.streets.length, filters.fields.length,
+    filters.streets.length, filters.fields.length, filters.bases.length,
     filters.ageRange.length, filters.ipRange.length, filters.employeeRange.length,
     filters.smeOnly ? 1 : 0,
     filters.willingness.length, filters.declarationType.length,
@@ -391,7 +412,7 @@ function TargetsPageContent() {
   return (
     <>
     <div className="-m-6 lg:-m-8 flex h-full" style={{ minHeight: "calc(100vh - 56px)" }}>
-      <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} streetOptions={streetOptions} />
+      <FilterPanel filters={filters} onChange={setFilters} lockedStreet={lockedStreet} streetOptions={streetOptions} baseMode={activeQual === "little_giant"} />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Pool tier quick-filter bar */}
@@ -533,9 +554,21 @@ function TargetsPageContent() {
                       </Link>
                     </td>
                     <td className="px-3 py-3">
-                      <span className="inline-block px-2 py-0.5 bg-[#f1f5f9] text-[#475569] text-xs rounded">
-                        {c.techField ?? "—"}
-                      </span>
+                      {activeQual === "little_giant" ? (() => {
+                        const six = deriveIndustrialSix(c);
+                        return (
+                          <div>
+                            <span className="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded">
+                              {six.category}
+                            </span>
+                            <div className="text-[11px] text-[#94a3b8] mt-0.5">{six.subdivision}</div>
+                          </div>
+                        );
+                      })() : (
+                        <span className="inline-block px-2 py-0.5 bg-[#f1f5f9] text-[#475569] text-xs rounded">
+                          {c.techField ?? "—"}
+                        </span>
+                      )}
                     </td>
                     <td className="px-3 py-3 text-[#475569] text-xs">{c.street}</td>
                     <td className="px-3 py-3 text-xs">

@@ -1,5 +1,6 @@
 import type { Company, Task, IPItem, IPType, QualificationType } from "./types";
 import { deriveSMEFields, checkEligibility } from "./sme-criteria";
+import { deriveIndustrialSix } from "./industrial-six";
 import { getRenewalKPI } from "./renewal";
 import { getCertifiedCompanies } from "./renewal-data";
 
@@ -228,6 +229,67 @@ export function getSMEDashboardKPI(qualType: Exclude<QualificationType, "high_te
 }
 
 export type SMEDashboardKPI = ReturnType<typeof getSMEDashboardKPI>;
+
+// ─── 专精特新"小巨人"驾驶舱 KPI ──────────────────────────────────
+// 顶部指标卡沿用"高企"模块结构；漏斗为五层阶梯；领域分布按工业六基第一层。
+
+export function getLittleGiantDashboardKPI() {
+  const all = getAllCompanies();
+
+  // 工业六基 第一层分布（覆盖标的池全量企业）
+  const byBase: Record<string, number> = {};
+  for (const c of all) {
+    const { category } = deriveIndustrialSix(c);
+    byBase[category] = (byBase[category] || 0) + 1;
+  }
+
+  // 街道 / 乡镇分布
+  const byStreet: Record<string, number> = {};
+  for (const c of all) byStreet[c.street] = (byStreet[c.street] || 0) + 1;
+
+  // 成立年限分布
+  const byAge: Record<string, number> = { "1-3 年": 0, "3-5 年": 0, "5-8 年": 0, "8-15 年": 0, "15 年+": 0 };
+  const now = new Date("2026-01-01").getTime();
+  for (const c of all) {
+    const years = (now - new Date(c.establishedAt).getTime()) / (1000 * 60 * 60 * 24 * 365);
+    if (years < 3) byAge["1-3 年"]++;
+    else if (years < 5) byAge["3-5 年"]++;
+    else if (years < 8) byAge["5-8 年"]++;
+    else if (years < 15) byAge["8-15 年"]++;
+    else byAge["15 年+"]++;
+  }
+
+  // 小巨人潜在标的（新增）与申报意愿名单
+  const potential = all.filter((c) => c.patents.invention >= 5 && c.techField !== null);
+  const willing = all.filter(
+    (c) =>
+      c.techField !== null &&
+      (c.declarationWillingness === "strong" || c.declarationWillingness === "moderate")
+  );
+
+  // 五层阶梯漏斗（区域级，mock 计数，逐层递减）
+  const funnelStages = [
+    { name: "高新技术企业", value: 1820 },
+    { name: "创新型中小企业", value: 940 },
+    { name: "专精特新中小企业", value: 386 },
+    { name: "潜在标的", value: 128 },
+    { name: "认定成功", value: 32 },
+  ];
+
+  return {
+    yearGoal: 15,             // 本年度申报目标
+    willing: willing.length,  // 有意愿申报的名单
+    renewalTotal: 8,          // 复审（三年期复核，mock）
+    newDeclTargets: potential.length, // 新增
+    poolTotal: all.length,    // 标的池企业总数（领域分布中心数）
+    byBase,
+    byStreet,
+    byAge,
+    funnelStages,
+  };
+}
+
+export type LittleGiantDashboardKPI = ReturnType<typeof getLittleGiantDashboardKPI>;
 
 // ─── 知识产权明细（确定性生成）─────────────────────────────────
 

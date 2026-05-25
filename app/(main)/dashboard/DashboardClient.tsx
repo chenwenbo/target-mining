@@ -2,10 +2,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Target, Users, AlertTriangle, Pencil, Check, X } from "lucide-react";
 import EChartsWrapper from "@/components/charts/EChartsWrapper";
-import type { getDashboardKPI, SMEDashboardKPI } from "@/lib/mock-data";
+import type { getDashboardKPI, SMEDashboardKPI, LittleGiantDashboardKPI } from "@/lib/mock-data";
 import { getRegionLabel, useCurrentPCUser, useRoleGuard } from "@/lib/account-mock";
 import { useQualStore } from "@/lib/qual-store";
 import { QUAL_TYPE_META, type QualificationType } from "@/lib/types";
+import { INDUSTRIAL_SIX_CATEGORIES } from "@/lib/industrial-six";
 
 type KPI = ReturnType<typeof getDashboardKPI>;
 
@@ -36,11 +37,23 @@ function useEditableNumber(storageKey: string, defaultValue: number) {
   return { value, editing, draft, setDraft, inputRef, startEdit, commit, cancel };
 }
 
-function TopKPI({ kpi }: { kpi: KPI }) {
-  const goal = useEditableNumber("dashboard_yearGoal", kpi.yearGoal);
-  const certified = useEditableNumber("dashboard_certified", kpi.certified);
+function TopKPI({
+  yearGoal,
+  willingDefault,
+  renewalTotal,
+  newDeclTargets,
+  storagePrefix = "dashboard",
+}: {
+  yearGoal: number;
+  willingDefault: number;
+  renewalTotal: number;
+  newDeclTargets: number;
+  storagePrefix?: string;
+}) {
+  const goal = useEditableNumber(`${storagePrefix}_yearGoal`, yearGoal);
+  const certified = useEditableNumber(`${storagePrefix}_certified`, willingDefault);
 
-  const totalTargets = kpi.newDeclTargets + kpi.renewalTotal;
+  const totalTargets = newDeclTargets + renewalTotal;
   const gapValue = goal.value - totalTargets;
   const hasGap = gapValue > 0;
   const progressPct = Math.min(100, Math.round((certified.value / goal.value) * 100));
@@ -113,12 +126,12 @@ function TopKPI({ kpi }: { kpi: KPI }) {
         <div className="flex items-stretch gap-3 shrink-0 border-l border-[#e5e7eb] pl-4">
           <div className="text-center">
             <div className="text-[11px] text-[#94a3b8]">复审</div>
-            <div className="text-lg font-semibold text-purple-600 tabular-nums leading-tight">{kpi.renewalTotal}</div>
+            <div className="text-lg font-semibold text-purple-600 tabular-nums leading-tight">{renewalTotal}</div>
             <div className="text-[10px] text-[#94a3b8]">家</div>
           </div>
           <div className="text-center">
             <div className="text-[11px] text-[#94a3b8]">新增</div>
-            <div className="text-lg font-semibold text-blue-600 tabular-nums leading-tight">{kpi.newDeclTargets}</div>
+            <div className="text-lg font-semibold text-blue-600 tabular-nums leading-tight">{newDeclTargets}</div>
             <div className="text-[10px] text-[#94a3b8]">家</div>
           </div>
         </div>
@@ -697,6 +710,141 @@ function SMEFunnel({ kpi, qualType }: { kpi: SMEDashboardKPI; qualType: string }
   );
 }
 
+// ─── 小巨人五层阶梯漏斗 ──────────────────────────────────────
+// 高新技术企业 → 创新型中小企业 → 专精特新中小企业 → 潜在标的 → 认定成功
+function LadderFunnel({ stages }: { stages: { name: string; value: number }[] }) {
+  const stageNames = stages.map((s) => s.name);
+  const stageValues = stages.map((s) => s.value);
+
+  const VW = 660;
+  const VH = 300;
+  const CENTER = 230;
+  const W_TOP = 380;
+  const W_BOT = 110;
+  const Y_START = 16;
+  const LAYER_H = 50;
+  const GAP = 4;
+  const LC = stageValues.length;
+  const widthAt = (i: number) => W_TOP - (i / LC) * (W_TOP - W_BOT);
+  const yAt = (i: number) => Y_START + i * (LAYER_H + GAP);
+  const palette = [
+    { from: "#bae6fd", to: "#7dd3fc" },
+    { from: "#7dd3fc", to: "#38bdf8" },
+    { from: "#38bdf8", to: "#0ea5e9" },
+    { from: "#0ea5e9", to: "#0284c7" },
+    { from: "#0284c7", to: "#075985" },
+  ];
+  const fmtPct = (num: number, den: number) =>
+    den > 0 ? `${((num / den) * 100).toFixed(1)}%` : "—";
+  const RIGHT_COL_X = 470;
+
+  return (
+    <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden flex flex-col">
+      <div className="px-5 py-3.5 border-b border-[#e5e7eb]">
+        <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗</h2>
+        <p className="text-xs text-[#94a3b8] mt-0.5">高新技术企业 → 创新型 → 专精特新 → 潜在标的 → 认定成功</p>
+      </div>
+      <div className="px-3 pt-3 pb-2 flex-1 min-h-0">
+        <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-full" role="img" aria-label="小巨人企业漏斗">
+          <defs>
+            {palette.map((p, i) => (
+              <linearGradient key={i} id={`lg-grad-${i}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={p.from} />
+                <stop offset="100%" stopColor={p.to} />
+              </linearGradient>
+            ))}
+            <linearGradient id="lg-shine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {stageValues.map((val, i) => {
+            const yT = yAt(i);
+            const yB = yT + LAYER_H;
+            const wT = widthAt(i);
+            const wB = widthAt(i + 1);
+            const xLT = CENTER - wT / 2;
+            const xRT = CENTER + wT / 2;
+            const xLB = CENTER - wB / 2;
+            const xRB = CENTER + wB / 2;
+            return (
+              <g key={i}>
+                <polygon points={`${xLT},${yT} ${xRT},${yT} ${xRB},${yB} ${xLB},${yB}`} fill={`url(#lg-grad-${i})`} />
+                <polygon points={`${xLT},${yT} ${xRT},${yT} ${xRT - (xRT - xRB) * 0.2},${yT + LAYER_H * 0.36} ${xLT + (xLT - xLB) * 0.2},${yT + LAYER_H * 0.36}`} fill="url(#lg-shine)" />
+                <text x={CENTER} y={yT + LAYER_H / 2 - 2} textAnchor="middle" fill={i === 0 ? "#0c4a6e" : "#fff"} fontSize="11" fontWeight="600">{stageNames[i]}</text>
+                <text x={CENTER} y={yT + LAYER_H / 2 + 15} textAnchor="middle" fill={i === 0 ? "#0c4a6e" : "#fff"} fontSize="15" fontWeight="700">{val.toLocaleString()}</text>
+              </g>
+            );
+          })}
+          {stageValues.map((val, i) => {
+            const yT = yAt(i);
+            const yB = yT + LAYER_H;
+            const yMid = (yT + yB) / 2;
+            const wT = widthAt(i);
+            const wB = widthAt(i + 1);
+            const rightEdge = CENTER + Math.max(wT, wB) / 2;
+            const conv = i > 0 ? fmtPct(val, stageValues[i - 1]) : null;
+            return (
+              <g key={`a${i}`}>
+                <line x1={rightEdge} y1={yMid} x2={RIGHT_COL_X - 6} y2={yMid} stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="3 3" />
+                <circle cx={rightEdge} cy={yMid} r="3" fill="#0ea5e9" />
+                <rect x={RIGHT_COL_X} y={yMid - 10} width="70" height="20" rx="10" fill="#fff" stroke="#0ea5e9" strokeWidth="1.5" />
+                <text x={RIGHT_COL_X + 35} y={yMid + 4} textAnchor="middle" fill="#0369a1" fontSize="12" fontWeight="700">{val.toLocaleString()}</text>
+                {conv && <text x={RIGHT_COL_X + 78} y={yMid + 4} fill="#0284c7" fontSize="10" fontWeight="600">转化 {conv}</text>}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+// ─── 工业六基分布（第一层 6 大类环形图）──────────────────────────
+function SixBaseDonut({ byBase, total }: { byBase: Record<string, number>; total: number }) {
+  const colors = ["#2563eb", "#0891b2", "#7c3aed", "#10b981", "#f59e0b", "#ec4899"];
+  const option = {
+    tooltip: { trigger: "item", formatter: "{b}: {c} 家 ({d}%)" },
+    legend: {
+      bottom: 0,
+      left: "center",
+      icon: "circle",
+      itemWidth: 7,
+      itemHeight: 7,
+      itemGap: 6,
+      textStyle: { color: "#475569", fontSize: 10 },
+      type: "scroll",
+    },
+    series: [{
+      type: "pie",
+      radius: ["52%", "76%"],
+      center: ["50%", "42%"],
+      avoidLabelOverlap: false,
+      itemStyle: { borderColor: "#ffffff", borderWidth: 2, borderRadius: 4 },
+      label: {
+        show: true,
+        position: "center",
+        formatter: `{total|${total}}\n{sub|标的池}`,
+        rich: {
+          total: { fontSize: 22, color: "#0f172a", fontWeight: "bold" },
+          sub: { fontSize: 11, color: "#94a3b8", padding: [4, 0, 0, 0] },
+        },
+      },
+      labelLine: { show: false },
+      data: INDUSTRIAL_SIX_CATEGORIES.map((name, i) => ({
+        name,
+        value: byBase[name] ?? 0,
+        itemStyle: { color: colors[i % colors.length] },
+      })),
+    }],
+  };
+  return (
+    <PanelCard title="工业六基分布" subtitle="工业基础能力六大方向（申报核心领域）">
+      <EChartsWrapper option={option} height={260} />
+    </PanelCard>
+  );
+}
+
 // ─── 主组件 ───────────────────────────────────────────────────
 export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
   const allowed = useRoleGuard("region_admin");
@@ -704,15 +852,18 @@ export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
   const activeQual = useQualStore((s) => s.activeQual);
   const [kpi, setKpi] = useState<KPI>(initialKpi);
   const [smeKpi, setSmeKpi] = useState<SMEDashboardKPI | null>(null);
+  const [lgKpi, setLgKpi] = useState<LittleGiantDashboardKPI | null>(null);
 
   // 登录用户的 city/district 在客户端才能拿到，因此 mount 后按权限重新计算
   useEffect(() => {
     if (!mounted) return;
     let cancelled = false;
-    import("@/lib/mock-data").then(({ getDashboardKPI, getSMEDashboardKPI }) => {
+    import("@/lib/mock-data").then(({ getDashboardKPI, getSMEDashboardKPI, getLittleGiantDashboardKPI }) => {
       if (cancelled) return;
       setKpi(getDashboardKPI());
-      if (activeQual !== "high_tech") {
+      if (activeQual === "little_giant") {
+        setLgKpi(getLittleGiantDashboardKPI());
+      } else if (activeQual !== "high_tech") {
         setSmeKpi(getSMEDashboardKPI(activeQual as Exclude<typeof activeQual, "high_tech">));
       }
     });
@@ -750,7 +901,13 @@ export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
       {activeQual === "high_tech" ? (
         <>
           {/* 第一行：3 张 KPI 卡横排 */}
-          <TopKPI kpi={kpi} />
+          <TopKPI
+            key="topkpi-high_tech"
+            yearGoal={kpi.yearGoal}
+            willingDefault={kpi.certified}
+            renewalTotal={kpi.renewalTotal}
+            newDeclTargets={kpi.newDeclTargets}
+          />
 
           {/* 第二行：企业漏斗 + 街道乡镇分布 */}
           <div className="grid grid-cols-2 gap-4 mb-4">
@@ -764,6 +921,42 @@ export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
             <AgeBar kpi={kpi} />
           </div>
         </>
+      ) : activeQual === "little_giant" ? (
+        lgKpi ? (
+          <>
+            {/* 第一行：沿用高企模块的 3 张 KPI 卡结构 */}
+            <TopKPI
+              key="topkpi-little_giant"
+              yearGoal={lgKpi.yearGoal}
+              willingDefault={lgKpi.willing}
+              renewalTotal={lgKpi.renewalTotal}
+              newDeclTargets={lgKpi.newDeclTargets}
+              storagePrefix="lg_dash"
+            />
+
+            {/* 第二行：五层阶梯漏斗 + 街道乡镇分布 */}
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <LadderFunnel stages={lgKpi.funnelStages} />
+              <StreetDistribution byStreet={lgKpi.byStreet} />
+            </div>
+
+            {/* 第三行：工业六基分布 + 成立年限分布 */}
+            <div className="grid grid-cols-2 gap-4">
+              <SixBaseDonut byBase={lgKpi.byBase} total={lgKpi.poolTotal} />
+              <PanelCard title="成立年限分布" subtitle="标的池企业成立年限">
+                <EChartsWrapper option={{
+                  grid: { left: 36, right: 12, top: 24, bottom: 28 },
+                  tooltip: { trigger: "axis" },
+                  xAxis: { type: "category", data: Object.keys(lgKpi.byAge), axisLine: { lineStyle: { color: "#e5e7eb" } }, axisTick: { show: false }, axisLabel: { color: "#64748b", fontSize: 10, interval: 0 } },
+                  yAxis: { type: "value", axisLine: { show: false }, axisTick: { show: false }, splitLine: { lineStyle: { color: "#f1f5f9" } }, axisLabel: { color: "#94a3b8", fontSize: 10 } },
+                  series: [{ type: "bar", data: Object.values(lgKpi.byAge), barWidth: 22, itemStyle: { color: { type: "linear", x: 0, y: 0, x2: 0, y2: 1, colorStops: [{ offset: 0, color: "#60a5fa" }, { offset: 1, color: "#2563eb" }] }, borderRadius: [4, 4, 0, 0] }, label: { show: true, position: "top", color: "#0f172a", fontSize: 11, fontWeight: "bold" } }],
+                }} height={260} />
+              </PanelCard>
+            </div>
+          </>
+        ) : (
+          <div className="flex items-center justify-center py-32 text-sm text-[#94a3b8]">加载中…</div>
+        )
       ) : smeKpi ? (
         <>
           {/* SME KPI 卡 */}

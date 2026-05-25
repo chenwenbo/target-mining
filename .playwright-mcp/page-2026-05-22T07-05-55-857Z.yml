@@ -1,0 +1,134 @@
+- main [ref=e2]:
+  - region "项目进展摘要" [ref=e3]:
+    - paragraph [ref=e4]: 阶段进展汇报 · 2026 年 5 月 22 日
+    - heading "标的挖掘项目阶段进展汇报" [level=1] [ref=e5]
+    - paragraph [ref=e6]: 项目组自 2026 年 5 月 18 日周一组建以来，已完成需求评审、技术方案评审与 AI 编程培训， 进入应用层联调收口阶段。当前应用层前后端开发已完成，AI 智能体能力仍在开发中。
+    - generic "关键状态" [ref=e7]:
+      - generic [ref=e8]:
+        - strong [ref=e9]: 5 天
+        - generic [ref=e10]: 组建至今推进周期
+      - generic [ref=e11]:
+        - strong [ref=e12]: 100%
+        - generic [ref=e13]: 需求与技术方案评审完成
+      - generic [ref=e14]:
+        - strong [ref=e15]: 完成
+        - generic [ref=e16]: 应用层前端 / 后端开发
+      - generic [ref=e17]:
+        - strong [ref=e18]: 进行中
+        - generic [ref=e19]: AI 智能体开发与计划反馈
+  - region "总体结论" [ref=e20]:
+    - generic [ref=e21]:
+      - heading "总体结论" [level=2] [ref=e22]
+      - paragraph [ref=e23]: 项目基础工作已闭环，应用层进入联调与测试准备
+    - generic [ref=e24]:
+      - article [ref=e25]:
+        - generic [ref=e26]: 已完成
+        - heading "项目交付框架已经搭建完成" [level=3] [ref=e27]
+        - paragraph [ref=e28]: 团队完成从 0 到交付节奏的建立，包括需求共识、技术边界、数据模型、接口契约以及 AI 编程协作方式。 当前全员已使用 AI 编程参与交付。
+      - article [ref=e29]:
+        - generic [ref=e30]: 推进中
+        - heading "应用层接近测试入口，智能体部分需补齐排期" [level=3] [ref=e31]
+        - paragraph [ref=e32]: 应用层前后端开发已完成，计划 2026 年 5 月 23 日周六完成全量联调， 2026 年 5 月 24 日周日进入测试验证。AI 智能体部分仍在开发中，待反馈明确时间计划。
+  - region "阶段推进时间线" [ref=e33]:
+    - generic [ref=e34]:
+      - heading "阶段推进" [level=2] [ref=e35]
+      - paragraph [ref=e36]: 从团队组建到测试验证入口的关键节点
+    - generic [ref=e37]:
+      - article [ref=e38]:
+        - generic [ref=e39]: 5 月 18 日 · 周一
+        - heading "项目组组建" [level=3] [ref=e40]
+        - paragraph [ref=e41]: 完成项目团队组织，明确交付目标、协作方式与近期推进节奏。
+      - article [ref=e42]:
+        - generic [ref=e43]: 本周已完成
+        - heading "需求与技术评审" [level=3] [ref=e44]
+        - paragraph [ref=e45]: 完成需求评审，并围绕数据模型、接口契约完成技术方案评审。
+      - article [ref=e46]:
+        - generic [ref=e47]: 当前状态
+        - heading "应用层开发完成" [level=3] [ref=e48]
+        - paragraph [ref=e49]: 前端与后端主体功能开发完成，进入跨端、跨接口、跨场景联调。
+      - article [ref=e50]:
+        - generic [ref=e51]: 5 月 23-24 日
+        - heading "联调收口与测试启动" [level=3] [ref=e52]
+        - paragraph [ref=e53]: 周六完成所有联调工作，周日开始测试验证并反馈问题清单。
+  - region "交付完成情况" [ref=e54]:
+    - generic [ref=e55]:
+      - heading "交付完成情况" [level=2] [ref=e56]
+      - paragraph [ref=e57]: 当前以应用层完成、智能体补齐为主线
+    - generic [ref=e58]:
+      - list [ref=e59]:
+        - listitem [ref=e60]:
+          - generic [ref=e61]: 需求评审
+          - generic [ref=e62]: 已完成需求范围、业务流程与关键场景评审，项目目标与交付口径已对齐。
+        - listitem [ref=e63]:
+          - generic [ref=e64]: 技术方案评审
+          - generic [ref=e65]: 已完成数据模型与接口契约评审，为前后端并行开发和联调提供统一标准。
+        - listitem [ref=e66]:
+          - generic [ref=e67]: AI 编程培训
+          - generic [ref=e68]: 已完成团队 AI 编程培训，目前全员使用 AI 编程进行功能交付、问题定位和效率提升。
+        - listitem [ref=e69]:
+          - generic [ref=e70]: 应用层开发
+          - generic [ref=e71]: 前端与后端开发已完成，正在面向全链路联调和测试验证进行收口。
+        - listitem [ref=e72]:
+          - generic [ref=e73]: AI 智能体
+          - generic [ref=e74]: 智能体部分仍在开发中，时间计划待相关开发反馈后同步更新。
+      - complementary [ref=e75]:
+        - heading "模块进度概览" [level=3] [ref=e76]
+        - generic [ref=e78]:
+          - generic [ref=e79]: 需求 / 方案 / 培训
+          - generic [ref=e80]: 完成
+        - generic [ref=e84]:
+          - generic [ref=e85]: 应用层前后端
+          - generic [ref=e86]: 开发完成
+        - generic [ref=e90]:
+          - generic [ref=e91]: 全量联调
+          - generic [ref=e92]: 周六完成
+        - generic [ref=e96]:
+          - generic [ref=e97]: AI 智能体
+          - generic [ref=e98]: 开发中
+  - region "下一步计划" [ref=e101]:
+    - generic [ref=e102]:
+      - heading "下一步计划" [level=2] [ref=e103]
+      - paragraph [ref=e104]: 确保应用层按计划进入验证，同时拉齐智能体排期
+    - generic [ref=e105]:
+      - article [ref=e106]:
+        - generic [ref=e107]: "1"
+        - heading "周六完成全量联调" [level=3] [ref=e108]
+        - paragraph [ref=e109]: 重点验证前后端接口契约、主流程闭环、异常分支、数据状态流转和权限边界。
+      - article [ref=e110]:
+        - generic [ref=e111]: "2"
+        - heading "周日启动测试验证" [level=3] [ref=e112]
+        - paragraph [ref=e113]: 进入系统化测试，输出问题清单、优先级、责任人和修复节奏，保障后续验收质量。
+      - article [ref=e114]:
+        - generic [ref=e115]: "3"
+        - heading "同步 AI 智能体计划" [level=3] [ref=e116]
+        - paragraph [ref=e117]: 尽快确认智能体开发剩余工作、风险点和明确交付时间，纳入整体项目里程碑管理。
+  - region "风险与关注事项" [ref=e118]:
+    - generic [ref=e119]:
+      - heading "风险与关注事项" [level=2] [ref=e120]
+      - paragraph [ref=e121]: 当前主要风险集中在智能体排期与联调验证质量
+    - table [ref=e122]:
+      - rowgroup [ref=e123]:
+        - row "事项 当前判断 建议动作" [ref=e124]:
+          - columnheader "事项" [ref=e125]
+          - columnheader "当前判断" [ref=e126]
+          - columnheader "建议动作" [ref=e127]
+      - rowgroup [ref=e128]:
+        - row "需跟进 AI 智能体交付计划 智能体开发仍在进行中，尚未形成明确时间反馈。 要求补齐剩余工作拆解、关键依赖、预计完成时间和风险预案。" [ref=e129]:
+          - cell "需跟进 AI 智能体交付计划" [ref=e130]:
+            - generic [ref=e131]: 需跟进
+            - text: AI 智能体交付计划
+          - cell "智能体开发仍在进行中，尚未形成明确时间反馈。" [ref=e132]
+          - cell "要求补齐剩余工作拆解、关键依赖、预计完成时间和风险预案。" [ref=e133]
+        - row "需保障 周六联调收口 应用层开发已完成，但联调质量决定周日测试能否顺利启动。 按主流程、异常流、数据一致性、权限边界建立联调检查清单。" [ref=e134]:
+          - cell "需保障 周六联调收口" [ref=e135]:
+            - generic [ref=e136]: 需保障
+            - text: 周六联调收口
+          - cell "应用层开发已完成，但联调质量决定周日测试能否顺利启动。" [ref=e137]
+          - cell "按主流程、异常流、数据一致性、权限边界建立联调检查清单。" [ref=e138]
+        - row "已形成 AI 编程交付机制 团队已完成培训并开始全员 AI 编程，交付效率有基础保障。 继续沉淀提示词、代码评审规范和问题定位经验，形成可复用资产。" [ref=e139]:
+          - cell "已形成 AI 编程交付机制" [ref=e140]:
+            - generic [ref=e141]: 已形成
+            - text: AI 编程交付机制
+          - cell "团队已完成培训并开始全员 AI 编程，交付效率有基础保障。" [ref=e142]
+          - cell "继续沉淀提示词、代码评审规范和问题定位经验，形成可复用资产。" [ref=e143]
+    - paragraph [ref=e144]: 汇报口径：截至 2026 年 5 月 22 日，待 AI 智能体排期反馈后可更新。
