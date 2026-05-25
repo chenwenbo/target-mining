@@ -521,9 +521,11 @@ function TargetsPageContent() {
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-36">知识产权</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-28">参保人数</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-16">注册资本</th>
-                <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">
-                  {activeQual === "high_tech" ? "申报类型" : "资质缺口(估算)"}
-                </th>
+                {activeQual !== "little_giant" && (
+                  <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">
+                    {activeQual === "high_tech" ? "申报类型" : "资质缺口(估算)"}
+                  </th>
+                )}
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-24">申报意愿</th>
                 <th className="px-3 py-3 text-left text-xs font-medium text-[#94a3b8] w-20">操作</th>
               </tr>
@@ -594,29 +596,31 @@ function TargetsPageContent() {
                       {c.employees}
                     </td>
                     <td className="px-3 py-3 tabular-nums text-[#475569] text-xs">{c.registeredCapital}万</td>
-                    <td className="px-3 py-3">
-                      {activeQual === "high_tech" ? (
-                        <span className={cn(
-                          "inline-block px-2 py-0.5 text-xs rounded-full font-medium",
-                          c.alreadyCertified
-                            ? "bg-purple-50 text-purple-700 border border-purple-200"
-                            : "bg-blue-50 text-blue-700 border border-blue-200"
-                        )}>
-                          {c.alreadyCertified ? "复审" : "新申报"}
-                        </span>
-                      ) : (() => {
-                        const elig = checkEligibility(c, activeQual);
-                        return elig.eligible ? (
-                          <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
-                            条件达标
+                    {activeQual !== "little_giant" && (
+                      <td className="px-3 py-3">
+                        {activeQual === "high_tech" ? (
+                          <span className={cn(
+                            "inline-block px-2 py-0.5 text-xs rounded-full font-medium",
+                            c.alreadyCertified
+                              ? "bg-purple-50 text-purple-700 border border-purple-200"
+                              : "bg-blue-50 text-blue-700 border border-blue-200"
+                          )}>
+                            {c.alreadyCertified ? "复审" : "新申报"}
                           </span>
-                        ) : (
-                          <span className="text-[11px] text-[#94a3b8] leading-tight block max-w-[120px] truncate" title={elig.gaps[0]}>
-                            {elig.gaps[0] ?? "—"}
-                          </span>
-                        );
-                      })()}
-                    </td>
+                        ) : (() => {
+                          const elig = checkEligibility(c, activeQual);
+                          return elig.eligible ? (
+                            <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 font-medium">
+                              条件达标
+                            </span>
+                          ) : (
+                            <span className="text-[11px] text-[#94a3b8] leading-tight block max-w-[120px] truncate" title={elig.gaps[0]}>
+                              {elig.gaps[0] ?? "—"}
+                            </span>
+                          );
+                        })()}
+                      </td>
+                    )}
                     <td className="px-3 py-3">
                       {(() => {
                         const w = c.declarationWillingness;
