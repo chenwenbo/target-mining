@@ -267,12 +267,13 @@ export function getLittleGiantDashboardKPI() {
       (c.declarationWillingness === "strong" || c.declarationWillingness === "moderate")
   );
 
-  // 五层阶梯漏斗（区域级，mock 计数，逐层递减）
+  // 六层阶梯漏斗（区域级，mock 计数，逐层递减）
   const funnelStages = [
     { name: "高新技术企业", value: 1820 },
     { name: "创新型中小企业", value: 940 },
     { name: "专精特新中小企业", value: 386 },
     { name: "潜在标的", value: 128 },
+    { name: "有意愿企业", value: 64 },
     { name: "认定成功", value: 32 },
   ];
 

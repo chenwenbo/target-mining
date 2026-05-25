@@ -266,6 +266,15 @@ export function getLittleGiantPoolTiers(): PoolTierDef[] {
       filter: (c) => c.patents.invention >= 5 && c.techField !== null,
     },
     {
+      id: "lg_willing",
+      label: "有意愿的企业",
+      desc: "申报意愿强烈或基本有意愿的小巨人候选",
+      filter: (c) =>
+        c.patents.invention >= 5 &&
+        c.techField !== null &&
+        (c.declarationWillingness === "strong" || c.declarationWillingness === "moderate"),
+    },
+    {
       id: "lg_certified",
       label: "认定成功",
       desc: "已获批专精特新小巨人",

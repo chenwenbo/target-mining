@@ -717,7 +717,6 @@ function LadderFunnel({ stages }: { stages: { name: string; value: number }[] })
   const stageValues = stages.map((s) => s.value);
 
   const VW = 660;
-  const VH = 300;
   const CENTER = 230;
   const W_TOP = 380;
   const W_BOT = 110;
@@ -725,6 +724,7 @@ function LadderFunnel({ stages }: { stages: { name: string; value: number }[] })
   const LAYER_H = 50;
   const GAP = 4;
   const LC = stageValues.length;
+  const VH = Y_START + LC * (LAYER_H + GAP) + 14;
   const widthAt = (i: number) => W_TOP - (i / LC) * (W_TOP - W_BOT);
   const yAt = (i: number) => Y_START + i * (LAYER_H + GAP);
   const palette = [
@@ -733,6 +733,7 @@ function LadderFunnel({ stages }: { stages: { name: string; value: number }[] })
     { from: "#38bdf8", to: "#0ea5e9" },
     { from: "#0ea5e9", to: "#0284c7" },
     { from: "#0284c7", to: "#075985" },
+    { from: "#075985", to: "#0c4a6e" },
   ];
   const fmtPct = (num: number, den: number) =>
     den > 0 ? `${((num / den) * 100).toFixed(1)}%` : "—";
@@ -742,7 +743,7 @@ function LadderFunnel({ stages }: { stages: { name: string; value: number }[] })
     <div className="bg-white rounded-xl border border-[#e5e7eb] shadow-[0_1px_2px_0_rgba(15,23,42,0.04)] overflow-hidden flex flex-col">
       <div className="px-5 py-3.5 border-b border-[#e5e7eb]">
         <h2 className="text-sm font-semibold text-[#0f172a]">企业漏斗</h2>
-        <p className="text-xs text-[#94a3b8] mt-0.5">高新技术企业 → 创新型 → 专精特新 → 潜在标的 → 认定成功</p>
+        <p className="text-xs text-[#94a3b8] mt-0.5">高新技术企业 → 创新型 → 专精特新 → 潜在标的 → 有意愿 → 认定成功</p>
       </div>
       <div className="px-3 pt-3 pb-2 flex-1 min-h-0">
         <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-full" role="img" aria-label="小巨人企业漏斗">
