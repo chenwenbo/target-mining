@@ -13,6 +13,15 @@ import {
   bool3Map,
   LIFECYCLE_META,
   type LifecycleStage,
+  LG_REVENUE_MAP,
+  LG_GROWTH_MAP,
+  LG_MAINBIZ_RATIO_MAP,
+  LG_DEBT_MAP,
+  LG_YEARS_MAP,
+  LG_RD_RATIO_MAP,
+  LG_RD_STAFF_MAP,
+  LG_STANDARDS_MAP,
+  LG_MARKET_SHARE_MAP,
 } from "./lifecycle";
 
 type Props = {
@@ -158,33 +167,74 @@ export default function TaskDetailDrawer({ open, onClose, task, company, records
                 <Row label="走访人员" value={record.visitorName} />
               </Section>
 
-              {/* 3. 实地核实 */}
-              <Section title="企业实际情况（实地核实）">
-                {record.fieldVerified.employeeCount != null && (
-                  <Row label="实际员工数" value={`${record.fieldVerified.employeeCount} 人`} />
-                )}
-                {record.fieldVerified.rdEmployeeCount != null && (
-                  <Row label="研发人员数" value={`${record.fieldVerified.rdEmployeeCount} 人`} />
-                )}
-                {record.fieldVerified.annualRevenue && (
-                  <Row label="年营收规模" value={REVENUE_MAP[record.fieldVerified.annualRevenue]} />
-                )}
-                {record.fieldVerified.rdExpenseRatio && (
-                  <Row label="研发费用占比" value={RD_RATIO_MAP[record.fieldVerified.rdExpenseRatio]} />
-                )}
-                {record.fieldVerified.rdExpenseSource && (
-                  <Row label="研发费用来源" value={RD_SOURCE_MAP[record.fieldVerified.rdExpenseSource]} />
-                )}
-                {record.fieldVerified.hasTechDept != null && (
-                  <Row label="独立研发部门" value={bool3Map(record.fieldVerified.hasTechDept)} />
-                )}
-                {record.fieldVerified.hasAccountingFirm != null && (
-                  <Row label="委托会计师事务所" value={bool3Map(record.fieldVerified.hasAccountingFirm)} />
-                )}
-                {record.fieldVerified.mainProductDesc && (
-                  <Row label="主营业务" value={record.fieldVerified.mainProductDesc} />
-                )}
-              </Section>
+              {/* 3. 实地核实（高企口径）*/}
+              {!record.littleGiant && (
+                <Section title="企业实际情况（实地核实）">
+                  {record.fieldVerified.employeeCount != null && (
+                    <Row label="实际员工数" value={`${record.fieldVerified.employeeCount} 人`} />
+                  )}
+                  {record.fieldVerified.rdEmployeeCount != null && (
+                    <Row label="研发人员数" value={`${record.fieldVerified.rdEmployeeCount} 人`} />
+                  )}
+                  {record.fieldVerified.annualRevenue && (
+                    <Row label="年营收规模" value={REVENUE_MAP[record.fieldVerified.annualRevenue]} />
+                  )}
+                  {record.fieldVerified.rdExpenseRatio && (
+                    <Row label="研发费用占比" value={RD_RATIO_MAP[record.fieldVerified.rdExpenseRatio]} />
+                  )}
+                  {record.fieldVerified.rdExpenseSource && (
+                    <Row label="研发费用来源" value={RD_SOURCE_MAP[record.fieldVerified.rdExpenseSource]} />
+                  )}
+                  {record.fieldVerified.hasTechDept != null && (
+                    <Row label="独立研发部门" value={bool3Map(record.fieldVerified.hasTechDept)} />
+                  )}
+                  {record.fieldVerified.hasAccountingFirm != null && (
+                    <Row label="委托会计师事务所" value={bool3Map(record.fieldVerified.hasAccountingFirm)} />
+                  )}
+                  {record.fieldVerified.mainProductDesc && (
+                    <Row label="主营业务" value={record.fieldVerified.mainProductDesc} />
+                  )}
+                </Section>
+              )}
+
+              {/* 3b. 小巨人摸排数据 */}
+              {record.littleGiant && (() => {
+                const g = record.littleGiant;
+                return (
+                  <Section title="小巨人摸排数据">
+                    {g.industrialBaseCategory && (
+                      <Row label="工业六基" value={`${g.industrialBaseCategory}${g.industrialBaseItem ? " · " + g.industrialBaseItem : ""}`} />
+                    )}
+                    {g.mainProductDesc && <Row label="主导产品" value={g.mainProductDesc} />}
+                    {g.annualRevenueBand && <Row label="上年度营收" value={LG_REVENUE_MAP[g.annualRevenueBand]} />}
+                    {g.mainBizGrowth2y && <Row label="近2年增长率" value={LG_GROWTH_MAP[g.mainBizGrowth2y]} />}
+                    {g.mainBizRevenueRatio && <Row label="主营收入占比" value={LG_MAINBIZ_RATIO_MAP[g.mainBizRevenueRatio]} />}
+                    {g.debtRatio && <Row label="资产负债率" value={LG_DEBT_MAP[g.debtRatio]} />}
+                    {g.subdivisionYears && <Row label="细分市场年限" value={LG_YEARS_MAP[g.subdivisionYears]} />}
+                    {g.rdExpenseRatio && <Row label="研发费用占比" value={LG_RD_RATIO_MAP[g.rdExpenseRatio]} />}
+                    {g.rdStaffRatio && <Row label="研发人员占比" value={LG_RD_STAFF_MAP[g.rdStaffRatio]} />}
+                    {g.hasProvincialRdInstitution != null && <Row label="省级研发机构" value={bool3Map(g.hasProvincialRdInstitution)} />}
+                    {g.standardsRole && <Row label="标准制定" value={LG_STANDARDS_MAP[g.standardsRole]} />}
+                    {g.marketShare && <Row label="市场占有率" value={LG_MARKET_SHARE_MAP[g.marketShare]} />}
+                    {g.fillsGapOrImportSub != null && <Row label="填补空白/进口替代" value={bool3Map(g.fillsGapOrImportSub)} />}
+                    {g.hasOwnBrand != null && <Row label="自主品牌" value={bool3Map(g.hasOwnBrand)} />}
+                    {g.supplyChainRole && <Row label="产业链地位" value={g.supplyChainRole} />}
+                    {g.expectedDeclareYear && (
+                      <Row label="预计申报年度" value={g.expectedDeclareYear === "uncertain" ? "暂不明确" : `${g.expectedDeclareYear}年`} />
+                    )}
+                    {(g.bottleneckTraits ?? []).length > 0 && (
+                      <div className="py-1">
+                        <span className="text-xs text-[#94a3b8] block mb-1.5">卡脖子/补短板</span>
+                        <div className="flex flex-wrap gap-1">
+                          {g.bottleneckTraits!.map((t) => (
+                            <span key={t} className="text-[10px] bg-rose-50 text-rose-700 border border-rose-100 px-2 py-0.5 rounded">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </Section>
+                );
+              })()}
 
               {/* 4. 申报意愿 */}
               <Section title="申报意愿">

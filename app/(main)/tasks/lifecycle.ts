@@ -97,3 +97,67 @@ export function bool3Map(v: boolean | null | undefined | string): string {
   if (v === false || v === "false") return "否";
   return "不清楚";
 }
+
+// ─── 专精特新"小巨人"分档展示映射 ───────────────────────────────
+export const LG_REVENUE_MAP: Record<string, string> = {
+  under_1yi: "1亿以下",
+  "1_4yi": "1-4亿",
+  "4_10yi": "4-10亿",
+  above_10yi: "10亿以上",
+};
+
+export const LG_GROWTH_MAP: Record<string, string> = {
+  neg: "负增长",
+  "0_5pct": "0-5%",
+  "5_10pct": "5-10%",
+  above_10pct: ">10%",
+};
+
+export const LG_MAINBIZ_RATIO_MAP: Record<string, string> = {
+  under_50: "<50%",
+  "50_70": "50-70%",
+  "70_85": "70-85%（达标）",
+  above_85: ">85%",
+};
+
+export const LG_DEBT_MAP: Record<string, string> = {
+  under_30: "<30%",
+  "30_50": "30-50%",
+  "50_70": "50-70%",
+  above_70: ">70%",
+};
+
+export const LG_YEARS_MAP: Record<string, string> = {
+  under_3: "<3年",
+  "3_5": "3-5年",
+  "5_10": "5-10年",
+  above_10: ">10年",
+};
+
+export const LG_RD_RATIO_MAP: Record<string, string> = {
+  under_3pct: "<3%",
+  "3_6pct": "3-6%",
+  "6_10pct": "6-10%（达标）",
+  above_10pct: ">10%",
+};
+
+export const LG_RD_STAFF_MAP: Record<string, string> = {
+  under_10: "<10%",
+  "10_20": "10-20%",
+  "20_30": "20-30%",
+  above_30: ">30%",
+};
+
+export const LG_STANDARDS_MAP: Record<string, string> = {
+  international: "主导/参与国际标准",
+  national: "国家标准",
+  industry: "行业标准",
+  none: "未参与",
+};
+
+export const LG_MARKET_SHARE_MAP: Record<string, string> = {
+  national_top: "全国前列",
+  provincial_top: "全省前列",
+  regional_lead: "区域领先",
+  unknown: "不清楚",
+};

@@ -3,8 +3,8 @@
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { ASSESSMENT_QUESTIONS } from "@/lib/assessment";
-import { scoreAssessment } from "@/lib/assessment";
+import { getAssessmentConfig, scoreAssessment } from "@/lib/assessment";
+import type { AssessmentStepGroup } from "@/lib/assessment";
 import {
   getAssessmentRecordByToken,
   saveAssessmentRecord,
@@ -13,19 +13,16 @@ import type { AssessmentAnswers, AssessmentRecord } from "@/lib/types";
 import { getCompanyById } from "@/lib/mock-data";
 import { cn } from "@/lib/cn";
 
-// Group questions into 3 steps
-const STEP_GROUPS = [
-  { title: "研发投入情况", ids: ["rd_expense_ratio", "rd_accounting_separate", "rd_staff_ratio", "has_rd_dept"] },
-  { title: "知识产权情况", ids: ["invention_patents", "utility_patents", "software_copyrights"] },
-  { title: "收入结构与管理", ids: ["hi_tech_revenue_ratio", "has_accounting_firm", "annual_audit", "compliance_clean"] },
-];
-
-const TOTAL_STEPS = STEP_GROUPS.length;
-
-function ProgressBar({ step }: { step: number }) {
+function ProgressBar({
+  step,
+  stepGroups,
+}: {
+  step: number;
+  stepGroups: AssessmentStepGroup[];
+}) {
   return (
     <div className="flex items-center gap-2 mb-6">
-      {STEP_GROUPS.map((g, i) => (
+      {stepGroups.map((g, i) => (
         <div key={i} className="flex-1 flex flex-col items-center gap-1">
           <div
             className={cn(
@@ -105,8 +102,11 @@ export default function AssessmentPublicPage({
     );
   }
 
-  const currentGroup = STEP_GROUPS[step];
-  const currentQuestions = ASSESSMENT_QUESTIONS.filter((q) =>
+  const config = getAssessmentConfig(record.qualType);
+  const stepGroups = config.stepGroups;
+  const totalSteps = stepGroups.length;
+  const currentGroup = stepGroups[step];
+  const currentQuestions = config.questions.filter((q) =>
     currentGroup.ids.includes(q.id),
   );
 
@@ -117,7 +117,7 @@ export default function AssessmentPublicPage({
   }
 
   function handleNext() {
-    if (step < TOTAL_STEPS - 1) {
+    if (step < totalSteps - 1) {
       setStep((s) => s + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -134,7 +134,7 @@ export default function AssessmentPublicPage({
 
   function handleSubmit() {
     setSubmitting(true);
-    const score = scoreAssessment(answers);
+    const score = scoreAssessment(record!.qualType, answers);
     const updated: AssessmentRecord = {
       ...record!,
       status: "completed",
@@ -153,14 +153,14 @@ export default function AssessmentPublicPage({
       {/* Header */}
       <div className="bg-white border-b border-[#e5e7eb] px-4 py-4 sticky top-0 z-10">
         <div className="max-w-lg mx-auto">
-          <p className="text-xs text-[#94a3b8] mb-0.5">高企资质测评</p>
+          <p className="text-xs text-[#94a3b8] mb-0.5">{config.title}</p>
           <h1 className="text-base font-bold text-[#0f172a] truncate">{companyName}</h1>
         </div>
       </div>
 
       <div className="max-w-lg mx-auto px-4 py-6">
         {/* Progress */}
-        <ProgressBar step={step} />
+        <ProgressBar step={step} stepGroups={stepGroups} />
 
         {/* Step title */}
         <h2 className="text-base font-semibold text-[#0f172a] mb-4">
@@ -221,7 +221,7 @@ export default function AssessmentPublicPage({
                 : "bg-[#e5e7eb] text-[#94a3b8] cursor-not-allowed",
             )}
           >
-            {step < TOTAL_STEPS - 1 ? (
+            {step < totalSteps - 1 ? (
               <>
                 下一步 <ChevronRight size={16} />
               </>
@@ -234,7 +234,7 @@ export default function AssessmentPublicPage({
         </div>
 
         <p className="text-center text-xs text-[#94a3b8] mt-4">
-          第 {step + 1} 步，共 {TOTAL_STEPS} 步
+          第 {step + 1} 步，共 {totalSteps} 步
         </p>
       </div>
     </div>

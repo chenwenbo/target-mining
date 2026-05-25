@@ -18,6 +18,19 @@ import {
   getLatestCompletedByCompany,
   getLatestPendingByCompany,
 } from "@/lib/assessment-store";
+import {
+  LG_REVENUE_MAP,
+  LG_GROWTH_MAP,
+  LG_MAINBIZ_RATIO_MAP,
+  LG_DEBT_MAP,
+  LG_YEARS_MAP,
+  LG_RD_RATIO_MAP,
+  LG_RD_STAFF_MAP,
+  LG_STANDARDS_MAP,
+  LG_MARKET_SHARE_MAP,
+  bool3Map,
+} from "@/app/(main)/tasks/lifecycle";
+import { getAssessmentConfig } from "@/lib/assessment";
 import type {
   TaskStatus,
   Company,
@@ -26,7 +39,7 @@ import type {
   IPType,
   AssessmentRecord,
   AssessmentScore,
-  AssessmentDimension,
+  QualificationType,
 } from "@/lib/types";
 import {
   ArrowLeft,
@@ -94,13 +107,6 @@ const GRADE_META: Record<
   待培育: { label: "待重点培育",   bg: "bg-amber-50",   text: "text-amber-700",  scoreBg: "text-amber-600"   },
 };
 
-const DIM_COLORS: Record<AssessmentDimension, string> = {
-  rd_expense:     "#2563eb",
-  rd_staff:       "#7c3aed",
-  ip:             "#0891b2",
-  hi_tech_revenue:"#059669",
-  management:     "#d97706",
-};
 
 export default function TaskDetailPage() {
   const router = useRouter();
@@ -194,7 +200,7 @@ export default function TaskDetailPage() {
         {activeTab === "overview"    && <OverviewTab company={company} />}
         {activeTab === "history"     && <HistoryTab records={records} />}
         {activeTab === "assessment"  && (
-          <AssessmentTab company={company} taskId={id} />
+          <AssessmentTab company={company} taskId={id} qualType={task.qualType} />
         )}
       </div>
 
@@ -223,9 +229,11 @@ export default function TaskDetailPage() {
 function AssessmentTab({
   company,
   taskId,
+  qualType,
 }: {
   company: Company;
   taskId: string;
+  qualType?: QualificationType;
 }) {
   const [completed, setCompleted] = useState<AssessmentRecord | null>(null);
   const [pending, setPending] = useState<AssessmentRecord | null>(null);
@@ -253,6 +261,7 @@ function AssessmentTab({
       status: "pending",
       createdAt: new Date().toISOString(),
       taskId,
+      qualType,
     };
     saveAssessmentRecord(record);
     setPending(record);
@@ -267,6 +276,9 @@ function AssessmentTab({
   }
 
   const score = completed?.score;
+  const dimColors: Record<string, string> = Object.fromEntries(
+    getAssessmentConfig(completed?.qualType).dimensions.map((d) => [d.id, d.color]),
+  );
 
   return (
     <div className="px-4 py-4 space-y-3 pb-8">
@@ -392,7 +404,7 @@ function AssessmentTab({
                     className="h-full rounded-full transition-all"
                     style={{
                       width: `${(d.score / d.maxScore) * 100}%`,
-                      backgroundColor: DIM_COLORS[d.dimension],
+                      backgroundColor: dimColors[d.dimension],
                     }}
                   />
                 </div>
@@ -737,6 +749,50 @@ function HistoryTab({ records }: { records: VisitRecord[] }) {
                       ))}
                     </div>
                   ) : null;
+                })()}
+
+                {/* 小巨人核实数据 */}
+                {r.littleGiant && (() => {
+                  const g = r.littleGiant;
+                  const rows = [
+                    (g.industrialBaseCategory) && { label: "工业六基", value: `${g.industrialBaseCategory}${g.industrialBaseItem ? " · " + g.industrialBaseItem : ""}` },
+                    g.mainProductDesc && { label: "主导产品", value: g.mainProductDesc },
+                    g.annualRevenueBand && { label: "上年度营收", value: LG_REVENUE_MAP[g.annualRevenueBand] ?? g.annualRevenueBand },
+                    g.mainBizGrowth2y && { label: "近2年增长率", value: LG_GROWTH_MAP[g.mainBizGrowth2y] ?? g.mainBizGrowth2y },
+                    g.mainBizRevenueRatio && { label: "主营收入占比", value: LG_MAINBIZ_RATIO_MAP[g.mainBizRevenueRatio] ?? g.mainBizRevenueRatio },
+                    g.debtRatio && { label: "资产负债率", value: LG_DEBT_MAP[g.debtRatio] ?? g.debtRatio },
+                    g.subdivisionYears && { label: "细分市场年限", value: LG_YEARS_MAP[g.subdivisionYears] ?? g.subdivisionYears },
+                    g.rdExpenseRatio && { label: "研发费用占比", value: LG_RD_RATIO_MAP[g.rdExpenseRatio] ?? g.rdExpenseRatio },
+                    g.rdStaffRatio && { label: "研发人员占比", value: LG_RD_STAFF_MAP[g.rdStaffRatio] ?? g.rdStaffRatio },
+                    g.hasProvincialRdInstitution != null && { label: "省级研发机构", value: bool3Map(g.hasProvincialRdInstitution) },
+                    g.standardsRole && { label: "标准制定", value: LG_STANDARDS_MAP[g.standardsRole] ?? g.standardsRole },
+                    g.marketShare && { label: "市场占有率", value: LG_MARKET_SHARE_MAP[g.marketShare] ?? g.marketShare },
+                    g.fillsGapOrImportSub != null && { label: "填补空白/进口替代", value: bool3Map(g.fillsGapOrImportSub) },
+                    g.hasOwnBrand != null && { label: "自主品牌", value: bool3Map(g.hasOwnBrand) },
+                    g.supplyChainRole && { label: "产业链地位", value: g.supplyChainRole },
+                    g.expectedDeclareYear && { label: "预计申报年度", value: g.expectedDeclareYear === "uncertain" ? "暂不明确" : `${g.expectedDeclareYear}年` },
+                  ].filter(Boolean) as { label: string; value: string }[];
+                  return (
+                    <div className="space-y-1.5">
+                      <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide">小巨人摸排数据</p>
+                      {rows.map(({ label, value }) => (
+                        <div key={label} className="flex items-start justify-between text-xs gap-2">
+                          <span className="text-gray-400 shrink-0">{label}</span>
+                          <span className="text-gray-700 font-medium text-right">{value}</span>
+                        </div>
+                      ))}
+                      {(g.bottleneckTraits ?? []).length > 0 && (
+                        <div>
+                          <span className="text-[10px] text-gray-400">卡脖子/补短板：</span>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {g.bottleneckTraits!.map((t, i) => (
+                              <span key={i} className="text-[10px] bg-rose-50 text-rose-600 px-2 py-0.5 rounded">{t}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
                 })()}
 
                 {/* 意愿与跟进 */}

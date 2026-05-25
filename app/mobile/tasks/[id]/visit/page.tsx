@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { getAllTasks, getCompanyById } from "@/lib/mock-data";
 import { getCurrentVisitor, saveDraft, clearDraft, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Company, Visitor, VisitMethod, WillingnessLevel } from "@/lib/types";
+import { INDUSTRIAL_SIX_BASES, INDUSTRIAL_SIX_CATEGORIES } from "@/lib/industrial-six";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 
 // ─── 表单数据类型 ───────────────────────────────────────────────
@@ -35,6 +36,28 @@ interface FormData {
   followUpDate: string;
   nextSteps: string[];
   notes: string;
+  // ─── 小巨人专属（仅 little_giant 任务使用）────────────────────
+  // 定位与经济效益
+  lgIndustrialBaseCategory: string;
+  lgIndustrialBaseItem: string;
+  lgMainProductDesc: string;
+  lgAnnualRevenueBand: string;
+  lgMainBizGrowth2y: string;
+  lgMainBizRevenueRatio: string;
+  lgDebtRatio: string;
+  lgSubdivisionYears: string;
+  // 创新与产业链
+  lgRdExpenseRatio: string;
+  lgRdStaffRatio: string;
+  lgHasProvincialRdInstitution: string;
+  lgStandardsRole: string;
+  lgMarketShare: string;
+  lgFillsGapOrImportSub: string;
+  lgSupplyChainRole: string;
+  lgHasOwnBrand: string;
+  lgBottleneckTraits: string[];
+  // 申报意愿与缺口
+  lgExpectedDeclareYear: string;
 }
 
 const INITIAL_FORM: FormData = {
@@ -45,6 +68,13 @@ const INITIAL_FORM: FormData = {
   rdExpenseSource: "", hasAccountingFirm: "", hasTechDept: "", mainProductDesc: "",
   willingness: "", willingnessNotes: "", acknowledgedGaps: [], keyObstacles: "",
   companyCommitments: "", followUpDate: "", nextSteps: [], notes: "",
+  lgIndustrialBaseCategory: "", lgIndustrialBaseItem: "", lgMainProductDesc: "",
+  lgAnnualRevenueBand: "", lgMainBizGrowth2y: "", lgMainBizRevenueRatio: "",
+  lgDebtRatio: "", lgSubdivisionYears: "",
+  lgRdExpenseRatio: "", lgRdStaffRatio: "", lgHasProvincialRdInstitution: "",
+  lgStandardsRole: "", lgMarketShare: "", lgFillsGapOrImportSub: "",
+  lgSupplyChainRole: "", lgHasOwnBrand: "", lgBottleneckTraits: [],
+  lgExpectedDeclareYear: "",
 };
 
 const WILLINGNESS_OPTIONS = [
@@ -74,6 +104,99 @@ const NEXT_STEP_OPTIONS = [
   "暂无明确需求",
 ];
 
+// ─── 小巨人专属选项 ──────────────────────────────────────────────
+const LG_REVENUE_OPTIONS = [
+  { value: "under_1yi", label: "<1亿" },
+  { value: "1_4yi", label: "1-4亿" },
+  { value: "4_10yi", label: "4-10亿" },
+  { value: "above_10yi", label: ">10亿" },
+];
+
+const LG_GROWTH_OPTIONS = [
+  { value: "neg", label: "负增长" },
+  { value: "0_5pct", label: "0-5%" },
+  { value: "5_10pct", label: "5-10%" },
+  { value: "above_10pct", label: ">10%" },
+];
+
+const LG_MAINBIZ_RATIO_OPTIONS = [
+  { value: "under_50", label: "<50%" },
+  { value: "50_70", label: "50-70%" },
+  { value: "70_85", label: "70-85% ✓" },
+  { value: "above_85", label: ">85% ✓" },
+];
+
+const LG_DEBT_OPTIONS = [
+  { value: "under_30", label: "<30%" },
+  { value: "30_50", label: "30-50%" },
+  { value: "50_70", label: "50-70%" },
+  { value: "above_70", label: ">70%" },
+];
+
+const LG_YEARS_OPTIONS = [
+  { value: "under_3", label: "<3年" },
+  { value: "3_5", label: "3-5年 ✓" },
+  { value: "5_10", label: "5-10年 ✓" },
+  { value: "above_10", label: ">10年 ✓" },
+];
+
+const LG_RD_RATIO_OPTIONS = [
+  { value: "under_3pct", label: "<3%" },
+  { value: "3_6pct", label: "3-6%" },
+  { value: "6_10pct", label: "6-10% ✓" },
+  { value: "above_10pct", label: ">10% ✓" },
+];
+
+const LG_RD_STAFF_OPTIONS = [
+  { value: "under_10", label: "<10%" },
+  { value: "10_20", label: "10-20%" },
+  { value: "20_30", label: "20-30%" },
+  { value: "above_30", label: ">30%" },
+];
+
+const LG_STANDARDS_OPTIONS = [
+  { value: "international", label: "主导/参与国际" },
+  { value: "national", label: "国家标准" },
+  { value: "industry", label: "行业标准" },
+  { value: "none", label: "未参与" },
+];
+
+const LG_MARKET_SHARE_OPTIONS = [
+  { value: "national_top", label: "全国前列" },
+  { value: "provincial_top", label: "全省前列" },
+  { value: "regional_lead", label: "区域领先" },
+  { value: "unknown", label: "不清楚" },
+];
+
+const LG_BOTTLENECK_OPTIONS = [
+  "卡脖子技术攻关", "进口替代", "强链补链", "填补国内空白", "单项冠军潜力", "无明显属性",
+];
+
+const LG_GAP_OPTIONS = [
+  "发明专利不足5件", "研发费用占比不足6%", "营收未达1亿", "细分市场排名未进前3",
+  "主营收入占比不足70%", "未持有省级专精特新", "未建省级研发机构",
+  "未主导参与标准制定", "存在合规风险",
+];
+
+const LG_NEXT_STEP_OPTIONS = [
+  "小巨人申报政策辅导",
+  "知识产权布局（发明专利）",
+  "省级研发机构培育",
+  "标准制定参与对接",
+  "专精特新梯度培育",
+  "产业链强链补链对接",
+  "研发费用归集辅导",
+  "专项资金奖补申报",
+  "暂无明确需求",
+];
+
+const LG_DECLARE_YEAR_OPTIONS = [
+  { value: "2026", label: "2026年" },
+  { value: "2027", label: "2027年" },
+  { value: "2028", label: "2028年及以后" },
+  { value: "uncertain", label: "暂不明确" },
+];
+
 export default function VisitFormPage() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
@@ -93,11 +216,17 @@ export default function VisitFormPage() {
   const company = task ? getCompanyById(task.companyId) : undefined;
   if (!task || !company) return null;
 
+  const isLittleGiant = task.qualType === "little_giant";
+  const totalSteps = isLittleGiant ? 4 : 3;
+  const stepLabels = isLittleGiant
+    ? ["走访信息", "定位与效益", "创新与产业链", "意愿与缺口"]
+    : ["走访信息", "情况核实", "申报意愿"];
+
   function update<K extends keyof FormData>(key: K, value: FormData[K]) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function toggleArr(key: "acknowledgedGaps" | "nextSteps", val: string) {
+  function toggleArr(key: "acknowledgedGaps" | "nextSteps" | "lgBottleneckTraits", val: string) {
     setForm((prev) => {
       const arr = prev[key] as string[];
       return { ...prev, [key]: arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val] };
@@ -109,8 +238,10 @@ export default function VisitFormPage() {
     form.contactReached !== null &&
     (form.contactReached || (form.actualContactName !== ""));
 
-  // Step 3 validation
-  const step3Valid = form.willingness !== "";
+  // 末步（申报意愿）校验：高企=step3，小巨人=step4
+  const lastStepValid = form.willingness !== "";
+
+  const isLast = step === totalSteps;
 
   function handleSaveDraft() {
     saveDraft(id, form as never);
@@ -118,7 +249,7 @@ export default function VisitFormPage() {
   }
 
   function handleNext() {
-    if (step < 3) setStep(step + 1);
+    if (step < totalSteps) setStep(step + 1);
     else {
       // 跳转预览页，通过 sessionStorage 传递表单数据
       const key = `visit_form_${id}`;
@@ -128,7 +259,7 @@ export default function VisitFormPage() {
     }
   }
 
-  const progressPct = (step / 3) * 100;
+  const progressPct = (step / totalSteps) * 100;
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
@@ -154,10 +285,10 @@ export default function VisitFormPage() {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-          <span className="text-xs text-gray-400 shrink-0">{step}/3</span>
+          <span className="text-xs text-gray-400 shrink-0">{step}/{totalSteps}</span>
         </div>
         <div className="flex justify-between mt-1.5">
-          {["走访信息", "情况核实", "申报意愿"].map((label, i) => (
+          {stepLabels.map((label, i) => (
             <span key={i} className={`text-[10px] font-medium ${step === i + 1 ? "text-blue-600" : step > i + 1 ? "text-emerald-500" : "text-gray-300"}`}>
               {label}
             </span>
@@ -168,24 +299,27 @@ export default function VisitFormPage() {
       {/* 表单内容 */}
       <div className="flex-1 overflow-y-auto px-4 py-4">
         {step === 1 && <Step1 form={form} company={company} update={update} />}
-        {step === 2 && <Step2 form={form} company={company} update={update} />}
-        {step === 3 && (
+        {!isLittleGiant && step === 2 && <Step2 form={form} company={company} update={update} />}
+        {!isLittleGiant && step === 3 && (
           <Step3
             form={form} update={update} toggleArr={toggleArr}
             otherGap={otherGap} setOtherGap={setOtherGap}
             showOtherGap={showOtherGap} setShowOtherGap={setShowOtherGap}
           />
         )}
+        {isLittleGiant && step === 2 && <LGStep2 form={form} update={update} />}
+        {isLittleGiant && step === 3 && <LGStep3 form={form} update={update} toggleArr={toggleArr} />}
+        {isLittleGiant && step === 4 && <LGStep4 form={form} update={update} toggleArr={toggleArr} />}
       </div>
 
       {/* 底部按钮 */}
       <div className="bg-white border-t border-gray-100 px-4 py-3">
         <button
           onClick={handleNext}
-          disabled={step === 1 ? !step1Valid : step === 3 ? !step3Valid : false}
+          disabled={step === 1 ? !step1Valid : isLast ? !lastStepValid : false}
           className="w-full bg-blue-600 text-white font-semibold text-sm py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98] transition-all flex items-center justify-center gap-1"
         >
-          {step < 3 ? (
+          {!isLast ? (
             <><span>下一步</span><ChevronRight size={16} /></>
           ) : (
             <span>预览并提交</span>
@@ -596,6 +730,275 @@ function Step3({
               );
             })}
           </div>
+        </FormRow>
+        <FormRow label="工作人员内部备注">
+          <textarea
+            value={form.notes}
+            onChange={(e) => update("notes", e.target.value)}
+            rows={2}
+            maxLength={300}
+            placeholder="内部备注，不对外展示"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm bg-gray-50 outline-none focus:border-blue-400 resize-none"
+          />
+        </FormRow>
+      </div>
+    </div>
+  );
+}
+
+// ─── 小巨人通用子组件 ────────────────────────────────────────────
+const BOOL3_OPTIONS = [
+  { value: "true", label: "是" },
+  { value: "false", label: "否" },
+  { value: "unknown", label: "不清楚" },
+];
+
+function MultiSelectPills({ options, selected, onToggle }: {
+  options: string[];
+  selected: string[];
+  onToggle: (v: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {options.map((opt) => {
+        const checked = selected.includes(opt);
+        return (
+          <button
+            key={opt}
+            onClick={() => onToggle(opt)}
+            className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-all ${
+              checked ? "bg-blue-600 border-blue-600 text-white" : "bg-white border-gray-200 text-gray-600"
+            }`}
+          >
+            {opt}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function WillingnessPicker({ value, notes, update }: {
+  value: WillingnessLevel | "";
+  notes: string;
+  update: <K extends keyof FormData>(k: K, v: FormData[K]) => void;
+}) {
+  return (
+    <div className="bg-white rounded-xl p-4">
+      <SectionTitle>申报意愿 <span className="text-red-400">*</span></SectionTitle>
+      <div className="space-y-2">
+        {WILLINGNESS_OPTIONS.map((opt) => (
+          <button
+            key={opt.value}
+            onClick={() => update("willingness", opt.value as WillingnessLevel)}
+            className={`w-full flex items-center gap-3 p-3 rounded-xl border-2 transition-all text-left ${
+              value === opt.value ? opt.color : "border-gray-200 bg-white"
+            }`}
+          >
+            <div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center ${
+              value === opt.value ? "border-current" : "border-gray-300"
+            }`}>
+              {value === opt.value && <div className={`w-2 h-2 rounded-full ${opt.dot}`} />}
+            </div>
+            <div className="flex-1">
+              <span className={`text-sm font-medium block ${value === opt.value ? opt.text : "text-gray-700"}`}>{opt.label}</span>
+              <span className="text-xs text-gray-400">{opt.desc}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+      <div className="mt-3">
+        <label className="block text-xs text-gray-500 mb-1.5">意愿补充说明（可选）</label>
+        <textarea
+          value={notes}
+          onChange={(e) => update("willingnessNotes", e.target.value)}
+          rows={2}
+          maxLength={200}
+          placeholder="如有特殊顾虑或背景，请记录"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 resize-none"
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─── 小巨人 Step 2：定位与经济效益 ───────────────────────────────
+function LGStep2({ form, update }: { form: FormData; update: <K extends keyof FormData>(k: K, v: FormData[K]) => void }) {
+  const baseItems = INDUSTRIAL_SIX_BASES.find((b) => b.category === form.lgIndustrialBaseCategory)?.items ?? [];
+  const isCustomItem = form.lgIndustrialBaseItem !== "" && !baseItems.includes(form.lgIndustrialBaseItem);
+  return (
+    <div className="space-y-4">
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>工业六基定位</SectionTitle>
+        <FormRow label="所属工业六基（第一层）" required hint="标的池领域与分布图数据来源">
+          <RadioGroup
+            value={form.lgIndustrialBaseCategory}
+            onChange={(v) => {
+              update("lgIndustrialBaseCategory", v);
+              update("lgIndustrialBaseItem", ""); // 切换一级清空二级
+            }}
+            options={INDUSTRIAL_SIX_CATEGORIES.map((c) => ({ value: c, label: c }))}
+          />
+        </FormRow>
+        {form.lgIndustrialBaseCategory && (
+          <FormRow label="细分方向（第二层）">
+            <RadioGroup
+              value={isCustomItem ? "" : form.lgIndustrialBaseItem}
+              onChange={(v) => update("lgIndustrialBaseItem", v)}
+              options={baseItems.map((it) => ({ value: it, label: it }))}
+            />
+            <input
+              value={isCustomItem ? form.lgIndustrialBaseItem : ""}
+              onChange={(e) => update("lgIndustrialBaseItem", e.target.value)}
+              placeholder="其他细分（可手动填写）"
+              className="mt-2 w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+            />
+          </FormRow>
+        )}
+        <FormRow label="主导产品/主营业务" hint="一句话描述">
+          <textarea
+            value={form.lgMainProductDesc}
+            onChange={(e) => update("lgMainProductDesc", e.target.value)}
+            maxLength={200}
+            rows={2}
+            placeholder="如：精密轴承及配套滚动体，供应国内头部机床厂"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 resize-none"
+          />
+          <div className="text-right text-[10px] text-gray-400 mt-1">{form.lgMainProductDesc.length}/200</div>
+        </FormRow>
+      </div>
+
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>经济效益指标（硬门槛）</SectionTitle>
+        <FormRow label="上年度营业收入">
+          <RadioGroup value={form.lgAnnualRevenueBand} onChange={(v) => update("lgAnnualRevenueBand", v)} options={LG_REVENUE_OPTIONS} />
+        </FormRow>
+        <FormRow label="近2年主营收入平均增长率">
+          <RadioGroup value={form.lgMainBizGrowth2y} onChange={(v) => update("lgMainBizGrowth2y", v)} options={LG_GROWTH_OPTIONS} />
+        </FormRow>
+        <FormRow label="主营业务收入占比" hint="门槛 ≥70%（✓为达标）">
+          <RadioGroup value={form.lgMainBizRevenueRatio} onChange={(v) => update("lgMainBizRevenueRatio", v)} options={LG_MAINBIZ_RATIO_OPTIONS} />
+        </FormRow>
+        <FormRow label="资产负债率">
+          <RadioGroup value={form.lgDebtRatio} onChange={(v) => update("lgDebtRatio", v)} options={LG_DEBT_OPTIONS} />
+        </FormRow>
+        <FormRow label="从事细分市场年限" hint="门槛 ≥3年（✓为达标）">
+          <RadioGroup value={form.lgSubdivisionYears} onChange={(v) => update("lgSubdivisionYears", v)} options={LG_YEARS_OPTIONS} />
+        </FormRow>
+      </div>
+    </div>
+  );
+}
+
+// ─── 小巨人 Step 3：创新与产业链 ─────────────────────────────────
+function LGStep3({ form, update, toggleArr }: {
+  form: FormData;
+  update: <K extends keyof FormData>(k: K, v: FormData[K]) => void;
+  toggleArr: (key: "acknowledgedGaps" | "nextSteps" | "lgBottleneckTraits", val: string) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>创新能力指标</SectionTitle>
+        <FormRow label="近2年研发费用占营收比重" hint="门槛 ≥6%（✓为达标）">
+          <RadioGroup value={form.lgRdExpenseRatio} onChange={(v) => update("lgRdExpenseRatio", v)} options={LG_RD_RATIO_OPTIONS} />
+        </FormRow>
+        <FormRow label="研发人员占比">
+          <RadioGroup value={form.lgRdStaffRatio} onChange={(v) => update("lgRdStaffRatio", v)} options={LG_RD_STAFF_OPTIONS} />
+        </FormRow>
+        <FormRow label="是否建有省级及以上研发机构">
+          <RadioGroup value={form.lgHasProvincialRdInstitution} onChange={(v) => update("lgHasProvincialRdInstitution", v)} options={BOOL3_OPTIONS} />
+        </FormRow>
+        <FormRow label="主持/参与标准制定">
+          <RadioGroup value={form.lgStandardsRole} onChange={(v) => update("lgStandardsRole", v)} options={LG_STANDARDS_OPTIONS} />
+        </FormRow>
+      </div>
+
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>专业化与产业链地位</SectionTitle>
+        <FormRow label="主导产品市场占有率">
+          <RadioGroup value={form.lgMarketShare} onChange={(v) => update("lgMarketShare", v)} options={LG_MARKET_SHARE_OPTIONS} />
+        </FormRow>
+        <FormRow label="是否填补国内空白/进口替代">
+          <RadioGroup value={form.lgFillsGapOrImportSub} onChange={(v) => update("lgFillsGapOrImportSub", v)} options={BOOL3_OPTIONS} />
+        </FormRow>
+        <FormRow label="是否拥有自主品牌">
+          <RadioGroup value={form.lgHasOwnBrand} onChange={(v) => update("lgHasOwnBrand", v)} options={BOOL3_OPTIONS} />
+        </FormRow>
+        <FormRow label="产业链地位/配套头部企业" hint="可填写">
+          <input
+            value={form.lgSupplyChainRole}
+            onChange={(e) => update("lgSupplyChainRole", e.target.value)}
+            placeholder="如：产业链关键环节，配套某行业头部企业"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+          />
+        </FormRow>
+        <FormRow label="卡脖子/补短板属性（多选）">
+          <MultiSelectPills
+            options={LG_BOTTLENECK_OPTIONS}
+            selected={form.lgBottleneckTraits}
+            onToggle={(v) => toggleArr("lgBottleneckTraits", v)}
+          />
+        </FormRow>
+      </div>
+    </div>
+  );
+}
+
+// ─── 小巨人 Step 4：申报意愿与缺口 ───────────────────────────────
+function LGStep4({ form, update, toggleArr }: {
+  form: FormData;
+  update: <K extends keyof FormData>(k: K, v: FormData[K]) => void;
+  toggleArr: (key: "acknowledgedGaps" | "nextSteps" | "lgBottleneckTraits", val: string) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <WillingnessPicker value={form.willingness} notes={form.willingnessNotes} update={update} />
+
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>预计可申报年度</SectionTitle>
+        <RadioGroup
+          value={form.lgExpectedDeclareYear}
+          onChange={(v) => update("lgExpectedDeclareYear", v)}
+          options={LG_DECLARE_YEAR_OPTIONS}
+        />
+      </div>
+
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>主要缺口项（多选）</SectionTitle>
+        <MultiSelectPills
+          options={LG_GAP_OPTIONS}
+          selected={form.acknowledgedGaps}
+          onToggle={(v) => toggleArr("acknowledgedGaps", v)}
+        />
+      </div>
+
+      <div className="bg-white rounded-xl p-4">
+        <SectionTitle>后续跟进安排</SectionTitle>
+        <FormRow label="企业承诺事项">
+          <textarea
+            value={form.companyCommitments}
+            onChange={(e) => update("companyCommitments", e.target.value)}
+            rows={2}
+            maxLength={300}
+            placeholder="记录企业表示将采取的行动，如：年底前申报省级专精特新"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400 resize-none"
+          />
+        </FormRow>
+        <FormRow label="约定下次联系日期">
+          <input
+            type="date"
+            value={form.followUpDate}
+            onChange={(e) => update("followUpDate", e.target.value)}
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+          />
+        </FormRow>
+        <FormRow label="后续跟进需求（多选）">
+          <MultiSelectPills
+            options={LG_NEXT_STEP_OPTIONS}
+            selected={form.nextSteps}
+            onToggle={(v) => toggleArr("nextSteps", v)}
+          />
         </FormRow>
         <FormRow label="工作人员内部备注">
           <textarea

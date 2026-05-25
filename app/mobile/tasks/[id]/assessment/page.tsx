@@ -10,17 +10,9 @@ import {
   getAssessmentDraft,
   clearAssessmentDraft,
 } from "@/lib/assessment-store";
-import { ASSESSMENT_QUESTIONS } from "@/lib/assessment";
+import { getAssessmentConfig } from "@/lib/assessment";
 import type { AssessmentAnswers, Visitor } from "@/lib/types";
 import { cn } from "@/lib/cn";
-
-const STEP_GROUPS = [
-  { title: "研发投入情况", ids: ["rd_expense_ratio", "rd_accounting_separate", "rd_staff_ratio", "has_rd_dept"] },
-  { title: "知识产权情况", ids: ["invention_patents", "utility_patents", "software_copyrights"] },
-  { title: "收入结构与管理", ids: ["hi_tech_revenue_ratio", "has_accounting_firm", "annual_audit", "compliance_clean"] },
-];
-
-const TOTAL_STEPS = STEP_GROUPS.length;
 
 export default function MobileAssessmentPage() {
   const { id } = useParams<{ id: string }>();
@@ -46,8 +38,11 @@ export default function MobileAssessmentPage() {
 
   if (!task || !company) return null;
 
-  const currentGroup = STEP_GROUPS[step];
-  const currentQuestions = ASSESSMENT_QUESTIONS.filter((q) =>
+  const config = getAssessmentConfig(task.qualType);
+  const stepGroups = config.stepGroups;
+  const totalSteps = stepGroups.length;
+  const currentGroup = stepGroups[step];
+  const currentQuestions = config.questions.filter((q) =>
     currentGroup.ids.includes(q.id),
   );
   const stepAnswered = currentQuestions.every((q) => answers[q.id] !== undefined);
@@ -68,7 +63,7 @@ export default function MobileAssessmentPage() {
   }
 
   function handleNext() {
-    if (step < TOTAL_STEPS - 1) {
+    if (step < totalSteps - 1) {
       setStep((s) => s + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -97,7 +92,7 @@ export default function MobileAssessmentPage() {
       {/* Step indicator */}
       <div className="bg-white px-4 py-3 border-b border-gray-100">
         <div className="flex items-center gap-2">
-          {STEP_GROUPS.map((g, i) => (
+          {stepGroups.map((g, i) => (
             <div key={i} className="flex-1">
               <div
                 className={cn(
@@ -167,7 +162,7 @@ export default function MobileAssessmentPage() {
               : "bg-gray-200 text-gray-400 cursor-not-allowed",
           )}
         >
-          {step < TOTAL_STEPS - 1 ? (
+          {step < totalSteps - 1 ? (
             <>
               下一步 <ChevronRight size={16} />
             </>
@@ -176,7 +171,7 @@ export default function MobileAssessmentPage() {
           )}
         </button>
         <p className="text-center text-xs text-gray-400 mt-2">
-          第 {step + 1} 步，共 {TOTAL_STEPS} 步
+          第 {step + 1} 步，共 {totalSteps} 步
         </p>
       </div>
     </div>

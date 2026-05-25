@@ -10,7 +10,7 @@ import {
   saveAssessmentRecord,
   getLatestPendingByCompany,
 } from "@/lib/assessment-store";
-import { scoreAssessment, ASSESSMENT_QUESTIONS } from "@/lib/assessment";
+import { scoreAssessment, getAssessmentConfig } from "@/lib/assessment";
 import type { AssessmentAnswers, AssessmentRecord } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
@@ -42,10 +42,12 @@ export default function AssessmentPreviewPage() {
   const task = [...getAllTasks(), ...getDispatchedTasks(), ...getCustomTasks()].find((t) => t.id === id);
   if (!task) return null;
 
+  const config = getAssessmentConfig(task.qualType);
+
   function handleSubmit() {
     if (!answers) return;
     setSubmitting(true);
-    const score = scoreAssessment(answers);
+    const score = scoreAssessment(task!.qualType, answers);
 
     const existing = getLatestPendingByCompany(task!.companyId);
     const token = existing?.token ?? generateToken();
@@ -63,6 +65,7 @@ export default function AssessmentPreviewPage() {
       answers,
       score,
       taskId: id,
+      qualType: task!.qualType,
     };
     saveAssessmentRecord(record);
     sessionStorage.removeItem(`assessment_form_${id}`);
@@ -96,7 +99,7 @@ export default function AssessmentPreviewPage() {
       <div className="flex-1 px-4 py-4 space-y-4 pb-28">
         <p className="text-xs text-gray-400">请核对以下答案，确认无误后提交</p>
 
-        {ASSESSMENT_QUESTIONS.map((q) => {
+        {config.questions.map((q) => {
           const chosenValue = answers[q.id];
           const chosenOpt = q.options.find((o) => o.value === chosenValue);
           return (

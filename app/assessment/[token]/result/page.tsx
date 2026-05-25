@@ -2,8 +2,8 @@
 
 import { useEffect, useState, use } from "react";
 import { getAssessmentRecordByToken } from "@/lib/assessment-store";
-import { DIMENSION_LABELS } from "@/lib/assessment";
-import type { AssessmentRecord, AssessmentDimension } from "@/lib/types";
+import { getAssessmentConfig } from "@/lib/assessment";
+import type { AssessmentRecord } from "@/lib/types";
 import { getCompanyById } from "@/lib/mock-data";
 import { cn } from "@/lib/cn";
 
@@ -11,14 +11,6 @@ const GRADE_META = {
   优秀:   { label: "条件优秀",   color: "text-emerald-700", bg: "bg-emerald-100", ring: "ring-emerald-400" },
   符合:   { label: "符合申报条件", color: "text-blue-700",    bg: "bg-blue-100",    ring: "ring-blue-400"    },
   待培育: { label: "待重点培育",  color: "text-amber-700",   bg: "bg-amber-100",   ring: "ring-amber-400"   },
-};
-
-const DIM_COLORS: Record<AssessmentDimension, string> = {
-  rd_expense:     "bg-blue-500",
-  rd_staff:       "bg-violet-500",
-  ip:             "bg-cyan-500",
-  hi_tech_revenue:"bg-emerald-500",
-  management:     "bg-amber-500",
 };
 
 export default function AssessmentResultPage({
@@ -61,13 +53,17 @@ export default function AssessmentResultPage({
 
   const { score } = record;
   const grade = GRADE_META[score.grade];
+  const config = getAssessmentConfig(record.qualType);
+  const dimColors = Object.fromEntries(
+    config.dimensions.map((d) => [d.id, d.color]),
+  );
 
   return (
     <div className="min-h-screen bg-[#f7f8fa]">
       {/* Header */}
       <div className="bg-white border-b border-[#e5e7eb] px-4 py-4">
         <div className="max-w-lg mx-auto">
-          <p className="text-xs text-[#94a3b8] mb-0.5">高企资质测评 · 结果</p>
+          <p className="text-xs text-[#94a3b8] mb-0.5">{config.title} · 结果</p>
           <h1 className="text-base font-bold text-[#0f172a] truncate">{companyName}</h1>
         </div>
       </div>
@@ -94,15 +90,18 @@ export default function AssessmentResultPage({
           {score.dimensionScores.map((d) => (
             <div key={d.dimension} className="space-y-1">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[#475569]">{DIMENSION_LABELS[d.dimension]}</span>
+                <span className="text-[#475569]">{d.label}</span>
                 <span className="font-medium text-[#0f172a]">
                   {d.score} / {d.maxScore}
                 </span>
               </div>
               <div className="w-full bg-[#f1f5f9] rounded-full h-2 overflow-hidden">
                 <div
-                  className={cn("h-full rounded-full transition-all", DIM_COLORS[d.dimension])}
-                  style={{ width: `${(d.score / d.maxScore) * 100}%` }}
+                  className="h-full rounded-full transition-all"
+                  style={{
+                    width: `${(d.score / d.maxScore) * 100}%`,
+                    backgroundColor: dimColors[d.dimension],
+                  }}
                 />
               </div>
             </div>

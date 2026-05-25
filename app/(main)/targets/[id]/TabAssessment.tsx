@@ -23,8 +23,7 @@ import {
   getLatestPendingByCompany,
 } from "@/lib/assessment-store";
 import {
-  ASSESSMENT_QUESTIONS,
-  DIMENSION_LABELS,
+  getAssessmentConfig,
   generateAiAnalysis,
   type AiAnalysis,
 } from "@/lib/assessment";
@@ -32,8 +31,8 @@ import type {
   Company,
   AssessmentRecord,
   AssessmentScore,
-  AssessmentDimension,
 } from "@/lib/types";
+import { useQualStore } from "@/lib/qual-store";
 import { cn } from "@/lib/cn";
 
 const GRADE_META: Record<
@@ -43,14 +42,6 @@ const GRADE_META: Record<
   优秀:   { label: "条件优秀",    bg: "bg-emerald-50", text: "text-emerald-700", border: "border-emerald-200" },
   符合:   { label: "符合申报条件", bg: "bg-blue-50",    text: "text-blue-700",    border: "border-blue-200"    },
   待培育: { label: "待重点培育",   bg: "bg-amber-50",   text: "text-amber-700",   border: "border-amber-200"   },
-};
-
-const DIM_COLORS: Record<AssessmentDimension, string> = {
-  rd_expense:      "#2563eb",
-  rd_staff:        "#7c3aed",
-  ip:              "#0891b2",
-  hi_tech_revenue: "#059669",
-  management:      "#d97706",
 };
 
 function ScoreGauge({ score }: { score: number }) {
@@ -174,13 +165,10 @@ function AssessmentDrawer({
   const { answers, score, submittedAt, source } = record;
   if (!answers || !score) return null;
 
-  const dims: AssessmentDimension[] = [
-    "rd_expense",
-    "rd_staff",
-    "ip",
-    "hi_tech_revenue",
-    "management",
-  ];
+  const config = getAssessmentConfig(record.qualType);
+  const dimColors = Object.fromEntries(
+    config.dimensions.map((d) => [d.id, d.color]),
+  );
 
   return (
     <>
@@ -236,8 +224,9 @@ function AssessmentDrawer({
 
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-7">
-          {dims.map((dim) => {
-            const dimQuestions = ASSESSMENT_QUESTIONS.filter(
+          {config.dimensions.map((dimDef) => {
+            const dim = dimDef.id;
+            const dimQuestions = config.questions.filter(
               (q) => q.dimension === dim,
             );
             const dimScore = score.dimensionScores.find(
@@ -250,9 +239,9 @@ function AssessmentDrawer({
                   <h3 className="text-sm font-semibold text-[#0f172a] flex items-center gap-2">
                     <span
                       className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                      style={{ backgroundColor: DIM_COLORS[dim] }}
+                      style={{ backgroundColor: dimColors[dim] }}
                     />
-                    {DIMENSION_LABELS[dim]}
+                    {dimDef.label}
                   </h3>
                   {dimScore && (
                     <div className="flex items-center gap-2">
@@ -261,7 +250,7 @@ function AssessmentDrawer({
                           className="h-full rounded-full"
                           style={{
                             width: `${(dimScore.score / dimScore.maxScore) * 100}%`,
-                            backgroundColor: DIM_COLORS[dim],
+                            backgroundColor: dimColors[dim],
                           }}
                         />
                       </div>
@@ -410,6 +399,7 @@ function exportAssessmentReport(
   const { score } = record;
   if (!score) return;
 
+  const config = getAssessmentConfig(record.qualType);
   const markdown = aiAnalysisToMarkdown(analysis);
 
   const dimRows = score.dimensionScores
@@ -464,7 +454,7 @@ function exportAssessmentReport(
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>高企测评报告 · ${company.name}</title>
+<title>${config.reportTitle} · ${company.name}</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -569,7 +559,7 @@ function exportAssessmentReport(
     <div>
       <div class="report-title">${company.name}</div>
       <div class="report-meta">
-        高企认定专业测评报告 &nbsp;·&nbsp;
+        ${config.reportTitle} &nbsp;·&nbsp;
         测评日期：${record.submittedAt?.slice(0, 10) ?? record.createdAt.slice(0, 10)} &nbsp;·&nbsp;
         生成时间：${new Date().toLocaleDateString("zh-CN")}
       </div>
@@ -704,6 +694,7 @@ function AiAnalysisPanel({
 // ── Main component ────────────────────────────────────────────────
 
 export default function TabAssessment({ company }: { company: Company }) {
+  const activeQual = useQualStore((s) => s.activeQual);
   const [completed, setCompleted] = useState<AssessmentRecord | null>(null);
   const [pending, setPending] = useState<AssessmentRecord | null>(null);
   const [shareUrl, setShareUrl] = useState("");
@@ -726,6 +717,7 @@ export default function TabAssessment({ company }: { company: Company }) {
       source: "enterprise_self",
       status: "pending",
       createdAt: new Date().toISOString(),
+      qualType: activeQual,
     };
     saveAssessmentRecord(record);
     setPending(record);
@@ -735,8 +727,16 @@ export default function TabAssessment({ company }: { company: Company }) {
   const score = completed?.score;
   const aiAnalysis =
     score && completed?.answers
-      ? generateAiAnalysis(score, completed.answers)
+      ? generateAiAnalysis(completed.qualType, score, completed.answers)
       : null;
+  const dimColors: Record<string, string> = completed
+    ? Object.fromEntries(
+        getAssessmentConfig(completed.qualType).dimensions.map((d) => [
+          d.id,
+          d.color,
+        ]),
+      )
+    : {};
 
   return (
     <div className="space-y-6">
@@ -867,7 +867,7 @@ export default function TabAssessment({ company }: { company: Company }) {
                           className="h-full rounded-full transition-all"
                           style={{
                             width: `${(d.score / d.maxScore) * 100}%`,
-                            backgroundColor: DIM_COLORS[d.dimension],
+                            backgroundColor: dimColors[d.dimension],
                           }}
                         />
                       </div>

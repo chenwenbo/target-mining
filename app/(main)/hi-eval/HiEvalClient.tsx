@@ -22,7 +22,14 @@ import {
   generateToken,
   buildShareUrl,
 } from "@/lib/assessment-store";
-import type { AssessmentRecord, AssessmentSource, Company } from "@/lib/types";
+import type {
+  AssessmentRecord,
+  AssessmentSource,
+  Company,
+  QualificationType,
+} from "@/lib/types";
+import { QUAL_TYPE_META } from "@/lib/types";
+import { useQualStore } from "@/lib/qual-store";
 import { cn } from "@/lib/cn";
 
 // ─── Status meta ─────────────────────────────────────────────────
@@ -64,11 +71,13 @@ function SourceBadge({ source }: { source: AssessmentSource }) {
 // ─── Initiate modal ───────────────────────────────────────────────
 interface InitiateModalProps {
   companies: Company[];
+  qualType: QualificationType;
+  qualLabel: string;
   onClose: () => void;
   onCreated: (record: AssessmentRecord) => void;
 }
 
-function InitiateModal({ companies, onClose, onCreated }: InitiateModalProps) {
+function InitiateModal({ companies, qualType, qualLabel, onClose, onCreated }: InitiateModalProps) {
   const [search, setSearch] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [source, setSource] = useState<AssessmentSource>("enterprise_self");
@@ -95,6 +104,7 @@ function InitiateModal({ companies, onClose, onCreated }: InitiateModalProps) {
       source,
       status: "pending",
       createdAt: now,
+      qualType,
     };
     saveAssessmentRecord(record);
     onCreated(record);
@@ -110,7 +120,7 @@ function InitiateModal({ companies, onClose, onCreated }: InitiateModalProps) {
               <ClipboardCheck size={16} className="text-blue-600" />
             </div>
             <div>
-              <h2 className="text-base font-semibold text-[#0f172a]">发起高企测评</h2>
+              <h2 className="text-base font-semibold text-[#0f172a]">发起{qualLabel}测评</h2>
               <p className="text-xs text-[#94a3b8]">为目标企业创建测评任务</p>
             </div>
           </div>
@@ -354,6 +364,8 @@ interface Props {
 }
 
 export default function HiEvalClient({ companies }: Props) {
+  const activeQual = useQualStore((s) => s.activeQual);
+  const qualMeta = QUAL_TYPE_META[activeQual];
   const [records, setRecords] = useState<AssessmentRecord[]>([]);
   const [filterTab, setFilterTab] = useState<FilterTab>("all");
   const [search, setSearch] = useState("");
@@ -375,8 +387,14 @@ export default function HiEvalClient({ companies }: Props) {
     [companies]
   );
 
+  // 仅展示当前资质的测评记录（缺省记录视为高企）
+  const scopedRecords = useMemo(
+    () => records.filter((r) => (r.qualType ?? "high_tech") === activeQual),
+    [records, activeQual],
+  );
+
   const filtered = useMemo(() => {
-    let list = [...records];
+    let list = [...scopedRecords];
     if (filterTab !== "all") list = list.filter((r) => r.status === filterTab);
     if (search) {
       const q = search.toLowerCase();
@@ -392,13 +410,13 @@ export default function HiEvalClient({ companies }: Props) {
       const cb = companyMap.get(b.companyId)?.name ?? "";
       return ca.localeCompare(cb);
     });
-  }, [records, filterTab, search, sortBy, companyMap]);
+  }, [scopedRecords, filterTab, search, sortBy, companyMap]);
 
   // KPIs
-  const totalCount = records.length;
-  const pendingCount = records.filter((r) => r.status === "pending").length;
-  const completedCount = records.filter((r) => r.status === "completed").length;
-  const completedWithScore = records.filter((r) => r.status === "completed" && r.score);
+  const totalCount = scopedRecords.length;
+  const pendingCount = scopedRecords.filter((r) => r.status === "pending").length;
+  const completedCount = scopedRecords.filter((r) => r.status === "completed").length;
+  const completedWithScore = scopedRecords.filter((r) => r.status === "completed" && r.score);
   const avgScore = completedWithScore.length
     ? Math.round(completedWithScore.reduce((s, r) => s + r.score!.total, 0) / completedWithScore.length)
     : 0;
@@ -441,7 +459,7 @@ export default function HiEvalClient({ companies }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-[#0f172a]">高企测评</h1>
+          <h1 className="text-xl font-bold text-[#0f172a]">{qualMeta.shortLabel}测评</h1>
           <p className="text-sm text-[#64748b] mt-0.5">
             共 {totalCount} 条测评记录 · {pendingCount} 条待完成 · {completedCount} 条已完成
           </p>
@@ -500,17 +518,17 @@ export default function HiEvalClient({ companies }: Props) {
       </div>
 
       {/* Charts */}
-      {(completedCount > 0 || records.length > 0) && (
+      {(completedCount > 0 || scopedRecords.length > 0) && (
         <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 1.5fr" }}>
           <div className="bg-white rounded-xl border border-[#e2e8f0] p-5">
             <h2 className="text-sm font-semibold text-[#0f172a] mb-1">测评等级分布</h2>
             <p className="text-xs text-[#94a3b8] mb-3">已完成测评的评级占比</p>
-            <GradeChart records={records} />
+            <GradeChart records={scopedRecords} />
           </div>
           <div className="bg-white rounded-xl border border-[#e2e8f0] p-5">
             <h2 className="text-sm font-semibold text-[#0f172a] mb-1">得分区间分布</h2>
             <p className="text-xs text-[#94a3b8] mb-3">企业综合得分的区间统计</p>
-            <ScoreDistChart records={records} />
+            <ScoreDistChart records={scopedRecords} />
           </div>
         </div>
       )}
@@ -716,6 +734,8 @@ export default function HiEvalClient({ companies }: Props) {
       {showModal && (
         <InitiateModal
           companies={companies}
+          qualType={activeQual}
+          qualLabel={qualMeta.shortLabel}
           onClose={() => setShowModal(false)}
           onCreated={handleCreated}
         />

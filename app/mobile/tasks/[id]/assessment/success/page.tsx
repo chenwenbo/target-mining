@@ -7,22 +7,14 @@ import { CheckCircle2, ChevronRight, ArrowLeft } from "lucide-react";
 import { getAllTasks } from "@/lib/mock-data";
 import { getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import { getAssessmentRecords } from "@/lib/assessment-store";
-import { DIMENSION_LABELS } from "@/lib/assessment";
-import type { AssessmentRecord, AssessmentDimension } from "@/lib/types";
+import { getAssessmentConfig } from "@/lib/assessment";
+import type { AssessmentRecord } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 const GRADE_META = {
   优秀:   { label: "条件优秀",   color: "text-emerald-700 bg-emerald-100 border-emerald-300" },
   符合:   { label: "符合申报条件", color: "text-blue-700 bg-blue-100 border-blue-300"    },
   待培育: { label: "待重点培育",  color: "text-amber-700 bg-amber-100 border-amber-300"   },
-};
-
-const DIM_COLORS: Record<AssessmentDimension, string> = {
-  rd_expense:     "bg-blue-500",
-  rd_staff:       "bg-violet-500",
-  ip:             "bg-cyan-500",
-  hi_tech_revenue:"bg-emerald-500",
-  management:     "bg-amber-500",
 };
 
 export default function AssessmentSuccessPage() {
@@ -53,6 +45,9 @@ export default function AssessmentSuccessPage() {
   const nextTask = allTasksByAssignee.find((t) => t.status === "pending");
 
   const score = record?.score;
+  const dimColors: Record<string, string> = Object.fromEntries(
+    getAssessmentConfig(record?.qualType).dimensions.map((d) => [d.id, d.color]),
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
@@ -91,12 +86,15 @@ export default function AssessmentSuccessPage() {
             {score.dimensionScores.map((d) => (
               <div key={d.dimension} className="flex items-center gap-2">
                 <span className="text-xs text-gray-500 w-16 flex-shrink-0">
-                  {DIMENSION_LABELS[d.dimension]}
+                  {d.label}
                 </span>
                 <div className="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
                   <div
-                    className={cn("h-full rounded-full", DIM_COLORS[d.dimension])}
-                    style={{ width: `${(d.score / d.maxScore) * 100}%` }}
+                    className="h-full rounded-full"
+                    style={{
+                      width: `${(d.score / d.maxScore) * 100}%`,
+                      backgroundColor: dimColors[d.dimension],
+                    }}
                   />
                 </div>
                 <span className="text-xs text-gray-500 w-10 text-right">

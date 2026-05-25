@@ -286,6 +286,31 @@ export interface VisitRecord {
     mainProductDesc?: string;
   };
 
+  // ─── 专精特新"小巨人"口径采集（仅 qualType==="little_giant" 的走访填充）────
+  littleGiant?: {
+    // 定位与经济效益
+    industrialBaseCategory?: string;   // 工业六基第一层
+    industrialBaseItem?: string;       // 第二层细分（或自定义）
+    mainProductDesc?: string;          // 主导产品一句话（小巨人单一真值源，不写入 fieldVerified）
+    annualRevenueBand?: "under_1yi" | "1_4yi" | "4_10yi" | "above_10yi";
+    mainBizGrowth2y?: "neg" | "0_5pct" | "5_10pct" | "above_10pct";
+    mainBizRevenueRatio?: "under_50" | "50_70" | "70_85" | "above_85"; // 门槛≥70%
+    debtRatio?: "under_30" | "30_50" | "50_70" | "above_70";
+    subdivisionYears?: "under_3" | "3_5" | "5_10" | "above_10";        // 门槛≥3年
+    // 创新与产业链
+    rdExpenseRatio?: "under_3pct" | "3_6pct" | "6_10pct" | "above_10pct"; // 门槛≥6%
+    rdStaffRatio?: "under_10" | "10_20" | "20_30" | "above_30";
+    hasProvincialRdInstitution?: boolean | null;
+    standardsRole?: "international" | "national" | "industry" | "none";
+    marketShare?: "national_top" | "provincial_top" | "regional_lead" | "unknown";
+    fillsGapOrImportSub?: boolean | null;
+    supplyChainRole?: string;
+    hasOwnBrand?: boolean | null;
+    bottleneckTraits?: string[];       // 卡脖子/补短板属性（多选）
+    // 申报意愿与缺口
+    expectedDeclareYear?: string;
+  };
+
   acknowledgedGaps: string[];
   keyObstacles?: string;
   followUpDate?: string;
@@ -297,12 +322,9 @@ export interface VisitRecord {
 
 // ─── 专业测评 ───────────────────────────────────────────────────
 
-export type AssessmentDimension =
-  | "rd_expense"
-  | "rd_staff"
-  | "ip"
-  | "hi_tech_revenue"
-  | "management";
+// 维度 id 由各资质测评配置（lib/assessment.ts）定义，故放宽为 string。
+// 维度分自带 label / maxScore，渲染不依赖固定枚举。
+export type AssessmentDimension = string;
 
 export interface AssessmentOption {
   value: string;
@@ -357,4 +379,5 @@ export interface AssessmentRecord {
   answers?: AssessmentAnswers;
   score?: AssessmentScore;
   taskId?: string;
+  qualType?: QualificationType; // 缺省视为 "high_tech"，兼容现有数据
 }

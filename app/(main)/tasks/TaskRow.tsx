@@ -7,6 +7,8 @@ import {
   WILLINGNESS_META,
   REVENUE_MAP,
   RD_RATIO_MAP,
+  LG_REVENUE_MAP,
+  LG_RD_RATIO_MAP,
   type LifecycleStage,
 } from "./lifecycle";
 
@@ -128,11 +130,18 @@ function DoneMiddle({
 }) {
   const wMeta = WILLINGNESS_META[record.willingness];
   const facts: string[] = [];
-  if (record.fieldVerified.employeeCount) facts.push(`${record.fieldVerified.employeeCount} 人`);
-  if (record.fieldVerified.rdExpenseRatio)
-    facts.push(`研发占比 ${RD_RATIO_MAP[record.fieldVerified.rdExpenseRatio]}`);
-  if (record.fieldVerified.annualRevenue)
-    facts.push(`营收 ${REVENUE_MAP[record.fieldVerified.annualRevenue]}`);
+  if (record.littleGiant) {
+    const g = record.littleGiant;
+    if (g.industrialBaseCategory) facts.push(g.industrialBaseCategory);
+    if (g.annualRevenueBand) facts.push(`营收 ${LG_REVENUE_MAP[g.annualRevenueBand]}`);
+    if (g.rdExpenseRatio) facts.push(`研发占比 ${LG_RD_RATIO_MAP[g.rdExpenseRatio]}`);
+  } else {
+    if (record.fieldVerified.employeeCount) facts.push(`${record.fieldVerified.employeeCount} 人`);
+    if (record.fieldVerified.rdExpenseRatio)
+      facts.push(`研发占比 ${RD_RATIO_MAP[record.fieldVerified.rdExpenseRatio]}`);
+    if (record.fieldVerified.annualRevenue)
+      facts.push(`营收 ${REVENUE_MAP[record.fieldVerified.annualRevenue]}`);
+  }
 
   return (
     <div className="space-y-1.5">
