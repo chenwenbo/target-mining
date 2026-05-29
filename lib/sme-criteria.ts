@@ -274,11 +274,5 @@ export function getLittleGiantPoolTiers(): PoolTierDef[] {
         c.techField !== null &&
         (c.declarationWillingness === "strong" || c.declarationWillingness === "moderate"),
     },
-    {
-      id: "lg_certified",
-      label: "认定成功",
-      desc: "已获批专精特新小巨人",
-      filter: (c) => isLittleGiantCertified(c),
-    },
   ];
 }
