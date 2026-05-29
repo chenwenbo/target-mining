@@ -755,7 +755,7 @@ function HistoryTab({ records }: { records: VisitRecord[] }) {
                 {r.littleGiant && (() => {
                   const g = r.littleGiant;
                   const rows = [
-                    (g.industrialBaseCategory) && { label: "工业六基", value: `${g.industrialBaseCategory}${g.industrialBaseItem ? " · " + g.industrialBaseItem : ""}` },
+                    (g.industrialBaseCategory) && { label: "所属领域", value: `${g.industrialBaseCategory}${g.industrialBaseItem ? " · " + g.industrialBaseItem : ""}` },
                     g.mainProductDesc && { label: "主导产品", value: g.mainProductDesc },
                     g.annualRevenueBand && { label: "上年度营收", value: LG_REVENUE_MAP[g.annualRevenueBand] ?? g.annualRevenueBand },
                     g.mainBizGrowth2y && { label: "近2年增长率", value: LG_GROWTH_MAP[g.mainBizGrowth2y] ?? g.mainBizGrowth2y },

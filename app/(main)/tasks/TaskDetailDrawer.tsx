@@ -203,7 +203,7 @@ export default function TaskDetailDrawer({ open, onClose, task, company, records
                 return (
                   <Section title="小巨人摸排数据">
                     {g.industrialBaseCategory && (
-                      <Row label="工业六基" value={`${g.industrialBaseCategory}${g.industrialBaseItem ? " · " + g.industrialBaseItem : ""}`} />
+                      <Row label="所属领域" value={`${g.industrialBaseCategory}${g.industrialBaseItem ? " · " + g.industrialBaseItem : ""}`} />
                     )}
                     {g.mainProductDesc && <Row label="主导产品" value={g.mainProductDesc} />}
                     {g.annualRevenueBand && <Row label="上年度营收" value={LG_REVENUE_MAP[g.annualRevenueBand]} />}

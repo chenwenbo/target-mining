@@ -155,7 +155,7 @@ export default function VisitPreviewPage() {
         {isLittleGiant && (
           <PreviewSection title="定位与经济效益">
             {!!s("lgIndustrialBaseCategory") && (
-              <Row label="工业六基" value={`${s("lgIndustrialBaseCategory")}${s("lgIndustrialBaseItem") ? " · " + s("lgIndustrialBaseItem") : ""}`} />
+              <Row label="所属领域" value={`${s("lgIndustrialBaseCategory")}${s("lgIndustrialBaseItem") ? " · " + s("lgIndustrialBaseItem") : ""}`} />
             )}
             {!!s("lgMainProductDesc") && <Row label="主导产品" value={String(s("lgMainProductDesc"))} />}
             {!!s("lgAnnualRevenueBand") && <Row label="上年度营收" value={LG_REVENUE_MAP[String(s("lgAnnualRevenueBand"))] ?? "-"} />}

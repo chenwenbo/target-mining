@@ -5,7 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { getAllTasks, getCompanyById } from "@/lib/mock-data";
 import { getCurrentVisitor, saveDraft, clearDraft, getDispatchedTasks, getCustomTasks } from "@/lib/mobile-mock";
 import type { Company, Visitor, VisitMethod, WillingnessLevel } from "@/lib/types";
-import { INDUSTRIAL_SIX_BASES, INDUSTRIAL_SIX_CATEGORIES } from "@/lib/industrial-six";
+import { PRIMARY_DOMAINS, DOMAIN_SECONDARIES, type PrimaryDomain } from "@/lib/domain-fields";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 
 // ─── 表单数据类型 ───────────────────────────────────────────────
@@ -824,24 +824,26 @@ function WillingnessPicker({ value, notes, update }: {
 
 // ─── 小巨人 Step 2：定位与经济效益 ───────────────────────────────
 function LGStep2({ form, update }: { form: FormData; update: <K extends keyof FormData>(k: K, v: FormData[K]) => void }) {
-  const baseItems = INDUSTRIAL_SIX_BASES.find((b) => b.category === form.lgIndustrialBaseCategory)?.items ?? [];
+  const baseItems: string[] = form.lgIndustrialBaseCategory
+    ? [...(DOMAIN_SECONDARIES[form.lgIndustrialBaseCategory as PrimaryDomain] ?? [])]
+    : [];
   const isCustomItem = form.lgIndustrialBaseItem !== "" && !baseItems.includes(form.lgIndustrialBaseItem);
   return (
     <div className="space-y-4">
       <div className="bg-white rounded-xl p-4">
-        <SectionTitle>工业六基定位</SectionTitle>
-        <FormRow label="所属工业六基（第一层）" required hint="标的池领域与分布图数据来源">
+        <SectionTitle>所属产业领域</SectionTitle>
+        <FormRow label="所属一级领域" required hint="标的池领域分布图数据来源">
           <RadioGroup
             value={form.lgIndustrialBaseCategory}
             onChange={(v) => {
               update("lgIndustrialBaseCategory", v);
               update("lgIndustrialBaseItem", ""); // 切换一级清空二级
             }}
-            options={INDUSTRIAL_SIX_CATEGORIES.map((c) => ({ value: c, label: c }))}
+            options={PRIMARY_DOMAINS.map((c) => ({ value: c, label: c }))}
           />
         </FormRow>
         {form.lgIndustrialBaseCategory && (
-          <FormRow label="细分方向（第二层）">
+          <FormRow label="五基（第二层）">
             <RadioGroup
               value={isCustomItem ? "" : form.lgIndustrialBaseItem}
               onChange={(v) => update("lgIndustrialBaseItem", v)}
