@@ -22,9 +22,12 @@ export interface PreviewCompany {
 export interface StreetStats {
   total: number;         // 企业总数
   techCount: number;     // 泛科技企业
-  highPotential: number; // 高潜力企业
+  highPotential: number; // 高潜力企业 / 小巨人候选
   preview: PreviewCompany[];
   blurredCount: number;
+  // 仅 little_giant 路径填充
+  innovativeSme?: number;   // 创新中小企业
+  specializedSme?: number;  // 专精特新中小企业
 }
 
 function isTech(c: RawCompany): boolean {
@@ -142,19 +145,24 @@ export function getDistrictStats(
       .sort((a, b) => b.score - a.score);
     const preview = scored.slice(0, 3).map(({ c }) => ({ name: c.name, industry: c.industry }));
     const highPotential = Math.max(3, Math.round(highPotentialCompanies.length * factor));
-    return {
+    const base: DistrictStats = {
       total: all.length,
       techCount: techCompanies.length,
       highPotential,
       preview,
       blurredCount: Math.max(0, highPotential - 3),
     };
+    if (qual === "little_giant") {
+      base.innovativeSme = Math.round(techCompanies.length * 0.58);
+      base.specializedSme = Math.round(techCompanies.length * 0.31);
+    }
+    return base;
   }
 
   // 其他区县：基于城市等级 + 确定性 seed 生成合理数字
   const seed = strHash(city + district);
-  const base = CITY_BASE[city] ?? 150;
-  const total = base + (seed % (base * 2));
+  const baseCount = CITY_BASE[city] ?? 150;
+  const total = baseCount + (seed % (baseCount * 2));
   const techCount = Math.floor(total * (0.28 + (seed % 28) / 100));
   const highPotential = Math.max(
     3,
@@ -162,11 +170,16 @@ export function getDistrictStats(
   );
   const preview = [0, 1, 2].map((i) => mockPreview(district, i));
 
-  return {
+  const result: DistrictStats = {
     total,
     techCount,
     highPotential,
     preview,
     blurredCount: Math.max(0, highPotential - 3),
   };
+  if (qual === "little_giant") {
+    result.innovativeSme = Math.round(techCount * (0.55 + (seed % 10) / 100));
+    result.specializedSme = Math.round(techCount * (0.28 + ((seed >> 4) % 8) / 100));
+  }
+  return result;
 }

@@ -236,9 +236,19 @@ export default function LandingClient({ from }: Props) {
                   <span className="text-xs text-[#94a3b8]">共 {stats.total} 家</span>
                 </div>
                 <div className="grid grid-cols-3 gap-3 mb-5">
-                  <StatChip color="slate" label="企业总数" value={stats.total} />
-                  <StatChip color="blue" label="泛科技企业" value={stats.techCount} />
-                  <StatChip color="emerald" label="高潜力企业" value={stats.highPotential} />
+                  {selectedQual === "little_giant" ? (
+                    <>
+                      <StatChip color="blue" label="创新中小企业" value={stats.innovativeSme ?? 0} />
+                      <StatChip color="amber" label="专精特新中小企业" value={stats.specializedSme ?? 0} />
+                      <StatChip color="emerald" label="高潜力企业" value={stats.highPotential} />
+                    </>
+                  ) : (
+                    <>
+                      <StatChip color="slate" label="企业总数" value={stats.total} />
+                      <StatChip color="blue" label="泛科技企业" value={stats.techCount} />
+                      <StatChip color="emerald" label="高潜力企业" value={stats.highPotential} />
+                    </>
+                  )}
                 </div>
 
                 {/* 企业列表 */}
@@ -513,7 +523,7 @@ export default function LandingClient({ from }: Props) {
 // ── 子组件 ──────────────────────────────────────────────────────
 
 function StatChip({ color, label, value }: {
-  color: "emerald" | "blue" | "slate";
+  color: "emerald" | "blue" | "slate" | "amber";
   label: string;
   value: number;
 }) {
@@ -521,6 +531,7 @@ function StatChip({ color, label, value }: {
     emerald: { bg: "bg-emerald-50", text: "text-emerald-700", bar: "bg-emerald-500" },
     blue:    { bg: "bg-blue-50",    text: "text-blue-700",    bar: "bg-blue-500" },
     slate:   { bg: "bg-slate-50",   text: "text-slate-600",   bar: "bg-slate-400" },
+    amber:   { bg: "bg-amber-50",   text: "text-amber-700",   bar: "bg-amber-500" },
   }[color];
   return (
     <div className={cn("rounded-xl p-3.5", cfg.bg)}>
