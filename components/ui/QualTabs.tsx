@@ -43,9 +43,6 @@ export default function QualTabs({ className, variant = "page" }: Props) {
             >
               <span className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", colors.dot)} />
               {meta.label}
-              <span className="text-[10px] text-[#94a3b8] font-normal ml-0.5">
-                {meta.ministry}
-              </span>
             </button>
           );
         })}
@@ -70,9 +67,6 @@ export default function QualTabs({ className, variant = "page" }: Props) {
           >
             <span className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", colors.dot)} />
             {meta.label}
-            <span className="text-[10px] text-[#94a3b8] font-normal ml-0.5">
-              {meta.ministry}
-            </span>
           </button>
         );
       })}
