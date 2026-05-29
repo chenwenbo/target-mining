@@ -19,6 +19,7 @@ import {
   setRegionAdminUser,
   type RegionAdminDemo,
 } from "@/lib/account-mock";
+import { AppIcon } from "@/components/AppIcon";
 
 export default function PCLoginPage() {
   const router = useRouter();
@@ -67,9 +68,7 @@ export default function PCLoginPage() {
       <div className="hidden lg:flex flex-col justify-between w-[42%] px-12 py-12 relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 text-white">
         <div>
           <div className="flex items-center gap-3 mb-12">
-            <div className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center font-bold">
-              TM
-            </div>
+            <AppIcon size={40} />
             <div>
               <div className="text-base font-semibold">标的挖掘 · PC 工作台</div>
               <div className="text-xs text-blue-200 mt-0.5">高企申报 · v0.1</div>
@@ -128,9 +127,7 @@ export default function PCLoginPage() {
         <div className="w-full max-w-[420px]">
           {/* 移动端 logo */}
           <div className="lg:hidden flex items-center gap-2.5 mb-8">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
-              TM
-            </div>
+            <AppIcon size={36} className="shadow-sm" />
             <div>
               <div className="text-sm font-semibold text-[#0f172a]">标的挖掘</div>
               <div className="text-[11px] text-[#94a3b8]">高企申报 · v0.1</div>

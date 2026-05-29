@@ -22,6 +22,7 @@ import {
   type LandingQual,
 } from "@/lib/landing-data";
 import { QUAL_TYPE_META } from "@/lib/types";
+import { AppIcon } from "@/components/AppIcon";
 
 interface Props {
   from: string;
@@ -118,9 +119,7 @@ export default function LandingClient({ from }: Props) {
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-[#e5e7eb]">
         <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">
-              TM
-            </div>
+            <AppIcon size={32} className="shadow-sm" />
             <span className="text-sm font-semibold text-[#0f172a]">标的挖掘平台</span>
           </div>
           <button

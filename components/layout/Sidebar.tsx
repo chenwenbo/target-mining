@@ -6,6 +6,7 @@ import { cn } from "@/lib/cn";
 import { useLayoutStore } from "@/lib/layout-store";
 import { useCurrentPCUser } from "@/lib/account-mock";
 import { getTenantById } from "@/lib/ops-mock";
+import { AppIcon } from "@/components/AppIcon";
 import {
   LayoutDashboard,
   Target,
@@ -57,9 +58,7 @@ export default function Sidebar() {
     >
       {/* Logo */}
       <div className="px-3 py-5 border-b border-[#e5e7eb] flex items-center gap-3 relative">
-        <div className="w-8 h-8 flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-sm">
-          TM
-        </div>
+        <AppIcon size={32} className="flex-shrink-0 shadow-sm" />
         {!collapsed && (
           <div className="overflow-hidden">
             <div className="text-sm font-semibold text-[#0f172a] leading-tight whitespace-nowrap">标的挖掘</div>

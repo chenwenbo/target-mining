@@ -86,7 +86,7 @@ export const MOCK_TENANTS_SEED: Tenant[] = [
     contactPhone: "027-83888001",
     contactEmail: "zhangju@dxh.gov.cn",
     notes: "参考租户，数据最为完整",
-    modules: ["high_tech"],
+    modules: ["high_tech", "innovative_sme", "specialized_sme", "little_giant"],
     stats: {
       companyCount: 1247,
       taskCount: 312,
