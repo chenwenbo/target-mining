@@ -9,13 +9,6 @@
       "autoPort": false
     },
     {
-      "name": "verify",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev", "--port", "3021"],
-      "port": 3021,
-      "autoPort": false
-    },
-    {
       "name": "prototype-static",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "3010"],

@@ -391,7 +391,18 @@ export default function LandingClient({ from }: Props) {
           <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mx-auto mb-5">
             <Building2 size={22} className="text-blue-600" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">立即获取辖区完整高企 / 专精特新潜在标的名单</h2>
+          <h2 className="text-2xl font-bold mb-2">
+            <span className="inline-flex flex-wrap items-baseline justify-center">
+              立即获取辖区完整
+              <span
+                key={heroIdx}
+                className="text-blue-600 animate-[heroFade_2.6s_ease-in-out] mx-0.5"
+              >
+                {LANDING_QUALS[heroIdx].hero}
+              </span>
+              潜在标的名单
+            </span>
+          </h2>
           <p className="text-sm text-[#94a3b8] mb-8">填写信息，1个工作日内安排产品演示（约30分钟）</p>
 
           {finalFormSubmitted ? (
