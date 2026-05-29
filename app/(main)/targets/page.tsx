@@ -12,7 +12,7 @@ import { TECH_FIELDS, DECLARATION_WILLINGNESS_LABELS } from "@/lib/types";
 import { cn } from "@/lib/cn";
 import { useQualStore } from "@/lib/qual-store";
 import { checkEligibility, getSMEPoolTiers, getLittleGiantPoolTiers } from "@/lib/sme-criteria";
-import { INDUSTRIAL_SIX_CATEGORIES, deriveIndustrialSix } from "@/lib/industrial-six";
+import { PRIMARY_DOMAINS, deriveDomain } from "@/lib/domain-fields";
 
 // ─── Filter state ────────────────────────────────────────────
 // 高企用固定四档；SME / 小巨人的档位 id 由各自 tier 定义动态决定，故放宽为 string。
@@ -29,7 +29,7 @@ interface Filters {
   q: string;
   streets: string[];
   fields: TechField[];
-  bases: string[]; // 工业六基第一层分类（小巨人模块）
+  bases: string[]; // 一级领域分类（小巨人模块）
   ageRange: string[];
   ipRange: string[];
   employeeRange: string[];
@@ -97,7 +97,7 @@ function FilterPanel({
   onChange: (f: Filters) => void;
   lockedStreet?: string | null;
   streetOptions: string[];
-  baseMode: boolean; // true=工业六基分类筛选（小巨人），false=八大领域
+  baseMode: boolean; // true=领域分类筛选（小巨人），false=八大领域
 }) {
   function pill(label: string, active: boolean, onClick: () => void) {
     return (
@@ -170,11 +170,11 @@ function FilterPanel({
         </div>
       )}
 
-      {section(baseMode ? "工业六基" : "所属领域", "border-l-blue-400", (
+      {section("所属领域", "border-l-blue-400", (
         <div className="flex flex-wrap gap-1.5">
           {baseMode
-            ? INDUSTRIAL_SIX_CATEGORIES.map((cat) =>
-                pill(cat, filters.bases.includes(cat), () =>
+            ? PRIMARY_DOMAINS.map((cat) =>
+                pill(cat.length > 10 ? cat.slice(0, 10) + "…" : cat, filters.bases.includes(cat), () =>
                   onChange({ ...filters, bases: toggle(filters.bases, cat) })
                 )
               )
@@ -295,7 +295,7 @@ function TargetsPageContent() {
     return smeTiers.map((t) => ({ id: t.id, label: t.label, desc: t.desc }));
   }, [activeQual]);
 
-  // Reset pool tier / 六基筛选 when qual type changes to avoid stale state
+  // Reset pool tier / 领域筛选 when qual type changes to avoid stale state
   useEffect(() => {
     setFilters((f) => ({ ...f, poolTier: "all_companies", bases: [] }));
   }, [activeQual]);
@@ -307,7 +307,7 @@ function TargetsPageContent() {
         if (filters.q && !c.name.includes(filters.q) && !c.creditCode.includes(filters.q)) return false;
         if (filters.streets.length > 0 && !filters.streets.includes(c.street)) return false;
         if (filters.fields.length > 0 && (!c.techField || !filters.fields.includes(c.techField))) return false;
-        if (activeQual === "little_giant" && filters.bases.length > 0 && !filters.bases.includes(deriveIndustrialSix(c).category)) return false;
+        if (activeQual === "little_giant" && filters.bases.length > 0 && !filters.bases.includes(deriveDomain(c).primary)) return false;
         if (filters.ageRange.length > 0 && !filters.ageRange.includes(getAgeRange(c.establishedAt))) return false;
         if (filters.ipRange.length > 0 && !filters.ipRange.includes(getIPRange(getTotalIP(c)))) return false;
         if (filters.employeeRange.length > 0 && !filters.employeeRange.includes(getEmployeeRange(c.employees))) return false;
@@ -556,13 +556,13 @@ function TargetsPageContent() {
                     </td>
                     <td className="px-3 py-3">
                       {activeQual === "little_giant" ? (() => {
-                        const six = deriveIndustrialSix(c);
+                        const domain = deriveDomain(c);
                         return (
                           <div>
                             <span className="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 text-xs rounded">
-                              {six.category}
+                              {domain.primary}
                             </span>
-                            <div className="text-[11px] text-[#94a3b8] mt-0.5">{six.subdivision}</div>
+                            <div className="text-[11px] text-[#94a3b8] mt-0.5">{domain.secondary}</div>
                           </div>
                         );
                       })() : (
