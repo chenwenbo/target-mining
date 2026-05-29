@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BarChart3,
   Building2,
@@ -19,11 +19,19 @@ import {
   getDistrictsForCity,
   getHubeiCities,
   type DistrictStats,
+  type LandingQual,
 } from "@/lib/landing-data";
+import { QUAL_TYPE_META } from "@/lib/types";
 
 interface Props {
   from: string;
 }
+
+// 落地页支持的两类申报资质（轮流展示 + 可选择）
+const LANDING_QUALS: { key: LandingQual; hero: string; chip: string }[] = [
+  { key: "high_tech", hero: "高企", chip: "高企认定" },
+  { key: "little_giant", hero: '专精特新"小巨人"', chip: '专精特新"小巨人"' },
+];
 
 interface LeadForm {
   name: string;
@@ -37,8 +45,21 @@ export default function LandingClient({ from }: Props) {
   const cities = getHubeiCities();
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedQual, setSelectedQual] = useState<LandingQual>("high_tech");
   const districts = selectedCity ? getDistrictsForCity(selectedCity) : [];
   const [stats, setStats] = useState<DistrictStats | null>(null);
+
+  // Hero 标题中的资质名称轮流展示
+  const [heroIdx, setHeroIdx] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroIdx((i) => (i + 1) % LANDING_QUALS.length);
+    }, 2600);
+    return () => clearInterval(timer);
+  }, []);
+
+  const activeQualMeta = LANDING_QUALS.find((q) => q.key === selectedQual)!;
+  const qualShort = QUAL_TYPE_META[selectedQual].shortLabel;
   const [analyzed, setAnalyzed] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [unlocked, setUnlocked] = useState(false);
@@ -50,7 +71,7 @@ export default function LandingClient({ from }: Props) {
 
   function handleAnalyze() {
     if (!selectedCity || !selectedDistrict) return;
-    setStats(getDistrictStats(selectedCity, selectedDistrict));
+    setStats(getDistrictStats(selectedCity, selectedDistrict, selectedQual));
     setAnalyzed(true);
     setUnlocked(false);
   }
@@ -121,15 +142,50 @@ export default function LandingClient({ from }: Props) {
             </div>
           )}
           <h1 className="text-3xl sm:text-4xl font-bold leading-tight mb-3 text-[#0f172a]">
-            每年高企申报季<br />
+            <span className="inline-flex flex-wrap items-baseline justify-center">
+              每年
+              <span
+                key={heroIdx}
+                className="text-blue-600 animate-[heroFade_2.6s_ease-in-out] mx-0.5"
+              >
+                {LANDING_QUALS[heroIdx].hero}
+              </span>
+              申报季
+            </span>
+            <br />
             <span className="text-blue-600">你们辖区还有多少潜在标的没挖到？</span>
           </h1>
           <p className="text-base text-[#475569] mb-10 max-w-xl mx-auto">
-            从标的挖掘到摸排闭环，帮助区县科技局完成全年高企申报任务
+            从标的挖掘到摸排闭环，帮助区县科技局完成全年高企、专精特新申报任务
           </p>
 
           {/* 数据钩子卡 */}
           <div className="bg-white rounded-2xl shadow-[0_4px_24px_0_rgba(15,23,42,0.08)] border border-[#e5e7eb] p-6 text-left">
+            {/* 申报资质选择 */}
+            <p className="text-sm font-semibold text-[#0f172a] mb-3">选择申报资质</p>
+            <div className="flex gap-2 mb-5">
+              {LANDING_QUALS.map((q) => (
+                <button
+                  key={q.key}
+                  type="button"
+                  onClick={() => {
+                    setSelectedQual(q.key);
+                    setAnalyzed(false);
+                    setStats(null);
+                    setUnlocked(false);
+                  }}
+                  className={cn(
+                    "flex-1 px-4 py-2.5 rounded-lg text-sm font-semibold border transition-colors",
+                    selectedQual === q.key
+                      ? "bg-blue-600 text-white border-blue-600"
+                      : "bg-white text-[#475569] border-[#e5e7eb] hover:border-blue-300",
+                  )}
+                >
+                  {q.chip}
+                </button>
+              ))}
+            </div>
+
             <p className="text-sm font-semibold text-[#0f172a] mb-3">选择你的辖区城市和区县</p>
             <div className="flex gap-2 mb-5">
               <div className="relative">
@@ -175,7 +231,7 @@ export default function LandingClient({ from }: Props) {
                 {/* 统计概览 */}
                 <div className="flex items-center justify-between mb-4">
                   <p className="text-sm font-semibold text-[#0f172a]">
-                    {selectedCity} {selectedDistrict} · 潜在高企分析
+                    {selectedCity} {selectedDistrict} · 潜在{qualShort}分析
                   </p>
                   <span className="text-xs text-[#94a3b8]">共 {stats.total} 家</span>
                 </div>
@@ -335,7 +391,7 @@ export default function LandingClient({ from }: Props) {
           <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mx-auto mb-5">
             <Building2 size={22} className="text-blue-600" />
           </div>
-          <h2 className="text-2xl font-bold mb-2">立即获取辖区完整高企潜在标的名单</h2>
+          <h2 className="text-2xl font-bold mb-2">立即获取辖区完整高企 / 专精特新潜在标的名单</h2>
           <p className="text-sm text-[#94a3b8] mb-8">填写信息，1个工作日内安排产品演示（约30分钟）</p>
 
           {finalFormSubmitted ? (

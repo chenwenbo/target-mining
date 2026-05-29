@@ -50,6 +50,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 落地页 Hero 资质名称轮播淡入淡出 */
+@keyframes heroFade {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  12%,
+  88% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;

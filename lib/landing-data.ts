@@ -116,7 +116,22 @@ export function getDistrictsForCity(city: string): string[] {
   return HUBEI_REGIONS[city] ?? [];
 }
 
-export function getDistrictStats(city: string, district: string): DistrictStats {
+// 落地页支持的两类申报资质
+export type LandingQual = "high_tech" | "little_giant";
+
+// 不同资质的高潜力企业占比系数（小巨人远比高企稀缺）
+const QUAL_POTENTIAL_FACTOR: Record<LandingQual, number> = {
+  high_tech: 1,
+  little_giant: 0.12,
+};
+
+export function getDistrictStats(
+  city: string,
+  district: string,
+  qual: LandingQual = "high_tech",
+): DistrictStats {
+  const factor = QUAL_POTENTIAL_FACTOR[qual];
+
   // 东西湖区使用真实数据
   if (district === "东西湖区") {
     const all = rawCompanies as RawCompany[];
@@ -126,12 +141,13 @@ export function getDistrictStats(city: string, district: string): DistrictStats 
       .map((c) => ({ c, score: scoreCompany(c) }))
       .sort((a, b) => b.score - a.score);
     const preview = scored.slice(0, 3).map(({ c }) => ({ name: c.name, industry: c.industry }));
+    const highPotential = Math.max(3, Math.round(highPotentialCompanies.length * factor));
     return {
       total: all.length,
       techCount: techCompanies.length,
-      highPotential: highPotentialCompanies.length,
+      highPotential,
       preview,
-      blurredCount: Math.max(0, highPotentialCompanies.length - 3),
+      blurredCount: Math.max(0, highPotential - 3),
     };
   }
 
@@ -140,7 +156,10 @@ export function getDistrictStats(city: string, district: string): DistrictStats 
   const base = CITY_BASE[city] ?? 150;
   const total = base + (seed % (base * 2));
   const techCount = Math.floor(total * (0.28 + (seed % 28) / 100));
-  const highPotential = Math.floor(techCount * (0.28 + ((seed >> 8) % 22) / 100));
+  const highPotential = Math.max(
+    3,
+    Math.round(techCount * (0.28 + ((seed >> 8) % 22) / 100) * factor),
+  );
   const preview = [0, 1, 2].map((i) => mockPreview(district, i));
 
   return {
