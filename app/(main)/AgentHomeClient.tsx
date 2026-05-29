@@ -2,6 +2,8 @@
 import { Sparkles } from "lucide-react";
 import { useAgentStore } from "@/lib/agent/store";
 import { useCurrentPCUser } from "@/lib/account-mock";
+import { useQualStore } from "@/lib/qual-store";
+import { QUAL_TYPE_META } from "@/lib/types";
 import AgentInputBox from "@/components/agent/AgentInputBox";
 import QuickCommandChips from "@/components/agent/QuickCommandChips";
 import RecentConversations from "@/components/agent/RecentConversations";
@@ -21,6 +23,8 @@ export default function AgentHomeClient() {
   const ask = useAgentStore((s) => s.ask);
   const status = useAgentStore((s) => s.status);
   const { user, mounted } = useCurrentPCUser();
+  const activeQual = useQualStore((s) => s.activeQual);
+  const qualLabel = QUAL_TYPE_META[activeQual].label;
 
   if (view === "conversation") {
     return <ConversationView />;
@@ -39,7 +43,7 @@ export default function AgentHomeClient() {
           {greeting()}{name ? `，${name}` : ""}
         </h1>
         <p className="text-[#64748b] text-[14px] mt-2">
-          我是高企标的挖掘智能体，可以帮你查数据、生成简报、安排任务
+          我是{qualLabel}标的挖掘智能体，可以帮你查数据、生成简报、安排任务
         </p>
       </div>
 
