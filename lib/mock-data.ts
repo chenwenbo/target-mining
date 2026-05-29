@@ -1,6 +1,7 @@
 import type { Company, Task, IPItem, IPType, QualificationType } from "./types";
 import { deriveSMEFields, checkEligibility } from "./sme-criteria";
 import { deriveIndustrialSix } from "./industrial-six";
+import { deriveDomain } from "./domain-fields";
 import { getRenewalKPI } from "./renewal";
 import { getCertifiedCompanies } from "./renewal-data";
 
@@ -236,11 +237,13 @@ export type SMEDashboardKPI = ReturnType<typeof getSMEDashboardKPI>;
 export function getLittleGiantDashboardKPI() {
   const all = getAllCompanies();
 
-  // 工业六基 第一层分布（覆盖标的池全量企业）
-  const byBase: Record<string, number> = {};
+  // 领域分布（一级领域 & 二级领域，覆盖标的池全量企业）
+  const byDomain: Record<string, number> = {};
+  const bySecondaryDomain: Record<string, number> = {};
   for (const c of all) {
-    const { category } = deriveIndustrialSix(c);
-    byBase[category] = (byBase[category] || 0) + 1;
+    const { primary, secondary } = deriveDomain(c);
+    byDomain[primary] = (byDomain[primary] || 0) + 1;
+    bySecondaryDomain[secondary] = (bySecondaryDomain[secondary] || 0) + 1;
   }
 
   // 街道 / 乡镇分布
@@ -283,7 +286,8 @@ export function getLittleGiantDashboardKPI() {
     renewalTotal: 8,          // 复审（三年期复核，mock）
     newDeclTargets: potential.length, // 新增
     poolTotal: all.length,    // 标的池企业总数（领域分布中心数）
-    byBase,
+    byDomain,
+    bySecondaryDomain,
     byStreet,
     byAge,
     funnelStages,

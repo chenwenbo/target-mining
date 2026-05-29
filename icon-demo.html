@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图标方案 · Icon Concepts</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=DM+Mono:wght@300;400&display=swap');
+
+  :root {
+    --bg: #0F0F14;
+    --surface: #16161D;
+    --border: rgba(255,255,255,0.06);
+    --text-primary: rgba(255,255,255,0.92);
+    --text-secondary: rgba(255,255,255,0.38);
+    --text-tertiary: rgba(255,255,255,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Noto Serif SC', 'PingFang SC', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 72px 40px 100px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Ambient background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(108,99,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(10,80,70,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
+  }
+
+  .page-subtitle {
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+  }
+
+  /* Main icon grid */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 80px;
+  }
+
+  .icon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+  }
+
+  .icon-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 26px;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.06) inset;
+  }
+
+  .icon-wrap:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.08) inset;
+  }
+
+  .icon-wrap svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .icon-name {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    color: var(--text-primary);
+  }
+
+  .icon-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+    text-align: center;
+    margin-top: -14px;
+  }
+
+  /* Divider */
+  .section-divider {
+    width: 100%;
+    max-width: 640px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 0 64px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Size showcase */
+  .size-section {
+    width: 100%;
+    max-width: 780px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .size-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 36px;
+    text-align: center;
+  }
+
+  .size-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .size-row {
+    display: flex;
+    align-items: center;
+    padding: 24px 32px;
+    gap: 40px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s ease;
+  }
+
+  .size-row:last-child { border-bottom: none; }
+  .size-row:hover { background: rgba(255,255,255,0.02); }
+
+  .size-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.1em;
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  .size-icons {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+  }
+
+  .size-icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .size-icon-item svg {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .size-icon-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="eyebrow">Brand Identity · 品牌视觉</div>
+  <h1 class="page-title">图标方案</h1>
+  <p class="page-subtitle">4 concepts · enterprise certification intelligence platform</p>
+</header>
+
+<!-- ── MAIN ICON GRID ─────────────────────────────────────────── -->
+<div class="icon-grid">
+
+  <!-- 1. 认证雷达 -->
+  <div class="icon-card">
+    <div class="icon-wrap">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="rg1" cx="30%" cy="70%" r="75%">
+            <stop offset="0%" stop-color="#1E1A3F"/>
+            <stop offset="100%" stop-color="#0D0C1D"/>
+          </radialGradient>
+          <linearGradient id="sweep1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#6C63FF" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/>
+          </linearGradient>
+          <clipPath id="clip1">
+            <rect width="120" height="120" rx="0"/>
+          </clipPath>
+        </defs>
+        <rect width="120" height="120" fill="url(#rg1)"/>
+
+        <!-- Radar rings from bottom-left origin (30, 90) -->
+        <g clip-path="url(#clip1)">
+          <circle cx="30" cy="90" r="22" fill="none" stroke="#6C63FF" stroke-width="0.7" stroke-opacity="0.25"/>
+          <circle cx="30" cy="90" r="40" fill="none" stroke="#6C63FF" stroke-width="0.7" stroke-opacity="0.2"/>
+          <circle cx="30" cy="90" r="58" fill="none" stroke="#6C63FF" stroke-width="0.7" stroke-opacity="0.15"/>
+          <circle cx="30" cy="90" r="76" fill="none" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.1"/>
+          <circle cx="30" cy="90" r="96" fill="none" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.07"/>
+
+          <!-- Sweep line + glow wedge -->
+          <path d="M30 90 L102 22" stroke="#6C63FF" stroke-width="1.2" stroke-opacity="0.9"/>
+          <path d="M30 90 L102 22 A96 96 0 0 0 30 90Z" fill="url(#sweep1)" opacity="0.18"/>
+
+          <!-- Cross-hairs at origin -->
+          <line x1="30" y1="82" x2="30" y2="98" stroke="#6C63FF" stroke-width="0.6" stroke-opacity="0.5"/>
+          <line x1="22" y1="90" x2="38" y2="90" stroke="#6C63FF" stroke-width="0.6" stroke-opacity="0.5"/>
+
+          <!-- Target blip at ~58px from origin -->
+          <circle cx="68" cy="52" r="3" fill="#6C63FF" opacity="0.9"/>
+          <circle cx="68" cy="52" r="6" fill="none" stroke="#6C63FF" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="68" cy="52" r="10" fill="none" stroke="#6C63FF" stroke-width="0.4" opacity="0.25"/>
+
+          <!-- Secondary blip -->
+          <circle cx="52" cy="70" r="1.8" fill="#A89FFF" opacity="0.7"/>
+
+          <!-- Grid lines -->
+          <line x1="30" y1="90" x2="120" y2="90" stroke="#6C63FF" stroke-width="0.4" stroke-opacity="0.12"/>
+          <line x1="30" y1="90" x2="30" y2="0" stroke="#6C63FF" stroke-width="0.4" stroke-opacity="0.12"/>
+        </g>
+
+        <!-- Bottom origin dot -->
+        <circle cx="30" cy="90" r="2.5" fill="#6C63FF" opacity="1"/>
+        <circle cx="30" cy="90" r="5" fill="none" stroke="#6C63FF" stroke-width="0.8" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="icon-name">认证雷达</div>
+    <div class="icon-desc">radar · sonar</div>
+  </div>
+
+  <!-- 2. 育星台 -->
+  <div class="icon-card">
+    <div class="icon-wrap">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0F2147"/>
+            <stop offset="100%" stop-color="#070F22"/>
+          </linearGradient>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F5A623"/>
+            <stop offset="100%" stop-color="#E8820C"/>
+          </linearGradient>
+          <filter id="glow2">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect width="120" height="120" fill="url(#bg2)"/>
+
+        <!-- Subtle grid -->
+        <line x1="22" y1="30" x2="22" y2="88" stroke="#F5A623" stroke-width="0.4" stroke-opacity="0.12"/>
+        <line x1="22" y1="88" x2="98" y2="88" stroke="#F5A623" stroke-width="0.4" stroke-opacity="0.12"/>
+        <line x1="22" y1="70" x2="98" y2="70" stroke="#F5A623" stroke-width="0.3" stroke-opacity="0.07"/>
+        <line x1="22" y1="52" x2="98" y2="52" stroke="#F5A623" stroke-width="0.3" stroke-opacity="0.07"/>
+
+        <!-- Bars -->
+        <rect x="28" y="72" width="16" height="16" rx="2" fill="url(#barGrad)" opacity="0.5"/>
+        <rect x="52" y="56" width="16" height="32" rx="2" fill="url(#barGrad)" opacity="0.7"/>
+        <rect x="76" y="38" width="16" height="50" rx="2" fill="url(#barGrad)" opacity="1"/>
+
+        <!-- Growth line -->
+        <polyline points="36,72 60,56 84,38" fill="none" stroke="#F5A623" stroke-width="1.5" stroke-opacity="0.6" stroke-dasharray="3 2"/>
+
+        <!-- Star at peak (above tallest bar) -->
+        <g filter="url(#glow2)" transform="translate(84, 24)">
+          <polygon points="0,-9 2.1,-3 8.6,-2.8 3.5,1.7 5.3,8.1 0,4.5 -5.3,8.1 -3.5,1.7 -8.6,-2.8 -2.1,-3"
+            fill="#F5A623" stroke="none"/>
+        </g>
+
+        <!-- Small dot indicators -->
+        <circle cx="36" cy="72" r="2.5" fill="#F5A623" opacity="0.8"/>
+        <circle cx="60" cy="56" r="2.5" fill="#F5A623" opacity="0.8"/>
+        <circle cx="84" cy="38" r="2.5" fill="#F5A623"/>
+      </svg>
+    </div>
+    <div class="icon-name">育星台</div>
+    <div class="icon-desc">growth · star · ascend</div>
+  </div>
+
+  <!-- 3. 企睿 -->
+  <div class="icon-card">
+    <div class="icon-wrap">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bg3" cx="40%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#3730A3"/>
+            <stop offset="100%" stop-color="#1E1B6E"/>
+          </radialGradient>
+          <linearGradient id="lensGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+          </linearGradient>
+          <filter id="lensGlow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <clipPath id="lensClip">
+            <circle cx="50" cy="50" r="28"/>
+          </clipPath>
+        </defs>
+        <rect width="120" height="120" fill="url(#bg3)"/>
+
+        <!-- Faint concentric from top-left -->
+        <circle cx="50" cy="50" r="36" fill="none" stroke="white" stroke-width="0.5" stroke-opacity="0.08"/>
+        <circle cx="50" cy="50" r="44" fill="none" stroke="white" stroke-width="0.5" stroke-opacity="0.05"/>
+
+        <!-- Lens circle -->
+        <circle cx="50" cy="50" r="28" fill="url(#lensGrad)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+
+        <!-- Building silhouette inside lens -->
+        <g clip-path="url(#lensClip)" opacity="0.9">
+          <!-- Main tower -->
+          <rect x="44" y="38" width="12" height="20" fill="white" opacity="0.9" rx="0.5"/>
+          <!-- Left wing -->
+          <rect x="32" y="46" width="10" height="12" fill="white" opacity="0.6" rx="0.5"/>
+          <!-- Right wing -->
+          <rect x="58" y="44" width="8" height="14" fill="white" opacity="0.6" rx="0.5"/>
+          <!-- Windows -->
+          <rect x="47" y="41" width="2.5" height="3" fill="#3730A3" rx="0.3"/>
+          <rect x="51" y="41" width="2.5" height="3" fill="#3730A3" rx="0.3"/>
+          <rect x="47" y="46" width="2.5" height="3" fill="#3730A3" rx="0.3"/>
+          <rect x="51" y="46" width="2.5" height="3" fill="#3730A3" rx="0.3"/>
+          <!-- Spire -->
+          <line x1="50" y1="38" x2="50" y2="32" stroke="white" stroke-width="1.2" opacity="0.7"/>
+          <circle cx="50" cy="31" r="1.5" fill="#A5B4FC"/>
+        </g>
+
+        <!-- Magnifier lens glare -->
+        <path d="M30 34 Q36 28 46 30" fill="none" stroke="white" stroke-width="1.2" opacity="0.3" stroke-linecap="round"/>
+
+        <!-- Handle -->
+        <line x1="72" y1="72" x2="92" y2="92" stroke="rgba(255,255,255,0.75)" stroke-width="5" stroke-linecap="round"/>
+        <line x1="72" y1="72" x2="92" y2="92" stroke="rgba(165,180,252,0.5)" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- Handle connector -->
+        <circle cx="71" cy="71" r="4" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <div class="icon-name">企睿</div>
+    <div class="icon-desc">lens · insight · discover</div>
+  </div>
+
+  <!-- 4. 峰企 -->
+  <div class="icon-card">
+    <div class="icon-wrap">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#082820"/>
+            <stop offset="100%" stop-color="#040F0C"/>
+          </linearGradient>
+          <linearGradient id="peak1Grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#34D399"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+          <linearGradient id="peak2Grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6EE7B7"/>
+            <stop offset="100%" stop-color="#10B981"/>
+          </linearGradient>
+          <linearGradient id="peak3Grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#A7F3D0"/>
+            <stop offset="100%" stop-color="#34D399"/>
+          </linearGradient>
+          <filter id="peakGlow">
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect width="120" height="120" fill="url(#bg4)"/>
+
+        <!-- Subtle horizon -->
+        <line x1="14" y1="88" x2="106" y2="88" stroke="#34D399" stroke-width="0.5" stroke-opacity="0.15"/>
+
+        <!-- Ground plane -->
+        <rect x="14" y="88" width="92" height="2" rx="1" fill="#34D399" fill-opacity="0.08"/>
+
+        <!-- Peak 1 (left, smallest — 创新型) -->
+        <polygon points="28,88 42,62 56,88" fill="url(#peak1Grad)" opacity="0.6"/>
+        <polygon points="28,88 42,62 56,88" fill="none" stroke="#34D399" stroke-width="0.6" stroke-opacity="0.5"/>
+        <!-- Snow cap -->
+        <polygon points="42,62 38,70 46,70" fill="white" opacity="0.18"/>
+
+        <!-- Peak 2 (middle — 专精特新) -->
+        <polygon points="44,88 62,44 80,88" fill="url(#peak2Grad)" opacity="0.75"/>
+        <polygon points="44,88 62,44 80,88" fill="none" stroke="#6EE7B7" stroke-width="0.6" stroke-opacity="0.5"/>
+        <!-- Snow cap -->
+        <polygon points="62,44 57,55 67,55" fill="white" opacity="0.22"/>
+
+        <!-- Peak 3 (right, tallest — 小巨人) -->
+        <g filter="url(#peakGlow)">
+          <polygon points="64,88 86,24 108,88" fill="url(#peak3Grad)" opacity="0.95"/>
+        </g>
+        <polygon points="64,88 86,24 108,88" fill="none" stroke="#A7F3D0" stroke-width="0.8" stroke-opacity="0.6"/>
+        <!-- Snow cap -->
+        <polygon points="86,24 80,38 92,38" fill="white" opacity="0.3"/>
+
+        <!-- Star / summit marker on tallest peak -->
+        <circle cx="86" cy="22" r="3" fill="#A7F3D0" opacity="0.9"/>
+        <circle cx="86" cy="22" r="5.5" fill="none" stroke="#A7F3D0" stroke-width="0.8" opacity="0.4"/>
+
+        <!-- Tier label dots -->
+        <circle cx="42" cy="92" r="1.5" fill="#34D399" opacity="0.5"/>
+        <circle cx="62" cy="92" r="1.5" fill="#6EE7B7" opacity="0.7"/>
+        <circle cx="86" cy="92" r="1.5" fill="#A7F3D0" opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="icon-name">峰企</div>
+    <div class="icon-desc">peaks · tiers · ascent</div>
+  </div>
+
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ── SIZE SHOWCASE ─────────────────────────────────────────── -->
+<div class="size-section">
+  <div class="size-label">Size Preview · 多尺寸预览</div>
+
+  <div class="size-rows">
+
+    <!-- 48px row -->
+    <div class="size-row">
+      <span class="size-tag">48px</span>
+      <div class="size-icons">
+
+        <!-- 认证雷达 48px -->
+        <div class="size-icon-item">
+          <svg width="48" height="48" viewBox="0 0 120 120" style="border-radius:10px">
+            <defs>
+              <radialGradient id="s48rg1" cx="30%" cy="70%" r="75%"><stop offset="0%" stop-color="#1E1A3F"/><stop offset="100%" stop-color="#0D0C1D"/></radialGradient>
+              <linearGradient id="s48sw1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6C63FF" stop-opacity="0.7"/><stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/></linearGradient>
+              <clipPath id="s48c1"><rect width="120" height="120"/></clipPath>
+            </defs>
+            <rect width="120" height="120" fill="url(#s48rg1)"/>
+            <g clip-path="url(#s48c1)">
+              <circle cx="30" cy="90" r="22" fill="none" stroke="#6C63FF" stroke-width="0.7" stroke-opacity="0.25"/>
+              <circle cx="30" cy="90" r="40" fill="none" stroke="#6C63FF" stroke-width="0.7" stroke-opacity="0.2"/>
+              <circle cx="30" cy="90" r="58" fill="none" stroke="#6C63FF" stroke-width="0.7" stroke-opacity="0.15"/>
+              <circle cx="30" cy="90" r="76" fill="none" stroke="#6C63FF" stroke-width="0.5" stroke-opacity="0.1"/>
+              <path d="M30 90 L102 22" stroke="#6C63FF" stroke-width="1.2" stroke-opacity="0.9"/>
+              <path d="M30 90 L102 22 A96 96 0 0 0 30 90Z" fill="url(#s48sw1)" opacity="0.18"/>
+              <circle cx="68" cy="52" r="3" fill="#6C63FF" opacity="0.9"/>
+              <circle cx="68" cy="52" r="6" fill="none" stroke="#6C63FF" stroke-width="0.8" opacity="0.5"/>
+            </g>
+            <circle cx="30" cy="90" r="2.5" fill="#6C63FF"/>
+            <circle cx="30" cy="90" r="5" fill="none" stroke="#6C63FF" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+          <span class="size-icon-label">认证雷达</span>
+        </div>
+
+        <!-- 育星台 48px -->
+        <div class="size-icon-item">
+          <svg width="48" height="48" viewBox="0 0 120 120" style="border-radius:10px">
+            <defs>
+              <linearGradient id="s48bg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F2147"/><stop offset="100%" stop-color="#070F22"/></linearGradient>
+              <linearGradient id="s48bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5A623"/><stop offset="100%" stop-color="#E8820C"/></linearGradient>
+              <filter id="s48g2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="120" height="120" fill="url(#s48bg2)"/>
+            <line x1="22" y1="88" x2="98" y2="88" stroke="#F5A623" stroke-width="0.4" stroke-opacity="0.12"/>
+            <rect x="28" y="72" width="16" height="16" rx="2" fill="url(#s48bar)" opacity="0.5"/>
+            <rect x="52" y="56" width="16" height="32" rx="2" fill="url(#s48bar)" opacity="0.7"/>
+            <rect x="76" y="38" width="16" height="50" rx="2" fill="url(#s48bar)" opacity="1"/>
+            <g filter="url(#s48g2)" transform="translate(84,24)">
+              <polygon points="0,-9 2.1,-3 8.6,-2.8 3.5,1.7 5.3,8.1 0,4.5 -5.3,8.1 -3.5,1.7 -8.6,-2.8 -2.1,-3" fill="#F5A623"/>
+            </g>
+          </svg>
+          <span class="size-icon-label">育星台</span>
+        </div>
+
+        <!-- 企睿 48px -->
+        <div class="size-icon-item">
+          <svg width="48" height="48" viewBox="0 0 120 120" style="border-radius:10px">
+            <defs>
+              <radialGradient id="s48bg3" cx="40%" cy="40%" r="70%"><stop offset="0%" stop-color="#3730A3"/><stop offset="100%" stop-color="#1E1B6E"/></radialGradient>
+              <linearGradient id="s48lg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.18)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient>
+              <clipPath id="s48lc"><circle cx="50" cy="50" r="28"/></clipPath>
+            </defs>
+            <rect width="120" height="120" fill="url(#s48bg3)"/>
+            <circle cx="50" cy="50" r="28" fill="url(#s48lg3)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+            <g clip-path="url(#s48lc)" opacity="0.9">
+              <rect x="44" y="38" width="12" height="20" fill="white" opacity="0.9" rx="0.5"/>
+              <rect x="32" y="46" width="10" height="12" fill="white" opacity="0.6" rx="0.5"/>
+              <rect x="58" y="44" width="8" height="14" fill="white" opacity="0.6" rx="0.5"/>
+            </g>
+            <line x1="72" y1="72" x2="92" y2="92" stroke="rgba(255,255,255,0.75)" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          <span class="size-icon-label">企睿</span>
+        </div>
+
+        <!-- 峰企 48px -->
+        <div class="size-icon-item">
+          <svg width="48" height="48" viewBox="0 0 120 120" style="border-radius:10px">
+            <defs>
+              <linearGradient id="s48bg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#082820"/><stop offset="100%" stop-color="#040F0C"/></linearGradient>
+              <linearGradient id="s48p1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34D399"/><stop offset="100%" stop-color="#059669"/></linearGradient>
+              <linearGradient id="s48p2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6EE7B7"/><stop offset="100%" stop-color="#10B981"/></linearGradient>
+              <linearGradient id="s48p3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A7F3D0"/><stop offset="100%" stop-color="#34D399"/></linearGradient>
+            </defs>
+            <rect width="120" height="120" fill="url(#s48bg4)"/>
+            <polygon points="28,88 42,62 56,88" fill="url(#s48p1)" opacity="0.6"/>
+            <polygon points="44,88 62,44 80,88" fill="url(#s48p2)" opacity="0.75"/>
+            <polygon points="64,88 86,24 108,88" fill="url(#s48p3)" opacity="0.95"/>
+            <circle cx="86" cy="22" r="3" fill="#A7F3D0" opacity="0.9"/>
+          </svg>
+          <span class="size-icon-label">峰企</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 32px row -->
+    <div class="size-row">
+      <span class="size-tag">32px</span>
+      <div class="size-icons">
+        <div class="size-icon-item">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="border-radius:7px">
+            <defs><radialGradient id="t32rg" cx="30%" cy="70%" r="75%"><stop offset="0%" stop-color="#1E1A3F"/><stop offset="100%" stop-color="#0D0C1D"/></radialGradient><clipPath id="t32c"><rect width="120" height="120"/></clipPath></defs>
+            <rect width="120" height="120" fill="url(#t32rg)"/>
+            <g clip-path="url(#t32c)"><circle cx="30" cy="90" r="22" fill="none" stroke="#6C63FF" stroke-width="1" stroke-opacity="0.3"/><circle cx="30" cy="90" r="42" fill="none" stroke="#6C63FF" stroke-width="1" stroke-opacity="0.22"/><circle cx="30" cy="90" r="62" fill="none" stroke="#6C63FF" stroke-width="0.8" stroke-opacity="0.15"/><path d="M30 90 L102 22" stroke="#6C63FF" stroke-width="1.8"/><circle cx="68" cy="52" r="4" fill="#6C63FF"/></g>
+            <circle cx="30" cy="90" r="3.5" fill="#6C63FF"/>
+          </svg>
+          <span class="size-icon-label">认证雷达</span>
+        </div>
+        <div class="size-icon-item">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="border-radius:7px">
+            <defs><linearGradient id="t32b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F2147"/><stop offset="100%" stop-color="#070F22"/></linearGradient><linearGradient id="t32br" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5A623"/><stop offset="100%" stop-color="#E8820C"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#t32b2)"/>
+            <rect x="28" y="72" width="16" height="16" rx="2" fill="url(#t32br)" opacity="0.5"/>
+            <rect x="52" y="56" width="16" height="32" rx="2" fill="url(#t32br)" opacity="0.7"/>
+            <rect x="76" y="38" width="16" height="50" rx="2" fill="url(#t32br)"/>
+            <polygon points="84,15 86.1,21 93,21.2 87.5,25.7 89.8,32.5 84,28.5 78.2,32.5 80.5,25.7 75,21.2 81.9,21" fill="#F5A623"/>
+          </svg>
+          <span class="size-icon-label">育星台</span>
+        </div>
+        <div class="size-icon-item">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="border-radius:7px">
+            <defs><radialGradient id="t32b3" cx="40%" cy="40%" r="70%"><stop offset="0%" stop-color="#3730A3"/><stop offset="100%" stop-color="#1E1B6E"/></radialGradient><linearGradient id="t32lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="rgba(255,255,255,0.18)"/><stop offset="100%" stop-color="rgba(255,255,255,0.04)"/></linearGradient><clipPath id="t32lc"><circle cx="50" cy="50" r="28"/></clipPath></defs>
+            <rect width="120" height="120" fill="url(#t32b3)"/>
+            <circle cx="50" cy="50" r="28" fill="url(#t32lg)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <g clip-path="url(#t32lc)"><rect x="44" y="38" width="12" height="20" fill="white" opacity="0.9"/><rect x="32" y="46" width="10" height="12" fill="white" opacity="0.6"/><rect x="58" y="44" width="8" height="14" fill="white" opacity="0.6"/></g>
+            <line x1="72" y1="72" x2="92" y2="92" stroke="rgba(255,255,255,0.8)" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <span class="size-icon-label">企睿</span>
+        </div>
+        <div class="size-icon-item">
+          <svg width="32" height="32" viewBox="0 0 120 120" style="border-radius:7px">
+            <defs><linearGradient id="t32b4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#082820"/><stop offset="100%" stop-color="#040F0C"/></linearGradient><linearGradient id="t32q1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34D399"/><stop offset="100%" stop-color="#059669"/></linearGradient><linearGradient id="t32q2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6EE7B7"/><stop offset="100%" stop-color="#10B981"/></linearGradient><linearGradient id="t32q3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A7F3D0"/><stop offset="100%" stop-color="#34D399"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#t32b4)"/>
+            <polygon points="28,88 42,62 56,88" fill="url(#t32q1)" opacity="0.6"/>
+            <polygon points="44,88 62,44 80,88" fill="url(#t32q2)" opacity="0.75"/>
+            <polygon points="64,88 86,24 108,88" fill="url(#t32q3)"/>
+            <circle cx="86" cy="21" r="4" fill="#A7F3D0"/>
+          </svg>
+          <span class="size-icon-label">峰企</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 16px row -->
+    <div class="size-row">
+      <span class="size-tag">16px</span>
+      <div class="size-icons">
+        <div class="size-icon-item">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="border-radius:3px">
+            <defs><radialGradient id="f16rg" cx="30%" cy="70%" r="75%"><stop offset="0%" stop-color="#1E1A3F"/><stop offset="100%" stop-color="#0D0C1D"/></radialGradient><clipPath id="f16c"><rect width="120" height="120"/></clipPath></defs>
+            <rect width="120" height="120" fill="url(#f16rg)"/>
+            <g clip-path="url(#f16c)"><circle cx="30" cy="90" r="32" fill="none" stroke="#6C63FF" stroke-width="2" stroke-opacity="0.3"/><circle cx="30" cy="90" r="56" fill="none" stroke="#6C63FF" stroke-width="2" stroke-opacity="0.2"/><path d="M30 90 L102 22" stroke="#6C63FF" stroke-width="3"/><circle cx="68" cy="52" r="7" fill="#6C63FF"/></g>
+            <circle cx="30" cy="90" r="6" fill="#6C63FF"/>
+          </svg>
+          <span class="size-icon-label">认证雷达</span>
+        </div>
+        <div class="size-icon-item">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="border-radius:3px">
+            <defs><linearGradient id="f16b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F2147"/><stop offset="100%" stop-color="#070F22"/></linearGradient><linearGradient id="f16br" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F5A623"/><stop offset="100%" stop-color="#E8820C"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#f16b2)"/>
+            <rect x="28" y="72" width="16" height="16" rx="1" fill="url(#f16br)" opacity="0.5"/>
+            <rect x="52" y="56" width="16" height="32" rx="1" fill="url(#f16br)" opacity="0.7"/>
+            <rect x="76" y="38" width="16" height="50" rx="1" fill="url(#f16br)"/>
+            <polygon points="84,20 86,26 93,26 87,30 89,37 84,33 79,37 81,30 75,26 82,26" fill="#F5A623"/>
+          </svg>
+          <span class="size-icon-label">育星台</span>
+        </div>
+        <div class="size-icon-item">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="border-radius:3px">
+            <defs><radialGradient id="f16b3" cx="40%" cy="40%" r="70%"><stop offset="0%" stop-color="#3730A3"/><stop offset="100%" stop-color="#1E1B6E"/></radialGradient></defs>
+            <rect width="120" height="120" fill="url(#f16b3)"/>
+            <circle cx="50" cy="50" r="28" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.5)" stroke-width="3"/>
+            <rect x="44" y="38" width="12" height="20" fill="white" opacity="0.9"/>
+            <rect x="32" y="46" width="10" height="12" fill="white" opacity="0.6"/>
+            <rect x="58" y="44" width="8" height="14" fill="white" opacity="0.6"/>
+            <line x1="72" y1="72" x2="94" y2="94" stroke="rgba(255,255,255,0.8)" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+          <span class="size-icon-label">企睿</span>
+        </div>
+        <div class="size-icon-item">
+          <svg width="16" height="16" viewBox="0 0 120 120" style="border-radius:3px">
+            <defs><linearGradient id="f16b4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#082820"/><stop offset="100%" stop-color="#040F0C"/></linearGradient><linearGradient id="f16q1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34D399"/><stop offset="100%" stop-color="#059669"/></linearGradient><linearGradient id="f16q2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6EE7B7"/><stop offset="100%" stop-color="#10B981"/></linearGradient><linearGradient id="f16q3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#A7F3D0"/><stop offset="100%" stop-color="#34D399"/></linearGradient></defs>
+            <rect width="120" height="120" fill="url(#f16b4)"/>
+            <polygon points="28,88 42,62 56,88" fill="url(#f16q1)" opacity="0.6"/>
+            <polygon points="44,88 62,44 80,88" fill="url(#f16q2)" opacity="0.75"/>
+            <polygon points="64,88 86,24 108,88" fill="url(#f16q3)"/>
+          </svg>
+          <span class="size-icon-label">峰企</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

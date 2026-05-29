@@ -6,7 +6,7 @@ import type { getDashboardKPI, SMEDashboardKPI, LittleGiantDashboardKPI } from "
 import { getRegionLabel, useCurrentPCUser, useRoleGuard } from "@/lib/account-mock";
 import { useQualStore } from "@/lib/qual-store";
 import { QUAL_TYPE_META, type QualificationType } from "@/lib/types";
-import { INDUSTRIAL_SIX_CATEGORIES } from "@/lib/industrial-six";
+import { PRIMARY_DOMAINS, DOMAIN_SECONDARIES } from "@/lib/domain-fields";
 
 type KPI = ReturnType<typeof getDashboardKPI>;
 
@@ -801,27 +801,46 @@ function LadderFunnel({ stages }: { stages: { name: string; value: number }[] })
   );
 }
 
-// ─── 工业六基分布（第一层 6 大类环形图）──────────────────────────
-function SixBaseDonut({ byBase, total }: { byBase: Record<string, number>; total: number }) {
-  const colors = ["#2563eb", "#0891b2", "#7c3aed", "#10b981", "#f59e0b", "#ec4899"];
+// ─── 领域分布（21 个一级领域环形图）──────────────────────────────
+function DomainDonut({ byDomain, total }: { byDomain: Record<string, number>; total: number }) {
+  // 21 色色板（跨色相均匀分布）
+  const COLORS = [
+    "#2563eb", "#0891b2", "#7c3aed", "#10b981", "#f59e0b", "#ec4899",
+    "#f97316", "#14b8a6", "#6366f1", "#84cc16", "#06b6d4", "#a855f7",
+    "#22c55e", "#eab308", "#ef4444", "#8b5cf6", "#3b82f6", "#d946ef",
+    "#0ea5e9", "#f43f5e", "#10b981",
+  ];
+
+  const domainData = PRIMARY_DOMAINS.map((name, i) => ({
+    name,
+    value: byDomain[name] ?? 0,
+    itemStyle: { color: COLORS[i % COLORS.length] },
+    tooltip: {
+      formatter: () => {
+        const secondaries = DOMAIN_SECONDARIES[name].join("、");
+        return `${name}<br/>${byDomain[name] ?? 0} 家<br/><span style="color:#94a3b8;font-size:11px">五基: ${secondaries}</span>`;
+      },
+    },
+  }));
+
   const option = {
-    tooltip: { trigger: "item", formatter: "{b}: {c} 家 ({d}%)" },
+    tooltip: { trigger: "item" },
     legend: {
       bottom: 0,
       left: "center",
       icon: "circle",
       itemWidth: 7,
       itemHeight: 7,
-      itemGap: 6,
-      textStyle: { color: "#475569", fontSize: 10 },
+      itemGap: 5,
+      textStyle: { color: "#475569", fontSize: 9 },
       type: "scroll",
     },
     series: [{
       type: "pie",
-      radius: ["52%", "76%"],
-      center: ["50%", "42%"],
+      radius: ["48%", "70%"],
+      center: ["50%", "40%"],
       avoidLabelOverlap: false,
-      itemStyle: { borderColor: "#ffffff", borderWidth: 2, borderRadius: 4 },
+      itemStyle: { borderColor: "#ffffff", borderWidth: 2, borderRadius: 3 },
       label: {
         show: true,
         position: "center",
@@ -832,15 +851,12 @@ function SixBaseDonut({ byBase, total }: { byBase: Record<string, number>; total
         },
       },
       labelLine: { show: false },
-      data: INDUSTRIAL_SIX_CATEGORIES.map((name, i) => ({
-        name,
-        value: byBase[name] ?? 0,
-        itemStyle: { color: colors[i % colors.length] },
-      })),
+      data: domainData,
     }],
   };
+
   return (
-    <PanelCard title="工业六基分布" subtitle="工业基础能力六大方向（申报核心领域）">
+    <PanelCard title="领域分布" subtitle="《产业基础创新发展目录》21 个重点产业领域">
       <EChartsWrapper option={option} height={260} />
     </PanelCard>
   );
@@ -941,9 +957,9 @@ export default function DashboardClient({ kpi: initialKpi }: { kpi: KPI }) {
               <StreetDistribution byStreet={lgKpi.byStreet} />
             </div>
 
-            {/* 第三行：工业六基分布 + 成立年限分布 */}
+            {/* 第三行：领域分布 + 成立年限分布 */}
             <div className="grid grid-cols-2 gap-4">
-              <SixBaseDonut byBase={lgKpi.byBase} total={lgKpi.poolTotal} />
+              <DomainDonut byDomain={lgKpi.byDomain} total={lgKpi.poolTotal} />
               <PanelCard title="成立年限分布" subtitle="标的池企业成立年限">
                 <EChartsWrapper option={{
                   grid: { left: 36, right: 12, top: 24, bottom: 28 },
