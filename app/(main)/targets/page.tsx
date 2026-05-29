@@ -552,7 +552,6 @@ function TargetsPageContent() {
                         <div className="font-medium text-[#0f172a] group-hover:text-blue-600 transition-colors">
                           {c.name}
                         </div>
-                        <div className="text-[11px] text-[#94a3b8] mt-0.5">{c.industry}</div>
                       </Link>
                     </td>
                     <td className="px-3 py-3">
